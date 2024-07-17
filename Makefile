@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/17 22:42:15 by bama             ###   ########.fr        #
+#    Updated: 2024/07/18 00:22:48 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,10 @@ NAME = minishell
 
 CC =	cc
 
-SRCS =	./srcs/minishell.c \
+SRCS =	./tmp/get_next_line_utils.c \
+		./tmp/get_next_line.c \
+		./srcs/parsing.c \
+		./srcs/minishell.c \
 		./main.c
 
 OBJS_DIR =		objs
@@ -40,9 +43,9 @@ INCLUDES =	-I ./includes/ -I $(LIBFT_P)/ -I .
 
 CFLAGS =	-Wall -Wextra -MMD #-Werror
 
-LIBFT_P		=	./libft
+LIBFT_P		=	#./libft
 
-LIB	=	$(LIBFT_P)/libft.a \
+LIB	=	#$(LIBFT_P)/libft.a \
 
 # ############## #
 #*    REGLES    *#
@@ -50,8 +53,8 @@ LIB	=	$(LIBFT_P)/libft.a \
 
 all: _colorY_ $(NAME) _colorG_
 
+#	make -C $(LIBFT_P)
 $(NAME): $(OBJS)
-	make -C $(LIBFT_P)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(MLX) -o $@
 
 $(OBJS_DIR)/%.obj: %.c
@@ -76,13 +79,10 @@ fclean: clean
 	rm $(NAME) -f
 	@echo "Tout à été supprimé... 🗑️\n$(CLASSIC)"
 
-mlx:
-	make -C ./minilibx
+#libft: _colorY_
+#	make -C $(LIBFT_P)
 
-libft: _colorY_
-	make -C $(LIBFT_P)
+re: fclean all
 
-re: fclean mlx all
-
-.PHONY: all clean fclean mlx libft re
+.PHONY: all clean fclean libft re
 -include $(DEPS)

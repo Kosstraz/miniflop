@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 00:25:00 by bama             ###   ########.fr       */
+/*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
+/*   Updated: 2024/07/18 00:48:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-inline void	new_prompt(void)
+static void	take_commandline(const char *line)
 {
-	write(1, PROMPT, PROMPT_SIZE);
+	t_token	
+	parse_line(line);
 }
 
-void	minishell(void)
+void	read_prompt(void)
 {
-	new_prompt();
-	read_prompt();
+	char	*gnl;
+
+	gnl = get_next_line(STDIN_FILENO);
+	while (gnl)
+	{
+		take_commandline(gnl);
+		new_prompt();
+		free(gnl);
+		gnl = get_next_line(STDIN_FILENO);
+	}
 }

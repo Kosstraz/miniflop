@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 00:25:00 by bama             ###   ########.fr       */
+/*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
+/*   Updated: 2024/07/18 00:53:49 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell.c"
 
-inline void	new_prompt(void)
+void	show_token(const t_token *tok)
 {
-	write(1, PROMPT, PROMPT_SIZE);
-}
-
-void	minishell(void)
-{
-	new_prompt();
-	read_prompt();
+	printf("");
 }
