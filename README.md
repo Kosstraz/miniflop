@@ -19,7 +19,7 @@
 
 - [*]
 
-- [EXCEPTIONS] Gestion des exceptions faute de quote fermant.
+- [EXCEPTIONS] Gestion des exceptions faute d'une quote fermante.
 
 ###### LISTE DES CHOSES A FAIRE : ######
 
