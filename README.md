@@ -5,21 +5,21 @@
 ###### PARSING : ######
 {ymanchon}
 
-- [QUOTES] Interpréter les singles quotes et les doubles quotes.
+- -~~~ [QUOTES] Interpréter les singles quotes et les doubles quotes.~~~
 
-- [COMMANDS]
+- -~~~ [COMMANDS] Commands~~~
 
-- [OPTIONS]
+- -~~~ [ARGUMENTS] Arguments~~~
 
-- [ARGUMENTS]
+- -~~~ [|] Pipe~~~
 
-- [|]
+- -~~~[||] Or~~~
 
-- [||]
-
-- [&&]
+- -~~~[&&] And~~~
 
 - [*]
+
+- [EXCEPTIONS] Gestion des exceptions faute de quote fermant.
 
 ###### LISTE DES CHOSES A FAIRE : ######
 
