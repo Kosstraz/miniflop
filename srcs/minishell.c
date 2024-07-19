@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 18:44:01 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/19 18:45:05 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ inline void	new_prompt(void)
 	write(1, PROMPT, PROMPT_SIZE);
 }
 
-static void	read_prompt(void)
+/*static void	read_prompt(void)
 {
 	char	*gnl;
 
@@ -29,10 +29,22 @@ static void	read_prompt(void)
 		free(gnl);
 		gnl = get_next_line(STDIN_FILENO);
 	}
+}*/
+
+static void	read_prompt(void)
+{
+	char	*gnl;
+
+	while (1)
+	{
+		gnl = readline(PROMPT);
+		
+		take_commandline(gnl);
+	}
 }
 
 void	minishell(void)
 {
-	new_prompt();
+	//new_prompt();
 	read_prompt();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 18:47:17 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/19 18:25:17 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,18 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 # include <unistd.h>
 # include <signal.h>
 # include "errcode.h"
 # include "libft.h"
+
+typedef struct s_useless_quotes
+{
+	int	i[2];
+	int	count;
+}	t_useless_quotes;
 
 typedef enum e_type
 {

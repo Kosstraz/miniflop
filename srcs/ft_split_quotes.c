@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/18 17:52:18 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/19 18:22:18 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_quotes(char c, int *quote_type);
-int	parse_quotes(const char *str, int quote_type, size_t *i, size_t *old);
-int	parse_squote(const char *str, size_t *i, size_t *old);
-int	parse_dquote(const char *str, size_t *i, size_t *old);
+int		check_quotes(char c, int *quote_type);
+int		parse_quotes(const char *str, int quote_type, size_t *i, size_t *old);
+int		parse_squote(const char *str, size_t *i, size_t *old);
+int		parse_dquote(const char *str, size_t *i, size_t *old);
+size_t	ft_count_words_quotes(const char *s, char sep);
 
 static void	ft_split_free(char **tofree, size_t count)
 {
@@ -55,41 +56,17 @@ static char	skip_sep(const char *s, size_t *i, size_t *old, char sep)
 	*old = *i;
 	while (s[*i] && s[*i] != sep && !check_quotes(s[*i], &quote_type))
 		(*i)++;
-	if (*i == *old)
+	if (quote_type)
+	{
+		(*i)++;
 		parse_quotes(s, quote_type, i, old);
+		(*i)++;
+	}
 	return (*i);
 }
 /*
-		echo e"cho" """"'""'""''t' | BONJOUR
+		echo e"cho" """"'""'""'t'f'' | BONJOUR
 */
-/*static char	skip_sep(const char *s, size_t *i, size_t *old, char sep)
-{
-	int	quote_type1;
-	int	quote_type2;
-
-	quote_type1 = 0;
-	quote_type2 = 0;
-	while (s[*i] && s[*i] == sep)
-		if (s[*i] == sep)
-			(*i)++;
-	if (s[*i] && check_quotes(s[*i], &quote_type1))
-	{
-		check_quotes(s[*i + 1], &quote_type2);
-		if (quote_type2 && quote_type1 == quote_type2)
-		{
-			*i += 2;
-			return (*old = *i, *i);
-		}
-		return (parse_quotes(s, quote_type1, i, old));
-	}
-	if (!s[*i])
-		return (SPLIT_ERROR);
-	*old = *i;
-	while (s[*i] && s[*i] != sep && !check_quotes(s[*i], &quote_type1))
-		if (s[*i] != sep)
-			(*i)++;
-	return (*i);
-}*/
 
 char	**ft_split_quotes(const char *s, char sep)
 {
@@ -100,7 +77,7 @@ char	**ft_split_quotes(const char *s, char sep)
 
 	if (!s)
 		return (NULL);
-	ret = (char **)malloc(sizeof(char *) * (ft_count_words(s, sep) + 1));
+	ret = (char **)malloc(sizeof(char *) * (ft_count_words_quotes(s, sep) + 1));
 	if (!ret)
 		return (NULL);
 	i = 0;
@@ -109,9 +86,8 @@ char	**ft_split_quotes(const char *s, char sep)
 	{
 		if (skip_sep(s, &i, &back, sep) == -1)
 			break ;
-		if (back != i)
-			ret[j] = strdup_at(s, back, i);
-		if (back != i && !ret[j++])
+		ret[j] = strdup_at(s, back, i);
+		if (!ret[j++])
 		{
 			ft_split_free(ret, j - 1);
 			return (NULL);
@@ -119,4 +95,4 @@ char	**ft_split_quotes(const char *s, char sep)
 	}
 	ret[j] = NULL;
 	return (ret);
-}
+}/**/

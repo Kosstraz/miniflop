@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:29:54 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 23:21:38 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/19 15:22:25 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ static int	count_useless_quotes(const char *line)
 	return (quotes_to_remove);
 }
 
+static char	*detect_useless_quotes(char **buffer, const char *line)
+{
+	
+}
+
 char	*remove_useless_quotes(const char *line)
 {
 	char	*ret;
@@ -63,5 +68,6 @@ char	*remove_useless_quotes(const char *line)
 	ret = (char *)malloc(sizeof(char) * (size + 1));
 	if (!ret)
 		return (NULL);
-	
+	ret = detect_useless_quotes(&ret, line);
+	return (ret);
 }

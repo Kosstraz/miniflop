@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 23:26:25 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/19 18:31:31 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static t_token	**parse_commandline(const char *line)
 	int		i;
 
 	i = 0;
-	remove_useless_quotes(line);
 	splitted = ft_split_quotes(line, ' ');
 	root = ft_createtok(ft_strlen2((const char **)splitted));
 	tokens = root;
