@@ -6,10 +6,13 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:19:42 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 16:54:31 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/18 17:21:18 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*			check_quotes(s[*i + 1], &quote_type2);
+		//if (quote_type2 && quote_type1 == quote_type2)
+		//	return (*old = ++(*i), *i);*/
 #ifndef ERRCODE_H
 # define ERRCODE_H
 

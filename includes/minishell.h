@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 17:04:15 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/18 18:47:17 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ typedef struct s_token
 {
 	enum e_type		type;
 	const char		*value;
+	struct s_token	*next;
 }	t_token;
+
+typedef struct s_data
+{
+	int	errcode;
+}	t_data;
 
 /*		MINISHELL		*/
 
@@ -54,6 +60,7 @@ void	new_prompt(void);
 
 /*		PARSING			*/
 
+char	*remove_useless_quotes(const char *line);
 void	show_token(const t_token **tok);
 void	take_commandline(const char *line);
 

@@ -5,7 +5,7 @@
 ###### PARSING : ######
 {ymanchon}
 
-- -~~~ [QUOTES] Interpréter les singles quotes et les doubles quotes.~~~
+- - [QUOTES] Interpréter les singles quotes et les doubles quotes.
 
 - -~~~ [COMMANDS] Commands~~~
 
@@ -19,7 +19,7 @@
 
 - [*]
 
-- [EXCEPTIONS] Gestion des exceptions faute d'une quote fermante.
+- [EXCEPTIONS] Gestion des exceptions faute de quote fermant.
 
 ###### LISTE DES CHOSES A FAIRE : ######
 
@@ -39,13 +39,15 @@
 
 - [PIPES] Implémenter les pipes '|' (output de la commande de gauche --> input de la commande de droite). {ymanchon}
 
+- [HERE_DOC] Implémenter un fonctionnement similaire à heredoc. {cachetra}
+
 - [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {cachetra}
 
-- [ctrl-C] Interpréter ce signal (SIGINT). Affiche un nouveau prompt avec une nouvelle ligne. {cachetra}
+- [ctrl-C] Interpréter ce signal (SIGINT). Affiche un nouveau prompt avec une nouvelle ligne. {ymanchon}
 
-- [ctrl-D] Interpréter ce signal (EOF <=> End-Of-File). With a read(). Quitte le Shell actuel. {cachetra}
+- [ctrl-D] Interpréter ce signal (EOF <=> End-Of-File). With a read(). Quitte le Shell actuel. {ymanchon}
 
-- [ctrl-\] Interpréter ce signal (SIGQUIT). Ne doit rien faire. {cachetra}
+- [ctrl-\] Interpréter ce signal (SIGQUIT). Ne doit rien faire. {ymanchon}
 
 ###### BUILTINS : ######
 

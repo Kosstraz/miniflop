@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 16:09:47 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/18 18:47:56 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void	show_token(const t_token **tok)
 	while (tok[i])
 	{
 		if (tok[i]->type == Pipe)
-			printf("[PIPE]");
+			printf("[PIPE]\t\t\t");
 		else if (tok[i]->type == And)
-			printf("[AND]");
+			printf("[AND]\t\t\t");
 		else if (tok[i]->type == Or)
-			printf("[OR]");
+			printf("[OR]\t\t\t");
 		else if (tok[i]->type == Command)
-			printf("[COMMAND]");
+			printf("[COMMAND]\t\t");
 		else if (tok[i]->type == Argument)
-			printf("[ARGUMENT]");
+			printf("[ARGUMENT]\t\t");
 		else if (tok[i]->type == Redirect)
-			printf("[REDIRECTION]");
-		printf("\t\t\e[31m$\e[0m%s\e[31m$\e[0m\n", tok[i]->value);
+			printf("[REDIRECTION]\t");
+		printf("\e[31m$\e[0m%s\e[31m$\e[0m\n", tok[i]->value);
 		i++;
 	}
 }

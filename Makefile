@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/18 15:59:37 by bama             ###   ########.fr        #
+#    Updated: 2024/07/18 18:35:56 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS =	./srcs/ft_split_quotes2.c \
 		./srcs/ft_split_quotes.c \
 		./srcs/lst.c \
 		./srcs/debug.c \
+		./srcs/parsing_quotes.c \
 		./srcs/parsing.c \
 		./srcs/minishell.c \
 		./main.c

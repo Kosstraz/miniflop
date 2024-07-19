@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 17:04:19 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/18 23:26:25 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static t_token	**parse_commandline(const char *line)
 	int		i;
 
 	i = 0;
+	remove_useless_quotes(line);
 	splitted = ft_split_quotes(line, ' ');
 	root = ft_createtok(ft_strlen2((const char **)splitted));
 	tokens = root;
@@ -66,14 +67,15 @@ static const char	*maybe_continued(void)
 {
 	if (errcode == 0)
 		return (NULL);
-	else if (errcode = SQUOTE_MISSING)
+	/*else if (errcode = SQUOTE_MISSING)
 	{
 		
 	}
 	else if (errcode = DQUOTE_MISSING)
 	{
 		
-	}
+	}*/
+	return (NULL);
 }
 
 void	take_commandline(const char *line)
@@ -82,10 +84,12 @@ void	take_commandline(const char *line)
 	const char	*continued;
 
 	tokens = parse_commandline(line);
+	printf("errcode = %d\n", errcode);
 	continued = maybe_continued();
 	if (continued)
 	{
 		//tokens[] = ft_toknew(splitted[i]);
-		check_e_type(tokens, splitted[i], i);
+		//check_e_type(tokens, splitted[i], i);
 	}
+	errcode = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/18 16:49:46 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/18 17:52:18 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,46 @@ static char	skip_sep(const char *s, size_t *i, size_t *old, char sep)
 	while (s[*i] && s[*i] == sep)
 		if (s[*i] == sep)
 			(*i)++;
-	if (check_quotes(s[*i], &quote_type))
-		return (parse_quotes(s, quote_type, i, old));
 	if (!s[*i])
 		return (SPLIT_ERROR);
 	*old = *i;
 	while (s[*i] && s[*i] != sep && !check_quotes(s[*i], &quote_type))
+		(*i)++;
+	if (*i == *old)
+		parse_quotes(s, quote_type, i, old);
+	return (*i);
+}
+/*
+		echo e"cho" """"'""'""''t' | BONJOUR
+*/
+/*static char	skip_sep(const char *s, size_t *i, size_t *old, char sep)
+{
+	int	quote_type1;
+	int	quote_type2;
+
+	quote_type1 = 0;
+	quote_type2 = 0;
+	while (s[*i] && s[*i] == sep)
+		if (s[*i] == sep)
+			(*i)++;
+	if (s[*i] && check_quotes(s[*i], &quote_type1))
+	{
+		check_quotes(s[*i + 1], &quote_type2);
+		if (quote_type2 && quote_type1 == quote_type2)
+		{
+			*i += 2;
+			return (*old = *i, *i);
+		}
+		return (parse_quotes(s, quote_type1, i, old));
+	}
+	if (!s[*i])
+		return (SPLIT_ERROR);
+	*old = *i;
+	while (s[*i] && s[*i] != sep && !check_quotes(s[*i], &quote_type1))
 		if (s[*i] != sep)
 			(*i)++;
 	return (*i);
-}
+}*/
 
 char	**ft_split_quotes(const char *s, char sep)
 {

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/18 16:34:20 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/18 17:51:40 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,11 @@ int	parse_dquote(const char *str, size_t *i, size_t *old);
 
 int	check_quotes(char c, int *quote_type)
 {
-	int	dquote;
-	int	squote;
-
-	dquote = 0;
-	squote = 0;
 	if (c == '\'')
-		squote = 1;
+		*quote_type = 1;
 	else if (c == '"')
-		dquote = 2;
-	*quote_type = dquote | squote;
-	return (dquote | squote);
+		*quote_type = 2;
+	return (*quote_type);
 }
 
 int	parse_quotes(const char *str, int quote_type, size_t *i, size_t *old)
@@ -36,8 +30,7 @@ int	parse_quotes(const char *str, int quote_type, size_t *i, size_t *old)
 		return (parse_squote(str, i, old));
 	else if (quote_type == 2)
 		return (parse_dquote(str, i, old));
-	errcode = ERROR;
-	return (ERROR);
+	return (0);
 }
 
 int	parse_squote(const char *str, size_t *i, size_t *old)
