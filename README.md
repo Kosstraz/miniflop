@@ -1,11 +1,22 @@
-###### A RAJOUTER : ######
+###### A RAJOUTER/REGLER : ######
+
+- [QUOTES_BUG] Régler le bug où les quotes ne sont pas affichées dans un contexte
+comme le suivant : """"""''"''" ou encore ''""''""'''""""' . Rien est affiché ce qui
+n'est pas normal. Seul bug repéré jusqu'ici.
+
+- [ctrl-C] C'est normalement automatiquement déjà géré, mais pour rappel si jamais : Gérer les commandes bloquantes.
 
 ###### QUESTIONNEMENTS : ######
+
+###### TERMCAP : ######
+{cachetra}
+
+- [FT_READLINE] Faire ft_readline() ez.
 
 ###### PARSING : ######
 {ymanchon}
 
-- - [QUOTES] Interpréter les singles quotes et les doubles quotes.
+- -~~~ [QUOTES] Interpréter les singles quotes et les doubles quotes.~~~
 
 - -~~~ [COMMANDS] Commands~~~
 
@@ -17,9 +28,17 @@
 
 - -~~~[&&] And~~~
 
+- [<] Parser et tokeniser dans ce contexte.
+- [>] Parser et tokeniser dans ce contexte.
+
 - [*]
 
+- [ENV_VAR] Parser et remplacer les variables d'environnement trouvées
+
 - [EXCEPTIONS] Gestion des exceptions faute de quote fermant.
+
+- [PARHENTESES] Parser les parentheses et créer des sous-tokenisation. Aussi découper
+la chaîne de token et les déplacer pour gérer les priorités.
 
 ###### LISTE DES CHOSES A FAIRE : ######
 
@@ -43,17 +62,17 @@
 
 - [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {cachetra}
 
-- [ctrl-C] Interpréter ce signal (SIGINT). Affiche un nouveau prompt avec une nouvelle ligne. {ymanchon}
+- -~~~ [ctrl-C] Interpréter ce signal (SIGINT). Affiche un nouveau prompt avec une nouvelle ligne. {ymanchon}~~~
 
-- [ctrl-D] Interpréter ce signal (EOF <=> End-Of-File). With a read(). Quitte le Shell actuel. {ymanchon}
+- -~~~ [ctrl-D] Interpréter ce signal (EOF <=> End-Of-File). With a read(). Quitte le Shell actuel. {ymanchon}~~~
 
-- [ctrl-\] Interpréter ce signal (SIGQUIT). Ne doit rien faire. {ymanchon}
+- -~~~ [ctrl-\] Interpréter ce signal (SIGQUIT). Ne doit rien faire. {ymanchon}~~~
 
 ###### BUILTINS : ######
 
-- [echo] Avec l'option -n. Affiche l'argument {ymanchon}.
+- -~~~ [echo] Avec l'option -n. Affiche l'argument. {ymanchon}~~~
 
-- [cd] Fonctionnant avec un chemin relatif et absolu. {ymanchon}
+- -~~~ [cd] Fonctionnant avec un chemin relatif et absolu. {ymanchon}~~~
 
 - [pwd] Affiche le répertoire dans lequel se trouve l'utilisateur appelant. {cachetra}
 

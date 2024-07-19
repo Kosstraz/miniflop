@@ -3,48 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/19 18:45:05 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/07/20 01:15:23 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-inline void	new_prompt(void)
+void	init_datas(t_data *datas);
+
+void	new_prompt(void)
 {
-	write(1, PROMPT, PROMPT_SIZE);
+	char	*cwd;
+
+	cwd = getcwd(NULL, 0);
+	write(1, PROMPT1, PROMPT1_SIZE);
+	write(1, cwd, ft_strlen(cwd));
+	write(1, PROMPT2, PROMPT2_SIZE);
+	write(1, PROMPT3, PROMPT3_SIZE);
 }
 
-/*static void	read_prompt(void)
+static void	read_prompt(void)
 {
+	t_data	datas;
 	char	*gnl;
 
+	init_datas(&datas);
 	gnl = get_next_line(STDIN_FILENO);
 	while (gnl)
 	{
-		take_commandline(gnl);
+		init_datas(&datas);
+		take_commandline(gnl, &datas);
+		free_datas(&datas);
 		new_prompt();
 		free(gnl);
 		gnl = get_next_line(STDIN_FILENO);
 	}
-}*/
-
-static void	read_prompt(void)
-{
-	char	*gnl;
-
-	while (1)
-	{
-		gnl = readline(PROMPT);
-		
-		take_commandline(gnl);
-	}
+	write(1, EXIT_TEXT, EXIT_TEXT_SIZE);
+	free_datas(&datas);
 }
 
 void	minishell(void)
 {
-	//new_prompt();
+	signal(SIGQUIT, signals_handling);
+	signal(SIGINT, signals_handling);
+	new_prompt();
 	read_prompt();
+}
+
+void	free_datas(t_data *datas)
+{
+	free_tokens(&datas->tokens);
+}
+
+void	init_datas(t_data *datas)
+{
+	datas->tokens = NULL;
+	datas->errcode = 0;
 }

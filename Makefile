@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+         #
+#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/19 18:27:41 by ymanchon         ###   ########.fr        #
+#    Updated: 2024/07/20 00:23:30 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,15 @@ NAME = minishell
 
 CC =	cc
 
-SRCS =	./srcs/ft_split_quotes2.c \
-		./srcs/ft_split_quotes.c \
-		./srcs/lst.c \
+SRCS =	./srcs/parsing/ft_split_quotes2.c \
+		./srcs/parsing/ft_split_quotes.c \
+		./srcs/parsing/token_id.c \
+		./srcs/parsing/parsing_quotes.c \
+		./srcs/parsing/parsing.c \
+		./srcs/builtins/echo.c \
+		./srcs/builtins/cd.c \
 		./srcs/debug.c \
-		./srcs/parsing.c \
+		./srcs/signals_handling.c \
 		./srcs/minishell.c \
 		./main.c
 
@@ -43,7 +47,7 @@ DEPS =	$(OBJS:%.obj=%.d)
 
 INCLUDES =	-I ./includes/ -I $(LIBFT_P)/ -I .
 
-CFLAGS =	-Wall -Wextra -MMD -lreadline #-Werror
+CFLAGS =	-Wall -Wextra -MMD -g3#-Werror
 
 LIBFT_P		=	./libft
 

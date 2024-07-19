@@ -3,18 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/19 18:25:17 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/07/20 01:10:09 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define PROMPT "\e[1m\e[35mMINIFLOP $> \e[0m"
-# define PROMPT_SIZE 26
+# define PROMPT1 "\e[1m\e[35m"
+# define PROMPT1_SIZE 9
+
+# define PROMPT2 " $> "
+# define PROMPT2_SIZE 4
+
+# define PROMPT3 "\e[0m"
+# define PROMPT3_SIZE 4
 
 # define SQUOTE_PROMPT "\e[1mmsquote >>> \e[0m"
 # define SQUOTE_PROMPT_SIZE 26
@@ -22,10 +28,12 @@
 # define DQUOTE_PROMPT "\e[1mmdquote >>> \e[0m"
 # define DQUOTE_PROMPT_SIZE 26
 
+# define EXIT_TEXT "\e[31m\nexit\n\e[0m"
+# define EXIT_TEXT_SIZE 15
+
+# include <limits.h>
 # include <stdlib.h>
 # include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 # include <unistd.h>
 # include <signal.h>
 # include "errcode.h"
@@ -57,28 +65,33 @@ typedef struct s_token
 
 typedef struct s_data
 {
-	int	errcode;
+	t_token	*tokens;
+	int		errcode;
 }	t_data;
+
+/*		BUILTINS		*/
+
+int		ft_cd(char **arguments);
+int		ft_echo(char **arguments);
 
 /*		MINISHELL		*/
 
 char	*get_next_line(int fd);
 void	minishell(void);
 void	new_prompt(void);
+void	free_datas(t_data *datas);
+void	signals_handling(int signum);;
 
 /*		PARSING			*/
 
-char	*remove_useless_quotes(const char *line);
-void	show_token(const t_token **tok);
-void	take_commandline(const char *line);
-
-/*		SPLIT_QUOTES		*/
-
+char	**remove_useless_quotes(char **splitted);
 char	**ft_split_quotes(const char *s, char sep);
+void	take_commandline(const char *line, t_data *datas);
+t_token	*new_token(char *value);;
+void	free_tokens(t_token **root);
 
-/*		LIST HANDLE		*/
+/*		DEBUG		*/
 
-t_token	*ft_toknew(char *value);
-t_token	**ft_createtok(size_t size);
+void	show_token(t_token *tok);
 
 #endif

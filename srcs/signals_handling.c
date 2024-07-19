@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dfree.c                                            :+:      :+:    :+:   */
+/*   signals_handling.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:38:33 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 01:17:14 by bama             ###   ########.fr       */
+/*   Created: 2024/07/20 00:23:31 by bama              #+#    #+#             */
+/*   Updated: 2024/07/20 00:55:55 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	dfree(void **ptr2)
+void	signals_handling(int signum)
 {
-	int	i;
-
-	i = 0;
-	while (ptr2[i])
-		free(ptr2[i++]);
-	free(ptr2);
+	if (signum == SIGINT)
+	{
+		write(1, "\n", 1);
+		new_prompt();
+	}
 }

@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dfree.c                                            :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:38:33 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 01:17:14 by bama             ###   ########.fr       */
+/*   Created: 2024/07/19 23:41:11 by bama              #+#    #+#             */
+/*   Updated: 2024/07/20 00:06:23 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	dfree(void **ptr2)
+int	ft_echo(char **arguments)
 {
-	int	i;
+	size_t	i;
+	char	option;
 
 	i = 0;
-	while (ptr2[i])
-		free(ptr2[i++]);
-	free(ptr2);
+	option = 0;
+	while (arguments[i])
+	{
+		if (ft_strcmp(arguments[i], "-n"))
+		{
+			write(1, arguments[i], ft_strlen(arguments[i]));
+			if (arguments[i + 1] && ft_strcmp(arguments[i + 1], "-n"))
+				write(1, " ", 1);
+		}
+		else
+			option = 1;
+		i++;
+	}
+	if (!option)
+		write(1, "\n", 1);
+	return (0);
 }
