@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/20 00:23:30 by bama             ###   ########.fr        #
+#    Updated: 2024/07/20 12:43:56 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS =	./srcs/parsing/ft_split_quotes2.c \
 		./srcs/parsing/ft_split_quotes.c \
 		./srcs/parsing/token_id.c \
 		./srcs/parsing/parsing_quotes.c \
+		./srcs/parsing/envvar.c \
 		./srcs/parsing/parsing.c \
 		./srcs/builtins/echo.c \
 		./srcs/builtins/cd.c \

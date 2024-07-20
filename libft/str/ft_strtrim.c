@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:53 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/05/23 13:37:57 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/07/20 13:07:22 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	skipset(const char *str, const char *set, ssize_t *a, ssize_t *b)
 		*b = size;
 }
 
-static char	*strdup_at(const char *str, ssize_t start, ssize_t end)
+/*static char	*ft_strdup_at(const char *str, ssize_t start, ssize_t end)
 {
 	size_t	i;
 	size_t	size;
@@ -63,7 +63,7 @@ static char	*strdup_at(const char *str, ssize_t start, ssize_t end)
 	while (start < end)
 		ret[i++] = str[start++];
 	return (ret);
-}
+}*/
 
 static char	allocc(const char *str, const char *set)
 {
@@ -91,7 +91,7 @@ char	*ft_strtrim(const char *str, const char *set)
 		return (ret);
 	}
 	skipset(str, set, &s, &e);
-	ret = strdup_at(str, s, e);
+	ret = ft_strdup_at(str, s, e);
 	if (!ret)
 		return (NULL);
 	return (ret);

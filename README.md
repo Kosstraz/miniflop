@@ -33,7 +33,7 @@ n'est pas normal. Seul bug repéré jusqu'ici.
 
 - [*]
 
-- [ENV_VAR] Parser et remplacer les variables d'environnement trouvées
+- -~~~[ENV_VAR] Parser et remplacer les variables d'environnement trouvées.~~~
 
 - [EXCEPTIONS] Gestion des exceptions faute de quote fermant.
 

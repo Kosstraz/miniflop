@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 02:36:20 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/20 12:50:44 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 
 # define EXIT_TEXT "\e[31m\nexit\n\e[0m"
 # define EXIT_TEXT_SIZE 15
+
+# ifndef ARG_MAX
+#  define ARG_MAX 2087151
+# endif
 
 # include <limits.h>
 # include <stdlib.h>
@@ -80,8 +84,9 @@ void	signals_handling(int signum);;
 char	**remove_useless_quotes(char **splitted);
 char	**ft_split_quotes(const char *s, char sep);
 void	take_commandline(const char *line, t_data *datas);
-t_token	*new_token(char *value);;
+t_token	*new_token(char *value);
 void	free_tokens(t_token **root);
+void	place_envvars(char ***splitted);
 
 /*		DEBUG		*/
 

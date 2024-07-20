@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strdup_at.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 20:10:44 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/20 13:02:01 by bama             ###   ########.fr       */
+/*   Created: 2024/07/20 13:03:52 by bama              #+#    #+#             */
+/*   Updated: 2024/07/20 13:07:02 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
 
-size_t	ft_strlen(const char *str)
+char	*ft_strdup_at(const char *str, ssize_t start, ssize_t end)
 {
 	size_t	i;
+	size_t	size;
+	char	*ret;
 
-	if (!str)
-		return (0);
+	size = end - start;
+	ret = (char *)malloc(sizeof(char) * (size + 1));
+	if (!ret)
+		return (NULL);
+	ret[size] = '\0';
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	while (start < end)
+		ret[i++] = str[start++];
+	return (ret);
 }
