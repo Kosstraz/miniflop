@@ -46,8 +46,6 @@ la chaîne de token et les déplacer pour gérer les priorités.
 
 - [$] Gérer les dollars (avec ou sans double quote). {cachetra}
 
-- [ENV_VAR] Interpréter les variables d'environnements, initiées avec un dollars avant le nom (ex : $VAR). {cachetra}
-
 - [<] Redirige l'input. {ymanchon}
 
 - [>] Redirige l'output. {ymanchon}

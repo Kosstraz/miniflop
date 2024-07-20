@@ -6,17 +6,16 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:36:30 by bama              #+#    #+#             */
-/*   Updated: 2024/07/18 16:31:14 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/20 15:07:55 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	errcode = 0;
-
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
-	errcode = 0;
-	minishell();
+	(void)ac;
+	(void)av;
+	minishell(env);
 	return (0);
 }

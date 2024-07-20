@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 12:50:44 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/20 17:41:18 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,11 @@
 #  define ARG_MAX 2087151
 # endif
 
-# include <limits.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
-# include "errcode.h"
+# include "err.h"
 # include "libft.h"
 
 typedef enum e_type
@@ -51,7 +50,9 @@ typedef enum e_type
 	Or,
 	Command,
 	Argument,
-	Redirect
+	Redirect,
+	Infile,
+	Outfile
 }	t_e_type;
 
 typedef struct s_token
@@ -74,7 +75,7 @@ int		ft_echo(char **arguments);
 
 /*		MINISHELL		*/
 
-void	minishell(void);
+void	minishell(char **env);
 void	new_prompt(void);
 void	free_datas(t_data *datas);
 void	signals_handling(int signum);;
@@ -87,6 +88,10 @@ void	take_commandline(const char *line, t_data *datas);
 t_token	*new_token(char *value);
 void	free_tokens(t_token **root);
 void	place_envvars(char ***splitted);
+void	separate_operands(char ***splitted);
+void	check_quote_status(char c, char *opened_status);
+char	is_operand(char c[2]);
+char	is_sep(char c);
 
 /*		DEBUG		*/
 

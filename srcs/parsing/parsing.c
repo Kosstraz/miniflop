@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 12:53:42 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/20 19:45:21 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static t_token	*parse_commandline(const char *line)
 
 	splitted = ft_split_quotes(line, ' ');
 	place_envvars(&splitted);
+	separate_operands(&splitted);
 	splitted = remove_useless_quotes(splitted);
 	token = new_token(splitted[0]);
 	token->type = Command;		// Rendre automatique (et surtt correcte) la tokenisation du premier token

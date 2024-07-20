@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/20 00:54:49 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/20 15:07:25 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	parse_squote(const char *str, size_t *i)
 			passed = 1;
 		(*i)++;
 	}
-	errcode = DQUOTE_MISSING;
 	return (DQUOTE_MISSING);
 }
 
@@ -67,7 +66,6 @@ int	parse_dquote(const char *str, size_t *i)
 			passed = 1;
 		(*i)++;
 	}
-	errcode = DQUOTE_MISSING;
 	return (DQUOTE_MISSING);
 }
 
