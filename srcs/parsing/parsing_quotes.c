@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:29:54 by bama              #+#    #+#             */
-/*   Updated: 2024/07/19 23:58:57 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/20 02:51:11 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ char	**remove_useless_quotes(char **splitted)
 		check_validity(ret, splitted[i], &j, size);
 		i++;
 	}
-	while (j < size2)
+	while (j <= size2)
 		ret[j++] = NULL;
-	ret[j] = NULL;
+	free(splitted);
 	return (ret);
 }

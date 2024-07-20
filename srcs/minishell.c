@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 01:15:23 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/20 02:43:55 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	new_prompt(void)
 	write(1, cwd, ft_strlen(cwd));
 	write(1, PROMPT2, PROMPT2_SIZE);
 	write(1, PROMPT3, PROMPT3_SIZE);
+	free(cwd);
 }
 
 static void	read_prompt(void)
@@ -30,7 +31,6 @@ static void	read_prompt(void)
 	t_data	datas;
 	char	*gnl;
 
-	init_datas(&datas);
 	gnl = get_next_line(STDIN_FILENO);
 	while (gnl)
 	{
@@ -42,7 +42,6 @@ static void	read_prompt(void)
 		gnl = get_next_line(STDIN_FILENO);
 	}
 	write(1, EXIT_TEXT, EXIT_TEXT_SIZE);
-	free_datas(&datas);
 }
 
 void	minishell(void)

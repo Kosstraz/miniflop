@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 01:10:09 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/20 02:36:20 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@
 # include "errcode.h"
 # include "libft.h"
 
-typedef struct s_useless_quotes
-{
-	int	i[2];
-	int	count;
-}	t_useless_quotes;
-
 typedef enum e_type
 {
 	Null,
@@ -76,7 +70,6 @@ int		ft_echo(char **arguments);
 
 /*		MINISHELL		*/
 
-char	*get_next_line(int fd);
 void	minishell(void);
 void	new_prompt(void);
 void	free_datas(t_data *datas);
