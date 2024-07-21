@@ -22,16 +22,16 @@ n'est pas normal. Seul bug repéré jusqu'ici.
 
 - -~~~ [ARGUMENTS] Arguments~~~
 
-- -~~~ [|] Pipe~~~
+- -~~~ [|] Pipe, notamment quand ils sont collés aux arguments/commandes.~~~
 
-- -~~~[||] Or~~~
+- -~~~[||] Or, notamment quand ils sont collés aux arguments/commandes.~~~
 
-- -~~~[&&] And~~~
+- -~~~[&&] And, notamment quand ils sont collés aux arguments/commandes.~~~
 
-- [<] Parser et tokeniser dans ce contexte.
-- [>] Parser et tokeniser dans ce contexte.
+- [<] Parser et tokeniser dans ce contexte. Notamment quand ils sont collés aux arguments/commandes.
+- [>] Parser et tokeniser dans ce contexte. Notamment quand ils sont collés aux arguments/commandes.
 
-- [*]
+- -~~~ [*] Avec gestion des fichiers cachés et exclusions (avec lettres pré/post wildcard)~~~
 
 - -~~~[ENV_VAR] Parser et remplacer les variables d'environnement trouvées.~~~
 
@@ -88,4 +88,4 @@ la chaîne de token et les déplacer pour gérer les priorités.
 
 - [&&] N'exécute aucune commande si l'une d'entre elles n'est pas valide. {cachetra}
 
-- [*] Doit fonctionner sur le répertoire courant. {ymanchon}
+- -~~~ [*] Doit fonctionner sur le répertoire courant. {ymanchon}~~~

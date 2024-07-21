@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/21 16:28:35 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 20:33:40 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,13 @@ ssize_t	ft_rev_isspaceptr(const char *s, ssize_t start);
 			/* **************************** */
 
 /*
+	Ajoute le tableau de strings 'strs2' à l'emplacement
+	at de 'strs1' et renvoie le résultat.
+	Partez du principe que strs1 et strs2 seront inutilisable après appel
+	de cette fonction
+*/
+char	**ft_strs_add_at(char **strs1, char **strs2, size_t at, char erase);
+/*
 	Insère dans le tableau de strings 'strs1' la chaîne 'str'
 	à l'index 'at'.
 */
@@ -218,6 +225,8 @@ char	**ft_strs_addback(char **strs1, char **strs2);
 /*
 	Similaire à 'ft_strs_addback' hormis qu'ici 'strs1' et 'strs2'
 	sont free à la fin de cette fonction
+	Partez du principe que strs1 et strs2 seront inutilisable après appel
+	de cette fonction
 */
 char	**ft_strs_addback_free(char **strs1, char **strs2);
 char	*ft_strdup_at(const char *str, ssize_t start, ssize_t end);
@@ -245,6 +254,7 @@ int		owsequence(const char *text, const char *mask);
 int		owsequence_i(const char *text, const char *mask, int *i);
 int		owsequence_si(const char *text, const char *mask, int *i, int size);
 int		owsequence_s(const char *text, const char *mask, int size);
+int		ft_strncmp_rev(const char *s1, const char *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *str, const char c);

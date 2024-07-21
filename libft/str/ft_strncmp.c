@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:48 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/05/23 13:37:57 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/07/21 20:41:27 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,29 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		if ((unsigned char)s1[i] != (unsigned char)s2[i])
 			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
+	}
+	return (0);
+}
+
+/*
+	Parcours les caractères à partir de la fin de la chaîne.
+*/
+int	ft_strncmp_rev(const char *s1, const char *s2, size_t n)
+{
+	unsigned long	cpt;
+	long			i;
+	long			j;
+
+	cpt = 0;
+	i = ft_strlen(s1) - 1;
+	j = ft_strlen(s2) - 1;
+	while ((i >= 0 && j >= 0) && cpt < n)
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[j])
+			return ((unsigned char)s1[i] - (unsigned char)s2[j]);
+		i--;
+		j--;
+		cpt++;
 	}
 	return (0);
 }

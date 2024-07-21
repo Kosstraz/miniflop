@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 17:41:18 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 20:08:29 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
+# include <dirent.h>
 # include "err.h"
 # include "libft.h"
 
@@ -88,6 +89,7 @@ void	take_commandline(const char *line, t_data *datas);
 t_token	*new_token(char *value);
 void	free_tokens(t_token **root);
 void	place_envvars(char ***splitted);
+void	place_wildcards(char ***splitted);
 void	separate_operands(char ***splitted);
 void	check_quote_status(char c, char *opened_status);
 char	is_operand(char c[2]);

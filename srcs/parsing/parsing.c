@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 18:31:36 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 20:27:07 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ static void	check_e_type(t_token **second, const char *word, int i)
 	(*second)->next->type = type;
 }
 
+static void	do_some_parsing(char ***splitted, const char *line)
+{
+	*splitted = ft_split_quotes(line, ' ');
+	place_envvars(splitted);
+	separate_operands(splitted);
+	place_wildcards(splitted);
+	*splitted = remove_useless_quotes(*splitted);
+}
+
 // Bon"jour mec MOUAH"AHAHH "why are you raging ??" "" A"urevoir "
 
 static t_token	*parse_commandline(const char *line)
@@ -49,10 +58,7 @@ static t_token	*parse_commandline(const char *line)
 	t_token	*root;
 	int		i;
 
-	splitted = ft_split_quotes(line, ' ');
-	place_envvars(&splitted);
-	separate_operands(&splitted);
-	splitted = remove_useless_quotes(splitted);
+	do_some_parsing(&splitted, line);
 	token = new_token(splitted[0]);
 	token->type = Command;		// Rendre automatique (et surtt correcte) la tokenisation du premier token
 	root = token;
