@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/20 13:29:44 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 16:28:35 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,8 +205,23 @@ ssize_t	ft_rev_isspaceptr(const char *s, ssize_t start);
 			/* **************************** */
 			/* **************************** */
 
+/*
+	Insère dans le tableau de strings 'strs1' la chaîne 'str'
+	à l'index 'at'.
+*/
+char	**ft_strs_insert(char **strs1, char *str, size_t at);
+/*
+	Ajoute le tableau de strings 'strs2' à la fin de
+	'strs1' et renvoie le résultat.
+*/
+char	**ft_strs_addback(char **strs1, char **strs2);
+/*
+	Similaire à 'ft_strs_addback' hormis qu'ici 'strs1' et 'strs2'
+	sont free à la fin de cette fonction
+*/
+char	**ft_strs_addback_free(char **strs1, char **strs2);
 char	*ft_strdup_at(const char *str, ssize_t start, ssize_t end);
-size_t	ft_strlen2(const char **str2);
+size_t	ft_strlen2(char **str2);
 char	*ft_strtolower(char *str);
 char	*ft_strtoupper(char *str);
 /*

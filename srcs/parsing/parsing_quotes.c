@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:29:54 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 02:51:11 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 16:42:37 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	**remove_useless_quotes(char **splitted)
 	size_t	i;
 	size_t	j;
 
-	size2 = ft_strlen2((const char **)splitted);
+	size2 = ft_strlen2(splitted);
 	ret = (char **)malloc(sizeof(char *) * (size2 + 1));
 	if (!ret)
 		return (NULL);
