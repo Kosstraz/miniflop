@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 00:53:54 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 22:44:48 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,15 @@ void	show_token(t_token *tok)
 		else if (tok->type == Argument)
 			printf("[ARGUMENT]\t\t");
 		else if (tok->type == Redirect)
-			printf("[REDIRECTION]\t");
+			printf("[REDIRECTION]\t\t");
+		else if (tok->type == RedirectAppend)
+			printf("[REDIRECTION (APPEND)]\t");
+		else if (tok->type == HereDoc)
+			printf("[HERE_DOC]\t\t");
+		else if (tok->type == Infile)
+			printf("[INFILE]\t\t");
+		else if (tok->type == Outfile)
+			printf("[OUTFILE]\t\t");
 		printf("\e[31m$\e[0m%s\e[31m$\e[0m\n", tok->value);
 		tok = tok->next;
 	}

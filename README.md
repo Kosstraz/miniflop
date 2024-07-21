@@ -28,23 +28,21 @@ n'est pas normal. Seul bug repéré jusqu'ici.
 
 - -~~~[&&] And, notamment quand ils sont collés aux arguments/commandes.~~~
 
-- [<] Parser et tokeniser dans ce contexte. Notamment quand ils sont collés aux arguments/commandes.
-- [>] Parser et tokeniser dans ce contexte. Notamment quand ils sont collés aux arguments/commandes.
+- -~~~[<] Parser et tokeniser dans ce contexte. Notamment quand ils sont collés aux arguments/commandes.~~~
+- -~~~[>] Parser et tokeniser dans ce contexte. Notamment quand ils sont collés aux arguments/commandes.~~~
 
-- -~~~ [*] Avec gestion des fichiers cachés et exclusions (avec lettres pré/post wildcard)~~~
+- -~~~[*] Avec gestion des fichiers cachés et exclusions (avec lettres pré/post wildcard)~~~
 
 - -~~~[ENV_VAR] Parser et remplacer les variables d'environnement trouvées.~~~
 
 - [EXCEPTIONS] Gestion des exceptions faute de quote fermant.
 
 - [PARHENTESES] Parser les parentheses et créer des sous-tokenisation. Aussi découper
-la chaîne de token et les déplacer pour gérer les priorités.
+la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 ###### LISTE DES CHOSES A FAIRE : ######
 
 - [HISTORY] Faire un historique fonctionnel, basique. {ymanchon}
-
-- [$] Gérer les dollars (avec ou sans double quote). {cachetra}
 
 - [<] Redirige l'input. {ymanchon}
 
@@ -58,19 +56,19 @@ la chaîne de token et les déplacer pour gérer les priorités.
 
 - [HERE_DOC] Implémenter un fonctionnement similaire à heredoc. {cachetra}
 
-- [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {cachetra}
+- [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {ymanchon}
 
-- -~~~ [ctrl-C] Interpréter ce signal (SIGINT). Affiche un nouveau prompt avec une nouvelle ligne. {ymanchon}~~~
+- -~~~[ctrl-C] Interpréter ce signal (SIGINT). Affiche un nouveau prompt avec une nouvelle ligne. {ymanchon}~~~
 
-- -~~~ [ctrl-D] Interpréter ce signal (EOF <=> End-Of-File). With a read(). Quitte le Shell actuel. {ymanchon}~~~
+- -~~~[ctrl-D] Interpréter ce signal (EOF <=> End-Of-File). With a read(). Quitte le Shell actuel. {ymanchon}~~~
 
-- -~~~ [ctrl-\] Interpréter ce signal (SIGQUIT). Ne doit rien faire. {ymanchon}~~~
+- -~~~[ctrl-\] Interpréter ce signal (SIGQUIT). Ne doit rien faire. {ymanchon}~~~
 
 ###### BUILTINS : ######
 
-- -~~~ [echo] Avec l'option -n. Affiche l'argument. {ymanchon}~~~
+- -~~~[echo] Avec l'option -n. Affiche l'argument. {ymanchon}~~~
 
-- -~~~ [cd] Fonctionnant avec un chemin relatif et absolu. {ymanchon}~~~
+- -~~~[cd] Fonctionnant avec un chemin relatif et absolu. {ymanchon}~~~
 
 - [pwd] Affiche le répertoire dans lequel se trouve l'utilisateur appelant. {cachetra}
 
@@ -80,7 +78,7 @@ la chaîne de token et les déplacer pour gérer les priorités.
 
 - [env] Affiche toutes les variables 'environnements.d {cachetra}
 
-- [exit] Quitte le terminal. {cachetra}
+- -~~~[exit] Quitte le terminal. {ymanchon}~~~
 
 ###### BONUS : ######
 
@@ -88,4 +86,4 @@ la chaîne de token et les déplacer pour gérer les priorités.
 
 - [&&] N'exécute aucune commande si l'une d'entre elles n'est pas valide. {cachetra}
 
-- -~~~ [*] Doit fonctionner sur le répertoire courant. {ymanchon}~~~
+- -~~~[*] Doit fonctionner sur le répertoire courant. {ymanchon}~~~

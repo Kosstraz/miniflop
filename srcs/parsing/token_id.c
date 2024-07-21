@@ -6,11 +6,61 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:09:44 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 01:14:37 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 22:45:54 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	review_tokenid(t_token **tokens)
+{
+	t_token	*tok;
+
+	tok = *tokens;
+	while (tok)
+	{
+		if (tok->value)
+		{
+			if ((!ft_strcmp(tok->value, "<") || !ft_strcmp(tok->value, ">")
+			|| !ft_strcmp(tok->value, ">>") || !ft_strcmp(tok->value, "<<")))
+			{
+				if (!tok->next || (tok->next && is_sep_toktype(*(tok->next))))
+					write(1, PARSE_ERROR, PARSE_ERROR_SIZE);
+				else if (tok->next)
+					detect_redirect_type(&tok);
+			}
+		}
+		tok = tok->next;
+	}
+}
+
+// Cherche le type de token auquel correspond le mot splitté
+void	check_e_type(t_token **second, const char *word, int i)
+{
+	enum e_type	type;
+
+	type = Null;
+	if (i == 0 || (*second)->type == Pipe
+		|| (*second)->type == And || (*second)->type == Or)
+		type = Command;
+	else if (ft_strlen(word) == 1)
+	{
+		if (word[0] == '|')
+			type = Pipe;
+	}
+	else if (ft_strlen(word) == 2)
+	{
+		if (word[0] == '&' && word[1] == '&')
+			type = And;
+		else if (word[0] == '|' && word[1] == '|')
+			type = Or;
+	}
+	if (i != 0
+		&& (((*second)->type == Command || (*second)->type == Argument)
+			&& type == Null))
+		type = Argument;
+	(*second)->next->type = type;
+}
 
 void	free_tokens(t_token **root)
 {

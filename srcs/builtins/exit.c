@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_words.c                                   :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 14:01:21 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/21 21:24:58 by bama             ###   ########.fr       */
+/*   Created: 2024/07/21 22:50:43 by bama              #+#    #+#             */
+/*   Updated: 2024/07/21 23:11:38 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "minishell.h"
 
-size_t	ft_count_words(const char *s, char sep)
+int	ft_exit(char **av, t_data *datas)
 {
-	size_t	words;
-	size_t	i;
+	int	count;
 
-	words = 0;
-	i = 0;
-	while (s[i])
+	count = 0;
+	while (av[count + 1])
 	{
-		if (((i != 0 && s[i - 1] == sep) || i == 0) && s[i] != sep)
-			words++;
-		i++;
+		count++;
+		if (count > 1)
+		{
+			write(1, TOO_MANY_ARGS_ERROR, TOO_MANY_ARGS_ERROR_SIZE);
+			free_datas(datas);
+			exit(1);
+		}
 	}
-	return (words);
+	free_datas(datas);
+	if (!count)
+		exit(0);
+	exit(ft_atoi(av[1]));
 }

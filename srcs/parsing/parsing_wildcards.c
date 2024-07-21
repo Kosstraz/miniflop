@@ -6,52 +6,65 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:47:22 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 20:58:26 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 22:00:40 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handle_wildcard(char ***splitted, size_t word_at, size_t at)
+void	finish_wildcard_checking(char *pre_, char *post_, char *allfiles,
+		const char *word);
+void	init_wildcard_checking(char **pre_, char **post_, char *word,
+		size_t wc_at);
+
+static char	check_wildcard_protection(char *pre_, char *post_, char *fname)
+{
+	char	bool_;
+	char	bool_dir;
+
+	bool_dir = 
+	bool_ = ((!pre_ && !post_)
+		|| (!ft_strncmp(fname, pre_, ft_strlen(pre_)) && !post_)
+		|| (!ft_strncmp_rev(fname, post_, ft_strlen(post_)) && !pre_)
+		|| (!ft_strncmp_rev(fname, post_, ft_strlen(post_))
+			&& !ft_strncmp(fname, pre_, ft_strlen(pre_))))
+		&& (ft_strcmp(fname, ".") && ft_strcmp(fname, ".."))
+		&& (ft_strncmp(fname, ".", 1) || (pre_ && !ft_strncmp(pre_, ".", 1)));
+	if (bool_dir)
+		return (2);
+	else if (bool_)
+		return (1);
+	return (0);
+}
+
+static char	handle_wildcard(char ***splitted, size_t word_at, size_t at)
 {
 	struct dirent	*dirent;
 	DIR				*dir;
 	char			*allfiles;
-	char			*pre_wildcard;
-	char			*post_wildcard;
+	char			*pre_wc;
+	char			*post_wc;
 	char			**wildcard;
 
 	dir = opendir(".");
 	dirent = readdir(dir);
-	pre_wildcard = NULL;
-	post_wildcard = NULL;
-	if (at != 0)
-		pre_wildcard = ft_strdup_at((*splitted)[word_at], 0, at);
-	if (at + 1 != ft_strlen((*splitted)[word_at]))
-		post_wildcard = ft_strdup_at((*splitted)[word_at], at + 1, ft_strlen((*splitted)[word_at]));
+	init_wildcard_checking(&pre_wc, &post_wc, (*splitted)[word_at], at);
 	allfiles = NULL;
 	while (dirent)
 	{
-		if (((!pre_wildcard && !post_wildcard)
-		|| (!ft_strncmp(dirent->d_name, pre_wildcard, ft_strlen(pre_wildcard)) && !post_wildcard)
-		|| (!ft_strncmp_rev(dirent->d_name, post_wildcard, ft_strlen(post_wildcard)) && !pre_wildcard)
-		|| (!ft_strncmp_rev(dirent->d_name, post_wildcard, ft_strlen(post_wildcard)) && !ft_strncmp(dirent->d_name, pre_wildcard, ft_strlen(pre_wildcard))))
-		&& (ft_strcmp(dirent->d_name, ".") && ft_strcmp(dirent->d_name, ".."))
-		&& (ft_strncmp(dirent->d_name, ".", 1) || (pre_wildcard && !ft_strncmp(pre_wildcard, ".", 1))))
+		if (check_wildcard_protection(pre_wc, post_wc, dirent->d_name))
 		{
 			allfiles = ft_strsjoin(allfiles, dirent->d_name);
 			allfiles = ft_strsjoin(allfiles, " ");
 		}
 		dirent = readdir(dir);
 	}
-	free(pre_wildcard);
-	free(post_wildcard);
 	closedir(dir);
 	if (!allfiles)
-		return ;
+		return (finish_wildcard_checking(pre_wc, post_wc, NULL, (*splitted)[word_at]), 0);
 	wildcard = ft_split(allfiles, ' ');
-	free(allfiles);
 	*splitted = ft_strs_add_at(*splitted, wildcard, word_at, 1);
+	return (finish_wildcard_checking(pre_wc, post_wc, allfiles, NULL), 1);
 }
 
 void	place_wildcards(char ***splitted)

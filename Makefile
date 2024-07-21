@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/21 19:52:48 by bama             ###   ########.fr        #
+#    Updated: 2024/07/21 23:13:09 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,15 +30,19 @@ CC =	cc
 SRCS =	./srcs/parsing/utils.c \
 		./srcs/parsing/ft_split_quotes2.c \
 		./srcs/parsing/ft_split_quotes.c \
+		./srcs/parsing/token_id2.c \
 		./srcs/parsing/token_id.c \
+		./srcs/parsing/parsing_wildcards2.c \
 		./srcs/parsing/parsing_wildcards.c \
 		./srcs/parsing/parsing_quotes.c \
 		./srcs/parsing/envvar.c \
 		./srcs/parsing/separate_operands.c \
 		./srcs/parsing/parsing.c \
+		./srcs/builtins/exit.c \
 		./srcs/builtins/echo.c \
 		./srcs/builtins/cd.c \
 		./srcs/debug.c \
+		./srcs/datas_handling.c \
 		./srcs/signals_handling.c \
 		./srcs/minishell.c \
 		./main.c

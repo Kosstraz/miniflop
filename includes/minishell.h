@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 20:08:29 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 23:13:34 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # include <unistd.h>
 # include <signal.h>
 # include <dirent.h>
+# include <sys/stat.h>
 # include "err.h"
 # include "libft.h"
 
@@ -52,6 +53,8 @@ typedef enum e_type
 	Command,
 	Argument,
 	Redirect,
+	RedirectAppend,
+	HereDoc,
 	Infile,
 	Outfile
 }	t_e_type;
@@ -66,11 +69,13 @@ typedef struct s_token
 typedef struct s_data
 {
 	t_token	*tokens;
-	int		errcode;
+	int		command_ret;
+	int		_errcode;
 }	t_data;
 
 /*		BUILTINS		*/
 
+int		ft_exit(char **av, t_data *datas);
 int		ft_cd(char **arguments);
 int		ft_echo(char **arguments);
 
@@ -79,7 +84,10 @@ int		ft_echo(char **arguments);
 void	minishell(char **env);
 void	new_prompt(void);
 void	free_datas(t_data *datas);
-void	signals_handling(int signum);;
+void	signals_handling(int signum);
+void	add_env_to_datas(t_data *datas, char **env);
+void	free_datas(t_data *datas);
+void	init_datas(t_data *datas);
 
 /*		PARSING			*/
 
@@ -94,6 +102,10 @@ void	separate_operands(char ***splitted);
 void	check_quote_status(char c, char *opened_status);
 char	is_operand(char c[2]);
 char	is_sep(char c);
+void	check_e_type(t_token **second, const char *word, int i);
+void	review_tokenid(t_token **tokens);
+char	is_sep_toktype(t_token tok);
+void	detect_redirect_type(t_token **tok);
 
 /*		DEBUG		*/
 

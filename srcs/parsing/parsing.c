@@ -6,39 +6,11 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 20:27:07 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 22:31:35 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// Cherche le type de token auquel correspond le mot splitté
-static void	check_e_type(t_token **second, const char *word, int i)
-{
-	enum e_type	type;
-
-	type = Null;
-	if (i == 0 || (*second)->type == Pipe
-		|| (*second)->type == And || (*second)->type == Or)
-		type = Command;
-	else if (ft_strlen(word) == 1)
-	{
-		if (word[0] == '|')
-			type = Pipe;
-	}
-	else if (ft_strlen(word) == 2)
-	{
-		if (word[0] == '&' && word[1] == '&')
-			type = And;
-		else if (word[0] == '|' && word[1] == '|')
-			type = Or;
-	}
-	if (i != 0
-		&& (((*second)->type == Command || (*second)->type == Argument)
-			&& type == Null))
-		type = Argument;
-	(*second)->next->type = type;
-}
 
 static void	do_some_parsing(char ***splitted, const char *line)
 {
@@ -70,8 +42,8 @@ static t_token	*parse_commandline(const char *line)
 		token = token->next;
 		i++;
 	}
-	token = NULL;
 	free(splitted);
+	review_tokenid(&root);
 	show_token(root);
 	return (root);
 }

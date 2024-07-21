@@ -6,13 +6,11 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 15:00:32 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 23:12:15 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	init_datas(t_data *datas);
 
 void	new_prompt(void)
 {
@@ -31,6 +29,7 @@ static void	read_prompt(char **env)
 	t_data	datas;
 	char	*gnl;
 
+	add_env_to_datas(&datas, env);
 	gnl = get_next_line(STDIN_FILENO);
 	while (gnl)
 	{
@@ -50,15 +49,4 @@ void	minishell(char **env)
 	signal(SIGINT, signals_handling);
 	new_prompt();
 	read_prompt(env);
-}
-
-void	free_datas(t_data *datas)
-{
-	free_tokens(&datas->tokens);
-}
-
-void	init_datas(t_data *datas)
-{
-	datas->tokens = NULL;
-	datas->errcode = 0;
 }

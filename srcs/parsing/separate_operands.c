@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:49:27 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 18:36:57 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/21 22:42:52 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static void	add_new_words(char ***div, char *str, size_t *i, size_t at)
 	if (str[at] == '|' && str[at + 1] != '|')
 		ope_len = 1;
 	else if ((str[at] == '&' && str[at + 1] == '&')
-		|| (str[at] == '|' && str[at + 1] == '|'))
+		|| (str[at] == '|' && str[at + 1] == '|')
+		|| (str[at] == '<' && str[at + 1] == '<')
+		|| (str[at] == '>' && str[at + 1] == '>'))
 		ope_len = 2;
 	if (at > 0)
 		(*div)[(*i)++] = ft_strdup_at(str, 0, at);
@@ -66,12 +68,12 @@ void	separate_operands(char ***splitted)
 		if (ft_strlen((*splitted)[i]) > 2 || !is_operand(&(*splitted)[i][0]))
 		{
 			j = 0;
-			while ((*splitted)[i][j])
+			while (j < ft_strlen((*splitted)[i]) && (*splitted)[i][j])
 			{
 				check_quote_status((*splitted)[i][j], &quote_opened);
 				if (is_operand(&(*splitted)[i][j]) && !quote_opened)
 					separate(splitted, i++, j);
-				if ((*splitted)[i][j])
+				if (j < ft_strlen((*splitted)[i]))
 					j++;
 			}
 		}
