@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 23:12:15 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/22 22:47:44 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,17 @@ void	new_prompt(void)
 
 static void	read_prompt(char **env)
 {
-	t_data	datas;
+	t_data	data;
 	char	*gnl;
 
-	add_env_to_datas(&datas, env);
+	add_env_to_data(&data, env);
 	gnl = get_next_line(STDIN_FILENO);
 	while (gnl)
 	{
-		init_datas(&datas);
-		take_commandline(gnl, &datas);
-		free_datas(&datas);
+		ft_memset(&data, 0, sizeof(t_data));
+		// init_data(&data);
+		take_commandline(gnl, &data);
+		free_data(&data);
 		new_prompt();
 		free(gnl);
 		gnl = get_next_line(STDIN_FILENO);

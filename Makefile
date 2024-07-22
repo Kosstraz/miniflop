@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
+#    By: cachetra <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/21 23:13:09 by bama             ###   ########.fr        #
+#    Updated: 2024/07/22 22:47:44 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRCS =	./srcs/parsing/utils.c \
 		./srcs/builtins/echo.c \
 		./srcs/builtins/cd.c \
 		./srcs/debug.c \
-		./srcs/datas_handling.c \
+		./srcs/data_handling.c \
 		./srcs/signals_handling.c \
 		./srcs/minishell.c \
 		./main.c
@@ -55,7 +55,7 @@ DEPS =	$(OBJS:%.obj=%.d)
 
 INCLUDES =	-I ./includes/ -I $(LIBFT_P)/ -I .
 
-CFLAGS =	-Wall -Wextra -MMD -g3#-Werror
+CFLAGS =	-Wall -Wextra -MMD -g3 #-Werror
 
 LIBFT_P		=	./libft
 

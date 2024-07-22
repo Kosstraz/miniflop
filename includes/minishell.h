@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 23:13:34 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/22 23:02:30 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # include <signal.h>
 # include <dirent.h>
 # include <sys/stat.h>
-# include "err.h"
+# include "error.h"
 # include "libft.h"
 
 typedef enum e_type
@@ -59,6 +59,13 @@ typedef enum e_type
 	Outfile
 }	t_e_type;
 
+typedef struct	s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_token
 {
 	enum e_type		type;
@@ -69,13 +76,16 @@ typedef struct s_token
 typedef struct s_data
 {
 	t_token	*tokens;
+	t_env	*env;
 	int		command_ret;
 	int		_errcode;
 }	t_data;
 
+typedef unsigned int	t_uint;
+
 /*		BUILTINS		*/
 
-int		ft_exit(char **av, t_data *datas);
+int		ft_exit(char **av, t_data *data);
 int		ft_cd(char **arguments);
 int		ft_echo(char **arguments);
 
@@ -83,17 +93,17 @@ int		ft_echo(char **arguments);
 
 void	minishell(char **env);
 void	new_prompt(void);
-void	free_datas(t_data *datas);
+void	free_data(t_data *data);
 void	signals_handling(int signum);
-void	add_env_to_datas(t_data *datas, char **env);
-void	free_datas(t_data *datas);
-void	init_datas(t_data *datas);
+void	add_env_to_data(t_data *data, char **env);
+void	free_data(t_data *data);
+void	init_data(t_data *data);
 
 /*		PARSING			*/
 
 char	**remove_useless_quotes(char **splitted);
 char	**ft_split_quotes(const char *s, char sep);
-void	take_commandline(const char *line, t_data *datas);
+void	take_commandline(const char *line, t_data *data);
 t_token	*new_token(char *value);
 void	free_tokens(t_token **root);
 void	place_envvars(char ***splitted);
