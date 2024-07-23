@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/07/23 17:59:12 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/07/23 19:10:49 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ void	add_env_to_data(t_data *data, char **env)
 void	free_data(t_data *data)
 {
 	free_tokens(&data->tokens);
-	free_env(&data->env);
+	//free_env(&data->env);
 }
 
-// void	init_data(t_data *data)
-// {
-// 	data->tokens = NULL;
-// 	data->command_ret = 0;
-// 	data->_errcode = 0;
-// }
+void	init_data(t_data *data)
+{
+	data->tokens = NULL;
+	data->returncode = 0;
+	data->_errcode = 0;
+}
