@@ -6,7 +6,7 @@
 /*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:36:30 by bama              #+#    #+#             */
-/*   Updated: 2024/07/22 23:03:18 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:52:03 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	main(int ac, char **av, char **env)
 	// minishell(env);
 	t_data	data;
 
+	int i = 0;
+	// while (env[i])
+	// 	ft_printf("%s\n", env[i++]);
 	ft_memset(&data, 0, sizeof(t_data));
 	add_env_to_data(&data, env);
 	print_linked_list(data.env);
