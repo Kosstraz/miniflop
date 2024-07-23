@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 22:44:48 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/22 22:47:44 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	print_linked_list(t_env *env)
+{
+	while (env)
+	{
+		ft_printf("name: %s\nvalue: %s\n\n", env->name, env->value);
+		env = env->next;
+	}
+}
 
 void	show_token(t_token *tok)
 {

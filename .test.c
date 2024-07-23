@@ -1,4 +1,4 @@
-int	main(int ac, char **av)
+
+int	main(int ac, char **av, char **env)
 {
-	printf("%s\n", av[1]);
 }
