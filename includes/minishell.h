@@ -6,7 +6,7 @@
 /*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/22 23:02:30 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:48:39 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,17 @@
 #  define ARG_MAX 2087151
 # endif
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
+# ifndef TERM_SIZE
+#  define TERM_SZE 4096
+# endif
+
 # include <dirent.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <sys/stat.h>
+# include <termcap.h>
+# include <unistd.h>
 # include "error.h"
 # include "libft.h"
 
@@ -58,6 +63,11 @@ typedef enum e_type
 	Infile,
 	Outfile
 }	t_e_type;
+
+typedef struct s_term
+{
+	char	*termtype;
+}	t_term;
 
 typedef struct	s_env
 {
@@ -77,6 +87,7 @@ typedef struct s_data
 {
 	t_token	*tokens;
 	t_env	*env;
+	t_term	term;
 	int		command_ret;
 	int		_errcode;
 }	t_data;

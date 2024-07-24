@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ez.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 22:36:30 by bama              #+#    #+#             */
-/*   Updated: 2024/07/23 18:45:11 by cachetra         ###   ########.fr       */
+/*   Created: 2024/07/23 18:25:42 by cachetra          #+#    #+#             */
+/*   Updated: 2024/07/23 18:45:40 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "tmp.h"
 
-int	main(int ac, char **av, char **env)
+/*
+
+ttyname, ttyslot, ioctl,
+getenv, tcsetattr, tcgetattr, tgetent, tgetflag,
+tgetnum, tgetstr, tgoto, tputs
+
+*/
+
+void	initialise(t_term *term)
 {
-	// (void)ac;
-	// (void)av;
-	// minishell(env);
+	int		x;
 
+	term->termtype = getenv("TERM");
+	x = tgetent(NULL, term->termtype);
+	ft_printf("test: %s\n%d\n", term->termtype, x);
+}
 
-	t_data	data;
-
-	ft_memset(&data, 0, sizeof(t_data));
-	add_env_to_data(&data, env);
-	initialise(&data.term);
-	return (0);
+void	terminal(t_data *data)
+{
+	initialise(&data->term);
 }

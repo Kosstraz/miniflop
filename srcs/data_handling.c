@@ -6,7 +6,7 @@
 /*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/07/23 17:59:12 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/07/23 18:06:09 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,10 @@ void	free_data(t_data *data)
 	free_env(&data->env);
 }
 
-// void	init_data(t_data *data)
-// {
-// 	data->tokens = NULL;
-// 	data->command_ret = 0;
-// 	data->_errcode = 0;
-// }
+void	init_data(t_data *data)
+{
+	data->tokens = NULL;
+	data->env = NULL;
+	data->command_ret = 0;
+	data->_errcode = 0;
+}

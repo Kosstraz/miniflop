@@ -6,7 +6,7 @@
 #    By: cachetra <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/22 22:47:44 by cachetra         ###   ########.fr        #
+#    Updated: 2024/07/23 18:29:22 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRCS =	./srcs/parsing/utils.c \
 		./srcs/data_handling.c \
 		./srcs/signals_handling.c \
 		./srcs/minishell.c \
-		./main.c
+		./main.c \
+		./term/ez.c \
 
 OBJS_DIR =		objs
 
@@ -55,7 +56,7 @@ DEPS =	$(OBJS:%.obj=%.d)
 
 INCLUDES =	-I ./includes/ -I $(LIBFT_P)/ -I .
 
-CFLAGS =	-Wall -Wextra -MMD -g3 #-Werror
+CFLAGS =	-Wall -Wextra -MMD -g3 -ltermcap #-Werror
 
 LIBFT_P		=	./libft
 
