@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/23 19:07:35 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/23 22:58:26 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
+# include <fcntl.h>
 # include <dirent.h>
 # include <sys/stat.h>
 # include "error.h"
@@ -79,6 +80,7 @@ typedef struct s_data
 	t_env	*env;
 	int		returncode;
 	int		_errcode;
+	int		historyfd;
 }	t_data;
 
 typedef unsigned int	t_uint;

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:29:54 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 16:42:37 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/25 11:47:04 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ size_t	ft_strlcpy_quotes(char *dst, const char *src, size_t size)
 	passed = 0;
 	if (size == 0)
 		return (ft_strlen(src));
-	while (src[i] && (i <= size))
+	while (src[i] && (i <= size + 1))
 	{
+		printf("size %d", size + 1);
 		if ((passed == 1 && src[i] == '\'') || (passed == 2 && src[i] == '"'))
 			passed = 0;
 		else if (src[i] == '\'' && !passed)

@@ -6,14 +6,14 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 22:31:35 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/25 11:45:51 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	do_some_parsing(char ***splitted, const char *line)
-{
+{	
 	*splitted = ft_split_quotes(line, ' ');
 	place_envvars(splitted);
 	separate_operands(splitted);

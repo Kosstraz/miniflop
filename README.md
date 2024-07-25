@@ -4,6 +4,12 @@
 comme le suivant : """"""''"''" ou encore ''""''""'''""""' . Rien est affiché ce qui
 n'est pas normal. Seul bug repéré jusqu'ici.
 
+- [ENV_VAR] Afficher littéralement le texte commençant par un '$' s'il est entouré de single quotes
+
+- [$] Doit s'afficher s'il est seul (ou avec espaces) dans des guillemets doubles
+
+- [*] Gérer plusieurs '*' sur un même mot
+
 - [ctrl-C] C'est normalement automatiquement déjà géré, mais pour rappel si jamais : Gérer les commandes bloquantes.
 
 ###### QUESTIONNEMENTS : ######
@@ -11,7 +17,13 @@ n'est pas normal. Seul bug repéré jusqu'ici.
 ###### TERMCAP : ######
 {cachetra}
 
-- [FT_READLINE] Faire ft_readline() ez.
+- [BIND_KEY] Faire une fonction qui permet de bind à un keycode donné une fonction. Exemple de prototype d'une fonction de ce style.
+
+- [UNBIND_KEY] L'inverse de BIND_KEY, si c'est possibe seulement, peut potentiellement être utile (cosmétiquement). Ne pas perdre trop de temps sur ça ...
+
+- [UTILS] N'importe quelle fonction permettant de modifier des flags termcap rapidement, ou d'utilités pour la modularité. A ton choix de faire ou non, si tu trouves ça utile.
+
+- [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!!
 
 ###### PARSING : ######
 {ymanchon}
