@@ -1,11 +1,5 @@
 ###### A RAJOUTER/REGLER : ######
 
-- [QUOTES_BUG] Régler le bug où les quotes ne sont pas affichées dans un contexte
-comme le suivant : """"""''"''" ou encore ''""''""'''""""' . Rien est affiché ce qui
-n'est pas normal. Seul bug repéré jusqu'ici.
-
-- [ENV_VAR] Afficher littéralement le texte commençant par un '$' s'il est entouré de single quotes
-
 - [$] Doit s'afficher s'il est seul (ou avec espaces) dans des guillemets doubles
 
 - [*] Gérer plusieurs '*' sur un même mot

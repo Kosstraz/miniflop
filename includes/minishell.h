@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/23 22:58:26 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/27 18:50:28 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef enum e_type
 	Outfile
 }	t_e_type;
 
-typedef struct	s_env
+typedef struct s_env
 {
 	char			*name;
 	char			*value;
@@ -76,6 +76,7 @@ typedef struct s_token
 
 typedef struct s_data
 {
+	DIR		*dir;
 	t_token	*tokens;
 	t_env	*env;
 	int		returncode;

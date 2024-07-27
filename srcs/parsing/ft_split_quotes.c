@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/23 23:43:09 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/27 18:38:11 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,6 @@ static void	ft_split_free(char **tofree, size_t count)
 	free(tofree[0]);
 	free(tofree);
 }
-
-/*static char	*ft_strdup_at(const char *str, ssize_t start, ssize_t end)
-{
-	size_t	i;
-	size_t	size;
-	char	*ret;
-
-	size = end - start;
-	ret = (char *)malloc(sizeof(char) * (size + 1));
-	if (!ret)
-		return (NULL);
-	ret[size] = '\0';
-	i = 0;
-	while (start < end)
-		ret[i++] = str[start++];
-	return (ret);
-}*/
 
 static char	skip_sep(const char *s, size_t *i, size_t *old, char sep)
 {
@@ -83,7 +66,7 @@ char	**ft_split_quotes(const char *s, char sep)
 	j = 0;
 	while (s[i])
 	{
-		if (skip_sep(s, &i, &back, sep) == -1)
+		if (skip_sep(s, &i, &back, sep) <= -1)
 			break ;
 		ret[j] = ft_strdup_at(s, back, i);
 		if (!ret[j++])

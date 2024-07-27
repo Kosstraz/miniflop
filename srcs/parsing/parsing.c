@@ -6,14 +6,14 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/25 11:45:51 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/25 13:53:22 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	do_some_parsing(char ***splitted, const char *line)
-{	
+{
 	*splitted = ft_split_quotes(line, ' ');
 	place_envvars(splitted);
 	separate_operands(splitted);
@@ -32,7 +32,7 @@ static t_token	*parse_commandline(const char *line)
 
 	do_some_parsing(&splitted, line);
 	token = new_token(splitted[0]);
-	token->type = Command;		// Rendre automatique (et surtt correcte) la tokenisation du premier token
+	token->type = Command;
 	root = token;
 	i = 1;
 	while (splitted[i])
