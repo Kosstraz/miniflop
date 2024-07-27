@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/07/22 22:47:44 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/07/27 19:18:32 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_linked_list(t_env *env)
+void	print_env(t_env *env)
 {
 	while (env)
 	{

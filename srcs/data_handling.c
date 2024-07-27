@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/07/27 18:51:47 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/27 19:33:50 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,58 +21,53 @@ void	free_env(t_env **env)
 	while (*env)
 	{
 		tmp = *env;
-		// free(tmp->name);
-		// free(tmp->value);
+		free(tmp->name);
 		*env = (*env)->next;
 		free(tmp);
 	}
 }
 
-void	env_addback(t_env **env, t_env *new)
+t_env	*env_create_node(const char *var, t_data *data)
 {
-	t_env	*tmp;
-	tmp = NULL;
-	if (*env)
-	{
-		tmp = *env;
-		while ((*env)->next)
-			*env = (*env)->next;
-		(*env)->next = new;
-		*env = tmp;
-	}
-	else
-		*env = new;
+	t_env	*env;
+	size_t	i;
+
+	i = 0;
+	env = (t_env *)malloc(sizeof(t_env));
+	while (var[i] != '=')
+		i++;
+	env->name = ft_strndup(var, i);
+	if (!env->name)
+		free_data(data);
+	env->value = getenv(env->name);
+	if (!env->value)
+		free_data(data);
+	env->next = NULL;
+	return (env);
 }
 
 void	add_env_to_data(t_data *data, char **env)
 {
 	t_uint	i;
-	t_uint	j;
-	t_env	*tmp;
+	t_env	*root;
 
 	i = 0;
+	data->env = env_create_node(env[i++], data);
+	root = data->env;
 	while (env[i])
 	{
-		j = 0;
-		tmp = (t_env *)malloc(sizeof(t_env));
-		while (env[i][j] != '=')
-			j++;
-		tmp->name = ft_strndup(env[i++], j);
-		if (!tmp->name)
-			free_data(data);
-		tmp->value = getenv(tmp->name);
-		if (!tmp->value)
-			free_data(data);
-		tmp->next = NULL;
-		env_addback(&data->env, tmp);
+		data->env->next = env_create_node(env[i++], data);
+		data->env = data->env->next;
 	}
+	data->env = root;
+	print_env(data->env);
 }
 
 void	free_data(t_data *data)
 {
 	free_tokens(&data->tokens);
+	free_env(&data->env);
 	closedir(data->dir);
-	//free_env(&data->env);
 }
 
 void	init_data(t_data *data)

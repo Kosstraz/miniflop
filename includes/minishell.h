@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/27 18:50:28 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/27 19:18:37 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,14 @@ void	init_data(t_data *data);
 
 /*		PARSING			*/
 
+void	print_env(t_env *env);
 char	**remove_useless_quotes(char **splitted);
 char	**ft_split_quotes(const char *s, char sep);
 void	take_commandline(const char *line, t_data *data);
 t_token	*new_token(char *value);
 void	free_tokens(t_token **root);
 void	place_envvars(char ***splitted);
-void	place_wildcards(char ***splitted);
+void	apply_wildcards(char ***splitted, t_data *data);
 void	separate_operands(char ***splitted);
 void	check_quote_status(char c, char *opened_status);
 char	is_operand(char c[2]);

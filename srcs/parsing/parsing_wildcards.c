@@ -6,10 +6,13 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:47:22 by bama              #+#    #+#             */
-/*   Updated: 2024/07/27 18:52:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/27 19:13:11 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
+void	apply_wildcards(char ***splitted, t_data *data)
+{
+	
+}

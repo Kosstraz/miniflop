@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/23 18:59:48 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/27 19:14:02 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	read_prompt(char **env)
 	t_data	data;
 	char	*gnl;
 
-	//add_env_to_data(&data, env);
+	add_env_to_data(&data, env);
 	gnl = get_next_line(STDIN_FILENO);
 	while (gnl)
 	{
