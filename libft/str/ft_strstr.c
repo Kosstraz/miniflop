@@ -1,45 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 16:30:17 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/28 17:47:24 by bama             ###   ########.fr       */
+/*   Created: 2024/07/28 17:47:27 by bama              #+#    #+#             */
+/*   Updated: 2024/07/28 17:48:59 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-
-
-int	find_occurence(const char *str, const char *to_find, int i, int limit)
+int	find_occurence(const char *str, const char *to_find, int i)
 {
 	int	j;
 
 	j = 0;
-	while (to_find[j])
-	{
-		if (to_find[j++] != str[i] || i >= limit)
+	while (to_find[j] && str[i])
+		if (to_find[j++] != str[i++])
 			return (0);
-		i++;
-	}
 	return (1);
 }
 
-char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+char	*ft_strstr(const char *str, const char *to_find)
 {
 	size_t	i;
 
 	i = 0;
 	if (to_find[0] == '\0')
 		return ((char *)str);
-	if (len > ft_strlen(str))
-		len = ft_strlen(str);
-	while (str[i] && i < len)
+	if (ft_strlen(to_find) > ft_strlen(str))
+		return (NULL);
+	while (str[i])
 	{
-		if (find_occurence(str, to_find, i, len) == 1)
+		if (find_occurence(str, to_find, i) == 1)
 			return ((char *)(str + i));
 		i++;
 	}

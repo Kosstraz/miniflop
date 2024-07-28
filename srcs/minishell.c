@@ -6,23 +6,13 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/27 19:14:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/28 12:59:48 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	new_prompt(void)
-{
-	char	*cwd;
 
-	cwd = getcwd(NULL, 0);
-	write(1, PROMPT1, PROMPT1_SIZE);
-	write(1, cwd, ft_strlen(cwd));
-	write(1, PROMPT2, PROMPT2_SIZE);
-	write(1, PROMPT3, PROMPT3_SIZE);
-	free(cwd);
-}
 
 static void	read_prompt(char **env)
 {

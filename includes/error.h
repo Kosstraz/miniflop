@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/07/22 22:47:44 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:23:58 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@
 # define ERROR			-1
 # define BAD_MALLOC 	-2
 # define SPLIT_ERROR 	-3
+
 # define SQUOTE_MISSING	-10
 # define DQUOTE_MISSING	-11
+# define PIPE_MISSING	-12
+# define AND_MISSING	-13
+# define OR_MISSING		-14
 
 /*
 	bash --posix ERROR

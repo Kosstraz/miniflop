@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/07/27 19:33:50 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/28 12:30:47 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	add_env_to_data(t_data *data, char **env)
 		data->env = data->env->next;
 	}
 	data->env = root;
-	print_env(data->env);
 }
 
 void	free_data(t_data *data)
@@ -74,6 +73,5 @@ void	init_data(t_data *data)
 {
 	data->dir = opendir(".");
 	data->tokens = NULL;
-	data->returncode = 0;
 	data->_errcode = 0;
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cachetra <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/22 22:47:44 by cachetra         ###   ########.fr        #
+#    Updated: 2024/07/28 13:04:46 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ NAME = minishell
 CC =	cc
 
 SRCS =	./srcs/parsing/utils.c \
+		./srcs/parsing/utils2.c \
 		./srcs/parsing/ft_split_quotes2.c \
 		./srcs/parsing/ft_split_quotes.c \
 		./srcs/parsing/token_id2.c \
@@ -42,6 +43,7 @@ SRCS =	./srcs/parsing/utils.c \
 		./srcs/builtins/echo.c \
 		./srcs/builtins/cd.c \
 		./srcs/debug.c \
+		./srcs/prompts.c \
 		./srcs/data_handling.c \
 		./srcs/signals_handling.c \
 		./srcs/minishell.c \

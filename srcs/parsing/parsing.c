@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/27 19:09:08 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/28 18:13:05 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	do_some_parsing(char ***splitted, const char *line, t_data *data)
 {
-	*splitted = ft_split_quotes(line, ' ');
+	*splitted = ft_split_quotes(line, data);
 	place_envvars(splitted);
 	separate_operands(splitted);
-	apply_wildcards(splitted, data);
+	apply_wildcards(splitted);
 	*splitted = remove_useless_quotes(*splitted);
 }
 
@@ -44,17 +44,46 @@ static t_token	*parse_commandline(const char *line, t_data *data)
 	}
 	free(splitted);
 	review_tokenid(&root);
-	show_token(root);
 	return (root);
+}
+
+static char	*maybe_prompt(t_data *data, t_token **tokens)
+{
+	char	*buffer;
+	char	**splitted;
+	char	*gnl;
+
+	if (data->_errcode < 0)
+	{
+		printf("%d\n", data->_errcode);
+		buffer = NULL;
+		gnl = NULL;
+		new_missing_prompt((char)data->_errcode);
+		gnl = get_next_line(STDIN_FILENO);
+		while (gnl)
+		{
+			do_some_parsing(&splitted, gnl, data);
+			show_token(*tokens);
+			new_missing_prompt((char)data->_errcode);
+			if (ft_strstr(gnl, return_missing_chars(data->_errcode)))
+			{
+				data->_errcode = 0;
+				break ;
+			}
+			free(gnl);
+			gnl = get_next_line(STDIN_FILENO);
+		}
+	}
+	data->_errcode = 0;
 }
 
 void	take_commandline(const char *line, t_data *data)
 {
 	t_token	*tokens;
-	//char	*continued;
-
+ 
 	tokens = parse_commandline(line, data);
 	data->tokens = tokens;
-	//printf("errcode = %d\n", errcode);
-	//continued = maybe_continued();
+	show_token(tokens);
+ 	while (is_missing_septoktype(data->_errcode))
+		maybe_prompt(data, &tokens);
 }

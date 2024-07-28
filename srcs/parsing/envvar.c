@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:43:15 by bama              #+#    #+#             */
-/*   Updated: 2024/07/27 18:33:54 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/28 12:00:18 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static char	*add_envvar(char *s, size_t at, size_t *varlen)
 	size_t	i;
 
 	i = 0;
+	if (is_sep(s[at + 1]) || s[at + 1] == '"')
+		return (*varlen = 1, s);
 	while (s[at + i] && s[at + i] != ' '
 		&& s[at + i] != '\'' && s[at + i] != '"')
 	{
@@ -78,7 +80,7 @@ void	place_envvars(char ***splitted)
 		{
 			check_quote_status(tmp[i][j], &quote_status);
 			if (tmp[i][j] == '$' && quote_status != 1)
-			{
+			{ 
 				tmp[i] = add_envvar(tmp[i], j, &varlen);
 				j += varlen - 1;
 			}

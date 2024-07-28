@@ -1,7 +1,5 @@
 ###### A RAJOUTER/REGLER : ######
 
-- [$] Doit s'afficher s'il est seul (ou avec espaces) dans des guillemets doubles
-
 - [*] Gérer plusieurs '*' sur un même mot
 
 - [ctrl-C] C'est normalement automatiquement déjà géré, mais pour rappel si jamais : Gérer les commandes bloquantes.
