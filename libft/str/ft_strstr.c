@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen2.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/28 21:09:48 by bama              #+#    #+#             */
-/*   Updated: 2024/07/28 21:49:52 by bama             ###   ########.fr       */
+/*   Created: 2024/07/28 17:47:27 by bama              #+#    #+#             */
+/*   Updated: 2024/07/28 17:48:59 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen2(char **strs)
+int	find_occurence(const char *str, const char *to_find, int i)
 {
-	size_t	i;
+	int	j;
 
-	i = 0;
-	while (strs[i])
-		i++;
-	return (i);
+	j = 0;
+	while (to_find[j] && str[i])
+		if (to_find[j++] != str[i++])
+			return (0);
+	return (1);
 }
 
-size_t	ft_strslen(char **strs)
+char	*ft_strstr(const char *str, const char *to_find)
 {
 	size_t	i;
-	size_t	j;
-	size_t	len;
 
 	i = 0;
-	len = 0;
-	while (strs[i])
+	if (to_find[0] == '\0')
+		return ((char *)str);
+	if (ft_strlen(to_find) > ft_strlen(str))
+		return (NULL);
+	while (str[i])
 	{
-		j = 0;
-		while (strs[i][j++])
-			len++;
+		if (find_occurence(str, to_find, i) == 1)
+			return ((char *)(str + i));
 		i++;
 	}
-	return (len);
+	return (NULL);
 }

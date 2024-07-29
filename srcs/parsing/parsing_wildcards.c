@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:47:22 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 22:00:40 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/28 11:53:01 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	handle_wildcard(char ***splitted, size_t word_at, size_t at)
 	return (finish_wildcard_checking(pre_wc, post_wc, allfiles, NULL), 1);
 }
 
-void	place_wildcards(char ***splitted)
+void	apply_wildcards(char ***splitted)
 {
 	char	quote_opened;
 	size_t	i;

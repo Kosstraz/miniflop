@@ -1,8 +1,6 @@
 ###### A RAJOUTER/REGLER : ######
 
-- [QUOTES_BUG] Régler le bug où les quotes ne sont pas affichées dans un contexte
-comme le suivant : """"""''"''" ou encore ''""''""'''""""' . Rien est affiché ce qui
-n'est pas normal. Seul bug repéré jusqu'ici.
+- [*] Gérer plusieurs '*' sur un même mot
 
 - [ctrl-C] C'est normalement automatiquement déjà géré, mais pour rappel si jamais : Gérer les commandes bloquantes.
 
@@ -11,7 +9,13 @@ n'est pas normal. Seul bug repéré jusqu'ici.
 ###### TERMCAP : ######
 {cachetra}
 
-- [FT_READLINE] Faire ft_readline() ez.
+- [BIND_KEY] Faire une fonction qui permet de bind à un keycode donné une fonction. Exemple de prototype d'une fonction de ce style.
+
+- [UNBIND_KEY] L'inverse de BIND_KEY, si c'est possibe seulement, peut potentiellement être utile (cosmétiquement). Ne pas perdre trop de temps sur ça ...
+
+- [UTILS] N'importe quelle fonction permettant de modifier des flags termcap rapidement, ou d'utilités pour la modularité. A ton choix de faire ou non, si tu trouves ça utile.
+
+- [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!!
 
 ###### PARSING : ######
 {ymanchon}
@@ -56,7 +60,7 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - [HERE_DOC] Implémenter un fonctionnement similaire à heredoc. {cachetra}
 
-- [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {ymanchon}
+- [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {cachetra}
 
 - -~~~[ctrl-C] Interpréter ce signal (SIGINT). Affiche un nouveau prompt avec une nouvelle ligne. {ymanchon}~~~
 
@@ -74,7 +78,7 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - [export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnements exportées. {cachetra}
 
-- [unset] Détruit une variable. Cette commande ne retourne rien --> void unset(...). {ymanchon}
+- -~~~[unset] Détruit une variable. Cette commande ne retourne rien --> void unset(...). {ymanchon}~~~
 
 - [env] Affiche toutes les variables 'environnements.d {cachetra}
 

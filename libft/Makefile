@@ -6,15 +6,31 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/21 20:01:12 by bama             ###   ########.fr        #
+#    Updated: 2024/07/29 15:16:01 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# ################ #
+#*    COULEURS    *#
+# ################ #
+
+CLASSIC = \e[0m
+BOLD	= \e[1m
+RED   	= \e[31m
+GREEN 	= \e[32m
+YELLOW  = \e[33m
+PURPLE	= \e[35m
+CYAN	= \e[36m
+
+# ############### #
+#*   VARIABLES   *#
+# ############### #
+
 NAME = libft.a
 
-CC =	cc
+CC =	@cc
 
-AR =  ar -rcs
+AR =  @ar -rcs
 
 SRCS = 	./binary_tree/btree_apply_infix.c \
 		./binary_tree/btree_apply_prefix.c \
@@ -53,6 +69,8 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./parsing/ft_rev_isspace.c \
 		./parsing/ft_rev_isspaceptr.c \
 		./parsing/owsequence.c \
+		./str/str_add_strs.c \
+		./str/ft_strnchr.c \
 		./str/ft_strs_addback.c \
 		./str/ft_strs_insert.c \
 		./str/ft_strs_add_at.c \
@@ -76,6 +94,7 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./str/ft_strlcpy.c \
 		./str/ft_strlcat.c \
 		./str/ft_strnstr.c \
+		./str/ft_strstr.c \
 		./str/ft_substr.c \
 		./str/strdelete.c \
 		./str/strerase.c \
@@ -100,6 +119,8 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./zbasic/ft_putnbr_fd.c \
 		./zbasic/ft_putstr_fd.c \
 
+LMAKE = @make --no-print-directory -C
+
 OBJS_DIR =	objs
 
 OBJS =			$(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -110,23 +131,45 @@ CFLAGS =	-Wall -Wextra -Werror -fPIE
 
 PRINTF_P = ./ft_printf
 
-all: $(NAME)
+# ############## #
+#*    REGLES    *#
+# ############## #
+
+all: pre_comp $(NAME)
 
 $(NAME): $(OBJS)
-	make -C $(PRINTF_P) re
+	$(LMAKE) $(PRINTF_P) re
+	@echo "$(BOLD)$(CYAN)Création de la bibliothèque $(NAME)$(CLASSIC)"
 	$(AR) -o $@ $(PRINTF_P)/objs/*/*.o
 	$(AR) -o $@ $(OBJS)
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(@D)
+	@echo "$(GREEN)🗸 Compilation $(BOLD)$(YELLOW)$<$(CLASSIC)"
 	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
 
 clean:
+	@echo "$(BOLD)$(RED)"
 	rm $(OBJS_DIR) -rf
+	@echo "$(CLASSIC)"
 
 fclean: clean
 	rm $(NAME) -f
+	@echo "$(BOLD)$(GREEN)Tout a été supprimé... 🗑️\n$(CLASSIC)"
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+post_comp:
+	@echo "$(BOLD)$(CYAN)Exécutable créé avec succès!$(CLASSIC)"
+
+pre_comp:
+	@echo "$(BOLD)"
+	@echo "$(PURPLE)"
+	@echo "***********************************************"
+	@echo "*****************           *******************"
+	@echo "*****************   LIBFT   *******************"
+	@echo "*****************           *******************"
+	@echo "***********************************************"
+	@echo "$(CLASSIC)"

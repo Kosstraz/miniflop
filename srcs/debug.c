@@ -6,11 +6,20 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 22:44:48 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/27 19:18:32 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	print_env(t_env *env)
+{
+	while (env)
+	{
+		ft_printf("name: %s\nvalue: %s\n\n", env->name, env->value);
+		env = env->next;
+	}
+}
 
 void	show_token(t_token *tok)
 {

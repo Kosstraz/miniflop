@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/21 23:13:09 by bama             ###   ########.fr        #
+#    Updated: 2024/07/29 15:13:31 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,13 @@
 #*    COULEURS    *#
 # ################ #
 
-CLASSIC	=	\e[0m
-RED_B	=	\e[1;31m
-GREEN_B	=	\e[1;32m
-YELLO	=	\e[33m
+CLASSIC= \e[0m
+BOLD	= \e[1m
+RED   	= \e[31m
+GREEN  = \e[32m
+YELLOW = \e[33m
+PURPLE = \e[35m
+CYAN   = \e[36m
 
 # ############### #
 #*   VARIABLES   *#
@@ -25,78 +28,95 @@ YELLO	=	\e[33m
 
 NAME = minishell
 
-CC =	cc
+CC = @cc
 
-SRCS =	./srcs/parsing/utils.c \
-		./srcs/parsing/ft_split_quotes2.c \
-		./srcs/parsing/ft_split_quotes.c \
-		./srcs/parsing/token_id2.c \
-		./srcs/parsing/token_id.c \
-		./srcs/parsing/parsing_wildcards2.c \
-		./srcs/parsing/parsing_wildcards.c \
-		./srcs/parsing/parsing_quotes.c \
-		./srcs/parsing/envvar.c \
-		./srcs/parsing/separate_operands.c \
-		./srcs/parsing/parsing.c \
-		./srcs/builtins/exit.c \
-		./srcs/builtins/echo.c \
-		./srcs/builtins/cd.c \
-		./srcs/debug.c \
-		./srcs/datas_handling.c \
-		./srcs/signals_handling.c \
-		./srcs/minishell.c \
-		./main.c
+SRCS = ./srcs/parsing/utils.c \
+       ./srcs/parsing/utils2.c \
+       ./srcs/parsing/ft_split_quotes2.c \
+       ./srcs/parsing/ft_split_quotes.c \
+       ./srcs/parsing/token_id2.c \
+       ./srcs/parsing/token_id.c \
+       ./srcs/parsing/parsing_wildcards2.c \
+       ./srcs/parsing/parsing_wildcards.c \
+       ./srcs/parsing/parsing_quotes.c \
+       ./srcs/parsing/envvar.c \
+       ./srcs/parsing/separate_operands.c \
+       ./srcs/parsing/parsing.c \
+       ./srcs/builtins/exit.c \
+       ./srcs/builtins/echo.c \
+       ./srcs/builtins/cd.c \
+       ./srcs/debug.c \
+       ./srcs/prompts.c \
+       ./srcs/data_handling.c \
+       ./srcs/signals_handling.c \
+       ./srcs/minishell.c \
+       ./main.c
 
-OBJS_DIR =		objs
+LMAKE = @make --no-print-directory -C
 
-OBJS =	$(SRCS:%.c=$(OBJS_DIR)/%.obj)
+OBJS_DIR = objs
 
-DEPS =	$(OBJS:%.obj=%.d)
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.obj)
 
-INCLUDES =	-I ./includes/ -I $(LIBFT_P)/ -I .
+DEPS = $(OBJS:%.obj=%.d)
 
-CFLAGS =	-Wall -Wextra -MMD -g3#-Werror
+INCLUDES = -I ./includes/ -I $(LIBFT_P)/ -I .
 
-LIBFT_P		=	./libft
+CFLAGS = -Wall -Wextra -MMD -g3 #-Werror
 
-LIB	=	$(LIBFT_P)/libft.a \
+LIBFT_P = ./libft
+
+LIB = $(LIBFT_P)/libft.a \
 
 # ############## #
 #*    REGLES    *#
 # ############## #
 
-all: _colorY_ $(NAME) _colorG_
+all: $(NAME) post_comp
 
-$(NAME): $(OBJS)
-	make -C $(LIBFT_P)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(MLX) -o $@
+$(NAME): libft_comp pre_comp $(OBJS)
+	
+	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $@
 
 $(OBJS_DIR)/%.obj: %.c
 	@mkdir -p $(@D)
+	@echo "$(GREEN)🗸 Compilation $(BOLD)$(YELLOW)$<$(CLASSIC)"
 	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
 
-_colorY_:
-	@echo "$(YELLO)Compilation en cours... ⚙️\n"
-
-_colorR_:
-	@echo "$(RED_B)"
-
-_colorG_:
-	@echo "$(GREEN_B)Compilation terminée 🗿\n$(CLASSIC)"
-
-clean: _colorR_
+clean:
+	@echo "$(BOLD)$(RED)"
 	rm $(LIBFT_P)/$(OBJS_DIR) -rf
 	rm $(OBJS_DIR) -rf
+	@echo "$(CLASSIC)"
 
 fclean: clean
+	@echo "$(BOLD)$(RED)"
 	rm $(LIB) -f
 	rm $(NAME) -f
-	@echo "Tout à été supprimé... 🗑️\n$(CLASSIC)"
-
-libft: _colorY_
-	make -C $(LIBFT_P)
+	@echo "$(BOLD)$(GREEN)Tout a été supprimé... 🗑️\n$(CLASSIC)"
 
 re: fclean all
 
-.PHONY: all clean fclean libft re
+.PHONY: all clean fclean re
 -include $(DEPS)
+
+# ############## #
+#*    AUTRES    *#
+# ############## #
+
+# Permet de compiler la libft avant $(NAME)
+libft_comp:
+	$(LMAKE) $(LIBFT_P)
+
+post_comp:
+	@echo "$(BOLD)$(CYAN)Exécutable créé avec succès!$(CLASSIC)"
+
+pre_comp:
+	@echo "$(BOLD)"
+	@echo "$(PURPLE)"
+	@echo "***********************************************"
+	@echo "*****************           *******************"
+	@echo "***************** MINISHELL *******************"
+	@echo "*****************           *******************"
+	@echo "***********************************************"
+	@echo "$(CLASSIC)"

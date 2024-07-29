@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:30:17 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/05/23 13:37:57 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/07/28 17:47:24 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+
 
 int	find_occurence(const char *str, const char *to_find, int i, int limit)
 {

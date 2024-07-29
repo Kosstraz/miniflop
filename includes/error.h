@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err.h                                              :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 16:19:42 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 22:54:22 by bama             ###   ########.fr       */
+/*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
+/*   Updated: 2024/07/28 15:23:58 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERR_H
-# define ERR_H
+#ifndef ERROR_H
+# define ERROR_H
 
 /*
 	BASIC ERROR
@@ -33,8 +33,12 @@
 # define ERROR			-1
 # define BAD_MALLOC 	-2
 # define SPLIT_ERROR 	-3
+
 # define SQUOTE_MISSING	-10
 # define DQUOTE_MISSING	-11
+# define PIPE_MISSING	-12
+# define AND_MISSING	-13
+# define OR_MISSING		-14
 
 /*
 	bash --posix ERROR

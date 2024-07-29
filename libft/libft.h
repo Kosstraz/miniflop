@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/21 20:33:40 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/28 22:25:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,9 @@ ssize_t	ft_rev_isspaceptr(const char *s, ssize_t start);
 			/* **************************** */
 			/* **************************** */
 
+char	*str_add_strs_free(char *str, char **strs, char sep);
+char	*str_add_strs(char *str, char **strs, char sep);
+size_t	ft_strnchr(const char *str, const char c);
 /*
 	Ajoute le tableau de strings 'strs2' à l'emplacement
 	at de 'strs1' et renvoie le résultat.
@@ -230,7 +233,8 @@ char	**ft_strs_addback(char **strs1, char **strs2);
 */
 char	**ft_strs_addback_free(char **strs1, char **strs2);
 char	*ft_strdup_at(const char *str, ssize_t start, ssize_t end);
-size_t	ft_strlen2(char **str2);
+size_t	ft_strlen2(char **strs);
+size_t	ft_strslen(char **strs);
 char	*ft_strtolower(char *str);
 char	*ft_strtoupper(char *str);
 /*
@@ -259,6 +263,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *str, const char c);
 char	*ft_strrchr(const char *str, const char c);
+char	*ft_strstr(const char *big, const char *little);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strdup(const char *str);
 char	*ft_strndup(const char *str, unsigned int n);
