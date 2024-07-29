@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/29 15:16:01 by bama             ###   ########.fr        #
+#    Updated: 2024/07/29 15:41:26 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,9 +139,9 @@ all: pre_comp $(NAME)
 
 $(NAME): $(OBJS)
 	$(LMAKE) $(PRINTF_P) re
-	@echo "$(BOLD)$(CYAN)Création de la bibliothèque $(NAME)$(CLASSIC)"
 	$(AR) -o $@ $(PRINTF_P)/objs/*/*.o
 	$(AR) -o $@ $(OBJS)
+	@echo "$(BOLD)$(CYAN)Bibliothèque $(NAME) créée avec succès!$(CLASSIC)"
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(@D)
@@ -161,15 +161,10 @@ re: fclean all
 
 .PHONY: all clean fclean re
 
-post_comp:
-	@echo "$(BOLD)$(CYAN)Exécutable créé avec succès!$(CLASSIC)"
-
 pre_comp:
 	@echo "$(BOLD)"
 	@echo "$(PURPLE)"
 	@echo "***********************************************"
-	@echo "*****************           *******************"
 	@echo "*****************   LIBFT   *******************"
-	@echo "*****************           *******************"
 	@echo "***********************************************"
 	@echo "$(CLASSIC)"

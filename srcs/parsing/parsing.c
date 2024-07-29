@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/29 01:32:20 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/29 15:42:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ static t_token	*parse_commandline(const char *line, t_data *data)
 }
 
 static void	unfinished_prompt()
-{}
+{
+	
+}
 
 static void	maybe_prompt(t_data *data, t_token **tokens)
 {
@@ -68,7 +70,7 @@ static void	maybe_prompt(t_data *data, t_token **tokens)
 				do_some_parsing(&splitted, gnl, data);
 				if (splitted && !splitted[0])
 					splitted[0] = ft_strdup("");
-				ret_last_token(*tokens)->value = str_add_strs_free((char *)(*tokens)->value, splitted, '\n');
+				ret_last_token(*tokens)->value = str_add_strs_free((char *)(*tokens)->value, splitted, ' ');
 				dfree((void **)splitted);
 				show_token(*tokens);
 				if (ft_strstr(gnl, return_missing_chars(data->_errcode)))

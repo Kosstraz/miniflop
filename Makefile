@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/29 15:13:31 by bama             ###   ########.fr        #
+#    Updated: 2024/07/29 15:41:38 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,11 +72,11 @@ LIB = $(LIBFT_P)/libft.a \
 #*    REGLES    *#
 # ############## #
 
-all: $(NAME) post_comp
+all: libft_comp pre_comp $(NAME)
 
-$(NAME): libft_comp pre_comp $(OBJS)
-	
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $@
+	@echo "$(BOLD)$(CYAN)Exécutable $(NAME) créé avec succès!$(CLASSIC)"
 
 $(OBJS_DIR)/%.obj: %.c
 	@mkdir -p $(@D)
@@ -108,15 +108,10 @@ re: fclean all
 libft_comp:
 	$(LMAKE) $(LIBFT_P)
 
-post_comp:
-	@echo "$(BOLD)$(CYAN)Exécutable créé avec succès!$(CLASSIC)"
-
 pre_comp:
 	@echo "$(BOLD)"
 	@echo "$(PURPLE)"
 	@echo "***********************************************"
-	@echo "*****************           *******************"
 	@echo "***************** MINISHELL *******************"
-	@echo "*****************           *******************"
 	@echo "***********************************************"
 	@echo "$(CLASSIC)"
