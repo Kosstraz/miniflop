@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/29 00:54:27 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/29 19:53:26 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@
 # include "error.h"
 # include "libft.h"
 
-extern char	_sig;
+extern char				g_sig;
+
+typedef unsigned int	t_uint;
+typedef long long		t_ll;
 
 typedef enum e_type
 {
@@ -100,8 +103,6 @@ typedef struct s_data
 	int		historyfd;
 }	t_data;
 
-typedef unsigned int	t_uint;
-
 /*		BUILTINS		*/
 
 int			ft_exit(char **av, t_data *data);
@@ -138,7 +139,7 @@ void		check_e_type(t_token **second, const char *word, int i);
 void		review_tokenid(t_token **tokens);
 char		is_sep_toktype(t_token tok);
 void		detect_redirect_type(t_token **tok);
-char		is_missing_septoktype(char _errcode);
+char		is_missing_septoktype(int _errcode);
 char		*return_missing_chars(char _errcode);
 t_token		*ret_last_token(t_token *tokens);
 

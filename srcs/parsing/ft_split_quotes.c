@@ -6,13 +6,13 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/28 12:39:19 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/29 16:56:40 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		check_quotes(char c, int *quote_type);
+int		check_quotes(char c, int *quote_type, t_data *data);
 int		parse_quotes(const char *str, int quote_type, size_t *i,
 			t_data *data);
 size_t	ft_count_words_quotes(const char *s);
@@ -36,7 +36,7 @@ static char	skip_sep(const char *s, size_t *i, size_t *old, t_data *data)
 	if (!s[*i])
 		return (SPLIT_ERROR);
 	*old = *i;
-	while (s[*i] && !is_sep(s[*i]) && !check_quotes(s[*i], &quote_type))
+	while (s[*i] && !is_sep(s[*i]) && !check_quotes(s[*i], &quote_type, data))
 		(*i)++;
 	if (quote_type)
 	{

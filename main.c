@@ -6,13 +6,13 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:36:30 by bama              #+#    #+#             */
-/*   Updated: 2024/07/29 00:55:14 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/29 19:56:12 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	_sig = 0;
+char	g_sig = 0;
 
 int	main(int ac, char **av, char **env)
 {

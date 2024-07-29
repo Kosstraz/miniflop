@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:40:38 by bama              #+#    #+#             */
-/*   Updated: 2024/07/28 17:50:37 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/29 16:57:51 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // 0 false
 // 1 true
-char	is_missing_septoktype(char _errcode)
+char	is_missing_septoktype(int _errcode)
 {
 	return (_errcode == SQUOTE_MISSING
 		|| _errcode == DQUOTE_MISSING

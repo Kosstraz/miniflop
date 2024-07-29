@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 00:23:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/29 01:11:17 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/29 19:53:41 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	signals_handling(int signum)
 {
 	if (signum == SIGINT)
 	{
-		_sig = signum;
+		g_sig = signum;
 		write(1, "\n", 1);
 		new_prompt();
 	}

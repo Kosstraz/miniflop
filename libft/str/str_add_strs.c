@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:14:13 by bama              #+#    #+#             */
-/*   Updated: 2024/07/28 23:07:34 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/29 18:42:51 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*str_add_strs(char *str, char **strs, char sep)
 }
 
 // 'str' sera free'd
-char	*str_add_strs_free(char *str, char **strs, char sep)
+char	*str_add_strs_free(char *str, char **strs, char sep, char last_sep)
 {
 	size_t	i;
 	size_t	j;
@@ -60,7 +60,7 @@ char	*str_add_strs_free(char *str, char **strs, char sep)
 	ft_strlcpy(ret, str, size + 1);
 	free(str);
 	i = size;
-	ret[i++] = sep;
+	ret[i++] = last_sep;
 	j = 0;
 	while (strs[j] && i < new_size)
 	{

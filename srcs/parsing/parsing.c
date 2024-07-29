@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/29 15:42:14 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/29 19:56:58 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,44 +47,46 @@ static t_token	*parse_commandline(const char *line, t_data *data)
 	return (root);
 }
 
-static void	unfinished_prompt()
+static char	unfinished_prompt(char *line, char ***splitted,
+			int errcode_tmp, t_token **tokens)
 {
-	
+	if ((*splitted) && !(*splitted)[0])
+		(*splitted)[0] = ft_strdup("");
+	ret_last_token(*tokens)->value = str_add_strs_free(
+		(char *)(*tokens)->value, (*splitted), ' ', '\n');
+	dfree((void **)(*splitted));
+	show_token(*tokens);
+	if (ft_strstr(line, return_missing_chars(errcode_tmp)))
+		return (1);
+	new_missing_prompt((char)errcode_tmp);
+	free(line);
+	return (0);
 }
 
 static void	maybe_prompt(t_data *data, t_token **tokens)
 {
 	char	**splitted;
 	char	*gnl;
+	int		errcode_tmp;
 
 	if (data->_errcode < 0)
 	{
-		printf("%d\n", data->_errcode);
-		gnl = NULL;
+		errcode_tmp = data->_errcode;
 		new_missing_prompt((char)data->_errcode);
 		gnl = get_next_line(STDIN_FILENO);
-		while (!_sig)
+		while (!g_sig)
 		{
 			if (gnl)
 			{
 				do_some_parsing(&splitted, gnl, data);
-				if (splitted && !splitted[0])
-					splitted[0] = ft_strdup("");
-				ret_last_token(*tokens)->value = str_add_strs_free((char *)(*tokens)->value, splitted, ' ');
-				dfree((void **)splitted);
-				show_token(*tokens);
-				if (ft_strstr(gnl, return_missing_chars(data->_errcode)))
-				{
-					data->_errcode = 0;
+				if (unfinished_prompt(gnl, &splitted, errcode_tmp, tokens))
 					return ;
-				}
-				new_missing_prompt((char)data->_errcode);
-				free(gnl);
 			}
 			gnl = get_next_line(STDIN_FILENO);
 		}
+		free(gnl);
+		data->_errcode = 0;
 	}
-	data->_errcode = 0;
 }
 
 void	take_commandline(const char *line, t_data *data)
