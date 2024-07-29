@@ -6,13 +6,28 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/06/17 11:10:39 by bama             ###   ########.fr        #
+#    Updated: 2024/07/29 14:43:23 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# ################ #
+#*    COULEURS    *#
+# ################ #
+
+CLASSIC = \e[0m
+BOLD	= \e[1m
+RED   	= \e[31m
+GREEN 	= \e[32m
+YELLOW  = \e[33m
+CYAN	= \e[36m
+
+# ############### #
+#*   VARIABLES   *#
+# ############### #
+
 NAME = libftprintf.a
 
-CC =	cc
+CC =	@cc
 
 AR =  ar -rcs
 
@@ -35,6 +50,10 @@ INCLUDES = -I . -I ./includes/
 
 CFLAGS =	-Wall -Wextra -Werror -fPIE
 
+# ############## #
+#*    REGLES    *#
+# ############## #
+
 all: $(OBJS)
 
 #$(NAME): $(OBJS)
@@ -42,13 +61,16 @@ all: $(OBJS)
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(@D)
+	@echo "$(GREEN)🗸 Compilation $(BOLD)$(YELLOW)$<$(CLASSIC)"
 	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm $(OBJS_DIR) -rf
+	@echo "$(BOLD)$(RED)"
+	@rm $(OBJS_DIR) -rf
+	@echo "$(CLASSIC)"
 
 fclean: clean
-	rm $(NAME) -f
+	 @rm $(NAME) -f
 
 re: fclean all
 

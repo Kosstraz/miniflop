@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:40:38 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 22:38:34 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/28 12:41:36 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char	is_operand(char c[2])
 		|| (c[0] == '<' && c[1] != '<')
 		|| (c[0] == '<' && c[1] == '<')
 		|| (c[0] == '>' && c[1] != '>')
-		|| (c[0] == '>' && c[1] == '>'));
+		|| (c[0] == '>' && c[1] == '>')
+		|| (ft_isdigit(c[0]) && c[1] == '<'));
 }
 
 char	is_sep(char c)
@@ -48,4 +49,13 @@ char	is_sep(char c)
 char	is_sep_toktype(t_token tok)
 {
 	return (tok.type == Pipe || tok.type == And || tok.type == Or);
+}
+
+t_vec2ul	new_vec2ul(size_t x, size_t y)
+{
+	t_vec2ul	ret;
+
+	ret.x = x;
+	ret.y = y;
+	return (ret);
 }

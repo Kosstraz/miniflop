@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:29:54 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 16:42:37 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/29 20:06:11 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,19 @@
 //  commandword_len
 static size_t	cwlen(char *word)
 {
-	int		passed;
+	char	quote_status;
 	size_t	len;
 	size_t	i;
 
 	i = 0;
 	len = 0;
-	passed = 0;
+	quote_status = 0;
 	while (word[i])
 	{
-		if ((passed == 1 && word[i] == '\'') || (passed == 2 && word[i] == '"'))
-			passed = 0;
-		else if (word[i] == '\'' && !passed)
-			passed = 1;
-		else if (word[i] == '"' && !passed)
-			passed = 2;
-		else if ((word[i] != '\'' && word[i] != '"')
-			|| (passed && (word[i] == '\'' || word[i] == '"')))
+		check_quote_status(word[i], &quote_status);
+		if ((word[i] != '\'' && word[i] != '"')
+			|| ((quote_status == 1 && word[i] != '\'')
+				|| (quote_status == 2 && word[i] != '"')))
 			len++;
 		i++;
 	}
@@ -40,26 +36,27 @@ static size_t	cwlen(char *word)
 
 size_t	ft_strlcpy_quotes(char *dst, const char *src, size_t size)
 {
-	int		passed;
+	char	quote_status;
 	size_t	i;
+	size_t	l;
 	size_t	j;
 
 	i = 0;
+	l = 0;
 	j = 0;
-	passed = 0;
+	quote_status = 0;
 	if (size == 0)
 		return (ft_strlen(src));
-	while (src[i] && (i <= size))
+	while (src[i] && l < size)
 	{
-		if ((passed == 1 && src[i] == '\'') || (passed == 2 && src[i] == '"'))
-			passed = 0;
-		else if (src[i] == '\'' && !passed)
-			passed = 1;
-		else if (src[i] == '"' && !passed)
-			passed = 2;
-		else if ((src[i] != '\'' && src[i] != '"')
-			|| (passed && (src[i] == '\'' || src[i] == '"')))
+		check_quote_status(src[i], &quote_status);
+		if ((src[i] != '\'' && src[i] != '"')
+			|| ((quote_status == 1 && src[i] != '\'')
+				|| (quote_status == 2 && src[i] != '"')))
+		{
+			l++;
 			dst[j++] = src[i];
+		}
 		i++;
 	}
 	dst[j] = '\0';
@@ -70,7 +67,7 @@ void	check_validity(char **src, char *word, size_t *src_idx, int size)
 {
 	if (size > 0)
 	{
-		ft_strlcpy_quotes(src[(*src_idx)++], word, size + 1);
+		ft_strlcpy_quotes(src[(*src_idx)++], word, size);
 		free(word);
 	}
 	else

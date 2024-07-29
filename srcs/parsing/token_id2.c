@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 22:17:54 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 22:45:59 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/28 15:29:36 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,11 @@ void	detect_redirect_type(t_token **tok)
 		(*tok)->type = Redirect;
 		(*tok)->next->type = HereDoc;
 	}
+}
+
+t_token	*ret_last_token(t_token *tokens)
+{
+	while (tokens && tokens->next)
+		tokens = tokens->next;
+	return (tokens);
 }
