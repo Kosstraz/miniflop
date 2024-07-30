@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/29 19:53:26 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 14:54:34 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,18 @@
 #  define ARG_MAX 2087151
 # endif
 
+# define ECHO_BLT	1
+# define UNSET_BLT	2
+# define CD_BLT		3
+# define EXIT_BLT	4
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
 # include <fcntl.h>
 # include <dirent.h>
+# include <sys/wait.h>
 # include <sys/stat.h>
 # include "error.h"
 # include "libft.h"
@@ -100,30 +106,29 @@ typedef struct s_data
 	t_token	*tokens;
 	t_env	*env;
 	int		_errcode;
+	int		ret_cmd;
 	int		historyfd;
 }	t_data;
 
 /*		BUILTINS		*/
 
+int			ft_unset(char **arguments, t_data *data);
 int			ft_exit(char **av, t_data *data);
-int			ft_cd(char **arguments);
-int			ft_echo(char **arguments);
+int			ft_cd(char **arguments, t_data *data);
+int			ft_echo(char **arguments, t_data *data);
 
-/*		MINISHELL		*/
+/*		   EXEC	    	*/
 
-void		minishell(char **env);
-void		new_prompt(void);
-void		free_data(t_data *data);
-void		signals_handling(int signum);
-void		add_env_to_data(t_data *data, char **env);
-void		free_data(t_data *data);
-void		init_data(t_data *data);
-void		new_missing_prompt(char _errcode);
+char		*search_cmd(t_token *cmdline, t_data *data);
+void		execution(t_data *data);
+char		is_a_builtin(const char *cmd);
+t_token		*tok_next_cmd(t_token *last);
+char		**tok_to_strs(t_token *cmdline);
 
 /*		PARSING			*/
 
 void		print_env(t_env *env);
-char		**remove_useless_quotes(char **splitted);
+char		**remove_useless_quotes(char **splitted, t_data *data);
 char		**ft_split_quotes(const char *s, t_data *data);
 void		take_commandline(const char *line, t_data *data);
 t_token		*new_token(char *value);
@@ -142,6 +147,21 @@ void		detect_redirect_type(t_token **tok);
 char		is_missing_septoktype(int _errcode);
 char		*return_missing_chars(char _errcode);
 t_token		*ret_last_token(t_token *tokens);
+
+/*		MINISHELL		*/
+
+void		free_env(t_env **env);
+void		free_shell(t_data *data);
+char		*getenvval(char *envname, t_env *env);
+int			setenvval(char *envname, char *newval, t_env **env);
+void		minishell(char **env);
+void		new_prompt(void);
+void		free_data(t_data *data);
+void		signals_handling(int signum);
+void		add_env_to_data(t_data *data, char **env);
+void		free_data(t_data *data);
+void		init_data(t_data *data);
+void		new_missing_prompt(char _errcode);
 
 /*		DEBUG		*/
 

@@ -6,16 +6,16 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:40:25 by bama              #+#    #+#             */
-/*   Updated: 2024/07/23 19:06:08 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 14:15:48 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_unset(t_data *data, char *varname)
+static void	find_envvar(char *varname, t_data *data)
 {
-	t_env	*env;
 	t_env	*prev;
+	t_env	*env;
 
 	prev = NULL;
 	env = data->env;
@@ -27,12 +27,24 @@ int	ft_unset(t_data *data, char *varname)
 				prev->next = env->next;
 			else
 				data->env = data->env->next;
+			free(env->value);
 			free(env->name);
 			free(env);
-			return (0);
+			return ;
 		}
 		prev = env;
 		env = env->next;
 	}
+}
+
+int	ft_unset(char **arguments, t_data *data)
+{
+	size_t	i;
+
+	i = 1;
+	while (arguments[i])
+		find_envvar(arguments[i++], data);
+	print_env(data->env);
+	data->ret_cmd = SUCCESS;
 	return (0);
 }

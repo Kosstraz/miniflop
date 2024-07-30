@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:09:44 by bama              #+#    #+#             */
-/*   Updated: 2024/07/21 22:45:54 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 14:52:33 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ void	review_tokenid(t_token **tokens)
 	{
 		if (tok->value)
 		{
-			if ((!ft_strcmp(tok->value, "<") || !ft_strcmp(tok->value, ">")
-			|| !ft_strcmp(tok->value, ">>") || !ft_strcmp(tok->value, "<<")))
+			if (!ft_strcmp(tok->value, "<") || !ft_strcmp(tok->value, ">")
+				|| !ft_strcmp(tok->value, ">>")
+				|| !ft_strcmp(tok->value, "<<")
+				|| (ft_isdigit(tok->value[0])
+					&& !ft_strcmp(&tok->value[1], ">")))
 			{
 				if (!tok->next || (tok->next && is_sep_toktype(*(tok->next))))
-					write(1, PARSE_ERROR, PARSE_ERROR_SIZE);
+					write(1, PARSE_ERROR_T, PARSE_ERROR_SIZE);
 				else if (tok->next)
 					detect_redirect_type(&tok);
 			}

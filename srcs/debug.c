@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/07/27 19:18:32 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 13:48:22 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_env(t_env *env)
 {
 	while (env)
 	{
-		ft_printf("name: %s\nvalue: %s\n\n", env->name, env->value);
+		ft_printf("%s=%s\n", env->name, env->value);
 		env = env->next;
 	}
 }

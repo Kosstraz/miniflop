@@ -9,12 +9,6 @@
 ###### TERMCAP : ######
 {cachetra}
 
-- [BIND_KEY] Faire une fonction qui permet de bind à un keycode donné une fonction. Exemple de prototype d'une fonction de ce style.
-
-- [UNBIND_KEY] L'inverse de BIND_KEY, si c'est possibe seulement, peut potentiellement être utile (cosmétiquement). Ne pas perdre trop de temps sur ça ...
-
-- [UTILS] N'importe quelle fonction permettant de modifier des flags termcap rapidement, ou d'utilités pour la modularité. A ton choix de faire ou non, si tu trouves ça utile.
-
 - [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!!
 
 ###### PARSING : ######
