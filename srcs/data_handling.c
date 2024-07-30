@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/07/30 14:36:33 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 17:55:19 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	free_data(t_data *data)
 
 void	init_data(t_data *data)
 {
+	ft_memset(data->fildes, 0, 2);
 	g_sig = 0;
 	data->dir = opendir(".");
 	data->tokens = NULL;

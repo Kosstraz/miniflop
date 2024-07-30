@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/30 14:56:10 by bama             ###   ########.fr        #
+#    Updated: 2024/07/30 19:42:18 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRCS = ./srcs/parsing/utils.c \
 	   ./srcs/exec/search_cmd.c \
 	   ./srcs/exec/exec.c \
 	   ./srcs/exec/utils.c \
+	   ./srcs/exec/utils2.c \
 	   \
        ./srcs/debug.c \
        ./srcs/prompts.c \

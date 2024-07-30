@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:28:38 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 15:12:15 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 19:37:40 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*check_in_path(t_token cmdword, t_data *data, char **paths)
 			{
 				path_to_f = ft_strjoin(paths[i], "/");
 				path_to_f = ft_strsjoin(path_to_f, file->d_name);
-				printf("file %s\n", path_to_f);
 				if (is_a_execbin(path_to_f))
 					return (path_to_f);
 			}

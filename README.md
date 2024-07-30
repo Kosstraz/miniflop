@@ -42,17 +42,17 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - [HISTORY] Faire un historique fonctionnel, basique. {ymanchon}
 
+- -~~~ [EXEC_GENERIC] Execution générique des commandes trouvées. {ymanchon}~~~
+
 - [<] Redirige l'input. {ymanchon}
 
 - [>] Redirige l'output. {ymanchon}
 
 - [<<] Redirige l'input avec un délimiteur. {cachetra}
 
-- [>>] Redirige l'output en mode APPEND. {cachetra}
+- [>>] Redirige l'output en mode APPEND. {ymanchon}
 
 - [PIPES] Implémenter les pipes '|' (output de la commande de gauche --> input de la commande de droite). {ymanchon}
-
-- [HERE_DOC] Implémenter un fonctionnement similaire à heredoc. {cachetra}
 
 - [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {cachetra}
 

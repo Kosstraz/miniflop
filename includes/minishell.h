@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 14:54:34 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 19:41:45 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_data
 	DIR		*dir;
 	t_token	*tokens;
 	t_env	*env;
+	int		fildes[2];
 	int		_errcode;
 	int		ret_cmd;
 	int		historyfd;
@@ -122,7 +123,9 @@ int			ft_echo(char **arguments, t_data *data);
 char		*search_cmd(t_token *cmdline, t_data *data);
 void		execution(t_data *data);
 char		is_a_builtin(const char *cmd);
+char		**convert_env(t_env *env);
 t_token		*tok_next_cmd(t_token *last);
+t_token		*tok_next_sep(t_token *last);
 char		**tok_to_strs(t_token *cmdline);
 
 /*		PARSING			*/

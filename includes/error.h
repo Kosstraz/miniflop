@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/07/30 14:52:09 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 15:25:40 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 /*
 	BASIC ERROR
 */
+# define UNKNOW_CMD_PRINTF "\e[31m\ninvalid command : not found \"%s\"\n\e[0m"
+
 # define PARSE_ERROR_T "\e[31m\nparse error :/\n\e[0m"
 # define PARSE_ERROR_SIZE 25
 

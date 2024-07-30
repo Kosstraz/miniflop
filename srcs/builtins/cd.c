@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 00:10:12 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 14:37:00 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 15:23:36 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_cd(char **arguments, t_data *data)
 	log = chdir(arguments[1]);
 	pwd = getcwd(NULL, 0);
 	setenvval("PWD", pwd, &data->env);
+	closedir(data->dir);
 	data->dir = opendir(".");
 	data->ret_cmd = -log;
 	return (-log);

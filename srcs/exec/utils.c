@@ -6,17 +6,27 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 01:46:59 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 18:54:50 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*tok_next_cmd(t_token *last)
+t_token	*tok_next_sep(t_token *last)
 {
 	while (last && !is_sep_toktype(*last))
 		last = last->next;
 	return (last);
+}
+
+t_token	*tok_next_cmd(t_token *last)
+{
+	while (last && !is_sep_toktype(*last))
+		last = last->next;
+	if (last && is_sep_toktype(*last))
+		if (last->next)
+			return (last->next);
+	return (NULL);
 }
 
 char	is_a_builtin(const char *cmd)
