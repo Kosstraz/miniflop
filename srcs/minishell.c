@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/29 01:01:30 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 13:57:55 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	read_prompt(char **env)
 		free(gnl);
 		gnl = get_next_line(STDIN_FILENO);
 	}
+	free_env(&data.env);
 	write(1, EXIT_TEXT, EXIT_TEXT_SIZE);
 }
 

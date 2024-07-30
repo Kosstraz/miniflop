@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 23:41:11 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 15:59:25 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 14:07:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ char	ft_is_option(const char *word)
 	return (0);
 }
 
-int	ft_echo(char **arguments)
+int	ft_echo(char **arguments, t_data *data)
 {
 	size_t	i;
 	char	option;
 	char	args;
 
-	i = 0;
+	i = 1;
 	args = 0;
 	option = 0;
 	while (arguments[i])
@@ -54,5 +54,6 @@ int	ft_echo(char **arguments)
 	}
 	if (!option)
 		write(1, "\n", 1);
+	data->ret_cmd = SUCCESS;
 	return (0);
 }

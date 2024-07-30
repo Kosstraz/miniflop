@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/29 19:56:58 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 13:40:15 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	do_some_parsing(char ***splitted, const char *line, t_data *data)
 	place_envvars(splitted);
 	separate_operands(splitted);
 	apply_wildcards(splitted);
-	*splitted = remove_useless_quotes(*splitted);
+	*splitted = remove_useless_quotes(*splitted, data);
 }
 
 // Bon"jour mec MOUAH"AHAHH "why are you raging ??" "" A"urevoir "
@@ -47,11 +47,12 @@ static t_token	*parse_commandline(const char *line, t_data *data)
 	return (root);
 }
 
-static char	unfinished_prompt(char *line, char ***splitted,
+/*static char	unfinished_prompt(char *line, char ***splitted,
 			int errcode_tmp, t_token **tokens)
 {
 	if ((*splitted) && !(*splitted)[0])
 		(*splitted)[0] = ft_strdup("");
+	//free(ret_last_token(*tokens)->value);
 	ret_last_token(*tokens)->value = str_add_strs_free(
 		(char *)(*tokens)->value, (*splitted), ' ', '\n');
 	dfree((void **)(*splitted));
@@ -61,9 +62,9 @@ static char	unfinished_prompt(char *line, char ***splitted,
 	new_missing_prompt((char)errcode_tmp);
 	free(line);
 	return (0);
-}
+}*/
 
-static void	maybe_prompt(t_data *data, t_token **tokens)
+/*static void	maybe_prompt(t_data *data, t_token **tokens)
 {
 	char	**splitted;
 	char	*gnl;
@@ -87,7 +88,7 @@ static void	maybe_prompt(t_data *data, t_token **tokens)
 		free(gnl);
 		data->_errcode = 0;
 	}
-}
+}*/
 
 void	take_commandline(const char *line, t_data *data)
 {
@@ -96,6 +97,7 @@ void	take_commandline(const char *line, t_data *data)
 	tokens = parse_commandline(line, data);
 	data->tokens = tokens;
 	show_token(tokens);
-	while (is_missing_septoktype(data->_errcode))
-		maybe_prompt(data, &tokens);
+	//while (is_missing_septoktype(data->_errcode))
+		//maybe_prompt(data, &tokens);
+	execution(data);
 }

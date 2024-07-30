@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/29 15:41:38 by bama             ###   ########.fr        #
+#    Updated: 2024/07/30 14:56:10 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,14 +42,23 @@ SRCS = ./srcs/parsing/utils.c \
        ./srcs/parsing/envvar.c \
        ./srcs/parsing/separate_operands.c \
        ./srcs/parsing/parsing.c \
+	   \
        ./srcs/builtins/exit.c \
+	   ./srcs/builtins/unset.c \
        ./srcs/builtins/echo.c \
        ./srcs/builtins/cd.c \
+	   \
+	   ./srcs/exec/search_cmd.c \
+	   ./srcs/exec/exec.c \
+	   ./srcs/exec/utils.c \
+	   \
        ./srcs/debug.c \
        ./srcs/prompts.c \
        ./srcs/data_handling.c \
+	   ./srcs/data_handling2.c \
        ./srcs/signals_handling.c \
        ./srcs/minishell.c \
+	   \
        ./main.c
 
 LMAKE = @make --no-print-directory -C
