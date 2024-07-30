@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 22:50:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 14:06:30 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/31 00:16:42 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	ft_exit(char **av, t_data *data)
 		{
 			write(1, TOO_MANY_ARGS_ERROR, TOO_MANY_ARGS_ERROR_SIZE);
 			data->ret_cmd = ERROR;
-			return (1);
+			return (ERROR);
 		}
 	}
 	free_data(data);
-	if (!count)
-		exit(0);
+	write(1, EXIT_TEXT, EXIT_TEXT_SIZE);
 	data->ret_cmd = SUCCESS;
+	if (!count)
+		exit(SUCCESS);
 	exit(ft_atoi(av[1]));
 }

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/07/30 17:55:19 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 20:05:00 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	add_env_to_data(t_data *data, char **env)
 		data->env = data->env->next;
 	}
 	data->env = root;
+	increment_shlvl(&data->env);
 }
 
 void	free_data(t_data *data)

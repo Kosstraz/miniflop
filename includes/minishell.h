@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 19:41:45 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 20:47:51 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ t_token		*ret_last_token(t_token *tokens);
 
 /*		MINISHELL		*/
 
+void		increment_shlvl(t_env **env);
 void		free_env(t_env **env);
 void		free_shell(t_data *data);
 char		*getenvval(char *envname, t_env *env);

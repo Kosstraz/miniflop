@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:47 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 14:06:12 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/30 20:00:00 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,19 @@ void	free_shell(t_data *data)
 {
 	free_data(data);
 	free_env(&data->env);
+}
+
+void	increment_shlvl(t_env **env)
+{
+	char	*shlvl;
+	char	*tmp;
+	int		i;
+
+	shlvl = getenvval("SHLVL", *env);
+	i = ft_atoi(shlvl);
+	tmp = shlvl;
+	shlvl = ft_itoa(++i);
+	free(tmp);
+	setenvval("SHLVL", shlvl, env);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:11:58 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 19:47:10 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/31 00:22:16 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,64 +58,76 @@ int	launch_generic(t_token *cmdline, t_data *data)
 	return (0);
 }
 
-int	exec_cmdline(t_data *data, t_token *cmdline)
+int	exec_cmdline(t_data *data, t_token *cmdline, int is_fork)
 {
 	int		ret_cmd;
 	t_token	*tmp;
 
-	/*tmp = tok_next_sep(cmdline);
+	tmp = tok_next_sep(cmdline);
 	if (tmp && tmp->type == Pipe)
 	{
 		close(data->fildes[0]);
 		dup2(data->fildes[1], STDOUT_FILENO);
-		close(data->fildes[1]);
-	}*/
+	}
 	ret_cmd = -ARG_MAX;
 	if (cmdline->type == Command)
 		ret_cmd = launch_builtin(is_a_builtin(cmdline->value), data, cmdline);
 	if (cmdline->type == Command && ret_cmd == -ARG_MAX)
 		ret_cmd = launch_generic(cmdline, data);
+	if (tmp && tmp->type == Pipe)
+		close(data->fildes[1]);
+	if (is_fork)
+		exit(data->ret_cmd);
 	return (ret_cmd);
 }
 
-void	create_fork(t_data *data, t_token *tok)
+void	create_fork(t_data *data, t_token *tok, t_token **base)
 {
 	t_token	*tmp;
 	int		pid;
 	int		stat;
 
-	/*tmp = tok_next_sep(tok);
+	tmp = tok_next_sep(tok);
 	if (tmp && tmp->type == Pipe)
-		pipe(data->fildes);*/
+		pipe(data->fildes);
 	pid = fork();
 	if (pid == 0)
-		exec_cmdline(data, tok);
+		exec_cmdline(data, tok, 1);
 	else
 	{
-		/*if (tmp && tmp->type == Pipe)
+		if (base && *base)
+			(*base) = tmp;
+		if (tmp && tmp->type == Pipe)
 		{
 			close(data->fildes[1]);
 			dup2(data->fildes[0], STDIN_FILENO);
 			close(data->fildes[0]);
-			create_fork(data, tmp->next);
-		}*/
+			create_fork(data, tmp->next, base);
+		}
 		waitpid(pid, &stat, 0);
+		data->ret_cmd = stat;
 	}
 }
 
 void	execution(t_data *data)
 {
 	t_token	*cmd;
+	int		builtins;
+	int		fileno[2];
 
+	fileno[0] = dup(STDOUT_FILENO);
+	fileno[1] = dup(STDIN_FILENO);
 	cmd = data->tokens;
 	while (cmd)
-	{
-		if (!is_a_builtin(cmd->value))
-			create_fork(data, cmd);
-		else
-			exec_cmdline(data, cmd);
-		cmd = tok_next_cmd(cmd);
-	}
+		create_fork(data, cmd, &cmd);
+	dup2(fileno[0], STDOUT_FILENO);
+	dup2(fileno[1], STDIN_FILENO);
 }
+	// A = open(...)
+	// B = open(...) [!=B]
+	// tmp
+	// tmp = dup(B);
+	// dup2(A, B);
+	// dup2(tmp, A);
 
 
