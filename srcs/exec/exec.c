@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:11:58 by bama              #+#    #+#             */
-/*   Updated: 2024/07/31 00:22:16 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/31 00:26:42 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,14 @@ void	execution(t_data *data)
 	fileno[1] = dup(STDIN_FILENO);
 	cmd = data->tokens;
 	while (cmd)
-		create_fork(data, cmd, &cmd);
+	{
+		builtins = is_a_builtin(cmd->value);
+		if (builtins != EXIT_BLT && tok_next_sep(cmd)
+			&& tok_next_sep(cmd)->type == Pipe)
+			create_fork(data, cmd, &cmd);
+		else
+			exec_cmdline(data, cmd, 0);
+	}
 	dup2(fileno[0], STDOUT_FILENO);
 	dup2(fileno[1], STDIN_FILENO);
 }
