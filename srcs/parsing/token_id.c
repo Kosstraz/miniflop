@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:09:44 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 14:52:33 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/31 13:53:45 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	review_tokenid(t_token **tokens)
 			if (!ft_strcmp(tok->value, "<") || !ft_strcmp(tok->value, ">")
 				|| !ft_strcmp(tok->value, ">>")
 				|| !ft_strcmp(tok->value, "<<")
-				|| (ft_isdigit(tok->value[0])
-					&& !ft_strcmp(&tok->value[1], ">")))
+				|| !ft_strcmp(tok->value, "2>"))
 			{
 				if (!tok->next || (tok->next && is_sep_toktype(*(tok->next))))
 					write(1, PARSE_ERROR_T, PARSE_ERROR_SIZE);
@@ -35,6 +34,7 @@ void	review_tokenid(t_token **tokens)
 		}
 		tok = tok->next;
 	}
+	reset_commandtype(tokens);
 }
 
 // Cherche le type de token auquel correspond le mot splitté

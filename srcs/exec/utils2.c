@@ -6,44 +6,22 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:42:00 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 19:46:08 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/01 12:45:42 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t	t_env_size(t_env *env)
+void	save_stdfileno(int fileno_[3])
 {
-	size_t	size;
-
-	size = 0;
-	while (env)
-	{
-		size++;
-		env = env->next;
-	}
-	return (size);
+	fileno_[0] = dup(STDIN_FILENO);
+	fileno_[1] = dup(STDOUT_FILENO);
+	fileno_[2] = dup(STDERR_FILENO);
 }
 
-char	**convert_env(t_env *env)
+void	restore_stdfileno(int fileno_[3])
 {
-	char	**ret;
-	char	*var;
-	size_t	i;
-	size_t	size;
-
-	size = t_env_size(env);
-	ret = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!ret)
-		return (NULL);
-	i = 0;
-	while (i < size)
-	{
-		var = ft_strjoin(env->name, "=");
-		var = ft_strsjoin(var, env->value);
-		ret[i++] = var;
-		env = env->next;
-	}
-	ret[i] = NULL;
-	return (ret);
+	dup2(fileno_[0], STDIN_FILENO);
+	dup2(fileno_[1], STDOUT_FILENO);
+	dup2(fileno_[2], STDERR_FILENO);
 }

@@ -6,28 +6,11 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 18:54:50 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/01 12:46:09 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_token	*tok_next_sep(t_token *last)
-{
-	while (last && !is_sep_toktype(*last))
-		last = last->next;
-	return (last);
-}
-
-t_token	*tok_next_cmd(t_token *last)
-{
-	while (last && !is_sep_toktype(*last))
-		last = last->next;
-	if (last && is_sep_toktype(*last))
-		if (last->next)
-			return (last->next);
-	return (NULL);
-}
 
 char	is_a_builtin(const char *cmd)
 {
@@ -42,36 +25,54 @@ char	is_a_builtin(const char *cmd)
 	return (0);
 }
 
-size_t	tok_cmdline_size(t_token *cmdline)
+char	check_exitedchild(int *status)
 {
-	size_t	len;
-
-	len = 0;
-	while (cmdline && !is_sep_toktype(*cmdline))
+	if (WIFEXITED((*status)))
 	{
-		len++;
-		cmdline = cmdline->next;
+		(*status) = WEXITSTATUS((*status));
+		return (1);
 	}
-	return (len);
+	return (0);
 }
 
-char	**tok_to_strs(t_token *cmdline)
+void	fprint_invalidcmd(const char *cmdword)
+{
+	write(2, UNKNOW_CMD_PRINTF1, UNKNOW_CMD_PRINTF1_SIZE);
+	write(2, cmdword, ft_strlen(cmdword));
+	write(2, UNKNOW_CMD_PRINTF2, UNKNOW_CMD_PRINTF2_SIZE);
+}
+
+static size_t	t_env_size(t_env *env)
+{
+	size_t	size;
+
+	size = 0;
+	while (env)
+	{
+		size++;
+		env = env->next;
+	}
+	return (size);
+}
+
+char	**convert_env(t_env *env)
 {
 	char	**ret;
-	size_t	size;
+	char	*var;
 	size_t	i;
+	size_t	size;
 
-	if (is_sep_toktype(*cmdline))
-		cmdline = cmdline->next;
-	size = tok_cmdline_size(cmdline);
+	size = t_env_size(env);
 	ret = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!ret)
 		return (NULL);
 	i = 0;
 	while (i < size)
 	{
-		ret[i++] = (char *)cmdline->value;
-		cmdline = cmdline->next;
+		var = ft_strjoin(env->name, "=");
+		var = ft_strsjoin(var, env->value);
+		ret[i++] = var;
+		env = env->next;
 	}
 	ret[i] = NULL;
 	return (ret);

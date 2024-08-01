@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 13:48:22 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/31 14:08:44 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	show_token(t_token *tok)
 			printf("[INFILE]\t\t");
 		else if (tok->type == Outfile)
 			printf("[OUTFILE]\t\t");
+		else if (tok->type == Errfile)
+			printf("[ERRFILE]\t\t");
 		printf("\e[31m$\e[0m%s\e[31m$\e[0m\n", tok->value);
 		tok = tok->next;
 	}

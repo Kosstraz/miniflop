@@ -1,8 +1,8 @@
 ###### A RAJOUTER/REGLER : ######
 
-- [*] Gérer plusieurs '*' sur un même mot
+- [EXIT] Doit quitter le programme si une commande comme ça surgit : "ls | exit"
 
-- [ctrl-C] C'est normalement automatiquement déjà géré, mais pour rappel si jamais : Gérer les commandes bloquantes.
+- [*] Gérer plusieurs '*' sur un même mot
 
 ###### QUESTIONNEMENTS : ######
 
@@ -52,7 +52,7 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - [>>] Redirige l'output en mode APPEND. {ymanchon}
 
-- [PIPES] Implémenter les pipes '|' (output de la commande de gauche --> input de la commande de droite). {ymanchon}
+- -~~~ [PIPES] Implémenter les pipes '|' (output de la commande de gauche --> input de la commande de droite). {ymanchon}~~~
 
 - [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {cachetra}
 

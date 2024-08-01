@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/30 19:42:18 by bama             ###   ########.fr        #
+#    Updated: 2024/08/01 12:46:44 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS = ./srcs/parsing/utils.c \
 	   \
 	   ./srcs/exec/search_cmd.c \
 	   ./srcs/exec/exec.c \
+	   ./srcs/exec/tok_utils.c \
 	   ./srcs/exec/utils.c \
 	   ./srcs/exec/utils2.c \
 	   \

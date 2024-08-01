@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:49:27 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 00:00:45 by bama             ###   ########.fr       */
+/*   Updated: 2024/07/31 13:53:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	add_new_words(char ***div, char *str, size_t *i, size_t at)
 		|| (str[at] == '|' && str[at + 1] == '|')
 		|| (str[at] == '<' && str[at + 1] == '<')
 		|| (str[at] == '>' && str[at + 1] == '>')
-		|| (ft_isdigit(str[at]) && str[at + 1] == '>'))
+		|| (str[at] == '2' && str[at + 1] == '>'))
 		ope_len = 2;
 	if (at > 0)
 		(*div)[(*i)++] = ft_strdup_at(str, 0, at);

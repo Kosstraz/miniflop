@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 20:47:51 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/01 12:46:12 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # define CD_BLT		3
 # define EXIT_BLT	4
 
+# define FORKED		1
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -77,7 +79,8 @@ typedef enum e_type
 	RedirectAppend,
 	HereDoc,
 	Infile,
-	Outfile
+	Outfile,
+	Errfile
 }	t_e_type;
 
 typedef struct s_vec2ul
@@ -120,6 +123,10 @@ int			ft_echo(char **arguments, t_data *data);
 
 /*		   EXEC	    	*/
 
+char		check_exitedchild(int *status);
+void		fprint_invalidcmd(const char *cmdword);
+void		save_stdfileno(int fileno_[3]);
+void		restore_stdfileno(int fileno_[3]);
 char		*search_cmd(t_token *cmdline, t_data *data);
 void		execution(t_data *data);
 char		is_a_builtin(const char *cmd);
@@ -130,6 +137,7 @@ char		**tok_to_strs(t_token *cmdline);
 
 /*		PARSING			*/
 
+void		reset_commandtype(t_token **root);
 void		print_env(t_env *env);
 char		**remove_useless_quotes(char **splitted, t_data *data);
 char		**ft_split_quotes(const char *s, t_data *data);
