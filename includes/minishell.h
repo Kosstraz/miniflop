@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/01 14:00:13 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:17:38 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,7 @@ void		free_shell(t_data *data);
 char		*getenvval(char *envname, t_env *env);
 int			setenvval(char *envname, char *newval, t_env **env);
 void		minishell(char **env);
-void		new_prompt(void);
+void		new_prompt(char **buffer_prompt);
 void		free_data(t_data *data);
 void		signals_handling(int signum);
 void		add_env_to_data(t_data *data, char **env);
@@ -245,26 +245,27 @@ void		init_data(t_data *data);
 void		new_missing_prompt(char _errcode);
 
 /*		TERMCAP			*/
-void	term_init(t_data *data) __attribute__((cold));
-char	*ft_readline(char *prompt, int sze, t_data *data) __attribute__((hot));
-void	term_reset(t_data *data) __attribute__((cold));
-void	*ft_malloc(size_t size, t_data *data) __attribute__((cold));
-void	*ft_realloc(void *ptr, size_t sze, t_data *data) __attribute__((cold));
-void	update_last(t_term *term, int add) __attribute__((hot));
-void	update_position(t_term *term, int dir) __attribute__((hot));
-void	get_cursor_position(t_data *data) __attribute__((cold));
-void	move_up(t_data *data, int last_col);
-void	move_down(t_term *term, int first_col);
-void	write_stored(t_term *term, int at, char *mem) __attribute__((hot));
-void	print_char(t_data *data, int c);
-void	key_backspace(t_data *data) __attribute__((hot));
-void	key_delete(t_data *data) __attribute__((hot));
-void	key_tab(t_data *data) __attribute__((hot));
-void	key_up(t_data *data) __attribute__((hot));
-void	key_down(t_data *data) __attribute__((hot));
-void	key_right(t_data *data) __attribute__((hot));
-void	key_left(t_data *data) __attribute__((hot));
-void	free_term(t_data *data) __attribute__((cold));
+void		term_init(t_data *data) __attribute__((cold));
+char		*ft_readline(char *prompt, t_data *data) __attribute__((hot));
+void		term_reset(t_data *data) __attribute__((cold));
+void		*ft_malloc(size_t size, t_data *data) __attribute__((cold));
+void		*ft_realloc(void *ptr, size_t sze,
+				t_data *data) __attribute__((cold));
+void		update_last(t_term *term, int add) __attribute__((hot));
+void		update_position(t_term *term, int dir) __attribute__((hot));
+void		get_cursor_position(t_data *data) __attribute__((cold));
+void		move_up(t_data *data, int last_col);
+void		move_down(t_term *term, int first_col);
+void		write_stored(t_term *term, int at, char *mem) __attribute__((hot));
+void		print_char(t_data *data, int c);
+void		key_backspace(t_data *data) __attribute__((hot));
+void		key_delete(t_data *data) __attribute__((hot));
+void		key_tab(t_data *data) __attribute__((hot));
+void		key_up(t_data *data) __attribute__((hot));
+void		key_down(t_data *data) __attribute__((hot));
+void		key_right(t_data *data) __attribute__((hot));
+void		key_left(t_data *data) __attribute__((hot));
+void		free_term(t_data *data) __attribute__((cold));
 
 /*		DEBUG		*/
 

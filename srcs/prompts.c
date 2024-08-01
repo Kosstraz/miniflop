@@ -6,21 +6,21 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:59:44 by bama              #+#    #+#             */
-/*   Updated: 2024/07/28 13:04:10 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/01 14:15:09 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	new_prompt(void)
+void	new_prompt(char **buffer_prompt)
 {
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
-	write(1, PROMPT1, PROMPT1_SIZE);
-	write(1, cwd, ft_strlen(cwd));
-	write(1, PROMPT2, PROMPT2_SIZE);
-	write(1, PROMPT3, PROMPT3_SIZE);
+	*buffer_prompt = ft_strdup(PROMPT1);
+	*buffer_prompt = ft_strsjoin(*buffer_prompt, cwd);
+	*buffer_prompt = ft_strsjoin(*buffer_prompt, PROMPT2);
+	*buffer_prompt = ft_strsjoin(*buffer_prompt, PROMPT3);
 	free(cwd);
 }
 

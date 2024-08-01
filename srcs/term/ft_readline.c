@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/01 14:04:10 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:17:22 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*duplicate_buffer(t_data *data)
 	return (rtn);
 }
 
-char	*ft_readline(char *prompt, int sze, t_data *data)
+char	*ft_readline(char *prompt, t_data *data)
 {
 	int		n;
 	int		b_read;
@@ -78,7 +78,7 @@ char	*ft_readline(char *prompt, int sze, t_data *data)
 	char	*rtn;
 
 	n = 1;
-	write(1, prompt, sze);
+	write(1, prompt, ft_strlen(prompt));
 	initialise_line_data(data);
 	get_cursor_position(data);
 	ft_memset(&buf, 0, READ);

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 13:57:55 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/01 14:25:25 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,22 @@
 static void	read_prompt(char **env)
 {
 	t_data	data;
+	char	*prompt;
 	char	*gnl;
 
 	add_env_to_data(&data, env);
-	gnl = get_next_line(STDIN_FILENO);
+	new_prompt(&prompt);
+	gnl = ft_readline(prompt, &data);
+	free(prompt);
 	while (gnl)
 	{
 		init_data(&data);
 		take_commandline(gnl, &data);
 		free_data(&data);
-		new_prompt();
 		free(gnl);
-		gnl = get_next_line(STDIN_FILENO);
+		new_prompt(&prompt);
+		gnl = ft_readline(prompt, &data);
+		free(prompt);
 	}
 	free_env(&data.env);
 	write(1, EXIT_TEXT, EXIT_TEXT_SIZE);
@@ -36,6 +40,5 @@ void	minishell(char **env)
 {
 	signal(SIGQUIT, signals_handling);
 	signal(SIGINT, signals_handling);
-	new_prompt();
 	read_prompt(env);
 }
