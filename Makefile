@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
+#    By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/01 12:46:44 by bama             ###   ########.fr        #
+#    Updated: 2024/08/01 13:57:02 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,38 +30,46 @@ NAME = minishell
 
 CC = @cc
 
-SRCS = ./srcs/parsing/utils.c \
-       ./srcs/parsing/utils2.c \
-       ./srcs/parsing/ft_split_quotes2.c \
-       ./srcs/parsing/ft_split_quotes.c \
-       ./srcs/parsing/token_id2.c \
-       ./srcs/parsing/token_id.c \
-       ./srcs/parsing/parsing_wildcards2.c \
-       ./srcs/parsing/parsing_wildcards.c \
-       ./srcs/parsing/parsing_quotes.c \
-       ./srcs/parsing/envvar.c \
-       ./srcs/parsing/separate_operands.c \
-       ./srcs/parsing/parsing.c \
-	   \
-       ./srcs/builtins/exit.c \
-	   ./srcs/builtins/unset.c \
-       ./srcs/builtins/echo.c \
-       ./srcs/builtins/cd.c \
-	   \
-	   ./srcs/exec/search_cmd.c \
-	   ./srcs/exec/exec.c \
-	   ./srcs/exec/tok_utils.c \
-	   ./srcs/exec/utils.c \
-	   ./srcs/exec/utils2.c \
-	   \
-       ./srcs/debug.c \
-       ./srcs/prompts.c \
-       ./srcs/data_handling.c \
-	   ./srcs/data_handling2.c \
-       ./srcs/signals_handling.c \
-       ./srcs/minishell.c \
-	   \
-       ./main.c
+SRCS =	./srcs/term/delete_keys.c \
+		./srcs/term/free_terminal.c \
+		./srcs/term/ft_readline.c \
+		./srcs/term/printables.c \
+		./srcs/term/special_keys.c \
+		./srcs/term/term_initialise.c \
+		./srcs/term/utils.c \
+		\
+		./srcs/parsing/utils.c \
+		./srcs/parsing/utils2.c \
+    	./srcs/parsing/ft_split_quotes2.c \
+		./srcs/parsing/ft_split_quotes.c \
+		./srcs/parsing/token_id2.c \
+		./srcs/parsing/token_id.c \
+		./srcs/parsing/parsing_wildcards2.c \
+		./srcs/parsing/parsing_wildcards.c \
+		./srcs/parsing/parsing_quotes.c \
+		./srcs/parsing/envvar.c \
+		./srcs/parsing/separate_operands.c \
+		./srcs/parsing/parsing.c \
+		\
+		./srcs/builtins/exit.c \
+		./srcs/builtins/unset.c \
+		./srcs/builtins/echo.c \
+		./srcs/builtins/cd.c \
+		\
+		./srcs/exec/search_cmd.c \
+		./srcs/exec/exec.c \
+		./srcs/exec/tok_utils.c \
+		./srcs/exec/utils.c \
+		./srcs/exec/utils2.c \
+		\
+		./srcs/debug.c \
+		./srcs/prompts.c \
+		./srcs/data_handling.c \
+		./srcs/data_handling2.c \
+		./srcs/signals_handling.c \
+		./srcs/minishell.c \
+		\
+		./main.c
 
 LMAKE = @make --no-print-directory -C
 
@@ -79,6 +87,8 @@ LIBFT_P = ./libft
 
 LIB = $(LIBFT_P)/libft.a \
 
+TLIB = -ltermcap \
+
 # ############## #
 #*    REGLES    *#
 # ############## #
@@ -86,7 +96,7 @@ LIB = $(LIBFT_P)/libft.a \
 all: libft_comp pre_comp $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(TLIB) -o $@
 	@echo "$(BOLD)$(CYAN)Exécutable $(NAME) créé avec succès!$(CLASSIC)"
 
 $(OBJS_DIR)/%.obj: %.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handling2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:47 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 20:00:00 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/01 14:00:42 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	setenvval(char *envname, char *newval, t_env **env)
 
 void	free_shell(t_data *data)
 {
+	free_term(data);
 	free_data(data);
 	free_env(&data->env);
 }
@@ -63,4 +64,3 @@ void	increment_shlvl(t_env **env)
 	free(tmp);
 	setenvval("SHLVL", shlvl, env);
 }
-
