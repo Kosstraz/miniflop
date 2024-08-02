@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+         #
+#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/01 13:57:02 by cachetra         ###   ########.fr        #
+#    Updated: 2024/08/02 02:13:28 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ SRCS =	./srcs/term/delete_keys.c \
 		./srcs/exec/search_cmd.c \
 		./srcs/exec/exec.c \
 		./srcs/exec/tok_utils.c \
+		./srcs/exec/tok_utils2.c \
 		./srcs/exec/utils.c \
 		./srcs/exec/utils2.c \
 		\

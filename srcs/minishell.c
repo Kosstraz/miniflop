@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/01 14:25:25 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/01 14:44:44 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	read_prompt(char **env)
 	char	*prompt;
 	char	*gnl;
 
+	term_init(&data);
 	add_env_to_data(&data, env);
 	new_prompt(&prompt);
 	gnl = ft_readline(prompt, &data);

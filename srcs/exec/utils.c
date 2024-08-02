@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/08/01 12:46:09 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 01:50:52 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ char	is_a_builtin(const char *cmd)
 	return (0);
 }
 
-char	check_exitedchild(int *status)
+char	check_exitedchild(t_data *data, int *status)
 {
 	if (WIFEXITED((*status)))
 	{
 		(*status) = WEXITSTATUS((*status));
+		data->ret_cmd = (*status);
 		return (1);
 	}
 	return (0);

@@ -9,7 +9,7 @@
 ###### TERMCAP : ######
 {cachetra}
 
-- [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!!
+- -~~~ [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!!~~~
 
 ###### PARSING : ######
 {ymanchon}

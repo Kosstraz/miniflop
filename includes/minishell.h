@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/01 14:17:38 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 18:23:45 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ typedef enum e_type
 	Or,
 	Command,
 	Argument,
-	Redirect,
+	RedirectW,
+	RedirectR,
 	RedirectAppend,
 	HereDoc,
 	Infile,
@@ -178,6 +179,7 @@ typedef struct s_data
 	t_token	*tokens;
 	t_env	*env;
 	int		fildes[2];
+	int		*fileno;
 	int		_errcode;
 	int		ret_cmd;
 	int		historyfd;
@@ -192,7 +194,10 @@ int			ft_echo(char **arguments, t_data *data);
 
 /*		   EXEC	    	*/
 
-char		check_exitedchild(int *status);
+char		is_there_cmd(t_token *cmdline);
+t_token		*tok_next_redirect(t_token *cmdline);
+char		is_there_redirect(t_token *cmdline);
+char		check_exitedchild(t_data *data, int *status);
 void		fprint_invalidcmd(const char *cmdword);
 void		save_stdfileno(int fileno_[3]);
 void		restore_stdfileno(int fileno_[3]);

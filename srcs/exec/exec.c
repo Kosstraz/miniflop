@@ -6,11 +6,45 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:11:58 by bama              #+#    #+#             */
-/*   Updated: 2024/08/01 12:41:10 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 18:46:46 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	redirect(t_data *data, t_token *cmdline, int mode)
+{
+	t_token	*r;
+	char	buffer[ARG_MAX];
+	int		fd;
+
+	r = tok_next_redirect(data->tokens);
+	if (!r)
+		return ;
+	if (r->type == RedirectW && mode == O_WRONLY)
+	{
+		fd = open(r->next->value, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (!is_there_cmd(cmdline))
+			write(fd, buffer, ARG_MAX);
+		dup2(fd, STDOUT_FILENO);
+	}
+	else if (r->type == RedirectR && r->next->type != HereDoc && mode == O_RDONLY)
+	{
+		fd = open(r->next->value, O_RDONLY, 0666);
+		dup2(fd, data->fildes[0]);
+	}
+	else if (r->type == RedirectAppend && mode == O_WRONLY)
+	{
+		fd = open(r->next->value, O_WRONLY | O_CREAT | O_APPEND, 0666);
+		restore_stdfileno(data->fileno);
+		save_stdfileno(data->fileno);
+		if (!is_there_cmd(cmdline))
+			write(fd, buffer, ARG_MAX);
+		dup2(fd, STDOUT_FILENO);
+	}
+	// handle HereDoc here
+	close(fd);
+}
 
 int	launch_builtin(char builtin_cmd, t_data *data, t_token *cmdline)
 {
@@ -65,6 +99,8 @@ int	exec_cmdline(t_data *data, t_token *cmdline, int is_fork)
 		close(data->fildes[0]);
 		dup2(data->fildes[1], STDOUT_FILENO);
 	}
+	if (is_there_redirect(cmdline))
+		redirect(data, cmdline, O_WRONLY);
 	ret_cmd = -ARG_MAX;
 	if (cmdline->type == Command)
 		ret_cmd = launch_builtin(is_a_builtin(cmdline->value), data, cmdline);
@@ -87,6 +123,8 @@ void	create_fork(t_data *data, t_token *tok, t_token **base)
 	if (tmp && tmp->type == Pipe)
 		pipe(data->fildes);
 	pid = fork();
+	if (is_there_redirect(tok))
+		redirect(data, NULL, O_RDONLY);
 	if (pid == 0)
 		exec_cmdline(data, tok, 1);
 	else
@@ -101,9 +139,8 @@ void	create_fork(t_data *data, t_token *tok, t_token **base)
 			create_fork(data, tmp->next, base);
 		}
 		waitpid(pid, &stat, 0);
-		if (check_exitedchild(&stat) && stat == CMD_UNKNOW)
+		if (check_exitedchild(data, &stat) && stat == CMD_UNKNOW)
 			fprint_invalidcmd(tok->value);
-		data->ret_cmd = stat;
 	}
 }
 
@@ -115,6 +152,7 @@ void	execution(t_data *data)
 	int		fileno[3];
 
 	save_stdfileno(fileno);
+	data->fileno = fileno;
 	cmd = data->tokens;
 	while (cmd)
 	{

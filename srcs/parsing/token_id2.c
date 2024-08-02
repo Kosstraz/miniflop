@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 22:17:54 by bama              #+#    #+#             */
-/*   Updated: 2024/07/31 14:07:13 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 15:46:40 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ inline static void	set_type_redirect(t_token **tok,
 void	detect_redirect_type(t_token **tok)
 {
 	if (!ft_strcmp((*tok)->value, "<"))
-		set_type_redirect(tok, Redirect, Infile);
+		set_type_redirect(tok, RedirectR, Infile);
 	else if (!ft_strcmp((*tok)->value, ">"))
-		set_type_redirect(tok, Redirect, Outfile);
+		set_type_redirect(tok, RedirectW, Outfile);
 	else if (!ft_strcmp((*tok)->value, ">>"))
 		set_type_redirect(tok, RedirectAppend, Outfile);
 	else if (!ft_strcmp((*tok)->value, "<<"))
-		set_type_redirect(tok, Redirect, HereDoc);
+		set_type_redirect(tok, RedirectR, HereDoc);
 	else if (!ft_strcmp((*tok)->value, "2>"))
-		set_type_redirect(tok, Redirect, Errfile);
+		set_type_redirect(tok, RedirectW, Errfile);
 }
 
 t_token	*ret_last_token(t_token *tokens)
@@ -55,7 +55,8 @@ void	reset_commandtype(t_token **root)
 	{
 		while (tmp && !is_sep_toktype(*tmp))
 		{
-			if (tmp->type != Redirect && tmp->type != RedirectAppend
+			if (tmp->type != RedirectR && tmp->type != RedirectW
+				&& tmp->type != RedirectAppend
 				&& tmp->type != HereDoc && tmp->type != Infile
 				&& tmp->type != Outfile && tmp->type != Command)
 				tmp->type = Command;

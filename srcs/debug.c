@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/07/31 14:08:44 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 15:45:15 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	show_token(t_token *tok)
 			printf("[COMMAND]\t\t");
 		else if (tok->type == Argument)
 			printf("[ARGUMENT]\t\t");
-		else if (tok->type == Redirect)
-			printf("[REDIRECTION]\t\t");
+		else if (tok->type == RedirectR)
+			printf("[REDIRECTIONread]\t");
+		else if (tok->type == RedirectW)
+			printf("[REDIRECTIONwrite]\t");
 		else if (tok->type == RedirectAppend)
 			printf("[REDIRECTION (APPEND)]\t");
 		else if (tok->type == HereDoc)
