@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 23:36:04 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 00:35:43 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,11 @@
 # define UNSET_BLT	2
 # define CD_BLT		3
 # define EXIT_BLT	4
+# define EXPORT_BLT	5
 
 # define FORKED		1
 
-# define TAB '\011'
-# define BCK '\177'
-# define DEL "\033[3~"
+# define KEY_DEL "\033[3~"
 # define KEY_UP "\033[A"
 # define KEY_DOWN "\033[B"
 # define KEY_RIGHT "\033[C"
@@ -87,7 +86,6 @@
 
 extern char				g_sig;
 
-typedef unsigned int	t_uint;
 typedef long long		t_ll;
 
 typedef enum e_type
@@ -195,6 +193,7 @@ int			ft_unset(char **arguments, t_data *data);
 int			ft_exit(char **av, t_data *data);
 int			ft_cd(char **arguments, t_data *data);
 int			ft_echo(char **arguments, t_data *data);
+int			ft_export(char **args, t_data *data);
 
 /*		   EXEC	    	*/
 
@@ -243,6 +242,7 @@ t_token		*ret_last_token(t_token *tokens);
 
 /*		MINISHELL		*/
 
+void		exit_shell(char *mess, t_data *data, int status);
 void		increment_shlvl(t_env **env);
 void		free_env(t_env **env);
 void		free_shell(t_data *data);
@@ -259,8 +259,10 @@ void		new_missing_prompt(char _errcode);
 
 /*		TERMCAP			*/
 void		term_init(t_data *data) __attribute__((cold));
+void		term_set_raw(t_data *data);
 char		*ft_readline(char *prompt, t_data *data) __attribute__((hot));
 void		term_reset(t_data *data) __attribute__((cold));
+int			ft_read(int fd, char *buf, int size, t_data *data);
 void		*ft_malloc(size_t size, t_data *data) __attribute__((cold));
 void		*ft_realloc(void *ptr, size_t sze,
 				t_data *data) __attribute__((cold));
@@ -278,8 +280,8 @@ void		key_up(t_data *data) __attribute__((hot));
 void		key_down(t_data *data) __attribute__((hot));
 void		key_right(t_data *data) __attribute__((hot));
 void		key_left(t_data *data) __attribute__((hot));
-void		kill_term(t_data *data) __attribute__((cold));
 void		free_term(t_data *data) __attribute__((cold));
+char		*handle_interrupt(t_data *data);
 
 /*		DEBUG		*/
 

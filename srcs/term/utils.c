@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:25:41 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/01 13:54:34 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/03 00:14:28 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	get_cursor_position(t_data *data)
 	i = 1;
 	ft_memset(&buf, 0, READ);
 	write(STDOUT_FILENO, "\033[6n", 4);
-	b_read = read(STDIN_FILENO, buf, READ);
-	if (b_read <= 0)
-		free_shell(data);
+	b_read = ft_read(STDIN_FILENO, buf, READ, data);
+	if (!b_read)
+		exit_shell("\e[1;31mread\e[0m", data, EXIT_FAILURE);
 	buf[b_read] = '\0';
 	while (!ft_isdigit(buf[i]))
 		i++;
@@ -84,7 +84,7 @@ void	move_up(t_data *data, int last_col)
 		return ;
 	cmd = tgoto(data->term.caps.move.cap, data->term.caps.cols, data->term.curs.l - 2);
 	if (!cmd)
-		free_shell(data);
+		exit_shell("\e[1;31mtgoto\e[0m", data, EXIT_FAILURE);
 	write(data->term.fd, cmd, ft_strlen(cmd));
 }
 

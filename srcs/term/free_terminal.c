@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:20:43 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/02 23:35:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 00:13:41 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 
 void	free_term(t_data *data)
 {
-	if (data->term.line.buf)
-		free(data->term.line.buf);
-}
-
-void	kill_term(t_data *data)
-{
 	if (data->term.state == RAW)
 		term_reset(data);
-	free_term(data);
+	if (data->term.line.buf)
+		free(data->term.line.buf);
 }
 
 void	term_reset(t_data *data)
@@ -31,8 +26,18 @@ void	term_reset(t_data *data)
 
 	log = tcsetattr(data->term.fd, TCSANOW, &data->term.og);
 	if (log)
-		free_shell(data);
+		exit_shell("\e[1;31mtcsetattr\e[0m", data, EXIT_FAILURE);
 	data->term.state = ORIGINAL;
+}
+
+int	ft_read(int fd, char *buf, int size, t_data *data)
+{
+	int	br;
+
+	br = read(fd, buf, size);
+	if (br == -1)
+		exit_shell("\e[1;31mread\e[0m", data, EXIT_FAILURE);
+	return (br);
 }
 
 void	*ft_malloc(size_t size, t_data *data)
@@ -41,7 +46,7 @@ void	*ft_malloc(size_t size, t_data *data)
 
 	new = malloc(size);
 	if (!new)
-		free_shell(data);
+		exit_shell("\e[1;31mmalloc\e[0m", data, EXIT_FAILURE);
 	return (new);
 }
 
@@ -52,7 +57,7 @@ void	*ft_realloc(void *ptr, size_t sze, t_data *data)
 
 	new = malloc(sze);
 	if (!new)
-		free_shell(data);
+		exit_shell("\e[1;31mmalloc\e[0m", data, EXIT_FAILURE);
 	s = ft_strlen((char *)ptr);
 	ft_memmove(new, ptr, s);
 	free(ptr);

@@ -9,7 +9,11 @@
 ###### TERMCAP : ######
 {cachetra}
 
-- -~~~ [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!!~~~
+- -~~~ [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!! ~~~
+
+- -~~~ (*) Remplacer toutes les occurences de free_shell dans /term avec shell_exit ~~~
+
+- [SIG] Gestion des signaux
 
 ###### PARSING : ######
 {ymanchon}
@@ -33,8 +37,6 @@
 
 - -~~~[ENV_VAR] Parser et remplacer les variables d'environnement trouvées.~~~
 
-- [EXCEPTIONS] Gestion des exceptions faute de quote fermant.
-
 - [PARHENTESES] Parser les parentheses et créer des sous-tokenisation. Aussi découper
 la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
@@ -54,7 +56,7 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - -~~~ [PIPES] Implémenter les pipes '|' (output de la commande de gauche --> input de la commande de droite). {ymanchon}~~~
 
-- [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {cachetra}
+- -~~~ [$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {cachetra}~~~
 
 - -~~~[ctrl-C] Interpréter ce signal (SIGINT). Affiche un nouveau prompt avec une nouvelle ligne. {ymanchon}~~~
 
