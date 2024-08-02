@@ -6,14 +6,19 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 01:50:52 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 22:00:46 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	is_a_builtin(const char *cmd)
+char	is_a_builtin(t_token *cmdline)
 {
+	char	*cmd;
+
+	while (cmdline && cmdline->type != Command)
+		cmdline = cmdline->next;
+	cmd = (char *)cmdline->value;
 	if (!ft_strcmp(cmd, "echo"))
 		return (ECHO_BLT);
 	else if (!ft_strcmp(cmd, "cd"))
@@ -36,10 +41,12 @@ char	check_exitedchild(t_data *data, int *status)
 	return (0);
 }
 
-void	fprint_invalidcmd(const char *cmdword)
+void	fprint_invalidcmd(t_token	*cmdline)
 {
+	while (cmdline && cmdline->type != Command)
+		cmdline = cmdline->next;
 	write(2, UNKNOW_CMD_PRINTF1, UNKNOW_CMD_PRINTF1_SIZE);
-	write(2, cmdword, ft_strlen(cmdword));
+	write(2, cmdline->value, ft_strlen(cmdline->value));
 	write(2, UNKNOW_CMD_PRINTF2, UNKNOW_CMD_PRINTF2_SIZE);
 }
 
@@ -63,6 +70,8 @@ char	**convert_env(t_env *env)
 	size_t	i;
 	size_t	size;
 
+	if (!env)
+		return (NULL);
 	size = t_env_size(env);
 	ret = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!ret)

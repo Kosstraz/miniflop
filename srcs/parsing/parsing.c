@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 15:28:49 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 20:16:57 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ void	take_commandline(const char *line, t_data *data)
 	//while (is_missing_septoktype(data->_errcode))
 		//maybe_prompt(data, &tokens);
 	if (data && data->tokens && data->tokens->value)
-		execution(data);
+		exec(data);
 }

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 02:12:04 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 18:17:40 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 19:56:03 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,13 @@ char	is_there_cmd(t_token *cmdline)
 		cmdline = cmdline->next;
 	}
 	return (0);
+}
+
+t_e_type	tok_next_type(t_token *last)
+{
+	while (last && !is_sep_toktype(*last))
+		last = last->next;
+	if (last)
+		return (last->type);
+	return (Null);
 }

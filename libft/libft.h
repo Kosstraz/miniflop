@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/29 19:51:46 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 20:43:36 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,7 @@ char	*ft_strndup(const char *str, unsigned int n);
 char	*ft_substr(const char *s, unsigned int start, size_t n);
 char	*ft_strjoin(const char *s1, const char *s2);
 size_t	ft_strlen(const char *str);
+size_t	ft_strslcpy(char **dst, const char **src, size_t siz1);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 /*

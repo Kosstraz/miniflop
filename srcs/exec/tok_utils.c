@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:45:04 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 16:03:29 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 23:30:43 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**tok_to_strs(t_token *cmdline)
 		if (type != RedirectR && type != RedirectW && type != RedirectAppend
 			&& type != Infile && type != Outfile && type != Errfile
 			&& type != HereDoc)
-			ret[i++] = (char *)cmdline->value;
+			ret[i++] = ft_strdup((char *)cmdline->value);
 		cmdline = cmdline->next;
 	}
 	ret[i] = NULL;

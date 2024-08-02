@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen2.c                                       :+:      :+:    :+:   */
+/*   ft_strslcpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/28 21:09:48 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 20:36:43 by bama             ###   ########.fr       */
+/*   Created: 2024/05/15 17:43:30 by ymanchon          #+#    #+#             */
+/*   Updated: 2024/08/02 20:43:11 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Nombre de string dans le tableau
-size_t	ft_strlen2(char **strs)
+size_t	ft_strslcpy(char **dst, const char **src, size_t siz1)
 {
 	size_t	i;
 
 	i = 0;
-	while (strs[i])
-		i++;
-	return (i);
-}
-
-// Nombre total de caractères dans le tableau de strings
-size_t	ft_strslen(char **strs)
-{
-	size_t	i;
-	size_t	j;
-	size_t	len;
-
-	i = 0;
-	len = 0;
-	while (strs[i])
+	if (siz1 == 0)
+		return (0);
+	while (src[i] && i < siz1)
 	{
-		j = 0;
-		while (strs[i][j++])
-			len++;
+		ft_strlcpy(dst[i], src[i], ft_strlen(src[i]));
 		i++;
 	}
-	return (len);
+	dst[i] = NULL;
+	return (i * siz1 + 1);
 }

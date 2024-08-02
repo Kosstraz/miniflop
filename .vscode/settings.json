@@ -1,0 +1,6 @@
+{
+	"github.copilot.editor.enableAutoCompletions": false,
+	"files.associations": {
+		"minishell.h": "c"
+	}
+}

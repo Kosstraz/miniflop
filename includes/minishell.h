@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 18:23:45 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 23:36:04 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@
 # ifndef ARG_MAX
 #  define ARG_MAX 2087151
 # endif
+
+// ARG_MAX / 2
+# define SZ_MAX 1174302
 
 # define ECHO_BLT	1
 # define UNSET_BLT	2
@@ -178,8 +181,9 @@ typedef struct s_data
 	t_term	term;
 	t_token	*tokens;
 	t_env	*env;
+	char	blt_val;
 	int		fildes[2];
-	int		*fileno;
+	int		fileno[3];
 	int		_errcode;
 	int		ret_cmd;
 	int		historyfd;
@@ -194,16 +198,20 @@ int			ft_echo(char **arguments, t_data *data);
 
 /*		   EXEC	    	*/
 
+void		dup2_stdin(int fd[2]);
+void		dup2_stdout(int fd[2]);
+int			exec_builtins(char blt_val, t_data *data, t_token *cmdline);
+t_e_type	tok_next_type(t_token *last);
 char		is_there_cmd(t_token *cmdline);
 t_token		*tok_next_redirect(t_token *cmdline);
 char		is_there_redirect(t_token *cmdline);
 char		check_exitedchild(t_data *data, int *status);
-void		fprint_invalidcmd(const char *cmdword);
+void		fprint_invalidcmd(t_token *cmdline);
 void		save_stdfileno(int fileno_[3]);
 void		restore_stdfileno(int fileno_[3]);
-char		*search_cmd(t_token *cmdline, t_data *data);
-void		execution(t_data *data);
-char		is_a_builtin(const char *cmd);
+char		*getcmdpath(t_token *cmdline, t_data *data);
+void		exec(t_data *data);
+char		is_a_builtin(t_token *cmdline);
 char		**convert_env(t_env *env);
 t_token		*tok_next_cmd(t_token *last);
 t_token		*tok_next_sep(t_token *last);
@@ -270,6 +278,7 @@ void		key_up(t_data *data) __attribute__((hot));
 void		key_down(t_data *data) __attribute__((hot));
 void		key_right(t_data *data) __attribute__((hot));
 void		key_left(t_data *data) __attribute__((hot));
+void		kill_term(t_data *data) __attribute__((cold));
 void		free_term(t_data *data) __attribute__((cold));
 
 /*		DEBUG		*/

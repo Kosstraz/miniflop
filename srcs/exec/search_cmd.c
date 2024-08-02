@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:28:38 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 19:37:40 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 20:04:33 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	is_a_execbin(char *path_to_f)
 	return (0);
 }
 
-char	*check_in_path(t_token cmdword, t_data *data, char **paths)
+static char	*check_in_path(t_token cmdword, t_data *data, char **paths)
 {
 	size_t			i;
 	char			*path_to_f;
@@ -53,7 +53,7 @@ char	*check_in_path(t_token cmdword, t_data *data, char **paths)
 	return (NULL);
 }
 
-char	*search_cmd(t_token *cmdline, t_data *data)
+char	*getcmdpath(t_token *cmdline, t_data *data)
 {
 	char			*path;
 	char			**paths;

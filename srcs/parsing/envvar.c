@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:43:15 by bama              #+#    #+#             */
-/*   Updated: 2024/07/28 12:00:18 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 22:23:21 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	place_envvars(char ***splitted)
 		{
 			check_quote_status(tmp[i][j], &quote_status);
 			if (tmp[i][j] == '$' && quote_status != 1)
-			{ 
+			{
 				tmp[i] = add_envvar(tmp[i], j, &varlen);
 				j += varlen - 1;
 			}
