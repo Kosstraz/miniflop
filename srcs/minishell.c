@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 00:36:50 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 00:43:57 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ void	minishell(char **env)
 		free_data(&data);
 	}
 	free_env(&data.env);
-	free_term(&data);
+	kill_term(&data);
 	write(1, EXIT_TEXT, EXIT_TEXT_SIZE);
 }

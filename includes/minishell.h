@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 00:35:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 00:43:45 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ void		init_data(t_data *data);
 void		new_missing_prompt(char _errcode);
 
 /*		TERMCAP			*/
+void		kill_term(t_data *data);
 void		term_init(t_data *data) __attribute__((cold));
 void		term_set_raw(t_data *data);
 char		*ft_readline(char *prompt, t_data *data) __attribute__((hot));

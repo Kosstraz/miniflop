@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/03 00:30:41 by bama             ###   ########.fr        #
+#    Updated: 2024/08/03 00:44:30 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ SRCS =	./srcs/term/delete_keys.c \
 		./srcs/prompts.c \
 		./srcs/data_handling.c \
 		./srcs/data_handling2.c \
-		./srcs/signals_handling.c \
+		./srcs/data_handling3.c \
 		./srcs/minishell.c \
 		\
 		./main.c

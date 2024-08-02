@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:20:43 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 00:13:41 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/03 00:43:02 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 void	free_term(t_data *data)
 {
-	if (data->term.state == RAW)
-		term_reset(data);
 	if (data->term.line.buf)
 		free(data->term.line.buf);
+}
+
+void	kill_term(t_data *data)
+{
+	if (data->term.state == RAW)
+		term_reset(data);
+	free_term(data);
 }
 
 void	term_reset(t_data *data)
