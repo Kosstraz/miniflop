@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/01 14:17:38 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 23:59:36 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,11 @@
 # define UNSET_BLT	2
 # define CD_BLT		3
 # define EXIT_BLT	4
+# define EXPORT_BLT	5
 
 # define FORKED		1
 
-# define TAB '\011'
-# define BCK '\177'
-# define DEL "\033[3~"
+# define KEY_DEL "\033[3~"
 # define KEY_UP "\033[A"
 # define KEY_DOWN "\033[B"
 # define KEY_RIGHT "\033[C"
@@ -84,7 +83,6 @@
 
 extern char				g_sig;
 
-typedef unsigned int	t_uint;
 typedef long long		t_ll;
 
 typedef enum e_type
@@ -102,12 +100,6 @@ typedef enum e_type
 	Outfile,
 	Errfile
 }	t_e_type;
-
-typedef struct s_vec2ul
-{
-	size_t	x;
-	size_t	y;
-}	t_vec2ul;
 
 typedef struct s_env
 {
@@ -183,12 +175,15 @@ typedef struct s_data
 	int		historyfd;
 }	t_data;
 
+void		exit_shell(char *mess, t_data *data, int status);
+
 /*		BUILTINS		*/
 
 int			ft_unset(char **arguments, t_data *data);
 int			ft_exit(char **av, t_data *data);
 int			ft_cd(char **arguments, t_data *data);
 int			ft_echo(char **arguments, t_data *data);
+int			ft_export(char **args, t_data *data);
 
 /*		   EXEC	    	*/
 
@@ -214,7 +209,6 @@ void		take_commandline(const char *line, t_data *data);
 t_token		*new_token(char *value);
 void		free_tokens(t_token **root);
 void		place_envvars(char ***splitted);
-t_vec2ul	new_vec2ul(size_t x, size_t y);
 void		apply_wildcards(char ***splitted);
 void		separate_operands(char ***splitted);
 void		check_quote_status(char c, char *opened_status);
@@ -238,7 +232,7 @@ int			setenvval(char *envname, char *newval, t_env **env);
 void		minishell(char **env);
 void		new_prompt(char **buffer_prompt);
 void		free_data(t_data *data);
-void		signals_handling(int signum);
+t_env		*env_create_node(const char *var, t_data *data);
 void		add_env_to_data(t_data *data, char **env);
 void		free_data(t_data *data);
 void		init_data(t_data *data);
@@ -246,8 +240,10 @@ void		new_missing_prompt(char _errcode);
 
 /*		TERMCAP			*/
 void		term_init(t_data *data) __attribute__((cold));
+void		term_set_raw(t_data *data);
 char		*ft_readline(char *prompt, t_data *data) __attribute__((hot));
 void		term_reset(t_data *data) __attribute__((cold));
+int			ft_read(int fd, char *buf, int size, t_data *data);
 void		*ft_malloc(size_t size, t_data *data) __attribute__((cold));
 void		*ft_realloc(void *ptr, size_t sze,
 				t_data *data) __attribute__((cold));
@@ -266,6 +262,7 @@ void		key_down(t_data *data) __attribute__((hot));
 void		key_right(t_data *data) __attribute__((hot));
 void		key_left(t_data *data) __attribute__((hot));
 void		free_term(t_data *data) __attribute__((cold));
+char		*handle_interrupt(t_data *data);
 
 /*		DEBUG		*/
 

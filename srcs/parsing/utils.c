@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:40:38 by bama              #+#    #+#             */
-/*   Updated: 2024/07/31 13:52:49 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 19:52:13 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,4 @@ char	is_sep(char c)
 char	is_sep_toktype(t_token tok)
 {
 	return (tok.type == Pipe || tok.type == And || tok.type == Or);
-}
-
-t_vec2ul	new_vec2ul(size_t x, size_t y)
-{
-	t_vec2ul	ret;
-
-	ret.x = x;
-	ret.y = y;
-	return (ret);
 }

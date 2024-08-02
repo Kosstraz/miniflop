@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:47 by bama              #+#    #+#             */
-/*   Updated: 2024/08/01 14:00:42 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:06:50 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,14 @@ void	increment_shlvl(t_env **env)
 	shlvl = ft_itoa(++i);
 	free(tmp);
 	setenvval("SHLVL", shlvl, env);
+}
+
+void	exit_shell(char *mess, t_data *data, int status)
+{
+	if (status && mess)
+		perror(mess);
+	else if (!status && mess)
+		write(STDOUT_FILENO, mess, ft_strlen(mess));
+	free_shell(data);
+	exit(status);
 }

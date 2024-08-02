@@ -6,26 +6,26 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:49:47 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/01 13:54:56 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/03 00:14:18 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	term_set_raw(t_data *data)
+void	term_set_raw(t_data *data)
 {
 	int	log;
 
 	log = tcgetattr(data->term.fd, &data->term.raw);
 	if (log)
-		free_shell(data);
+		exit_shell("\e[1;32mtcgetattr\e[0m", data, EXIT_FAILURE);
 	data->term.og = data->term.raw;
-	data->term.raw.c_lflag = ~(ECHO | ICANON);
+	data->term.raw.c_lflag = ~(ECHO | ICANON | ISIG);
 	data->term.raw.c_cc[VTIME] = 0;
 	data->term.raw.c_cc[VMIN] = 1;
 	log = tcsetattr(data->term.fd, TCSANOW, &data->term.raw);
 	if (log)
-		free_shell(data);
+		exit_shell("\e[1;32mtcsetattr\e[0m", data, EXIT_FAILURE);
 	data->term.state = RAW;
 }
 
@@ -52,7 +52,7 @@ static t_cap	ft_tgetstr(char *id, char **area, t_data *data)
 
 	new.cap = tgetstr(id, area);
 	if (!new.cap)
-		free_shell(data);
+		exit_shell("\e[1;32mtgetstr\e[0m", data, EXIT_FAILURE);
 	new.len = ft_strlen(new.cap);
 	return (new);
 }
@@ -80,13 +80,13 @@ void	term_init(t_data *data)
 	term_set_zero(&data->term);
 	data->term.type = getenv("TERM");
 	if (!data->term.type)
-		free_shell(data);
+		exit_shell("\e[1;31mgetenv\e[0m", data, EXIT_FAILURE);
 	log = tgetent(buffer, data->term.type);
 	if (log != 1)
-		free_shell(data);
+		exit_shell("\e[1;31mtgetent\e[0m", data, EXIT_FAILURE);
 	data->term.fd = ttyslot();
 	if (!isatty(data->term.fd))
-		free_shell(data);
+		exit_shell("\e[1;31mttyslot\e[0m", data, EXIT_FAILURE);
 	get_termcaps(data);
 	term_set_raw(data);
 }

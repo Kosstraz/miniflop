@@ -4,12 +4,18 @@
 
 - [*] Gérer plusieurs '*' sur un même mot
 
+- [FAIL_EXIT] Fonction qui quitte avec EXIT_FAILURE en liberant toute la memoire allouee. (*)
+
 ###### QUESTIONNEMENTS : ######
 
 ###### TERMCAP : ######
 {cachetra}
 
-- [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!!
+- -~~~ [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!! ~~~
+
+- -~~~ (*) Remplacer toutes les occurences de free_shell dans /term avec shell_exit ~~~
+
+- [SIG] Gestion des signaux
 
 ###### PARSING : ######
 {ymanchon}
@@ -70,7 +76,7 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - [pwd] Affiche le répertoire dans lequel se trouve l'utilisateur appelant. {cachetra}
 
-- [export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnements exportées. {cachetra}
+- [export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnements exportées. {cachetra}`
 
 - -~~~[unset] Détruit une variable. Cette commande ne retourne rien --> void unset(...). {ymanchon}~~~
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/07/30 20:05:00 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 00:05:39 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,25 @@ t_env	*env_create_node(const char *var, t_data *data)
 	return (env);
 }
 
+void	initialise_env(t_data *data)
+{
+	data->env = (t_env *)ft_malloc(sizeof(t_env), data);
+	data->env->name = ft_strdup("?");
+	data->env->value = ft_strdup("0");
+	if (!(data->env->name && data->env->value))
+		exit_shell("\e[1;32mft_strdup\e[0m", data, EXIT_FAILURE);
+	data->env->next = NULL;
+}
+
 void	add_env_to_data(t_data *data, char **env)
 {
-	t_uint	i;
+	int		i;
 	t_env	*root;
 
 	i = 0;
 	if (!env || !*env)
 		return ;
-	data->env = env_create_node(env[i++], data);
+	initialise_env(data);
 	root = data->env;
 	while (env[i])
 	{

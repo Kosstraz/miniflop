@@ -6,7 +6,7 @@
 #    By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/01 13:57:02 by cachetra         ###   ########.fr        #
+#    Updated: 2024/08/02 20:41:13 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS =	./srcs/term/delete_keys.c \
 		./srcs/builtins/unset.c \
 		./srcs/builtins/echo.c \
 		./srcs/builtins/cd.c \
+		./srcs/builtins/export.c \
 		\
 		./srcs/exec/search_cmd.c \
 		./srcs/exec/exec.c \
@@ -66,7 +67,6 @@ SRCS =	./srcs/term/delete_keys.c \
 		./srcs/prompts.c \
 		./srcs/data_handling.c \
 		./srcs/data_handling2.c \
-		./srcs/signals_handling.c \
 		./srcs/minishell.c \
 		\
 		./main.c

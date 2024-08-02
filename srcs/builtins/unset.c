@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:40:25 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 14:15:48 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/02 21:25:50 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	find_envvar(char *varname, t_data *data)
+static void	delete_envvar(char *varname, t_data *data)
 {
 	t_env	*prev;
 	t_env	*env;
@@ -43,7 +43,7 @@ int	ft_unset(char **arguments, t_data *data)
 
 	i = 1;
 	while (arguments[i])
-		find_envvar(arguments[i++], data);
+		delete_envvar(arguments[i++], data);
 	print_env(data->env);
 	data->ret_cmd = SUCCESS;
 	return (0);
