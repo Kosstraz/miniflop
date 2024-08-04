@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/04 15:22:53 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 17:10:36 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	parse_dquote(const char *str, size_t *i, t_data *data);
 
 int	check_quotes(char c, int *quote_type, t_data *data)
 {
+	(void)data;
 	if (c == '\'')
 		*quote_type = 1;
 	else if (c == '"')
@@ -47,7 +48,8 @@ int	parse_squote(const char *str, size_t *i, t_data *data)
 			passed = 1;
 		(*i)++;
 	}
-	return (-1);
+	data->_errcode = SQUOTE_MISSING;
+	return (SQUOTE_MISSING);
 }
 
 /*
@@ -67,7 +69,8 @@ int	parse_dquote(const char *str, size_t *i, t_data *data)
 			passed = 1;
 		(*i)++;
 	}
-	return (-1);
+	data->_errcode = DQUOTE_MISSING;
+	return (DQUOTE_MISSING);
 }
 
 size_t	ft_count_words_quotes(const char *s)

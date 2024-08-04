@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/04 15:32:33 by bama             ###   ########.fr        #
+#    Updated: 2024/08/04 17:12:04 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/termcap/term_initialise.c \
 		./srcs/termcap/utils.c \
 		\
+		./srcs/parsing/check_parse_error.c \
 		./srcs/parsing/utils.c \
     	./srcs/parsing/ft_split_quotes2.c \
 		./srcs/parsing/ft_split_quotes.c \
@@ -236,7 +237,7 @@ mischief:
 	@sleep 0.01
 	@echo "@@@@@@@@@@@@@@@@$(YELLOW)((#(/#/##(/%%%%%%####((###(#$(CLASSIC)@@@@#@@@@/$(YELLOW)&&%##%%%###/&$(BLACK)@@@@@@@@@@@@@"
 	@sleep 0.01
-	@echo "@@@@@@@@@@@@@@@@@$(YELLOW)%%%%###%%%%%%(%%%%%%%@@@@%$(CLASSIC)((%&&%###$(YELLOW)%#%##/#\/#\\#$(BLACK)@@@@@@@@@@@@@@@@@"
+	@echo "@@@@@@@@@@@@@@@@@$(YELLOW)%%%%###%%%%%%(%%%%%%%@@@@%$(CLASSIC)((%&&%###$(YELLOW)%#%##/#\/#\\#$(BLACK)@@@@@@@@@@@@@@@@"
 	@sleep 0.01
 	@echo "@@@@@@@@@@@@@@@$(YELLOW)(%&&%%%%%%%%%%##%%%%%%%%%&&&/%#%#(#%#%####/%$(BLACK)@@@@@@@@@@@@@@@@@@@@@"
 	@sleep 0.01

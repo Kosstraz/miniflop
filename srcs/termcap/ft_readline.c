@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 15:34:18 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 15:38:29 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_readline(char *prompt, t_data *data)
 	{
 		if (data->term.line.size == CHUNK * n)
 			data->term.line.buf = (char *)ft_realloc(data->term.line.buf,
-				sizeof(char) * (CHUNK * ++n + 1), data);
+					sizeof(char) * (CHUNK * ++n + 1), data);
 		b_read = ft_read(data->term.fd, buf, READ, data);
 		buf[b_read] = '\0';
 		if (!ft_strcmp(buf, "\003"))

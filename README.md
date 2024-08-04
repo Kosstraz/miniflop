@@ -50,9 +50,13 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - -~~~ [>] Redirige l'output. {ymanchon}~~~
 
+- [2>] Redirige l'output de la sortie d'erreur. {ymanchon}
+
 - [<<] Redirige l'input avec un délimiteur. {cachetra}
 
-- -~~~ [>>] Redirige l'output en mode APPEND. {ymanchon}~~~
+- [2>>] Redirige l'output de la sortie d'erreur en mode APPEND. {ymanchon}
+
+- -~~~ [>>] Redirige l'output en mode APPEND. {ymanchon}~~~
 
 - -~~~ [PIPES] Implémenter les pipes '|' (output de la commande de gauche --> input de la commande de droite). {ymanchon}~~~
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:13:33 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 14:25:39 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/04 17:09:43 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	ft_export(char **args, t_data *data)
 	t_env	*env;
 	char	**strs;
 
+	(void)strs;
+	(void)env;
+	(void)size;
 	size = 0;
 	env = data->env->next;
 	if (!args[1])

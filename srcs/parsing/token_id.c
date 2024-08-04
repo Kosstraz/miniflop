@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:09:44 by bama              #+#    #+#             */
-/*   Updated: 2024/07/31 13:53:45 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 16:15:46 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	review_tokenid(t_token **tokens)
 				else if (tok->next)
 					detect_redirect_type(&tok);
 			}
+			else if (!ft_strcmp(tok->value, "(") || !ft_strcmp(tok->value, ")"))
+				tok->type = Subshell;
 		}
 		tok = tok->next;
 	}
@@ -38,18 +40,20 @@ void	review_tokenid(t_token **tokens)
 }
 
 // Cherche le type de token auquel correspond le mot splitté
-void	check_e_type(t_token **second, const char *word, int i)
+void	check_e_type(t_token **prev, const char *word, int i)
 {
 	enum e_type	type;
 
 	type = Null;
-	if (i == 0 || (*second)->type == Pipe
-		|| (*second)->type == And || (*second)->type == Or)
+	if (i == 0 || (*prev)->type == Pipe
+		|| (*prev)->type == And || (*prev)->type == Or)
 		type = Command;
 	else if (ft_strlen(word) == 1)
 	{
 		if (word[0] == '|')
 			type = Pipe;
+		else if (word[0] == '(' || word[1] == ')')
+			type = Subshell;
 	}
 	else if (ft_strlen(word) == 2)
 	{
@@ -59,10 +63,10 @@ void	check_e_type(t_token **second, const char *word, int i)
 			type = Or;
 	}
 	if (i != 0
-		&& (((*second)->type == Command || (*second)->type == Argument)
+		&& (((*prev)->type == Command || (*prev)->type == Argument)
 			&& type == Null))
 		type = Argument;
-	(*second)->next->type = type;
+	(*prev)->next->type = type;
 }
 
 void	free_tokens(t_token **root)

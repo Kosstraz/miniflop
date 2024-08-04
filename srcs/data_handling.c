@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 00:38:41 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 17:29:16 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,10 @@ void	free_data(t_data *data)
 	if (data->dir)
 		closedir(data->dir);
 	data->dir = NULL;
+	close(data->fileno[0]);
+	close(data->fileno[1]);
+	close(data->fileno[2]);
+	data->fileno[0] = -1;
+	data->fileno[1] = -1;
+	data->fileno[2] = -1;
 }

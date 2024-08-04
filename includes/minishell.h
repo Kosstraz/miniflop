@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 15:20:28 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 17:21:21 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ void		ft_ntail(int fd, int n);
 /*														*/
 /* **************************************************** */
 
+char		check_parse_error(char ***splitted, t_data *data);
 void		reset_commandtype(t_token **root);
 void		print_env(t_env *env);
 void		take_commandline(const char *line, t_data *data);

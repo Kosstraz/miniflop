@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:29:54 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 15:24:29 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 17:10:44 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static size_t	cwlen(char *word, t_data *data)
 	size_t	len;
 	size_t	i;
 
+	(void)data;
 	i = 0;
 	len = 0;
 	quote_status = 0;
@@ -41,6 +42,7 @@ size_t	ft_strlcpy_quotes(char *dst, const char *src, size_t size, t_data *data)
 	size_t	l;
 	size_t	j;
 
+	(void)data;
 	i = 0;
 	l = 0;
 	j = 0;

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:52:08 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 15:09:01 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 22:06:25 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	fetch_command(char **ptf, t_token *cmdline, t_data *data)
 			fprint_invalidcmd(cmdline);
 			setenvval("?", ft_itoa(CMD_UNKNOW), &data->env);
 		}
+		else
+			setenvval("_", ft_strdup(*ptf), &data->env);
 	}
-	if (*ptf)
-		setenvval("_", ft_strdup(*ptf), &data->env);
 }
 
 void	do_redirections(t_token *cmdline, int mode)
