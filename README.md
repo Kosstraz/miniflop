@@ -6,14 +6,14 @@
 
 ###### QUESTIONNEMENTS : ######
 
+- [SIG] Gestion des Crtrl-C, Ctrl-D et Ctrl-\ dans les processus enfant ?
+
 ###### TERMCAP : ######
 {cachetra}
 
 - -~~~ [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!! ~~~
 
 - -~~~ (*) Remplacer toutes les occurences de free_shell dans /term avec shell_exit ~~~
-
-- [SIG] Gestion des signaux
 
 ###### PARSING : ######
 {ymanchon}
@@ -70,13 +70,13 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - -~~~[cd] Fonctionnant avec un chemin relatif et absolu. {ymanchon}~~~
 
-- [pwd] Affiche le répertoire dans lequel se trouve l'utilisateur appelant. {cachetra}
+- -~~~ [pwd] Affiche le répertoire dans lequel se trouve l'utilisateur appelant. {cachetra} ~~~
 
-- [export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnements exportées. {cachetra}
+- [export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnement exportées. {cachetra}
 
 - -~~~[unset] Détruit une variable. Cette commande ne retourne rien --> void unset(...). {ymanchon}~~~
 
-- [env] Affiche toutes les variables 'environnements.d {cachetra}
+- -~~~ [env] Affiche toutes les variables d'environnement. {cachetra} ~~~
 
 - -~~~[exit] Quitte le terminal. {ymanchon}~~~
 

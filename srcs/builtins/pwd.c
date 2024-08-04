@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 19:13:33 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 14:25:39 by cachetra         ###   ########.fr       */
+/*   Created: 2024/08/03 01:45:55 by cachetra          #+#    #+#             */
+/*   Updated: 2024/08/03 20:28:04 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_export(char **args, t_data *data)
+int	ft_pwd(char **args, t_data *data)
 {
-	int		size;
-	t_env	*env;
-	char	**strs;
+	char	*buf;
 
-	size = 0;
-	env = data->env->next;
-	if (!args[1])
+	buf = NULL;
+	if (args[1])
 	{
-		ft_printf("ez\n");
+		dfree((void **)args);
+		write(STDERR_FILENO, PWD_ARGS_ERROR, ARGS_ERROR_SIZE);
+		data->ret_cmd = ERROR;
+		return (ERROR);
 	}
-	else if (!export_args(args, &data->env))
-		exit_shell("\e[1;31mmalloc\e[0m", data, EXIT_FAILURE);
-	print_env(data->env);
+	buf = getcwd(NULL, 0);
+	if (!buf)
+	{
+		dfree((void **)args);
+		exit_shell("\e[31mgetcwd", data, EXIT_FAILURE);
+	}
+	write(1, buf, ft_strlen(buf));
+	write(1, "\n", 1);
+	free(buf);
 	// dfree((void **)args);
-	data->ret_cmd = 0;
-	return (0);
+	data->ret_cmd = SUCCESS;
+	return (SUCCESS);
 }

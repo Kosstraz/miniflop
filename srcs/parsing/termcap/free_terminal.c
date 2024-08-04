@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:20:43 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 00:43:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 01:30:28 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	term_reset(t_data *data)
 	log = tcsetattr(data->term.fd, TCSANOW, &data->term.og);
 	if (log)
 		exit_shell("\e[1;31mtcsetattr\e[0m", data, EXIT_FAILURE);
-	data->term.state = ORIGINAL;
+	data->term.state = CANON;
 }
 
 int	ft_read(int fd, char *buf, int size, t_data *data)

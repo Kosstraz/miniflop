@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/01 12:16:54 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 02:34:40 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 
 # define TOO_MANY_ARGS_ERROR "\e[31m\nexit(int) : too many arguments\n\e[0m"
 # define TOO_MANY_ARGS_ERROR_SIZE 41
+
+# define ENV_ARGS_ERROR "\e[31m\nenv : too many arguments\n\e[0m"
+# define PWD_ARGS_ERROR "\e[31m\npwd : too many arguments\n\e[0m"
+# define ARGS_ERROR_SIZE 35
 
 # define NO_MATCH_FOUND_ERROR "\e[31m\nno match found \
 with wildcard '%s' :O\n\e[0m"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 00:43:45 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 21:50:51 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,229 +41,66 @@
 # define EXIT_TEXT_SIZE 15
 
 # ifndef ARG_MAX
-#  define ARG_MAX 2087151
+#  define ARG_MAX	2087151
 # endif
 
 // ARG_MAX / 2
-# define SZ_MAX 1174302
+# define SZ_MAX		1174302
 
 # define ECHO_BLT	1
 # define UNSET_BLT	2
 # define CD_BLT		3
 # define EXIT_BLT	4
 # define EXPORT_BLT	5
+# define ENV_BLT	6
+# define PWD_BLT	7
 
 # define FORKED		1
 
-# define KEY_DEL "\033[3~"
-# define KEY_UP "\033[A"
-# define KEY_DOWN "\033[B"
-# define KEY_RIGHT "\033[C"
-# define KEY_LEFT "\033[D"
+# define KEY_DEL	"\033[3~"
+# define KEY_UP		"\033[A"
+# define KEY_DOWN	"\033[B"
+# define KEY_RIGHT	"\033[C"
+# define KEY_LEFT	"\033[D"
 
-# define READ 16
-# define CHUNK 256
-# define TERM 4096
+# define READ	16
+# define CHUNK	256
+# define TERM	4096
 
-# define ORIGINAL 0
-# define RAW 1
+# define CANON	0
+# define RAW	1
 
-# define LEFT -1
-# define RIGHT 1
+# define LEFT	-1
+# define RIGHT	1
 
+# include <fcntl.h>
+# include <limits.h>
+# include <signal.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <dirent.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-# include <termcap.h>
-# include <termios.h>
+# include <unistd.h>
 # include "error.h"
 # include "libft.h"
+# include "platform.h"
 
-extern char				g_sig;
+/*		DEzBUG		*/
 
-typedef long long		t_ll;
+void		show_token(t_token *tok);
 
-typedef enum e_type
-{
-	Null,
-	Pipe,
-	And,
-	Or,
-	Command,
-	Argument,
-	RedirectW,
-	RedirectR,
-	RedirectAppend,
-	HereDoc,
-	Infile,
-	Outfile,
-	Errfile
-}	t_e_type;
+/* **************************************************** */
+/*														*/
+/*		 __ __| __|  _ \   \  |   __|    \    _ \		*/
+/*		    |   _|     /  |\/ |  (      _ \   __/		*/
+/*		   _|  ___| _|_\ _|  _| \___| _/  _\ _|			*/
+/*														*/
+/* **************************************************** */
 
-typedef struct s_vec2ul
-{
-	size_t	x;
-	size_t	y;
-}	t_vec2ul;
-
-typedef struct s_env
-{
-	char			*name;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
-
-typedef struct s_token
-{
-	enum e_type		type;
-	const char		*value;
-	struct s_token	*next;
-}	t_token;
-
-typedef struct s_coords
-{
-	int	l;
-	int	c;
-}	t_coords;
-
-typedef struct s_line
-{
-	int			i;
-	int			size;
-	int			next;
-	char		*buf;
-	t_coords	last;
-}	t_line;
-
-typedef struct s_cap
-{
-	char	*cap;
-	int		len;
-}	t_cap;
-
-typedef struct s_info
-{
-	int		cols;
-	int		lines;
-	t_cap	move;
-	t_cap	clear;
-	t_cap	left;
-	t_cap	right;
-	t_cap	save;
-	t_cap	restore;
-	t_cap	down;
-	t_cap	up;
-	t_cap	carriage;
-}	t_info;
-
-typedef struct s_term
-{
-	int				state;
-	int				fd;
-	char			*type;
-	t_coords		curs;
-	t_line			line;
-	t_info			caps;
-	struct termios	raw;
-	struct termios	og;
-}	t_term;
-
-typedef struct s_data
-{
-	DIR		*dir;
-	t_term	term;
-	t_token	*tokens;
-	t_env	*env;
-	char	blt_val;
-	int		fildes[2];
-	int		fileno[3];
-	int		_errcode;
-	int		ret_cmd;
-	int		historyfd;
-}	t_data;
-
-/*		BUILTINS		*/
-
-int			ft_unset(char **arguments, t_data *data);
-int			ft_exit(char **av, t_data *data);
-int			ft_cd(char **arguments, t_data *data);
-int			ft_echo(char **arguments, t_data *data);
-int			ft_export(char **args, t_data *data);
-
-/*		   EXEC	    	*/
-
-void		dup2_stdin(int fd[2]);
-void		dup2_stdout(int fd[2]);
-int			exec_builtins(char blt_val, t_data *data, t_token *cmdline);
-t_e_type	tok_next_type(t_token *last);
-char		is_there_cmd(t_token *cmdline);
-t_token		*tok_next_redirect(t_token *cmdline);
-char		is_there_redirect(t_token *cmdline);
-char		check_exitedchild(t_data *data, int *status);
-void		fprint_invalidcmd(t_token *cmdline);
-void		save_stdfileno(int fileno_[3]);
-void		restore_stdfileno(int fileno_[3]);
-char		*getcmdpath(t_token *cmdline, t_data *data);
-void		exec(t_data *data);
-char		is_a_builtin(t_token *cmdline);
-char		**convert_env(t_env *env);
-t_token		*tok_next_cmd(t_token *last);
-t_token		*tok_next_sep(t_token *last);
-char		**tok_to_strs(t_token *cmdline);
-
-/*		PARSING			*/
-
-void		reset_commandtype(t_token **root);
-void		print_env(t_env *env);
-char		**remove_useless_quotes(char **splitted, t_data *data);
-char		**ft_split_quotes(const char *s, t_data *data);
-void		take_commandline(const char *line, t_data *data);
-t_token		*new_token(char *value);
-void		free_tokens(t_token **root);
-void		place_envvars(char ***splitted);
-t_vec2ul	new_vec2ul(size_t x, size_t y);
-void		apply_wildcards(char ***splitted);
-void		separate_operands(char ***splitted);
-void		check_quote_status(char c, char *opened_status);
-char		is_operand(char c[2]);
-char		is_sep(char c);
-void		check_e_type(t_token **second, const char *word, int i);
-void		review_tokenid(t_token **tokens);
-char		is_sep_toktype(t_token tok);
-void		detect_redirect_type(t_token **tok);
-char		is_missing_septoktype(int _errcode);
-char		*return_missing_chars(char _errcode);
-t_token		*ret_last_token(t_token *tokens);
-
-/*		MINISHELL		*/
-
-void		exit_shell(char *mess, t_data *data, int status);
-void		increment_shlvl(t_env **env);
-void		free_env(t_env **env);
-void		free_shell(t_data *data);
-char		*getenvval(char *envname, t_env *env);
-int			setenvval(char *envname, char *newval, t_env **env);
-void		minishell(char **env);
-void		new_prompt(char **buffer_prompt);
-void		free_data(t_data *data);
-void		signals_handling(int signum);
-void		add_env_to_data(t_data *data, char **env);
-void		free_data(t_data *data);
-void		init_data(t_data *data);
-void		new_missing_prompt(char _errcode);
-
-/*		TERMCAP			*/
 void		kill_term(t_data *data);
 void		term_init(t_data *data) __attribute__((cold));
 void		term_set_raw(t_data *data);
-char		*ft_readline(char *prompt, t_data *data) __attribute__((hot));
 void		term_reset(t_data *data) __attribute__((cold));
-int			ft_read(int fd, char *buf, int size, t_data *data);
 void		*ft_malloc(size_t size, t_data *data) __attribute__((cold));
 void		*ft_realloc(void *ptr, size_t sze,
 				t_data *data) __attribute__((cold));
@@ -273,7 +110,9 @@ void		get_cursor_position(t_data *data) __attribute__((cold));
 void		move_up(t_data *data, int last_col);
 void		move_down(t_term *term, int first_col);
 void		write_stored(t_term *term, int at, char *mem) __attribute__((hot));
-void		print_char(t_data *data, int c);
+// void		print_chars(t_data *data, char *chars, int cnt)
+void		print_char(t_data *data, int c)
+			__attribute__((hot));
 void		key_backspace(t_data *data) __attribute__((hot));
 void		key_delete(t_data *data) __attribute__((hot));
 void		key_tab(t_data *data) __attribute__((hot));
@@ -282,10 +121,117 @@ void		key_down(t_data *data) __attribute__((hot));
 void		key_right(t_data *data) __attribute__((hot));
 void		key_left(t_data *data) __attribute__((hot));
 void		free_term(t_data *data) __attribute__((cold));
+
+int			ft_read(int fd, char *buf, int size, t_data *data);
+
 char		*handle_interrupt(t_data *data);
+char		*ft_readline(char *prompt, t_data *data) __attribute__((hot));
 
-/*		DEBUG		*/
+/* **************************************************** */
+/*														*/
+/*  		_ \  \    _ \   __| _ _|   \ |   __|		*/
+/*  		__/ _ \     / \__ \   |   .  |  (_ |		*/
+/*		   _| _/  _\ _|_\ ____/ ___| _|\_| \___|		*/
+/*														*/
+/* **************************************************** */
 
-void		show_token(t_token *tok);
+void		reset_commandtype(t_token **root);
+void		print_env(t_env *env);
+void		take_commandline(const char *line, t_data *data);
+void		free_tokens(t_token **root);
+void		place_envvars(char ***splitted);
+void		apply_wildcards(char ***splitted);
+void		separate_operands(char ***splitted);
+void		check_quote_status(char c, char *opened_status);
+void		check_e_type(t_token **second, const char *word, int i);
+void		review_tokenid(t_token **tokens);
+void		detect_redirect_type(t_token **tok);
+
+char		is_operand(char c[2]);
+char		is_sep(char c);
+char		is_sep_toktype(t_token tok);
+char		is_missing_septoktype(int _errcode);
+char		*return_missing_chars(char _errcode);
+
+t_token		*new_token(char *value);
+t_token		*ret_last_token(t_token *tokens);
+
+char		**remove_useless_quotes(char **splitted, t_data *data);
+char		**ft_split_quotes(const char *s, t_data *data);
+
+/* ******************************************************** */
+/*															*/
+/*		  _ )  |  | _ _|  |  __ __| _ _|   \ |   __|		*/
+/*		  _ \  |  |   |   |     |     |   .  | \__ \		*/
+/*		 ___/ \__/  ___| ____| _|   ___| _|\_| ____/		*/
+/*															*/
+/* ******************************************************** */
+
+int			export_args(char **args, t_env **head);
+int			ft_cd(char **arguments, t_data *data);
+int			ft_echo(char **arguments, t_data *data);
+int			ft_env(char **args, t_data *data);
+int			ft_exit(char **av, t_data *data);
+int			ft_export(char **args, t_data *data);
+int			ft_pwd(char **args, t_data *data);
+int			ft_unset(char **arguments, t_data *data);
+
+/* **************************************************************** */
+/*																	*/
+/*		  __| \ \  /  __|   __|  |  | __ __| _ _|   _ \   \ |		*/
+/*		  _|   >  <   _|   (     |  |    |     |   (   | .  |		*/
+/*		 ___|  _/\_\ ___| \___| \__/    _|   ___| \___/ _|\_|		*/
+/*																	*/
+/* **************************************************************** */
+
+void		dup2_stdin(int fd[2]);
+void		dup2_stdout(int fd[2]);
+void		fprint_invalidcmd(t_token *cmdline);
+void		save_stdfileno(int fileno_[3]);
+void		restore_stdfileno(int fileno_[3]);
+void		exec(t_data *data);
+
+char		is_there_cmd(t_token *cmdline);
+char		is_there_redirect(t_token *cmdline);
+char		check_exitedchild(t_data *data, int *status);
+char		is_a_builtin(t_token *cmdline);
+
+int			exec_builtins(char blt_val, t_data *data, t_token *cmdline);
+
+t_e_type	tok_next_type(t_token *last);
+
+char		*getcmdpath(t_token *cmdline, t_data *data);
+
+t_token		*tok_next_redirect(t_token *cmdline);
+t_token		*tok_next_cmd(t_token *last);
+t_token		*tok_next_sep(t_token *last);
+
+char		**convert_env(t_env *env);
+char		**tok_to_strs(t_token *cmdline);
+
+/* ************************************************ */
+/*													*/
+/*		   __|  __|   \ |  __|  _ \    \    |		*/
+/*		  (_ |  _|   .  |  _|     /   _ \   |		*/
+/*		 \___| ___| _|\_| ___| _|_\ _/  _\ ___|		*/
+/*													*/
+/* ************************************************ */
+
+void		exit_shell(char *mess, t_data *data, int status);
+void		increment_shlvl(t_env **env);
+void		free_env(t_env **env);
+void		free_shell(t_data *data);
+void		minishell(char **env);
+void		new_prompt(char **buffer_prompt);
+void		free_data(t_data *data);
+void		signals_handling(int signum);
+void		add_env_to_data(t_data *data, char **env);
+void		free_data(t_data *data);
+void		init_data(t_data *data);
+void		new_missing_prompt(char _errcode);
+
+char		*getenvval(char *envname, t_env *env);
+
+int			setenvval(char *envname, char *newval, t_env **env);
 
 #endif

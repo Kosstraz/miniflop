@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 00:43:57 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 01:30:13 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	minishell(char **env)
 	add_env_to_data(&data, env);
 	while (1)
 	{
-		if (data.term.state == ORIGINAL)
+		if (data.term.state == CANON)
 			term_set_raw(&data);
 		init_data(&data);
 		new_prompt(&prompt);

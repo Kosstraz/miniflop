@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:49:47 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 00:14:18 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/03 01:30:22 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	term_set_zero(t_term *term)
 {
 	term->fd = 0;
 	term->type = NULL;
-	term->state = ORIGINAL;
+	term->state = CANON;
 	term->curs.c = 0;
 	term->curs.l = 0;
 	term->caps.cols = 0;

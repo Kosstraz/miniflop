@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:42:00 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 21:53:57 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 02:05:42 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ int	exec_builtins(char blt_val, t_data *data, t_token *cmdline)
 		ret_cmd = ft_unset(strs, data);
 	else if (blt_val == EXIT_BLT)
 		ret_cmd = ft_exit(strs, data);
-	free(strs);
+	else if (blt_val == EXPORT_BLT)
+		ret_cmd = ft_export(strs, data);
+	else if (blt_val == ENV_BLT)
+		ret_cmd = ft_env(strs, data);
+	else if (blt_val == PWD_BLT)
+		ret_cmd = ft_pwd(strs, data);
+	free(strs);	
 	return (ret_cmd);
 }

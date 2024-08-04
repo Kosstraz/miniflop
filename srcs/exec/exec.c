@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:52:08 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 00:13:40 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 02:08:06 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	custom_execve(char *path, t_token *cmdline, t_data *data)
 	exit(0);
 }
 
-void	execute_cmd(char *path, t_token *cmdline, t_data *data)
+void	execute_cmd(char *path, t_token *cmdline, t_data *data, int forked)
 {
 	if (tok_next_type(cmdline) == Pipe)
 		dup2_stdout(data->fildes);
@@ -39,7 +39,8 @@ void	execute_cmd(char *path, t_token *cmdline, t_data *data)
 		data->ret_cmd = exec_builtins(data->blt_val, data, cmdline);
 	else
 		custom_execve(path, cmdline, data);
-	exit(data->ret_cmd);
+	if (forked)
+		exit(data->ret_cmd);
 }
 
 void	launch_cmd(char *path, t_token *cmdline, t_data *data)
@@ -51,11 +52,11 @@ void	launch_cmd(char *path, t_token *cmdline, t_data *data)
 		pipe(data->fildes);
 	pid = 1;
 	if (data->blt_val && tok_next_type(cmdline) != Pipe)
-		execute_cmd(path, cmdline, data);
+		execute_cmd(path, cmdline, data, 0);
 	else
 		pid = fork();
 	if (pid == 0)
-		execute_cmd(path, cmdline, data);
+		execute_cmd(path, cmdline, data, 1);
 	else if (data->blt_val == EXIT_BLT && tok_next_type(cmdline) != Pipe)
 	{
 		free(path);

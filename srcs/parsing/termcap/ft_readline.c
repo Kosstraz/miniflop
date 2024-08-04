@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 00:13:58 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/03 02:41:56 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char	*ft_readline(char *prompt, t_data *data)
 				sizeof(char) * (CHUNK * ++n + 1), data);
 		b_read = ft_read(data->term.fd, buf, READ, data);
 		buf[b_read] = '\0';
-		if (buf[0] == '\003')
+		if (!ft_strcmp(buf, "\003"))
 			return (handle_interrupt(data));
 		terminal_handle_keys(data, buf);
 	}

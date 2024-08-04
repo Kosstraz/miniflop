@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:13:46 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/01 13:54:56 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/04 14:22:35 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	edge_case_last_line(t_data *data, int c)
 	data->term.line.size++;
 	write_stored(&data->term, data->term.line.i, tmp);
 	write(data->term.fd, data->term.caps.restore.cap, data->term.caps.restore.len);
-	--data->term.curs.l;
-	move_up(data, 0);
+	if (data->term.curs.l >= data->term.caps.lines - 1)
+		move_up(data, 0);
 	free(tmp);
 }
 
