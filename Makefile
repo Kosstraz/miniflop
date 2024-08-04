@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
+#    By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/04 15:32:33 by bama             ###   ########.fr        #
+#    Updated: 2024/08/05 00:25:14 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/termcap/term_initialise.c \
 		./srcs/termcap/utils.c \
 		\
+		./srcs/parsing/check_parse_error.c \
 		./srcs/parsing/utils.c \
     	./srcs/parsing/ft_split_quotes2.c \
 		./srcs/parsing/ft_split_quotes.c \
@@ -64,6 +65,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		\
 		./srcs/exec/search_cmd.c \
 		./srcs/exec/exec.c \
+		./srcs/exec/subshell.c\
 		./srcs/exec/tok_utils.c \
 		./srcs/exec/tok_utils2.c \
 		./srcs/exec/pipe_utils.c \

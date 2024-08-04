@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:52:08 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 15:09:01 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 00:12:36 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,25 +93,70 @@ void	do_redirections(t_token *cmdline, int mode)
 	}
 }
 
-void	exec(t_data *data)
+void	subshell(t_token **cmdline, t_data *data, pid_t *sub_pid, char *lvl)
 {
+	int		status;
+
+	if (!ft_strcmp((*cmdline)->value, "("))
+	{
+		write(2, "(", 1);
+		*cmdline = (*cmdline)->next;
+		//if (*lvl == 0)
+		//	data->pids[data->npid++] = *sub_pid;
+		(*lvl)++;
+		*sub_pid = fork();
+		if (*sub_pid == -1)
+			exit_shell("\e[31mfork\e[0", data, EXIT_FAILURE);
+		else if (*sub_pid == 0)
+			exec(data, *lvl);
+	}
+	else if (!ft_strcmp((*cmdline)->value, ")"))
+	{
+		write(2, ")", 1);
+		waitpid(*sub_pid, &status, 0);
+		check_exitedchild(data, &status);
+		data->ret_cmd = status;
+		(*lvl)--;
+		if (*sub_pid == 0)
+			exit(data->ret_cmd);
+	}
+}
+///
+
+void	exec(t_data *data, char lvl)
+{
+	char	flag;
+	pid_t	sub_pid;
 	t_token	*cmd;
 	char	*path_to_file;
 
+	flag = lvl;
 	cmd = data->tokens;
-	save_stdfileno(data->fileno);
+	sub_pid = -1;
+	if (lvl == 0)
+		save_stdfileno(data->fileno);
 	while (cmd)
 	{
-		path_to_file = NULL;
-		if (is_there_redirect(cmd))
-			do_redirections(cmd, O_RDONLY);
-		if (is_there_cmd(cmd))
-			fetch_command(&path_to_file, cmd, data);
-		if (data->blt_val || path_to_file)
-			launch_cmd(path_to_file, cmd, data);
-		if (tok_next_type(cmd) != Pipe)
-			waitchildren(data);
+		write(2, "c", 1);
+		//if (cmd->type == Subshell)
+		//{
+		//	write(2, "s", 1);
+		//	subshell(&cmd, data, &sub_pid, &lvl);
+		//}
+		if (flag == lvl)
+		{
+			path_to_file = NULL;
+			if (is_there_redirect(cmd))
+				do_redirections(cmd, O_RDONLY);
+			if (is_there_cmd(cmd))
+				fetch_command(&path_to_file, cmd, data);
+			if ((data->blt_val || path_to_file))
+				launch_cmd(path_to_file, cmd, data);
+			if ((tok_next_type(cmd) != Pipe))
+				waitchildren(data);
+		}
 		cmd = tok_next_cmd(cmd);
 	}
-	restore_stdfileno(data->fileno);
+	if (lvl == 0)
+		restore_stdfileno(data->fileno);
 }

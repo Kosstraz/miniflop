@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 15:45:15 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 16:12:33 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	show_token(t_token *tok)
 			printf("[OUTFILE]\t\t");
 		else if (tok->type == Errfile)
 			printf("[ERRFILE]\t\t");
+		else if (tok->type == Subshell)
+			printf("[SUBSHELL]\t\t");
 		printf("\e[31m$\e[0m%s\e[31m$\e[0m\n", tok->value);
 		tok = tok->next;
 	}

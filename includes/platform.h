@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   platform.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 15:08:37 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 16:01:57 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_type
 	Pipe,
 	And,
 	Or,
+	Subshell,
 	Command,
 	Argument,
 	RedirectW,

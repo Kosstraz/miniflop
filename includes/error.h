@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 15:21:00 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 17:13:49 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define FALSE	0
 
 /*
-	BASIC ERROR
+	TEXT ERROR
 */
 # define UNKNOW_CMD_PRINTF1 "\e[31m\ninvalid command : not found \
 \"\e[1m"
@@ -45,13 +45,33 @@
 # define NO_MATCH_FOUND_ERROR "\e[31m\nno match found \
 with wildcard '%s' :O\n\e[0m"
 
+# define SQUOTE_ERROR "\e[31m\nparse error caused by an non-closed \
+\e[1msquote\e[0m\n"
+# define DQUOTE_ERROR "\e[31m\nparse error caused by an non-closed \
+\e[1mdquote\e[0m\n"
+# define PIPE_ERROR "\e[31m\nparse error caused by an incomplete \
+\e[1mpipe\e[0m\n"
+# define AND_ERROR "\e[31m\nparse error caused by an incomplete \
+\e[1mand\e[0m\n"
+# define OR_ERROR "\e[31m\nparse error caused by an incomplete \
+\e[1mor\e[0m\n"
+# define SUBSHELL_ERROR "\e[31m\nparse error caused by an non-closed \
+\e[1msubshell\e[0m\n"
+
 /*
-	LOCAL ERROR
+	INT ERROR
 */
 # define __ERROR__			-1
 # define BAD_MALLOC 		-2
 # define SPLIT_ERROR 		-3
 # define ENVVAR_NOTFOUND	-4
+
+# define SQUOTE_MISSING		-10
+# define DQUOTE_MISSING		-11
+# define SUBSHELL_MISSING	-12
+# define INCOMPLETE_PIPE	-13
+# define INCOMPLETE_AND		-14
+# define INCOMPLETE_OR		-15
 
 /*
 	bash --posix ERROR

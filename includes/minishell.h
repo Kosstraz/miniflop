@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 15:20:28 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 00:24:10 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ void		open_pipe(t_token *cmdline, int fd[2]);
 void		fprint_invalidcmd(t_token *cmdline);
 void		save_stdfileno(int fileno_[3]);
 void		restore_stdfileno(int fileno_[3]);
-void		exec(t_data *data);
+// void		exec(t_data *data);
+void		exec(t_data *data, char lvl);
 
 char		is_there_redirect(t_token *cmdline);
 char		check_exitedchild(t_data *data, int *status);
@@ -155,7 +156,13 @@ int			ft_export(char **args, t_data *data);
 int			ft_pwd(char **args, t_data *data);
 int			ft_unset(char **arguments, t_data *data);
 
-/*		   HISTORY	    	*/
+/* **************************************************** */
+/*														*/
+/*		  |  | _ _|   __| __ __| _ \  _ \ \ \  /		*/
+/*		  __ |   |  \__ \    |  (   |   /  \  /			*/
+/*		 _| _| ___| ____/   _| \___/ _|_\   _|			*/
+/*														*/
+/* **************************************************** */
 
 void		ft_ntail(int fd, int n);
 
@@ -175,10 +182,11 @@ void		place_envvars(char ***splitted, t_data *data);
 void		apply_wildcards(char ***splitted);
 void		separate_operands(char ***splitted);
 void		check_quote_status(char c, char *opened_status);
-void		check_e_type(t_token **second, const char *word, int i);
+void		check_e_type(t_token **prev, const char *word, int i);
 void		review_tokenid(t_token **tokens);
 void		detect_redirect_type(t_token **tok);
 
+char		check_parse_error(char ***splitted, t_data *data);
 char		is_operand(char c[2]);
 char		is_sep(char c);
 char		is_sep_toktype(t_token tok);
@@ -199,7 +207,6 @@ char		**ft_split_quotes(const char *s, t_data *data);
 /*														*/
 /* **************************************************** */
 
-
 void		kill_term(t_data *data);
 void		term_init(t_data *data) __attribute__((cold));
 void		term_set_raw(t_data *data);
@@ -213,8 +220,7 @@ void		get_cursor_position(t_data *data) __attribute__((cold));
 void		move_up(t_data *data, int last_col);
 void		move_down(t_term *term, int first_col);
 void		write_stored(t_term *term, int at, char *mem) __attribute__((hot));
-void		print_char(t_data *data, int c)
-			__attribute__((hot));
+void		print_char(t_data *data, int c) __attribute__((hot));
 void		key_backspace(t_data *data) __attribute__((hot));
 void		key_delete(t_data *data) __attribute__((hot));
 void		key_tab(t_data *data) __attribute__((hot));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tok_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:45:04 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 23:30:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 23:55:52 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // 0 aucune
 char	is_there_redirect(t_token *cmdline)
 {
-	while (cmdline && !is_sep_toktype(*cmdline))
+	while (cmdline && !is_sep_toktype(*cmdline) && cmdline->type != Subshell)
 	{
 		if (cmdline->type == RedirectW || cmdline->type == RedirectR
 			|| cmdline->type == RedirectAppend)
@@ -38,7 +38,11 @@ t_token	*tok_next_sep(t_token *last)
 t_token	*tok_next_cmd(t_token *last)
 {
 	while (last && !is_sep_toktype(*last))
+	{
+		if (last->type == Subshell)
+			return (last);
 		last = last->next;
+	}
 	if (last && is_sep_toktype(*last))
 		if (last->next)
 			return (last->next);
@@ -51,7 +55,7 @@ size_t	tok_cmdline_size(t_token *cmdline)
 	t_e_type	type;
 
 	len = 0;
-	while (cmdline && !is_sep_toktype(*cmdline))
+	while (cmdline && !is_sep_toktype(*cmdline) && cmdline->type != Subshell)
 	{
 		type = cmdline->type;
 		if (type != RedirectR && type != RedirectW && type != RedirectAppend
