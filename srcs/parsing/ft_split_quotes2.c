@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/29 20:05:10 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 15:22:53 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,10 @@ int	parse_dquote(const char *str, size_t *i, t_data *data);
 
 int	check_quotes(char c, int *quote_type, t_data *data)
 {
-	if (data->_errcode == DQUOTE_MISSING && c == '"')
-	{
-		data->_errcode = 0;
-		return (0);
-	}
-	else if (data->_errcode == SQUOTE_MISSING && c == '\'')
-	{
-		data->_errcode = 0;
-		return (0);
-	}
-	else
-	{
-		if (c == '\'')
-			*quote_type = 1;
-		else if (c == '"')
-			*quote_type = 2;
-	}
+	if (c == '\'')
+		*quote_type = 1;
+	else if (c == '"')
+		*quote_type = 2;
 	return (*quote_type);
 }
 
@@ -52,22 +39,15 @@ int	parse_squote(const char *str, size_t *i, t_data *data)
 	int	passed;
 
 	passed = 0;
-	if (data->_errcode == SQUOTE_MISSING)
-		passed = 1;
 	while (str[*i])
 	{
 		if ((str[*i] == '\'' || passed) && (!str[*i + 1] || str[*i + 1] == ' '))
-		{
-			if (data->_errcode == SQUOTE_MISSING)
-				data->_errcode = 0;
 			return (1);
-		}
 		else if (str[*i] == '\'' && !passed)
 			passed = 1;
 		(*i)++;
 	}
-	data->_errcode = SQUOTE_MISSING;
-	return (SQUOTE_MISSING);
+	return (-1);
 }
 
 /*
@@ -79,22 +59,15 @@ int	parse_dquote(const char *str, size_t *i, t_data *data)
 	int	passed;
 
 	passed = 0;
-	if (data->_errcode == DQUOTE_MISSING)
-		passed = 1;
 	while (str[*i])
 	{
 		if ((str[*i] == '"' || passed) && (!str[*i + 1] || str[*i + 1] == ' '))
-		{
-			if (data->_errcode == DQUOTE_MISSING)
-				data->_errcode = 0;
 			return (1);
-		}
 		else if (str[*i] == '"' && !passed)
 			passed = 1;
 		(*i)++;
 	}
-	data->_errcode = DQUOTE_MISSING;
-	return (DQUOTE_MISSING);
+	return (-1);
 }
 
 size_t	ft_count_words_quotes(const char *s)

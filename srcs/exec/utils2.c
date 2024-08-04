@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 18:28:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 21:44:11 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 15:09:53 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,9 @@ int	exec_builtins(char blt_val, t_data *data, t_token *cmdline)
 		ret_cmd = ft_exit(strs, data);
 	else if (blt_val == EXPORT_BLT)
 		ret_cmd = ft_export(strs, data);
+	else if (blt_val == ENV_BLT)
+		ret_cmd = ft_env(strs, data);
+	else if (blt_val == EXPORT_BLT)
+		ret_cmd = ft_pwd(strs, data);
 	return (ret_cmd);
 }

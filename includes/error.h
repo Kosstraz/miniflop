@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/01 12:16:54 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 15:21:00 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@
 # define TOO_MANY_ARGS_ERROR "\e[31m\nexit(int) : too many arguments\n\e[0m"
 # define TOO_MANY_ARGS_ERROR_SIZE 41
 
+# define ENV_ARGS_ERROR "\e[31m\nenv : too many arguments\n\e[0m"
+# define PWD_ARGS_ERROR "\e[31m\npwd : too many arguments\n\e[0m"
+# define ARGS_ERROR_SIZE 35
+
 # define NO_MATCH_FOUND_ERROR "\e[31m\nno match found \
 with wildcard '%s' :O\n\e[0m"
 
@@ -48,12 +52,6 @@ with wildcard '%s' :O\n\e[0m"
 # define BAD_MALLOC 		-2
 # define SPLIT_ERROR 		-3
 # define ENVVAR_NOTFOUND	-4
-
-# define SQUOTE_MISSING		-10
-# define DQUOTE_MISSING		-11
-# define PIPE_MISSING		-12
-# define AND_MISSING		-13
-# define OR_MISSING			-14
 
 /*
 	bash --posix ERROR

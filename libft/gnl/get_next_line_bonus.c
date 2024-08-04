@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 12:57:35 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/04 13:40:29 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 15:00:16 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,26 +119,26 @@ char	gnl_read(int fd, char **ret, char **buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[FD_MAX];
+	static char	*buffer;
 	char		*ret;
 	char		log;
 
 	ret = NULL;
 	if (fd < 0)
-		return (free_n(&(buffer[fd])));
-	while (!thereis_nl(buffer[fd]))
+		return (free_n(&buffer));
+	while (!thereis_nl(buffer))
 	{
-		log = gnl_read(fd, &ret, &(buffer[fd]));
+		log = gnl_read(fd, &ret, &(buffer));
 		if (log < 0)
 			return (NULL);
 		else if (log > 0)
 			return (ret);
 	}
 	free_n(&ret);
-	ret = save_line(buffer[fd], '\n');
-	buffer[fd] = save_after_c(&(buffer[fd]), '\n');
-	if (!buffer[fd][0])
-		free_n(&(buffer[fd]));
+	ret = save_line(buffer, '\n');
+	buffer = save_after_c(&(buffer), '\n');
+	if (!buffer[0])
+		free_n(&(buffer));
 	return (ret);
 }
 

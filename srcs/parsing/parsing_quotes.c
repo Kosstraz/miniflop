@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:29:54 by bama              #+#    #+#             */
-/*   Updated: 2024/07/29 20:51:46 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 15:24:29 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static size_t	cwlen(char *word, t_data *data)
 	{
 		check_quote_status(word[i], &quote_status);
 		if ((word[i] != '\'' && word[i] != '"')
-			|| (((quote_status == 1 || ((!quote_status || quote_status == 1) && data->_errcode == SQUOTE_MISSING)) && word[i] != '\'')
-				|| ((quote_status == 2 || ((!quote_status || quote_status == 2) && data->_errcode == DQUOTE_MISSING)) && word[i] != '"')))
+			|| ((quote_status == 1 && word[i] != '\'')
+				|| (quote_status == 2 && word[i] != '"')))
 			len++;
 		i++;
 	}
@@ -51,8 +51,8 @@ size_t	ft_strlcpy_quotes(char *dst, const char *src, size_t size, t_data *data)
 	{
 		check_quote_status(src[i], &quote_status);
 		if ((src[i] != '\'' && src[i] != '"')
-			|| (((quote_status == 1 || ((!quote_status || quote_status == 1) && data->_errcode == SQUOTE_MISSING)) && src[i] != '\'')
-				|| ((quote_status == 2 || ((!quote_status || quote_status == 2) && data->_errcode == DQUOTE_MISSING)) && src[i] != '"')))
+			|| ((quote_status == 1 && src[i] != '\'')
+				|| (quote_status == 2 && src[i] != '"')))
 		{
 			l++;
 			dst[j++] = src[i];

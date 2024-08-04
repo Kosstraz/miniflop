@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/04 02:42:14 by bama             ###   ########.fr        #
+#    Updated: 2024/08/04 15:32:33 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,15 @@
 #*    COULEURS    *#
 # ################ #
 
-CLASSIC= \e[0m
+CLASSIC	= \e[0m
 BOLD	= \e[1m
+BLACK	= \e[30m
 RED   	= \e[31m
-GREEN  = \e[32m
-YELLOW = \e[33m
-PURPLE = \e[35m
-CYAN   = \e[36m
+GREEN  	= \e[32m
+BLUE 	= \e[34m
+PURPLE 	= \e[35m
+CYAN   	= \e[36m
+YELLOW 	= \e[93m
 
 # ############### #
 #*   VARIABLES   *#
@@ -30,16 +32,15 @@ NAME = minishell
 
 CC = @cc
 
-SRCS =	./srcs/term/delete_keys.c \
-		./srcs/term/free_terminal.c \
-		./srcs/term/ft_readline.c \
-		./srcs/term/printables.c \
-		./srcs/term/special_keys.c \
-		./srcs/term/term_initialise.c \
-		./srcs/term/utils.c \
+SRCS =	./srcs/termcap/delete_keys.c \
+		./srcs/termcap/free_terminal.c \
+		./srcs/termcap/ft_readline.c \
+		./srcs/termcap/printables.c \
+		./srcs/termcap/special_keys.c \
+		./srcs/termcap/term_initialise.c \
+		./srcs/termcap/utils.c \
 		\
 		./srcs/parsing/utils.c \
-		./srcs/parsing/utils2.c \
     	./srcs/parsing/ft_split_quotes2.c \
 		./srcs/parsing/ft_split_quotes.c \
 		./srcs/parsing/token_id2.c \
@@ -51,11 +52,15 @@ SRCS =	./srcs/term/delete_keys.c \
 		./srcs/parsing/separate_operands.c \
 		./srcs/parsing/parsing.c \
 		\
-		./srcs/builtins/exit.c \
-		./srcs/builtins/unset.c \
-		./srcs/builtins/echo.c \
 		./srcs/builtins/cd.c \
+		./srcs/builtins/echo.c \
+		./srcs/builtins/exit.c \
+		./srcs/builtins/env.c \
+		./srcs/builtins/export_args.c \
+		./srcs/builtins/export_no_args.c \
 		./srcs/builtins/export.c \
+		./srcs/builtins/pwd.c \
+		./srcs/builtins/unset.c \
 		\
 		./srcs/exec/search_cmd.c \
 		./srcs/exec/exec.c \
@@ -98,7 +103,7 @@ TLIB = -ltermcap \
 #*    REGLES    *#
 # ############## #
 
-all: libft_comp pre_comp $(NAME)
+all: libft_comp pre_comp $(NAME) mischief
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(TLIB) -o $@
@@ -137,7 +142,120 @@ libft_comp:
 pre_comp:
 	@echo "$(BOLD)"
 	@echo "$(PURPLE)"
-	@echo "***********************************************"
-	@echo "***************** MINISHELL *******************"
-	@echo "***********************************************"
+	@echo "\t\t╔╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╗"
+	@sleep 0.008
+	@echo "\t\t╠╬╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╬╣"
+	@sleep 0.008
+	@echo "\t\t╠╣                                               ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣                                               ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣     __    __     __     __   __     __        ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣    /\ '-./  \   /\ \   /\ '-.\ \   /\ \       ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣    \ \ \-./\ \  \ \ \  \ \ \-.  \  \ \ \      ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣     \ \_\ \ \_\  \ \_\  \ \_\/'\_\  \ \_\     ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣      \/_/  \/_/   \/_/   \/_/ \/_/   \/_/     ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣                                               ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣     ______   __         ______     ______     ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣    /\  ___\ /\ \       /\  __ \   /\  == \    ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣    \ \  __\ \ \ \____  \ \ \/\ \  \ \  _-/    ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣     \ \_\    \ \_____\  \ \_____\  \ \_\      ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣      \/_/     \/_____/   \/_____/   \/_/      ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣                                               ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╣                                               ╠╣"
+	@sleep 0.008
+	@echo "\t\t╠╬╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╬╣"
+	@sleep 0.008
+	@echo "\t\t╚╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╝"
+	@sleep 0.008
 	@echo "$(CLASSIC)"
+	@echo "$(YELLOW)"
+
+mischief:
+	@echo "$(CLASSIC)$(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@$(YELLOW)%(/(############(/(%$(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@$(YELLOW)((############################(($(BLACK)@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@@@@@@@@$(YELLOW)/########%%%%%%%%%%%%%%%%%%%%##########/$(BLACK)@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@@@@@$(YELLOW)/######%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#######/&$(BLACK)@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@@$(YELLOW)######%#%&@@@@@@@@@@&%%%%%%%%%%%%%%%%%%%%%%%%######($(BLACK)@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@$(YELLOW)(####%@@@@@@@@@@@&&&&&&&&&&&&%%%%%%%%%%%%%%%%%%%%######/$(BLACK)@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@$(YELLOW)%####@@@@@@@@@@@&&&&&&&&&&&&&&&&&&%%%%%%%%%%%%%%%%%%%#######$(BLACK)@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@$(YELLOW)/##%@@@@@@@@@@&&&&&&&&&&&&&&&&&&&&&&&&%%%%%%%%%%%%%%%%%%###%%/$(BLACK)@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@$(YELLOW)(##&@@@@@@@&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&%%%%%%%%%%%%%%%%%##%%%($(BLACK)@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@$(YELLOW)(%%&@@@@@&&&&&&&&&&&&&&&&&&&&&.*,*,,&&&&&&&%%%%%%%%%%%%%%%%%%%%%%($(BLACK)@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@$(YELLOW)(##&@@&&&&&&&&&&&&&&&&&&&&&&&&.,.(%%#.&&&%#####%%%%%%%%%%%%%%%%%%&#/$(BLACK)@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@$(YELLOW)&##%&&&&&&&&&&&&&&&&&&&&&&&&&&.,....,%%&%%####&&&&&%%%%%%%%%%%%%%%&&#$(BLACK)@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@$(YELLOW)###&&&&&&&&&&&&&&&&&&&&&&&&&%,,,$(CLASSIC)#&@&&&&$(YELLOW).###%&&&%(/(((%%%%%%%%%%%%%&&#/$(BLACK)@"
+	@sleep 0.01
+	@echo "@@@@@@@@@$(YELLOW)(#%&&&&&&&&&&&&&&&&&&&&&&&&(,,*.*** $(CLASSIC)@@@$(YELLOW)&#(%%%%(/%%%%%%%%%%%%%%%%%%&&#/$(BLACK)@"
+	@sleep 0.01
+	@echo "@@@@@@@@@$(YELLOW)(#%&&&&&&&&&&&&&&&&&&/#&&&,,,,,$(BLUE)@*  *$(CLASSIC),@@@$(YELLOW)&*#%%/%%/%%%%%%%%%%%%%%%%%&&#/$(BLACK)@"
+	@sleep 0.01
+	@echo "@@@@@@@@@$(YELLOW)###,..*%&&&&&&&&&(.&&&.(&.,,,* $(BLUE)(   #$(CLASSIC).@@@$(YELLOW)&((%%%%%(%%%%%%%%%%%%%%%%%&&#($(BLACK)@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@$(YELLOW)(#,..,,,,,, #&&&&,.&&&.,,,,($(CLASSIC)%@@$(YELLOW), ,$(CLASSIC)@@@@@$(YELLOW)&,#%%%%%/&#%%%%%%%%%%%%%%%&%($(BLACK)@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@$(YELLOW)##.&&&#,$(CLASSIC)%%/$(YELLOW)..,,,,.,.&%%.,,%.$(CLASSIC)@@@@@@@@@@$(YELLOW)&,##%%%%#%&#%%%%%%%%%%%%%%%&#($(BLACK)@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@$(YELLOW)/#&&%(#&$(CLASSIC)@@ $(BLUE)/  %$(YELLOW)*/*#%%%%%%%%#.$(CLASSIC)&&&&&&&$(YELLOW)*(#%%%%%##$(CLASSIC)&&$(YELLOW)@#%%%%%%%%%%%%%%%/$(BLACK)@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@$(YELLOW)/%%###,$(CLASSIC)@@@@@@@@&$(YELLOW)/%%%%%%%%%%%########%%%%%%(&$(CLASSIC)@@@@$(YELLOW)#%%%%%%%%%%%%%%/$(BLACK)@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@$(YELLOW)##%%%##**$(CLASSIC)%&&$(YELLOW)(,#%%%%%%%%%%%%%%%%%%%######/$(CLASSIC)@#@@@$(YELLOW)(&%%%%%%%%%##%#($(BLACK)@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@$(YELLOW)/#%%%%%%%%%%%%%%%%%%%%%%%%%%########/$(CLASSIC)@@@@(@@$(YELLOW)%%%%%%%%%%###/$(BLACK)@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@$(YELLOW)/#%%%%%%%%(#&&%#(%%#############/$(CLASSIC)@@@@@@@($(YELLOW)%%%%%%%%%###(&$(BLACK)@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@@@$(YELLOW)/##%%%%#%&&%%%#(#%#######%#/$(CLASSIC)(@@@@@@@&($(YELLOW)&%%%%%%%###/$(BLACK)@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@$(YELLOW)((#(/#/##(/%%%%%%####((###(#$(CLASSIC)@@@@#@@@@/$(YELLOW)&&%##%%%###/&$(BLACK)@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@$(YELLOW)%%%%###%%%%%%(%%%%%%%@@@@%$(CLASSIC)((%&&%###$(YELLOW)%#%##/#\/#\\#$(BLACK)@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@$(YELLOW)(%&&%%%%%%%%%%##%%%%%%%%%&&&/%#%#(#%#%####/%$(BLACK)@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@@@@@@$(YELLOW)(%%%%(%&&&&&%%%%%%%&&%////(##&$(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@@@@$(YELLOW)(%%%/&&&&&&&&&&&%%%%%%&%#$(BLACK)@@@@@#$(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@@@$(YELLOW)%(%%##&&&%&&&&&&&&&%%%%%%%($(BLACK)@@@@@@#$(BLACK)@@@&@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@$(YELLOW)/%%%%##&&&&%&&&&&%&&&&%%%%%%/$(BLACK)@@@@@@#$(BLACK)@@@@($(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@$(YELLOW)(&&&%%%/&&&&%%%&##&&&&&%%#(%#($(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@%@@@$(YELLOW)/&&%%%%/&&&%%%%/&&&%%%(#%%/&$(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@(@@@(@@@@$(YELLOW)/%%%%#/%%%%#(&&%%%%/%#($(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@/@@@@(@@@$(YELLOW)/##%%%%%(%&&%%%%###($(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@#@$(YELLOW)%/%&&&#/%/%%#%/(&$(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	@sleep 0.01
+	@echo "@@@@@@@@@@@@@@@$(YELLOW)&/##(($(BLACK)@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n$(CLASSIC)"

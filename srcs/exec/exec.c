@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:52:08 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 14:13:15 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 15:09:01 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void	exec(t_data *data)
 			fetch_command(&path_to_file, cmd, data);
 		if (data->blt_val || path_to_file)
 			launch_cmd(path_to_file, cmd, data);
-		
 		if (tok_next_type(cmd) != Pipe)
 			waitchildren(data);
 		cmd = tok_next_cmd(cmd);

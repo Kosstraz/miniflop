@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 02:56:15 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 14:27:39 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 14:57:39 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static size_t	get_nb_of_line_in_fd(int fd)
 	while (gnl)
 	{
 		count++;
+		printf("\e[32m%s\e[0m\n", gnl);
 		free(gnl);
 		gnl = get_next_line(fd);
 	}
@@ -50,6 +51,7 @@ char	*ft_ntail(struct s_openf *openfile, int n)
 
 	reopenf(openfile);
 	size = get_nb_of_line_in_fd(openfile->fd);
+	printf("size %d\n", size);
 	reopenf(openfile);
 	gnl = get_next_line(openfile->fd);
 	if (n + 1 > size)
@@ -95,7 +97,7 @@ int	main(void)
 	else
 		printf("(null)\n");
 
-	ntail = ft_ntail(&openfile, 12);
+	ntail = ft_ntail(&openfile, 1);
 	if (ntail)
 		printf("%s\n", ntail);
 	else

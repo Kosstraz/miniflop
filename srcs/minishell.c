@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 18:03:27 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 15:26:01 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	minishell(char **env)
 	data.ret_cmd = 0;
 	while (1)
 	{
-		if (data.term.state == ORIGINAL)
+		if (data.term.state == CANON)
 			term_set_raw(&data);
 		init_data(&data);
 		new_prompt(&prompt);
