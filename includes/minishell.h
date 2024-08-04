@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 00:43:45 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/04 13:45:44 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@
 # define CHUNK 256
 # define TERM 4096
 
+# define NB_OF_PROC_MAX_PER_USER 1023
+
 # define ORIGINAL 0
 # define RAW 1
 
@@ -104,6 +106,13 @@ typedef enum e_type
 	Outfile,
 	Errfile
 }	t_e_type;
+
+typedef struct s_openf
+{
+	const char	*file_path;
+	int			oflags;
+	int			mode;
+}	t_openf;
 
 typedef struct s_vec2ul
 {
@@ -179,9 +188,12 @@ typedef struct s_data
 	t_term	term;
 	t_token	*tokens;
 	t_env	*env;
+	char	*rl;
 	char	blt_val;
 	int		fildes[2];
 	int		fileno[3];
+	int		npid;
+	int		pids[NB_OF_PROC_MAX_PER_USER];
 	int		_errcode;
 	int		ret_cmd;
 	int		historyfd;
@@ -195,10 +207,18 @@ int			ft_cd(char **arguments, t_data *data);
 int			ft_echo(char **arguments, t_data *data);
 int			ft_export(char **args, t_data *data);
 
+/*		   HISTORY	    	*/
+
+void		ft_ntail(int fd, int n);
+
 /*		   EXEC	    	*/
 
-void		dup2_stdin(int fd[2]);
-void		dup2_stdout(int fd[2]);
+void		do_redirections(t_token *cmdline, int mode);
+void		custom_execve(char *path, t_token *cmdline, t_data *data);
+void		waitchildren(t_data *data);
+void		dup2_stdin(t_token *cmdline, int fd[2]);
+void		dup2_stdout(t_token *cmdline, int fd[2]);
+void		open_pipe(t_token *cmdline, int fd[2]);
 int			exec_builtins(char blt_val, t_data *data, t_token *cmdline);
 t_e_type	tok_next_type(t_token *last);
 char		is_there_cmd(t_token *cmdline);
@@ -225,7 +245,7 @@ char		**ft_split_quotes(const char *s, t_data *data);
 void		take_commandline(const char *line, t_data *data);
 t_token		*new_token(char *value);
 void		free_tokens(t_token **root);
-void		place_envvars(char ***splitted);
+void		place_envvars(char ***splitted, t_data *data);
 t_vec2ul	new_vec2ul(size_t x, size_t y);
 void		apply_wildcards(char ***splitted);
 void		separate_operands(char ***splitted);

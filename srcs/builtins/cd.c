@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 00:10:12 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 15:23:36 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 03:12:19 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int	ft_cd(char **arguments, t_data *data)
 	closedir(data->dir);
 	data->dir = opendir(".");
 	data->ret_cmd = -log;
+	dfree((void **)arguments);
 	return (-log);
 }

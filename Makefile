@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/03 00:44:30 by bama             ###   ########.fr        #
+#    Updated: 2024/08/04 02:42:14 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,8 +61,11 @@ SRCS =	./srcs/term/delete_keys.c \
 		./srcs/exec/exec.c \
 		./srcs/exec/tok_utils.c \
 		./srcs/exec/tok_utils2.c \
+		./srcs/exec/pipe_utils.c \
 		./srcs/exec/utils.c \
 		./srcs/exec/utils2.c \
+		\
+		./srcs/history/history.c \
 		\
 		./srcs/debug.c \
 		./srcs/prompts.c \

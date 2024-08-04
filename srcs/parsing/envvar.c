@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:43:15 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 22:23:21 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 18:04:27 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*modify_word(const char *s, const char *varname, char *env,
 	return (ret);
 }
 
-static char	*add_envvar(char *s, size_t at, size_t *varlen)
+static char	*add_envvar(char *s, size_t at, size_t *varlen, t_data *data)
 {
 	char	*ret;
 	char	*env;
@@ -55,14 +55,15 @@ static char	*add_envvar(char *s, size_t at, size_t *varlen)
 	}
 	varname_len = i;
 	ft_strlcpy(&varname[1], &s[at + 1], varname_len);
-	env = getenv(&varname[1]);
+	env = getenvval(&varname[1], data->env);
 	*varlen = ft_strlen(env);
 	ret = modify_word(s, &varname[1], env, at);
+	free(env);
 	free(s);
 	return (ret);
 }
 
-void	place_envvars(char ***splitted)
+void	place_envvars(char ***splitted, t_data *data)
 {
 	char	**tmp;
 	char	quote_status;
@@ -81,7 +82,7 @@ void	place_envvars(char ***splitted)
 			check_quote_status(tmp[i][j], &quote_status);
 			if (tmp[i][j] == '$' && quote_status != 1)
 			{
-				tmp[i] = add_envvar(tmp[i], j, &varlen);
+				tmp[i] = add_envvar(tmp[i], j, &varlen, data);
 				j += varlen - 1;
 			}
 			j++;

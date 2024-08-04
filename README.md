@@ -46,13 +46,13 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - -~~~ [EXEC_GENERIC] Execution générique des commandes trouvées. {ymanchon}~~~
 
-- [<] Redirige l'input. {ymanchon}
+- -~~~ [<] Redirige l'input. {ymanchon}~~~
 
-- [>] Redirige l'output. {ymanchon}
+- -~~~ [>] Redirige l'output. {ymanchon}~~~
 
 - [<<] Redirige l'input avec un délimiteur. {cachetra}
 
-- [>>] Redirige l'output en mode APPEND. {ymanchon}
+- -~~~ [>>] Redirige l'output en mode APPEND. {ymanchon}~~~
 
 - -~~~ [PIPES] Implémenter les pipes '|' (output de la commande de gauche --> input de la commande de droite). {ymanchon}~~~
 
@@ -70,13 +70,13 @@ la chaîne de token et les déplacer pour gérer les priorités. {cachetra}
 
 - -~~~[cd] Fonctionnant avec un chemin relatif et absolu. {ymanchon}~~~
 
-- [pwd] Affiche le répertoire dans lequel se trouve l'utilisateur appelant. {cachetra}
+- -~~~ [pwd] Affiche le répertoire dans lequel se trouve l'utilisateur appelant. {cachetra}~~~
 
 - [export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnements exportées. {cachetra}
 
 - -~~~[unset] Détruit une variable. Cette commande ne retourne rien --> void unset(...). {ymanchon}~~~
 
-- [env] Affiche toutes les variables 'environnements.d {cachetra}
+- -~~~ [env] Affiche toutes les variables 'environnements.d {cachetra}~~~
 
 - -~~~[exit] Quitte le terminal. {ymanchon}~~~
 

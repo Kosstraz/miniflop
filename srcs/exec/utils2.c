@@ -5,39 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 19:42:00 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 21:53:57 by bama             ###   ########.fr       */
+/*   Created: 2024/08/03 18:28:31 by bama              #+#    #+#             */
+/*   Updated: 2024/08/03 21:44:11 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	save_stdfileno(int fileno_[3])
+void	custom_execve(char *path, t_token *cmdline, t_data *data)
 {
-	fileno_[0] = dup(STDIN_FILENO);
-	fileno_[1] = dup(STDOUT_FILENO);
-	fileno_[2] = dup(STDERR_FILENO);
+	char	**args;
+	char	**env;
+
+	args = tok_to_strs(cmdline);
+	env = convert_env(data->env);
+	free_data(data);
+	free_env(&data->env);
+	free_term(data);
+	execve((const char *)path,
+		(char *const *)args,
+		(char *const *)env);
+	free(path);
+	dfree((void **)env);
+	dfree((void **)args);
+	exit(0);
 }
 
-void	restore_stdfileno(int fileno_[3])
+void	open_pipe(t_token *cmdline, int fd[2])
 {
-	dup2(fileno_[0], STDIN_FILENO);
-	dup2(fileno_[1], STDOUT_FILENO);
-	dup2(fileno_[2], STDERR_FILENO);
-}
-
-void	dup2_stdin(int fd[2])
-{
-	close(fd[1]);
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[0]);
-}
-
-void	dup2_stdout(int fd[2])
-{
-	close(fd[0]);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[1]);
+	if (tok_next_type(cmdline) == Pipe)
+		pipe(fd);
 }
 
 int	exec_builtins(char blt_val, t_data *data, t_token *cmdline)
@@ -55,6 +52,7 @@ int	exec_builtins(char blt_val, t_data *data, t_token *cmdline)
 		ret_cmd = ft_unset(strs, data);
 	else if (blt_val == EXIT_BLT)
 		ret_cmd = ft_exit(strs, data);
-	free(strs);
+	else if (blt_val == EXPORT_BLT)
+		ret_cmd = ft_export(strs, data);
 	return (ret_cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 20:16:57 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 22:01:02 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	do_some_parsing(char ***splitted, const char *line, t_data *data)
 {
 	*splitted = ft_split_quotes(line, data);
-	place_envvars(splitted);
+	place_envvars(splitted, data);
 	separate_operands(splitted);
 	apply_wildcards(splitted);
 	*splitted = remove_useless_quotes(*splitted, data);
@@ -94,6 +94,8 @@ void	take_commandline(const char *line, t_data *data)
 {
 	t_token	*tokens;
 
+	if (!line)
+		return ;
 	tokens = parse_commandline(line, data);
 	data->tokens = tokens;
 	show_token(tokens);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:40 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/06/13 14:48:02 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/08/03 03:14:19 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	ft_atoi(const char *str)
 	int		neg;
 	size_t	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	ret = 0;
 	ft_isspace(str, &i);

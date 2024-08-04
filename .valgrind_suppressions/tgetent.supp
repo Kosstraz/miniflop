@@ -13,7 +13,6 @@
    fun:_nc_trim_sgr0
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -30,7 +29,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -45,7 +43,6 @@
    fun:_nc_trim_sgr0
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -58,7 +55,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -74,7 +70,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -90,7 +85,6 @@
    fun:_nc_trim_sgr0
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -104,7 +98,6 @@
    fun:tgetnum_sp
    fun:get_termcaps
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -117,7 +110,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -135,7 +127,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
 }
 {
@@ -151,7 +142,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -164,7 +154,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -181,7 +170,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -193,7 +181,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -210,7 +197,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -225,7 +211,6 @@
    fun:_nc_trim_sgr0
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -241,7 +226,6 @@
    fun:_nc_trim_sgr0
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -257,7 +241,6 @@
    fun:_nc_trim_sgr0
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -272,7 +255,6 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
    fun:minishell
    fun:main
 }
@@ -287,7 +269,88 @@
    fun:_nc_setupterm
    fun:tgetent_sp
    fun:term_init
-   fun:read_prompt
+   fun:minishell
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4
+   fun:_nc_find_type_entry
+   fun:tgetnum_sp
+   fun:get_termcaps
+   fun:term_init
+   fun:minishell
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4
+   fun:_nc_setupterm
+   fun:tgetent_sp
+   fun:term_init
+   fun:minishell
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:_nc_doalloc
+   fun:_nc_read_termtype
+   fun:_nc_read_file_entry
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4
+   fun:_nc_read_entry2
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4
+   fun:_nc_setupterm
+   fun:tgetent_sp
+   fun:term_init
+   fun:minishell
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4
+   fun:_nc_setupterm
+   fun:tgetent_sp
+   fun:term_init
+   fun:minishell
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:_nc_read_termtype
+   fun:_nc_read_file_entry
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4
+   fun:_nc_read_entry2
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4
+   fun:_nc_setupterm
+   fun:tgetent_sp
+   fun:term_init
+   fun:minishell
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.4
+   fun:_nc_setupterm
+   fun:tgetent_sp
+   fun:term_init
    fun:minishell
    fun:main
 }

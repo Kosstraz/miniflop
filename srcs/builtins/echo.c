@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 23:41:11 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 14:07:14 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 03:12:33 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int	ft_echo(char **arguments, t_data *data)
 	if (!option)
 		write(1, "\n", 1);
 	data->ret_cmd = SUCCESS;
+	dfree((void **)arguments);
 	return (0);
 }

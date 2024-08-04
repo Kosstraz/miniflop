@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:47 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 00:37:49 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 01:46:28 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	setenvval(char *envname, char *newval, t_env **env)
 {
 	t_env	*tmp;
 
-	if (!env)
+	if (!env || !newval)
 		return (-1);
 	tmp = *env;
 	while (tmp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 00:13:58 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/03 02:58:21 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,6 @@ static void terminal_handle_keys(t_data *data, char *ch)
 		key_left(data);
 }
 
-static char	*duplicate_buffer(t_data *data)
-{
-	char	*rtn;
-
-	if (!data->term.line.buf)
-		return (NULL);
-	rtn = ft_strdup(data->term.line.buf);
-	if (!rtn)
-		exit_shell("\e[1;31mft_strdup\e[0m", data, EXIT_FAILURE);
-	free(data->term.line.buf);
-	data->term.line.buf = NULL;
-	return (rtn);
-}
-
 char	*handle_interrupt(t_data *data)
 {
 	while (data->term.curs.l++ <= data->term.line.last.l)
@@ -96,7 +82,7 @@ char	*ft_readline(char *prompt, t_data *data)
 	{
 		if (data->term.line.size == CHUNK * n)
 			data->term.line.buf = (char *)ft_realloc(data->term.line.buf,
-				sizeof(char) * (CHUNK * ++n + 1), data);
+					sizeof(char) * (CHUNK * ++n + 1), data);
 		b_read = ft_read(data->term.fd, buf, READ, data);
 		buf[b_read] = '\0';
 		if (buf[0] == '\003')
@@ -105,5 +91,5 @@ char	*ft_readline(char *prompt, t_data *data)
 	}
 	while (data->term.curs.l++ <= data->term.line.last.l)
 		write(data->term.fd, "\n", 1);
-	return (duplicate_buffer(data));
+	return (data->term.line.buf);
 }

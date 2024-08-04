@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 00:43:57 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 18:03:27 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	minishell(char **env)
 
 	term_init(&data);
 	add_env_to_data(&data, env);
+	data.ret_cmd = 0;
 	while (1)
 	{
 		if (data.term.state == ORIGINAL)
@@ -28,9 +29,9 @@ void	minishell(char **env)
 		new_prompt(&prompt);
 		rl = ft_readline(prompt, &data);
 		term_reset(&data);
+		free(prompt);
 		take_commandline(rl, &data);
 		free(rl);
-		free(prompt);
 		free_data(&data);
 	}
 	free_env(&data.env);

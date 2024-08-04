@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:28:38 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 20:04:33 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/03 17:46:18 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ char	*getcmdpath(t_token *cmdline, t_data *data)
 		return (NULL);
 	path = getenvval("PATH", data->env);
 	paths = ft_split(path, ':');
+	free(path);
 	if (!paths)
 		return (NULL);
-	free(path);
 	path = check_in_path(*cmdline, data, paths);
 	dfree((void **)paths);
 	return (path);
