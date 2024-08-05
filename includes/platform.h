@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   platform.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 15:49:51 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 00:42:38 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_data
 	t_term	term;
 	t_token	*tokens;
 	t_env	*env;
+	char	exec_next;
 	char	blt_val;
 	int		npid;
 	int		pids[NB_OF_PROC_MAX_PER_USER];

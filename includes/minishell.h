@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 22:12:52 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 00:57:02 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define EXPORT_BLT	5
 # define ENV_BLT	6
 # define PWD_BLT	7
+# define LS_BLT		8
 
 # define FORKED		1
 
@@ -75,7 +76,7 @@
 # include "libft.h"
 # include "platform.h"
 
-extern char	g_sig;
+// extern char	g_sig;
 
 /* ************************************************ */
 /*													*/
@@ -120,12 +121,14 @@ void		save_stdfileno(int fileno_[3]);
 void		restore_stdfileno(int fileno_[3]);
 void		exec(t_data *data);
 
+char		is_a_execbin(char *path_to_f);
 char		is_redirection(t_token *redirection);
 char		is_there_redirect(t_token *cmdline);
 char		check_exitedchild(t_data *data, int *status);
 char		is_there_cmd(t_token *cmdline);
 char		is_a_builtin(t_token *cmdline);
 
+int			ft_fork(t_data *data);
 int			is_there_subshells(t_token *cmdline, t_data *data);
 int			exec_builtins(char blt_val, t_data *data, t_token *cmdline);
 
@@ -149,16 +152,25 @@ t_token		*tok_next_sep(t_token *last);
 /*															*/
 /* ******************************************************** */
 
+void		show_dir_contents(char *filename, char *ref, t_data *data);
+
 int			export_args(char **args, t_env **head);
 int			ft_cd(char **arguments, t_data *data);
 int			ft_echo(char **arguments, t_data *data);
 int			ft_env(char **args, t_data *data);
 int			ft_exit(char **av, t_data *data);
 int			ft_export(char **args, t_data *data);
+int			ft_ls(char **args, t_data *data);
 int			ft_pwd(char **args, t_data *data);
 int			ft_unset(char **arguments, t_data *data);
 
-/*		   HISTORY	    	*/
+/* **************************************************** */
+/*														*/
+/*		  |  | _ _|   __| __ __| _ \  _ \ \ \  /		*/
+/*		  __ |   |  \__ \    |  (   |   /  \  /			*/
+/*		 _| _| ___| ____/   _| \___/ _|_\   _|			*/
+/*														*/
+/* **************************************************** */
 
 void		ft_ntail(int fd, int n);
 
@@ -183,7 +195,6 @@ void		check_e_type(t_token **second, const char *word, int i);
 void		review_tokenid(t_token **tokens);
 void		detect_redirect_type(t_token **tok);
 void		check_potential_errors(char **splitted, t_data *data);
-t_token		*check_tokens_error(t_token *tokens, t_data *data);
 
 char		check_parse_error(char ***splitted, t_data *data);
 char		is_operand(char c[3]);
@@ -193,6 +204,7 @@ char		is_missing_septoktype(int _errcode);
 char		*return_missing_chars(char _errcode);
 char		handle_generic_error(char ***splitted, t_data *data);
 
+t_token		*check_tokens_error(t_token *tokens, t_data *data);
 t_token		*new_token(char *value);
 t_token		*ret_last_token(t_token *tokens);
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
+#    By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/05 21:53:34 by bama             ###   ########.fr        #
+#    Updated: 2024/08/06 00:56:46 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/builtins/export_args.c \
 		./srcs/builtins/export_no_args.c \
 		./srcs/builtins/export.c \
+		./srcs/builtins/ls.c \
 		./srcs/builtins/pwd.c \
 		./srcs/builtins/unset.c \
 		\

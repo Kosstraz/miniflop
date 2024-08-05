@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 15:09:32 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 00:57:47 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	is_a_builtin(t_token *cmdline)
 		return (ENV_BLT);
 	else if (!ft_strcmp(cmd, "pwd"))
 		return (PWD_BLT);
+	else if (!ft_strcmp(cmd, "ls"))
+		return (LS_BLT);
 	return (0);
 }
 
