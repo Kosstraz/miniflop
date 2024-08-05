@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 22:17:54 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 16:31:54 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 22:17:17 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	detect_redirect_type(t_token **tok)
 		set_type_redirect(tok, RedirectR, HereDoc);
 	else if (!ft_strcmp((*tok)->value, "2>"))
 		set_type_redirect(tok, RedirectW, Errfile);
+	else if (!ft_strcmp((*tok)->value, "2>>"))
+		set_type_redirect(tok, RedirectAppend, Errfile);
 }
 
 t_token	*ret_last_token(t_token *tokens)
@@ -55,11 +57,13 @@ void	reset_commandtype(t_token **root)
 	{
 		while (tmp && !is_sep_toktype(*tmp))
 		{
+			if (tmp->type == Null)
+				tmp->type = Argument;
 			if (tmp->type != RedirectR && tmp->type != RedirectW
 				&& tmp->type != RedirectAppend
 				&& tmp->type != HereDoc && tmp->type != Infile
 				&& tmp->type != Outfile && tmp->type != Command
-				&& tmp->type != Subshell)
+				&& tmp->type != Subshell && tmp->type != Errfile)
 				tmp->type = Command;
 			if (tmp->type == Command)
 				break ;
@@ -67,5 +71,18 @@ void	reset_commandtype(t_token **root)
 		}
 		cmd = tok_next_cmd(cmd);
 		tmp = cmd;
+	}
+}
+
+void	tok_set_null_to_arg(t_token **root)
+{
+	t_token	*tmp;
+
+	tmp = *root;
+	while (tmp)
+	{
+		if (tmp->type == Null)
+			tmp->type = Argument;
+		tmp = tmp->next;
 	}
 }

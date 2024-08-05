@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/04 17:12:04 by bama             ###   ########.fr        #
+#    Updated: 2024/08/05 21:53:34 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/parsing/envvar.c \
 		./srcs/parsing/separate_operands.c \
 		./srcs/parsing/parsing.c \
+		./srcs/parsing/token_parseerror.c \
 		\
 		./srcs/builtins/cd.c \
 		./srcs/builtins/echo.c \
@@ -68,6 +69,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/exec/tok_utils.c \
 		./srcs/exec/tok_utils2.c \
 		./srcs/exec/pipe_utils.c \
+		./srcs/exec/redirections_utils.c \
 		./srcs/exec/utils.c \
 		./srcs/exec/utils2.c \
 		\

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:38:33 by bama              #+#    #+#             */
-/*   Updated: 2024/07/20 01:17:14 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 19:26:28 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ void	dfree(void **ptr2)
 {
 	int	i;
 
-	i = 0;
-	while (ptr2[i])
-		free(ptr2[i++]);
-	free(ptr2);
+	if (ptr2)
+	{
+		i = 0;
+		while (ptr2[i])
+			free(ptr2[i++]);
+		free(ptr2);
+	}
 }

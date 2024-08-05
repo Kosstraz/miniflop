@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:45:04 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 22:07:39 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 18:16:02 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ t_token	*tok_next_cmd(t_token *last)
 	while (last && !is_sep_toktype(*last))
 		last = last->next;
 	if (last && is_sep_toktype(*last))
-		if (last->next)
-			return (last->next);
+		return (last->next);
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 02:12:04 by bama              #+#    #+#             */
-/*   Updated: 2024/08/02 19:56:03 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 19:20:04 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,48 @@ t_e_type	tok_next_type(t_token *last)
 	if (last)
 		return (last->type);
 	return (Null);
+}
+
+t_token	*tok_skip_subshell(t_token *cmdline)
+{
+	int	inc;
+	int	outc;
+
+	inc = 0;
+	outc = 0;
+	while (cmdline)
+	{
+		if (is_sep_toktype(*cmdline) && inc == outc)
+			return (cmdline->next);
+		if (cmdline->type == Subshell)
+		{
+			if (!ft_strcmp(cmdline->value, "("))
+				inc++;
+			else if (!ft_strcmp(cmdline->value, ")"))
+				outc++;
+		}
+		cmdline = cmdline->next;
+	}
+	return (NULL);
+}
+
+char	is_redirection(t_token *redirection)
+{
+	if (redirection)
+	{
+		if (redirection->type == RedirectAppend
+			|| redirection->type == RedirectR
+			|| redirection->type == RedirectW
+			|| redirection->type == HereDoc)
+		{
+			if (redirection->next)
+			{
+				if (redirection->next->type == Infile
+					|| redirection->next->type == Outfile
+					|| redirection->next->type == Errfile)
+					return (redirection->type);
+			}
+		}
+	}
+	return (0);
 }

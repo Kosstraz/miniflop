@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:09:44 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 16:15:46 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 22:18:51 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	review_tokenid(t_token **tokens)
 			if (!ft_strcmp(tok->value, "<") || !ft_strcmp(tok->value, ">")
 				|| !ft_strcmp(tok->value, ">>")
 				|| !ft_strcmp(tok->value, "<<")
-				|| !ft_strcmp(tok->value, "2>"))
+				|| !ft_strcmp(tok->value, "2>")
+				|| !ft_strcmp(tok->value, "2>>"))
 			{
 				if (!tok->next || (tok->next && is_sep_toktype(*(tok->next))))
 					write(1, PARSE_ERROR_T, PARSE_ERROR_SIZE);
@@ -37,6 +38,7 @@ void	review_tokenid(t_token **tokens)
 		tok = tok->next;
 	}
 	reset_commandtype(tokens);
+	tok_set_null_to_arg(tokens);
 }
 
 // Cherche le type de token auquel correspond le mot splitté
@@ -52,7 +54,7 @@ void	check_e_type(t_token **prev, const char *word, int i)
 	{
 		if (word[0] == '|')
 			type = Pipe;
-		else if (word[0] == '(' || word[1] == ')')
+		else if (word[0] == '(' || word[0] == ')')
 			type = Subshell;
 	}
 	else if (ft_strlen(word) == 2)
@@ -73,13 +75,16 @@ void	free_tokens(t_token **root)
 {
 	t_token	*tmp;
 
-	while (*root)
+	if (root)
 	{
-		free((char *)(*root)->value);
-		(*root)->value = NULL;
-		tmp = (*root)->next;
-		free(*root);
-		*root = tmp;
+		while (*root)
+		{
+			free((char *)(*root)->value);
+			(*root)->value = NULL;
+			tmp = (*root)->next;
+			free(*root);
+			*root = tmp;
+		}
 	}
 }
 

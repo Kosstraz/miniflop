@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 17:21:21 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 22:12:52 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,13 @@ void		save_stdfileno(int fileno_[3]);
 void		restore_stdfileno(int fileno_[3]);
 void		exec(t_data *data);
 
+char		is_redirection(t_token *redirection);
 char		is_there_redirect(t_token *cmdline);
 char		check_exitedchild(t_data *data, int *status);
 char		is_there_cmd(t_token *cmdline);
 char		is_a_builtin(t_token *cmdline);
 
+int			is_there_subshells(t_token *cmdline, t_data *data);
 int			exec_builtins(char blt_val, t_data *data, t_token *cmdline);
 
 t_e_type	tok_next_type(t_token *last);
@@ -134,6 +136,7 @@ char		*getcmdpath(t_token *cmdline, t_data *data);
 char		**convert_env(t_env *env);
 char		**tok_to_strs(t_token *cmdline);
 
+t_token		*tok_skip_subshell(t_token *cmdline);
 t_token		*tok_next_redirect(t_token *cmdline);
 t_token		*tok_next_cmd(t_token *last);
 t_token		*tok_next_sep(t_token *last);
@@ -167,7 +170,7 @@ void		ft_ntail(int fd, int n);
 /*														*/
 /* **************************************************** */
 
-char		check_parse_error(char ***splitted, t_data *data);
+void		tok_set_null_to_arg(t_token **root);
 void		reset_commandtype(t_token **root);
 void		print_env(t_env *env);
 void		take_commandline(const char *line, t_data *data);
@@ -179,12 +182,16 @@ void		check_quote_status(char c, char *opened_status);
 void		check_e_type(t_token **second, const char *word, int i);
 void		review_tokenid(t_token **tokens);
 void		detect_redirect_type(t_token **tok);
+void		check_potential_errors(char **splitted, t_data *data);
+t_token		*check_tokens_error(t_token *tokens, t_data *data);
 
-char		is_operand(char c[2]);
+char		check_parse_error(char ***splitted, t_data *data);
+char		is_operand(char c[3]);
 char		is_sep(char c);
 char		is_sep_toktype(t_token tok);
 char		is_missing_septoktype(int _errcode);
 char		*return_missing_chars(char _errcode);
+char		handle_generic_error(char ***splitted, t_data *data);
 
 t_token		*new_token(char *value);
 t_token		*ret_last_token(t_token *tokens);

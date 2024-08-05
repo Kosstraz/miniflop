@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:40:38 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 16:09:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 22:12:32 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ void	check_quote_status(char c, char *opened_status)
 		*opened_status = 0;
 }
 
-char	is_operand(char c[2])
+char	is_operand(char c[3])
 {
-	return ((c[0] == '|' && c[1] != '|')
+	return (!ft_strncmp(c, "2>>", 3)
+		|| (c[0] == '|' && c[1] != '|')
 		|| (c[0] == '|' && c[1] == '|')
 		|| (c[0] == '&' && c[1] == '&')
 		|| (c[0] == '<' && c[1] != '<')

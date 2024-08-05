@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:52:08 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 22:06:25 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 21:54:01 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,32 +64,6 @@ void	fetch_command(char **ptf, t_token *cmdline, t_data *data)
 		}
 		else
 			setenvval("_", ft_strdup(*ptf), &data->env);
-	}
-}
-
-void	do_redirections(t_token *cmdline, int mode)
-{
-	int		fd;
-	t_token	*r;
-
-	r = tok_next_redirect(cmdline);
-	if (mode == O_RDONLY && r->type == RedirectR)
-	{
-		fd = open(r->next->value, O_RDONLY);
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-		return ;
-	}
-	else if (mode == O_WRONLY)
-	{
-		if (r->type == RedirectW)
-			fd = open(r->next->value, O_WRONLY | O_TRUNC | O_CREAT, 0666);
-		else if (r->type == RedirectAppend)
-			fd = open(r->next->value, O_WRONLY | O_APPEND | O_CREAT, 0666);
-		else
-			return ;
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 23:51:37 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 00:28:26 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 static void	do_some_parsing(char ***splitted, const char *line, t_data *data)
 {
 	*splitted = ft_split_quotes(line, data);
-	if (check_parse_error(splitted, data) < 0)
+	if (handle_generic_error(splitted, data) < 0)
 		return ;
 	place_envvars(splitted, data);
 	separate_operands(splitted);
-	apply_wildcards(splitted);
+	//apply_wildcards(splitted);
+	check_potential_errors(*splitted, data);
+	if (handle_generic_error(splitted, data) < 0)
+		return ;
 	//*splitted = remove_useless_quotes(*splitted, data);
 }
 
@@ -48,6 +51,8 @@ static t_token	*parse_commandline(const char *line, t_data *data)
 	}
 	free(splitted);
 	review_tokenid(&root);
+	root = check_tokens_error(root, data);
+	handle_generic_error(NULL, data);
 	return (root);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/02 20:43:36 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 17:30:32 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,8 @@ ssize_t	ft_rev_isspaceptr(const char *s, ssize_t start);
 			/* **************************** */
 			/* **************************** */
 
+char	*lastword(char **strs);
+char	*duplastword(char **strs);
 char	*str_add_strs_free(char *str, char **strs, char sep, char last_sep);
 char	*str_add_strs(char *str, char **strs, char sep);
 size_t	ft_strnchr(const char *str, const char c);

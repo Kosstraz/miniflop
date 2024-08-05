@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:49:27 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 00:17:31 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 22:14:06 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ static void	add_new_words(char ***div, char *str, size_t *i, size_t at)
 {
 	size_t	ope_len;
 
-	if ((str[at] == '|' && str[at + 1] != '|')
+	if (!ft_strncmp(&str[at], "2>>", 3))
+		ope_len = 3;
+	else if ((str[at] == '|' && str[at + 1] != '|')
 		|| (str[at] == '>' && str[at + 1] != '>')
 		|| (str[at] == '<' && str[at + 1] != '<')
-		|| (str[at] == '(' && str[at + 1] != ')')
-		|| (str[at] == ')' && str[at + 1] != '('))
+		|| (str[at] == '(')
+		|| (str[at] == ')'))
 		ope_len = 1;
 	else if ((str[at] == '&' && str[at + 1] == '&')
 		|| (str[at] == '|' && str[at + 1] == '|')

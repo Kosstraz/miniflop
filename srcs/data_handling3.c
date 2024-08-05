@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 00:39:06 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 18:43:57 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 20:13:56 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,7 @@ void	init_data(t_data *data)
 	data->dir = opendir(".");
 	data->tokens = NULL;
 	data->_errcode = 0;
+	data->fileno[0] = -1;
+	data->fileno[1] = -1;
+	data->fileno[2] = -1;
 }

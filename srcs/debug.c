@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 16:12:12 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/05 18:31:54 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	show_token(t_token *tok)
 			printf("[ERRFILE]\t\t");
 		else if (tok->type == Subshell)
 			printf("[SUBSHELL]\t\t");
+		else if (tok->type == Null)
+			printf("[NULL]\t\t\t");
 		printf("\e[31m$\e[0m%s\e[31m$\e[0m\n", tok->value);
 		tok = tok->next;
 	}
