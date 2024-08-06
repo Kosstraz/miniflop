@@ -6,14 +6,14 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 22:12:52 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 23:13:04 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define PROMPT1 "\e[1m\e[35m"
+# define PROMPT1 "\e[1m\e[38;2;0;235;200m"
 # define PROMPT1_SIZE 9
 
 # define PROMPT2 " $> "
@@ -29,9 +29,13 @@
 #  define ARG_MAX 2087151
 # endif
 
+# define CWD_MAX_LEN 35
+# define CWD_AT_NAME "CWD_AT_PATH"
+
 // ARG_MAX / 2
 # define SZ_MAX 1174302
 
+# define EXEC_BIN	-1
 # define ECHO_BLT	1
 # define UNSET_BLT	2
 # define CD_BLT		3
@@ -71,11 +75,12 @@
 # include <sys/stat.h>
 # include <termcap.h>
 # include <termios.h>
+# include "colors.h"
 # include "error.h"
 # include "libft.h"
 # include "platform.h"
 
-extern char	g_sig;
+// extern char	g_sig;
 
 /* ************************************************ */
 /*													*/
@@ -85,21 +90,26 @@ extern char	g_sig;
 /*													*/
 /* ************************************************ */
 
+void		env_remove(char *name, t_env **env);
 void		exit_shell(char *mess, t_data *data, int status);
 void		increment_shlvl(t_env **env);
 void		free_env(t_env **env);
 void		free_shell(t_data *data);
 void		minishell(char **env);
-void		new_prompt(char **buffer_prompt);
+void		new_prompt(char **buffer_prompt, t_data *data);
+void		add_new_env(char *name, char *value, t_env	**env);
 void		free_data(t_data *data);
 void		add_env_to_data(t_data *data, char **env);
 void		free_data(t_data *data);
 void		init_data(t_data *data);
 void		new_missing_prompt(char _errcode);
+void		priv_create_node(char *name, char *value, t_data *data);
 
-char		*getenvval(char *envname, t_env *env);
+char		env_exist(char *name, t_data *data);
 
 int			setenvval(char *envname, char *newval, t_env **env);
+
+char		*getenvval(char *envname, t_env *env);
 
 /* **************************************************************** */
 /*																	*/
@@ -120,18 +130,23 @@ void		save_stdfileno(int fileno_[3]);
 void		restore_stdfileno(int fileno_[3]);
 void		exec(t_data *data);
 
+char		is_a_execbin(char *path_to_f);
 char		is_redirection(t_token *redirection);
 char		is_there_redirect(t_token *cmdline);
 char		check_exitedchild(t_data *data, int *status);
 char		is_there_cmd(t_token *cmdline);
 char		is_a_builtin(t_token *cmdline);
 
+int			ft_fork(t_data *data);
 int			is_there_subshells(t_token *cmdline, t_data *data);
 int			exec_builtins(char blt_val, t_data *data, t_token *cmdline);
 
 t_e_type	tok_next_type(t_token *last);
 
-char		*getcmdpath(t_token *cmdline, t_data *data);
+char		*take_absocmd(char	*path_to_file);
+char		*take_dir(char *path_to_file);
+char		*catch_execbin(t_token *cmdline);
+char		*getcmdpath(t_token **cmdline, t_data *data);
 
 char		**convert_env(t_env *env);
 char		**tok_to_strs(t_token *cmdline);
@@ -149,16 +164,25 @@ t_token		*tok_next_sep(t_token *last);
 /*															*/
 /* ******************************************************** */
 
+void		show_dir_contents(char *filename, char *ref, t_data *data);
+
 int			export_args(char **args, t_env **head);
 int			ft_cd(char **arguments, t_data *data);
 int			ft_echo(char **arguments, t_data *data);
 int			ft_env(char **args, t_data *data);
 int			ft_exit(char **av, t_data *data);
 int			ft_export(char **args, t_data *data);
+int			ft_ls(char **args, t_data *data);
 int			ft_pwd(char **args, t_data *data);
 int			ft_unset(char **arguments, t_data *data);
 
-/*		   HISTORY	    	*/
+/* **************************************************** */
+/*														*/
+/*		  |  | _ _|   __| __ __| _ \  _ \ \ \  /		*/
+/*		  __ |   |  \__ \    |  (   |   /  \  /			*/
+/*		 _| _| ___| ____/   _| \___/ _|_\   _|			*/
+/*														*/
+/* **************************************************** */
 
 void		ft_ntail(int fd, int n);
 
@@ -183,7 +207,6 @@ void		check_e_type(t_token **second, const char *word, int i);
 void		review_tokenid(t_token **tokens);
 void		detect_redirect_type(t_token **tok);
 void		check_potential_errors(char **splitted, t_data *data);
-t_token		*check_tokens_error(t_token *tokens, t_data *data);
 
 char		check_parse_error(char ***splitted, t_data *data);
 char		is_operand(char c[3]);
@@ -193,6 +216,7 @@ char		is_missing_septoktype(int _errcode);
 char		*return_missing_chars(char _errcode);
 char		handle_generic_error(char ***splitted, t_data *data);
 
+t_token		*check_tokens_error(t_token *tokens, t_data *data);
 t_token		*new_token(char *value);
 t_token		*ret_last_token(t_token *tokens);
 

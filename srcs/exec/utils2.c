@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 18:28:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 15:09:53 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 19:53:38 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ void	open_pipe(t_token *cmdline, int fd[2])
 		pipe(fd);
 }
 
+int	ft_fork(t_data *data)
+{
+	int	pid;
+
+	pid = fork();
+	if (pid == -1)
+		exit_shell("\e[31mfork\e[0m", data, EXIT_FAILURE);
+	return (pid);
+}
+
 int	exec_builtins(char blt_val, t_data *data, t_token *cmdline)
 {
 	char	**strs;
@@ -58,5 +68,6 @@ int	exec_builtins(char blt_val, t_data *data, t_token *cmdline)
 		ret_cmd = ft_env(strs, data);
 	else if (blt_val == EXPORT_BLT)
 		ret_cmd = ft_pwd(strs, data);
+	dfree((void **)strs);
 	return (ret_cmd);
 }

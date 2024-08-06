@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/05 20:01:22 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 23:16:57 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,12 @@ void	add_env_to_data(t_data *data, char **env)
 
 void	free_data(t_data *data)
 {
-	g_sig = 0;
-	if (data->tokens)
-	{
-		free_tokens(&data->tokens);}
+	free_tokens(&data->tokens);
 	if (data->dir)
 		closedir(data->dir);
 	data->dir = NULL;
+	free(data->prompt);
+	data->prompt = NULL;
 	if (data->fileno[0] != -1)
 		close(data->fileno[0]);
 	if (data->fileno[1] != -1)

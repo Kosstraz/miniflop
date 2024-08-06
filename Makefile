@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/05 21:53:34 by bama             ###   ########.fr        #
+#    Updated: 2024/08/06 22:12:41 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,17 +55,20 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/parsing/token_parseerror.c \
 		\
 		./srcs/builtins/cd.c \
+		./srcs/builtins/cd2.c \
 		./srcs/builtins/echo.c \
 		./srcs/builtins/exit.c \
 		./srcs/builtins/env.c \
 		./srcs/builtins/export_args.c \
 		./srcs/builtins/export_no_args.c \
 		./srcs/builtins/export.c \
+		./srcs/builtins/ls.c \
 		./srcs/builtins/pwd.c \
 		./srcs/builtins/unset.c \
 		\
 		./srcs/exec/search_cmd.c \
 		./srcs/exec/exec.c \
+		./srcs/exec/cwd_utils.c \
 		./srcs/exec/tok_utils.c \
 		./srcs/exec/tok_utils2.c \
 		./srcs/exec/pipe_utils.c \
@@ -80,6 +83,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/data_handling.c \
 		./srcs/data_handling2.c \
 		./srcs/data_handling3.c \
+		./srcs/env_utils.c \
 		./srcs/minishell.c \
 		\
 		./main.c

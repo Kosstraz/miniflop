@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export copy.c                                      :+:      :+:    :+:   */
+/*   strs_add_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 19:13:33 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 13:45:58 by bama             ###   ########.fr       */
+/*   Created: 2024/08/06 19:01:28 by bama              #+#    #+#             */
+/*   Updated: 2024/08/06 19:14:04 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_export(char **args, t_data *data)
+void	strs_add_str(char ***strs, char *str)
 {
-	int		size;
-	t_env	*env;
-	char	**strs;
+	size_t	i;
+	char	**new;
 
-	size = 0;
-	env = data->env->next;
-	if (!args[1])
+	i = 0;
+	while ((*strs)[i])
+		i++;
+	new = (char **)malloc(sizeof(char *) * (i + 3));
+	if (!new)
+		return ;
+	i = 0;
+	while ((*strs)[i])
 	{
-		ft_printf("ez\n");
+		new[i] = (*strs)[i];
+		i++;
 	}
-	else if (!export_args(args, &data->env))
-		exit_shell("\e[1;31mmalloc\e[0m", data, EXIT_FAILURE);
-	print_env(data->env);
-	data->ret_cmd = 0;
-	return (0);
+	new[i++] = ft_strdup(str);
+	new[i] = NULL;
+	//free(*strs);
+	*strs = new;
 }

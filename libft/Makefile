@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/05 17:30:16 by bama             ###   ########.fr        #
+#    Updated: 2024/08/06 19:05:49 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./parsing/ft_rev_isspace.c \
 		./parsing/ft_rev_isspaceptr.c \
 		./parsing/owsequence.c \
+		./str/strs_add_str.c \
 		./str/str_add_strs.c \
 		./str/lastword.c \
 		./str/ft_strnchr.c \
