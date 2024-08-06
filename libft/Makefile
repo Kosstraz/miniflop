@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
+#    By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/05 17:30:16 by bama             ###   ########.fr        #
+#    Updated: 2024/08/06 17:44:59 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ BLUE 	= \e[34m
 PURPLE 	= \e[35m
 CYAN   	= \e[36m
 YELLOW 	= \e[93m
+EZ 		= \e[38;2;211;54;130m
 
 # ############### #
 #*   VARIABLES   *#
@@ -168,7 +169,7 @@ re: fclean all
 
 pre_comp:
 	@echo "$(BOLD)"
-	@echo "$(PURPLE)"
+	@echo "$(EZ)"
 	@echo "\\t\\t╔────────────────────────────────────────────╗"
 	@sleep 0.008
 	@echo "\\t\\t│                                            │"

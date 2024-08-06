@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
+#    By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/07/29 14:43:23 by bama             ###   ########.fr        #
+#    Updated: 2024/08/06 17:45:26 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CLASSIC = \e[0m
 BOLD	= \e[1m
 RED   	= \e[31m
 GREEN 	= \e[32m
-YELLOW  = \e[33m
+YELLOW  = \e[93m
 CYAN	= \e[36m
 
 # ############### #
