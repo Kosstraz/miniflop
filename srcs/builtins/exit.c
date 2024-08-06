@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 22:50:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 22:22:59 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 13:46:21 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	ft_exit(char **av, t_data *data)
 		count++;
 		if (count > 1)
 		{
-			dfree((void **)av);
 			write(2, TOO_MANY_ARGS_ERROR, TOO_MANY_ARGS_ERROR_SIZE);
 			data->ret_cmd = ERROR;
 			return (ERROR);

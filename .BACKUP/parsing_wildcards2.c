@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 21:22:07 by bama              #+#    #+#             */
-/*   Updated: 2024/07/27 18:49:19 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 14:48:18 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	finish_wildcard_checking(char *pre_, char *post_, char *allfiles,
 		const char *word)
 {
 	if (!allfiles)
-		printf(NO_MATCH_FOUND_ERROR, word);
+		printf(NO_MATCH_FOUND_ERROR, CURLY, LINE_RED, word, R_CURLY);
 	free(pre_);
 	free(post_);
 	free(allfiles);

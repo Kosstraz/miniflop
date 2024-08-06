@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/05 19:07:46 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 14:59:42 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 /*
 	TEXT ERROR
 */
-# define UNKNOW_CMD_PRINTF1 "\e[31m\ninvalid command : not found \
-\"\e[1m"
-# define UNKNOW_CMD_PRINTF1_SIZE 39
+# define UNKNOW_CMD_PRINTF1 "\e[1m\ninvalid command : not found \
+\""
+# define UNKNOW_CMD_PRINTF1_SIZE 35
 
-# define UNKNOW_CMD_PRINTF2 "\e[0;31m\"\n\e[0m"
-# define UNKNOW_CMD_PRINTF2_SIZE 13
+# define UNKNOW_CMD_PRINTF2 "\"\n\e[0m"
+# define UNKNOW_CMD_PRINTF2_SIZE 7
 
 # define PARSE_ERROR_T "\e[31m\nparse error :/\n\e[0m"
 # define PARSE_ERROR_SIZE 25
@@ -35,32 +35,38 @@
 # define COMMAND_IS_DIR_ERROR "\e[31m\ncommand is a directory :/\n\e[0m"
 # define COMMAND_IS_DIR_ERROR_SIZE 36
 
-# define TOO_MANY_ARGS_ERROR "\e[31m\nexit(int) : too many arguments\n\e[0m"
-# define TOO_MANY_ARGS_ERROR_SIZE 41
+# define TOO_MANY_ARGS_ERROR "\e[1m\nexit(int) : \
+\e[5m\e[31mtoo many arguments\n\e[0m"
+# define TOO_MANY_ARGS_ERROR_SIZE 50
 
-# define ENV_ARGS_ERROR "\e[31m\nenv : too many arguments\n\e[0m"
-# define PWD_ARGS_ERROR "\e[31m\npwd : too many arguments\n\e[0m"
-# define ARGS_ERROR_SIZE 35
+# define ENV_ARGS_ERROR "\e[1m\nenv : \
+\e[5m\e[31mtoo many arguments\n\e[0m"
+# define PWD_ARGS_ERROR "\e[1m\npwd : \
+\e[5m\e[31mtoo many arguments\n\e[0m"
+# define CD_ARGS_ERROR "\e[1m\ncd : \
+\e[5m\e[31mtoo many arguments\n\e[0m"
+# define ARGS_ERROR_SIZE 43
 
 # define NO_MATCH_FOUND_ERROR "\e[31m\nno match found \
-with wildcard '%s' :O\n\e[0m"
+with wildcard %s%s'%s'%s :O\n\e[0m"
 
-# define SQUOTE_ERROR		"\e[31m\nparse error caused by an non-closed \
-\e[1msquote\e[0m\n"
-# define DQUOTE_ERROR		"\e[31m\nparse error caused by an non-closed \
-\e[1mdquote\e[0m\n"
-# define SUBSHELL_ERROR		"\e[31m\nparse error caused by an non-closed \
-\e[1msubshell\e[0m\n"
-# define SUBSHELLI_ERROR	"\e[31m\nparse error caused by a missing action in \
-\e[1msubshell\e[0m\n"
-# define SUBSHELLU_ERROR	"\e[31m\nparse error caused by a useless \
-\e[1msubshell\e[0;31m like \"\e[1m()\e[0;31m\"\e[0m\n"
-# define PIPE_ERROR			"\e[31m\nparse error caused by an incomplete \
-\e[1mpipe\e[0m\n"
-# define AND_ERROR			"\e[31m\nparse error caused by an incomplete \
-\e[1mand\e[0m\n"
-# define OR_ERROR			"\e[31m\nparse error caused by an incomplete \
-\e[1mor\e[0m\n"
+# define SQUOTE_ERROR		"\e[1m\nparse error caused by an non-closed \
+\e[21m\e[58:2:255:122:0msquote\e[0m\n"
+# define DQUOTE_ERROR		"\e[1m\nparse error caused by an non-closed \
+\e[21m\e[58:2:255:122:0mdquote\e[0m\n"
+# define SUBSHELL_ERROR		"\e[1m\nparse error caused by an non-closed \
+\e[21m\e[58:2:255:122:0msubshell\e[0m\n"
+# define SUBSHELLI_ERROR	"\e[1m\nparse error caused by a \e[21m\e[58:2:255:122:0m\
+missing action\e[0;1m in \
+\e[21m\e[58:2:255:122:0msubshell\e[0m\n"
+# define SUBSHELLU_ERROR	"\e[1m\nparse error caused by a useless \
+\e[21m\e[58:2:255:122:0msubshell like \"()\"\e[0m\n"
+# define PIPE_ERROR			"\e[1m\nparse error caused by an incomplete \
+\e[21m\e[58:2:255:122:0mpipe\e[0m\n"
+# define AND_ERROR			"\e[1m\nparse error caused by an incomplete \
+\e[21m\e[58:2:255:122:0mand\e[0m\n"
+# define OR_ERROR			"\e[1m\nparse error caused by an incomplete \
+\e[21m\e[58:2:255:122:0mor\e[0m\n"
 
 /*
 	INT ERROR

@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   special_keys.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:24:47 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 00:27:28 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 01:53:51 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	show_dir_contents(char *filename, char *ref, t_data *data);
-
+//
 void	key_tab(t_data *data)
 {
 	int		n;

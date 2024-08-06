@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 00:57:02 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:10:29 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define PROMPT1 "\e[1m\e[35m"
+# define PROMPT1 "\e[1m\e[38;2;0;235;200m"
 # define PROMPT1_SIZE 9
 
 # define PROMPT2 " $> "
@@ -32,6 +32,7 @@
 // ARG_MAX / 2
 # define SZ_MAX 1174302
 
+# define EXEC_BIN	-1
 # define ECHO_BLT	1
 # define UNSET_BLT	2
 # define CD_BLT		3
@@ -39,7 +40,6 @@
 # define EXPORT_BLT	5
 # define ENV_BLT	6
 # define PWD_BLT	7
-# define LS_BLT		8
 
 # define FORKED		1
 
@@ -72,6 +72,7 @@
 # include <sys/stat.h>
 # include <termcap.h>
 # include <termios.h>
+# include "colors.h"
 # include "error.h"
 # include "libft.h"
 # include "platform.h"
@@ -134,6 +135,7 @@ int			exec_builtins(char blt_val, t_data *data, t_token *cmdline);
 
 t_e_type	tok_next_type(t_token *last);
 
+char		*catch_execbin(t_token *cmdline);
 char		*getcmdpath(t_token *cmdline, t_data *data);
 
 char		**convert_env(t_env *env);

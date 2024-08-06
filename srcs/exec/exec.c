@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:41:28 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 00:41:35 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:10:01 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ static void	launch_cmd(char *path, t_token *cmdline, t_data *data)
 
 static void	fetch_command(char **ptf, t_token *cmdline, t_data *data)
 {
-	data->blt_val = is_a_builtin(cmdline);
+	*ptf = catch_execbin(cmdline);
+	if (!ptf || (ptf && !*ptf))
+		data->blt_val = is_a_builtin(cmdline);
 	if (!data->blt_val)
 	{
-		*ptf = getcmdpath(cmdline, data);
+		if (!ptf || (ptf && !*ptf))
+			*ptf = getcmdpath(cmdline, data);
 		if (!*ptf)
 		{
 			fprint_invalidcmd(cmdline);

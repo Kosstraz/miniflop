@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   export copy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:13:33 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 14:25:39 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:45:58 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_export(char **args, t_data *data)
 	else if (!export_args(args, &data->env))
 		exit_shell("\e[1;31mmalloc\e[0m", data, EXIT_FAILURE);
 	print_env(data->env);
-	// dfree((void **)args);
 	data->ret_cmd = 0;
 	return (0);
 }

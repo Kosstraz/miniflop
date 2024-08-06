@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:28:38 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 00:43:04 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:13:28 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,31 @@ static char	*check_in_path(t_token cmdword, t_data *data, char **paths)
 	return (NULL);
 }
 
+char	*catch_execbin(t_token *cmdline)
+{
+	char			*path;
+	DIR				*dir;
+	struct	dirent	*rdir;
+
+	while (cmdline && !is_sep_toktype(*cmdline) && cmdline->type != Command)
+		cmdline = cmdline->next;
+	if (!cmdline || !cmdline->value || cmdline->type != Command)
+		return (NULL);
+	if (ft_strncmp(cmdline->value, "./", 2))
+		return (NULL);
+	path = NULL;
+	dir = opendir(".");
+	rdir = readdir(dir);
+	while (rdir && rdir->d_name)
+	{
+		if (!ft_strcmp(&cmdline->value[2], rdir->d_name))
+			path = ft_strdup(&cmdline->value[2]);
+		rdir = readdir(dir);
+	}
+	closedir(dir);
+	return (path);
+}
+
 char	*getcmdpath(t_token *cmdline, t_data *data)
 {
 	char			*path;
@@ -60,7 +85,7 @@ char	*getcmdpath(t_token *cmdline, t_data *data)
 
 	while (cmdline && !is_sep_toktype(*cmdline) && cmdline->type != Command)
 		cmdline = cmdline->next;
-	if (!cmdline || cmdline->type != Command || is_sep_toktype(*cmdline))
+	if (!cmdline || !cmdline->value || cmdline->type != Command)
 		return (NULL);
 	path = getenvval("PATH", data->env);
 	paths = ft_split(path, ':');

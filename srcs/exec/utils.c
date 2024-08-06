@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 00:57:47 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:13:51 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ char	is_a_builtin(t_token *cmdline)
 		return (ENV_BLT);
 	else if (!ft_strcmp(cmd, "pwd"))
 		return (PWD_BLT);
-	else if (!ft_strcmp(cmd, "ls"))
-		return (LS_BLT);
 	return (0);
 }
 
@@ -54,7 +52,10 @@ void	fprint_invalidcmd(t_token	*cmdline)
 	while (cmdline && cmdline->type != Command)
 		cmdline = cmdline->next;
 	write(2, UNKNOW_CMD_PRINTF1, UNKNOW_CMD_PRINTF1_SIZE);
+	write(2, CURLY, ft_strlen(CURLY));
+	write(2, LINE_RED, ft_strlen(LINE_RED));
 	write(2, cmdline->value, ft_strlen(cmdline->value));
+	write(2, R_CURLY, ft_strlen(R_CURLY));
 	write(2, UNKNOW_CMD_PRINTF2, UNKNOW_CMD_PRINTF2_SIZE);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 00:36:32 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 01:04:43 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ void	add_env_to_data(t_data *data, char **env)
 
 void	free_data(t_data *data)
 {
-	if (data->tokens)
-	{
-		free_tokens(&data->tokens);}
+	free_tokens(&data->tokens);
 	if (data->dir)
 		closedir(data->dir);
 	data->dir = NULL;
