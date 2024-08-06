@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:20:43 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/05 21:39:05 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 20:20:10 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_term(t_data *data)
 {
 	if (data->term.line.buf)
 		free(data->term.line.buf);
+	if (data->term.tab.ref)
+		free(data->term.tab.ref);
 }
 
 void	kill_term(t_data *data)

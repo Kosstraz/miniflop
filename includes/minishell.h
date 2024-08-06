@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 18:05:51 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 23:33:55 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,18 @@
 
 # define FORKED		1
 
-# define KEY_DEL "\033[3~"
-# define KEY_UP "\033[A"
-# define KEY_DOWN "\033[B"
-# define KEY_RIGHT "\033[C"
-# define KEY_LEFT "\033[D"
+# define F_UNKNOWN	0
+# define DIRECTORY	4
+# define REG_FILE	8
+
+# define KEY_DEL	"\033[3~"
+# define KEY_UP		"\033[A"
+# define KEY_DOWN	"\033[B"
+# define KEY_RIGHT	"\033[C"
+# define KEY_LEFT	"\033[D"
 
 # define READ 16
-# define CHUNK 256
+# define CHUNK 512
 # define TERM 4096
 
 # define NB_OF_PROC_MAX_PER_USER 1023
@@ -61,8 +65,9 @@
 # define LEFT -1
 # define RIGHT 1
 
+# include <errno.h>
 # include <stdlib.h>
-# include <limits.h>
+// # include <limits.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
@@ -122,7 +127,7 @@ void		save_stdfileno(int fileno_[3]);
 void		restore_stdfileno(int fileno_[3]);
 void		exec(t_data *data);
 
-char		is_a_execbin(char *path_to_f);
+char		is_an_execbin(char *path_to_f);
 char		is_redirection(t_token *redirection);
 char		is_there_redirect(t_token *cmdline);
 char		check_exitedchild(t_data *data, int *status);
@@ -154,15 +159,12 @@ t_token		*tok_next_sep(t_token *last);
 /*															*/
 /* ******************************************************** */
 
-void		show_dir_contents(char *filename, char *ref, t_data *data);
-
 int			export_args(char **args, t_env **head);
 int			ft_cd(char **arguments, t_data *data);
 int			ft_echo(char **arguments, t_data *data);
 int			ft_env(char **args, t_data *data);
 int			ft_exit(char **av, t_data *data);
 int			ft_export(char **args, t_data *data);
-int			ft_ls(char **args, t_data *data);
 int			ft_pwd(char **args, t_data *data);
 int			ft_unset(char **arguments, t_data *data);
 
@@ -221,6 +223,8 @@ char		**ft_split_quotes(const char *s, t_data *data);
 /*														*/
 /* **************************************************** */
 
+void		tab_reset(t_data *data);
+void		enter_tab_mode(t_data *data);
 
 void		kill_term(t_data *data);
 void		term_init(t_data *data) __attribute__((cold));
@@ -248,7 +252,6 @@ void		free_term(t_data *data) __attribute__((cold));
 
 int			ft_read(int fd, char *buf, int size, t_data *data);
 
-char		*handle_interrupt(t_data *data);
 char		*ft_readline(char *prompt, t_data *data) __attribute__((hot));
 
 /*		DEBUG		*/

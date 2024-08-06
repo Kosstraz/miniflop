@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   search_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:28:38 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 15:13:28 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 18:43:43 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	is_a_execbin(char *path_to_f)
+char	is_an_execbin(char *path_to_f)
 {
 	struct stat	fstat;
 
@@ -43,7 +43,7 @@ static char	*check_in_path(t_token cmdword, t_data *data, char **paths)
 			{
 				path_to_f = ft_strjoin(paths[i], "/");
 				path_to_f = ft_strsjoin(path_to_f, file->d_name);
-				if (is_a_execbin(path_to_f))
+				if (is_an_execbin(path_to_f))
 					return (path_to_f);
 			}
 			file = readdir(data->dir);
@@ -68,7 +68,7 @@ char	*catch_execbin(t_token *cmdline)
 	path = NULL;
 	dir = opendir(".");
 	rdir = readdir(dir);
-	while (rdir && rdir->d_name)
+	while (rdir)
 	{
 		if (!ft_strcmp(&cmdline->value[2], rdir->d_name))
 			path = ft_strdup(&cmdline->value[2]);
