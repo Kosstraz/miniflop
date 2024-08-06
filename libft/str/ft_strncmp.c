@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:48 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/21 20:41:27 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 23:57:41 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	unsigned long	i;
 
 	i = 0;
+	if (!s1 || !s2)
+		return ((int)((unsigned long)s1 - (unsigned long)s2));
 	while ((s1[i] || s2[i]) && i < n)
 	{
 		if ((unsigned char)s1[i] != (unsigned char)s2[i])

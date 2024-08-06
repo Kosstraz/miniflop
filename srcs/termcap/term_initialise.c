@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:49:47 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 01:30:22 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/06 22:59:36 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ static void	term_set_zero(t_term *term)
 	term->line.last.c = 0;
 	term->line.last.l = 0;
 	term->line.buf = NULL;
+	term->tab.is_on = 0;
+	term->tab.max_cnt = 0;
+	term->tab.max_len = 0;
+	term->tab.cnt = 0;
+	term->tab.written = 0;
+	term->tab.prev_line = 0;
+	term->tab.pos = -1;
+	term->tab.ref = NULL;
+	ft_memset(&term->tab.types, 0, sizeof(int) * CHUNK);
+	ft_memset(&term->tab.files, 0, sizeof(char) * CHUNK * CHUNK);
 }
 
 static t_cap	ft_tgetstr(char *id, char **area, t_data *data)

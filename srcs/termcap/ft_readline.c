@@ -6,24 +6,11 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 15:38:29 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 00:14:45 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	is_empty(char *str)
-{
-	int	i;
-
-	i = -1;
-	if (!str)
-		return (1);
-	while (str[++i])
-		if (str[i] != ' ' && str[i] != '\t')
-			return (0);
-	return (1);
-}
 
 static void	initialise_line_data(t_data *data)
 {
@@ -38,7 +25,10 @@ static void	initialise_line_data(t_data *data)
 
 static void terminal_handle_keys(t_data *data, char *ch)
 {
-	if (ft_isprint(ch[0]) || (ch[0] == '\t' && is_empty(data->term.line.buf)))
+	if (data->term.tab.is_on &&
+		(ft_isprint(ch[0]) || ch[0] == '\177' || !ft_strcmp(ch, KEY_DEL)))
+		tab_reset(data);
+	if (ft_isprint(ch[0]))
 		print_char(data, ch[0]);
 	else if (ch[0] == '\004')
 		exit_shell(EXIT_TEXT, data, EXIT_SUCCESS);
@@ -58,8 +48,10 @@ static void terminal_handle_keys(t_data *data, char *ch)
 		key_left(data);
 }
 
-char	*handle_interrupt(t_data *data)
+char	*end_read(t_data *data)
 {
+	if (data->term.tab.is_on)
+		tab_reset(data);
 	while (data->term.curs.l++ <= data->term.line.last.l)
 		write(data->term.fd, "\n", 1);
 	free(data->term.line.buf);
@@ -86,10 +78,13 @@ char	*ft_readline(char *prompt, t_data *data)
 		b_read = ft_read(data->term.fd, buf, READ, data);
 		buf[b_read] = '\0';
 		if (!ft_strcmp(buf, "\003"))
-			return (handle_interrupt(data));
+			return (end_read(data));
 		terminal_handle_keys(data, buf);
 	}
+	if (data->term.tab.is_on)
+		tab_reset(data);
 	while (data->term.curs.l++ <= data->term.line.last.l)
 		write(data->term.fd, "\n", 1);
+	//end_read(data);
 	return (data->term.line.buf);
 }

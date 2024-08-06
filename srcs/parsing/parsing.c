@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 00:28:26 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 00:18:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	take_commandline(const char *line, t_data *data)
 		return ;
 	tokens = parse_commandline(line, data);
 	data->tokens = tokens;
-	show_token(tokens);
+	//show_token(tokens);
 	if (data && data->tokens && data->tokens->value)
 		exec(data);
 }

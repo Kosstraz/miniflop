@@ -6,13 +6,13 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:28:38 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 23:35:17 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 00:00:17 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	is_a_execbin(char *path_to_f)
+char	is_an_execbin(char *path_to_f)
 {
 	struct stat	fstat;
 
@@ -60,7 +60,7 @@ static char	*check_in_path(t_token **cmdword, t_data *data, char **paths)
 					free((char *)(*cmdword)->value);
 					(*cmdword)->value = ft_strdup(absocmd);
 				}
-				if (is_a_execbin(path_to_f))
+				if (is_an_execbin(path_to_f))
 					return (free(absolute), free(absocmd), path_to_f);
 			}
 			file = readdir(data->dir);

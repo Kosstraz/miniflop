@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 23:13:04 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 00:01:08 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@
 
 # define FORKED		1
 
+# define F_UNKNOWN	0
+# define DIRECTORY	4
+# define REG_FILE	8
+
 # define KEY_DEL "\033[3~"
 # define KEY_UP "\033[A"
 # define KEY_DOWN "\033[B"
@@ -53,7 +57,7 @@
 # define KEY_LEFT "\033[D"
 
 # define READ 16
-# define CHUNK 256
+# define CHUNK 512
 # define TERM 4096
 
 # define NB_OF_PROC_MAX_PER_USER 1023
@@ -65,7 +69,7 @@
 # define RIGHT 1
 
 # include <stdlib.h>
-# include <limits.h>
+# include <errno.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
@@ -130,7 +134,7 @@ void		save_stdfileno(int fileno_[3]);
 void		restore_stdfileno(int fileno_[3]);
 void		exec(t_data *data);
 
-char		is_a_execbin(char *path_to_f);
+char		is_an_execbin(char *path_to_f);
 char		is_redirection(t_token *redirection);
 char		is_there_redirect(t_token *cmdline);
 char		check_exitedchild(t_data *data, int *status);
@@ -231,7 +235,8 @@ char		**ft_split_quotes(const char *s, t_data *data);
 /*														*/
 /* **************************************************** */
 
-
+void		tab_reset(t_data *data);
+void		enter_tab_mode(t_data *data);
 void		kill_term(t_data *data);
 void		term_init(t_data *data) __attribute__((cold));
 void		term_set_raw(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 21:17:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/06 23:57:07 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,20 @@ typedef struct s_info
 	t_cap	carriage;
 }	t_info;
 
+typedef struct s_tab
+{
+	char			is_on;
+	int				max_cnt;
+	int				max_len;
+	int				pos;
+	int				cnt;
+	int				prev_line;
+	int				written;
+	char			*ref;
+	unsigned char	types[CHUNK];
+	char			files[CHUNK][CHUNK];
+}	t_tab;
+
 typedef struct s_term
 {
 	int				state;
@@ -93,6 +107,7 @@ typedef struct s_term
 	t_coords		curs;
 	t_line			line;
 	t_info			caps;
+	t_tab			tab;
 	struct termios	raw;
 	struct termios	og;
 }	t_term;
