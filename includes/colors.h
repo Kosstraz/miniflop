@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:52:14 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 23:58:51 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 01:07:37 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 
 # define DUNDERLINE		"\e[21m"
 # define R_DUNDERLINE	"\e[24m"
+# define R_BLINK		"\e[25m"
 
 # define R_HIDDEN		"\e[28m"
 # define R_CENTRALLINE	"\e[29m"

@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/06 19:05:49 by bama             ###   ########.fr        #
+#    Updated: 2024/08/07 00:55:02 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,11 +43,17 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./binary_tree/btree_search_item.c \
 		./binary_tree/btree_size.c \
 		./binary_tree/btree_strict_size.c \
+		\
+		./file/swap_fd.c \
+		./file/ft_cat.c \
+		\
 		./ft_maths/ft_abs.c \
 		./ft_maths/ft_lerp.c \
 		./ft_maths/ft_pow.c \
+		\
 		./gnl/get_next_line_utils_bonus.c \
 		./gnl/get_next_line_bonus.c \
+		\
 		./lst/ft_lstadd_back_bonus.c \
 		./lst/ft_lstadd_front_bonus.c \
 		./lst/ft_lstclear_bonus.c \
@@ -57,6 +63,7 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./lst/ft_lstmap_bonus.c \
 		./lst/ft_lstnew_bonus.c \
 		./lst/ft_lstsize_bonus.c \
+		\
 		./mem/dfree.c \
 		./mem/freemem.c \
 		./mem/freemexit.c \
@@ -67,10 +74,12 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./mem/ft_memcpy.c \
 		./mem/ft_memmove.c \
 		./mem/ft_memset.c \
+		\
 		./parsing/ft_isspace.c \
 		./parsing/ft_rev_isspace.c \
 		./parsing/ft_rev_isspaceptr.c \
 		./parsing/owsequence.c \
+		\
 		./str/strs_add_str.c \
 		./str/str_add_strs.c \
 		./str/lastword.c \
@@ -104,11 +113,13 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./str/strdelete.c \
 		./str/strerase.c \
 		./str/strinsert.c \
+		\
 		./utils/ft_count_words.c \
 		./utils/ft_intlen.c \
 		./utils/ft_convert_base2.c \
 		./utils/ft_convert_base.c \
 		./utils/swap64.c \
+		\
 		./zbasic/ft_atod.c \
 		./zbasic/ft_atof.c \
 		./zbasic/ft_atoi.c \

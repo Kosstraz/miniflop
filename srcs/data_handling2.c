@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:47 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 01:46:28 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 01:17:51 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	free_shell(t_data *data)
 {
 	free_data(data);
 	free_env(&data->env);
+	close(data->historyfd);
 	kill_term(data);
 }
 

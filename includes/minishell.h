@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 00:01:08 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 01:16:58 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@
 
 # define LEFT -1
 # define RIGHT 1
+
+# define HISTORY_PATH ".miniflop.history"
 
 # include <stdlib.h>
 # include <errno.h>
@@ -188,7 +190,9 @@ int			ft_unset(char **arguments, t_data *data);
 /*														*/
 /* **************************************************** */
 
-void		ft_ntail(int fd, int n);
+void		create_history(t_data *data);
+void		add_to_history(char *line, t_data *data);
+char		*search_in_history(char *line, t_data *data);
 
 /* **************************************************** */
 /*														*/
