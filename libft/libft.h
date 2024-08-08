@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/08 22:17:16 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:40:59 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ char	*va_strjoin(size_t count, ...);
 char	*va_strljoin(size_t count, ...);
 char	*ft_strldup(char *str);
 char	*ft_strldup_at(const char *str, ssize_t start, ssize_t end);
-void	strs_add_str(char ***strs, char *str);
+void	strsjoinstr(char ***strs, char *str);
 char	*lastword(char **strs);
 char	*duplastword(char **strs);
 char	*str_add_strs_free(char *str, char **strs, char sep, char last_sep);
@@ -242,14 +242,14 @@ char	**ft_strs_insert(char **strs1, char *str, size_t at);
 	Ajoute le tableau de strings 'strs2' à la fin de
 	'strs1' et renvoie le résultat.
 */
-char	**ft_strs_addback(char **strs1, char **strs2);
+char	**strsjoin(char **strs1, char **strs2);
 /*
 	Similaire à 'ft_strs_addback' hormis qu'ici 'strs1' et 'strs2'
 	sont free à la fin de cette fonction
 	Partez du principe que strs1 et strs2 seront inutilisable après appel
 	de cette fonction
 */
-char	**ft_strs_addback_free(char **strs1, char **strs2);
+char	**strsljoin(char **strs1, char **strs2);
 char	*ft_strdup_at(const char *str, ssize_t start, ssize_t end);
 size_t	ft_strlen2(char **strs);
 size_t	ft_strslen(char **strs);
