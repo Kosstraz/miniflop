@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:18 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 04:13:17 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 14:26:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	recu_joker(t_data *data, char *begin, char **jokers, size_t at, char last)
 	data->dirjok[at] = opendir(".");
 	rd = readdir(data->dirjok[at]);
 	begin = ft_strsjoin(begin, jokers[at]);
-	//printf("begind : %s\n", begin);
 	while (rd)
 	{
 		if (!ft_strncmp(rd->d_name, begin, ft_strlen(begin)))
@@ -79,11 +78,12 @@ void	recu_joker(t_data *data, char *begin, char **jokers, size_t at, char last)
 				printf("\e[31m %s NEW\n\e[0m", tmp);
 			}
 			else if (!jokers[at + 1] && !last)
-				if (!ft_strcmp(rd->d_name, begin, ft_strlen(begin)))
+				if (!ft_strcmp(rd->d_name, begin))
 					printf("\e[31m %s NEW\n\e[0m", begin);
 			if (jokers[at + 1])
 			{
 				tmp = ft_strdup(rd->d_name);
+				tmp = strldelete(tmp, ft_strlen(tmp) - ft_strlen(jokers[at + 1]), ft_strlen(jokers[at + 1]));
 				recu_joker(data, tmp, jokers, at + 1, last);
 			}
 		}
