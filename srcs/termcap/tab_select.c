@@ -6,11 +6,9 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:37:03 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 14:40:49 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 22:12:23 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// verifier que next = ok
 
 #include "minishell.h"
 
@@ -34,8 +32,37 @@ void	write_stored_move(t_term *term, int at, char *mem, int cnt)
 	}
 }
 
-void	tab_insert_loop(t_data *data, int ref_len)
+static void	move_to_slash(t_data *data)
 {
+	int	i;
+	int	dir_len;
+
+	i = 0;
+	if (!data->term.tab.dir)
+		return ;
+	dir_len = ft_strlen(data->term.tab.dir);
+	while (i < dir_len && ft_strncmp(&data->term.tab.dir[i],
+		&data->term.line.buf[data->term.line.i], dir_len - i))
+		i++;
+	if (i == dir_len)
+		return ;
+	i = dir_len - i;
+	while (i--)
+	{
+		if (data->term.curs.c != data->term.caps.cols)
+			write(data->term.fd, data->term.caps.right.cap,
+				data->term.caps.right.len);
+		else
+			move_down(&data->term, 0);
+		data->term.line.i++;
+	}
+}
+
+static void	tab_insert_loop(t_data *data, int ref_len)
+{
+	move_to_slash(data);
+	if (!ref_len)
+		return ;
 	while (data->term.line.i && !(data->term.line.buf[data->term.line.i]
 		== data->term.tab.ref[0] && !ft_strncmp(&data->term.line.buf
 			[data->term.line.i], data->term.tab.ref, ref_len)))
@@ -49,7 +76,7 @@ void	tab_insert_loop(t_data *data, int ref_len)
 		}
 }
 
-char	*tab_insert(t_data *data, char *selected, int len)
+static char	*tab_insert(t_data *data, char *selected, int len)
 {
 	int		tmp;
 	int		ref_len;
@@ -59,8 +86,7 @@ char	*tab_insert(t_data *data, char *selected, int len)
 	ft_memmove(selected, data->term.tab.files[data->term.tab.pos], len);
 	if (data->term.line.size + len >= data->term.line.total)
 		resize_line_buffer(data);
-	if (ref_len)
-		tab_insert_loop(data, ref_len);
+	tab_insert_loop(data, ref_len);
 	tmp = data->term.line.size - data->term.line.i - ref_len + 1;
 	rtn = (char *)ft_malloc(sizeof(char) * tmp, data);
 	ft_memmove(rtn, &data->term.line.buf[data->term.line.i + ref_len], tmp);
@@ -68,6 +94,7 @@ char	*tab_insert(t_data *data, char *selected, int len)
 	data->term.line.i += len;
 	len -= ref_len;
 	data->term.line.size += len;
+	data->term.line.next = data->term.line.size -  data->term.line.i;
 	while (len--)
 	{
 		update_position(&data->term, RIGHT);
@@ -76,12 +103,14 @@ char	*tab_insert(t_data *data, char *selected, int len)
 	return (rtn);
 }
 
-void	tab_select(t_data *data)
+void	tab_select(t_data *data, char shortcut)
 {
 	int		len;
 	char	*tmp;
 	char	selected[S_CHUNK];
 
+	if (!shortcut)
+		tab_clear(data);
 	ft_memset(selected, 0, S_CHUNK);
 	len = ft_strlen(data->term.tab.files[data->term.tab.pos]);
 	tmp = tab_insert(data, selected, len);
@@ -91,5 +120,5 @@ void	tab_select(t_data *data)
 		write_stored_dont_move(&data->term, data->term.line.i, tmp, len);
 	}
 	free(tmp);
-	tab_reset(data);
+	tab_reset(data, 0);
 }

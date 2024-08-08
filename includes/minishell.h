@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 21:37:12 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:33:08 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@
 # include "error.h"
 # include "libft.h"
 # include "platform.h"
-
-// extern char	g_sig;
 
 /* ************************************************ */
 /*													*/
@@ -228,9 +226,10 @@ char		**ft_split_quotes(const char *s, t_data *data);
 /* **************************************************** */
 
 void		resize_line_buffer(t_data *data);
-void		tab_reset(t_data *data);
+void		tab_clear(t_data *data);
+void		tab_reset(t_data *data, int clear);
 void		enter_tab_mode(t_data *data);
-void		tab_select(t_data *data);
+void		tab_select(t_data *data, char shortcut);
 void		print_files(t_data *data);
 void		kill_term(t_data *data);
 void		term_init(t_data *data) __attribute__((cold));
@@ -261,8 +260,8 @@ int			key_right(t_data *data) __attribute__((hot));
 int			key_left(t_data *data) __attribute__((hot));
 int			ft_read(int fd, char *buf, int size, t_data *data);
 
-char		*take_dir_no_space(char *path_to_file);
-char		*take_absocmd_no_space(char	*path_to_file, t_data *data);
+char		*fetch_dir_name(char *path);
+char		*fetch_file_name(char *path);
 char		*ft_readline(char *prompt, t_data *data) __attribute__((hot));
 
 /*		DEBUG		*/

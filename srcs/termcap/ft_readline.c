@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 02:50:29 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:06:58 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static void terminal_handle_keys(t_data *data, char *ch)
 {
 	if (data->term.tab.is_on &&
 		(ft_isprint(ch[0]) || ch[0] == '\177' || !ft_strcmp(ch, KEY_DEL)))
-		tab_reset(data);
+		tab_reset(data, 1);
 	if (ft_isprint(ch[0]))
 		print_char(data, ch[0]);
 	else if (ch[0] == '\r' && data->term.tab.is_on)
-		tab_select(data);
+		tab_select(data, 0);
 	else if (ch[0] == '\004')
 		exit_shell(EXIT_TEXT, data, EXIT_SUCCESS);
 	else if (ch[0] == '\177')
@@ -55,7 +55,7 @@ static void terminal_handle_keys(t_data *data, char *ch)
 char	*end_read(t_data *data)
 {
 	if (data->term.tab.is_on)
-		tab_reset(data);
+		tab_reset(data, 1);
 	while (data->term.curs.l++ <= data->term.line.last.l)
 		write(data->term.fd, "\n", 1);
 	free(data->term.line.buf);
@@ -91,7 +91,7 @@ char	*ft_readline(char *prompt, t_data *data)
 			break ;
 		terminal_handle_keys(data, buf);
 	}
-	tab_reset(data);
+	tab_reset(data, 1);
 	while (data->term.curs.l++ <= data->term.line.last.l)
 		write(data->term.fd, "\n", 1);
 	return (data->term.line.buf);

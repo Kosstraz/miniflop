@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:47 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 13:52:54 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:06:43 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	increment_shlvl(t_env **env)
 
 void	exit_shell(char *mess, t_data *data, int status)
 {
-	tab_reset(data);
+	tab_reset(data, 1);
 	if (status && mess)
 		perror(mess);
 	else if (!status && mess)

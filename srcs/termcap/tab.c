@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 18:30:32 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/07 21:55:38 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 21:05:55 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,10 @@ void	key_tab(t_data *data)
 	data->term.tab.pos++;
 	data->term.tab.pos -= (data->term.tab.pos == data->term.tab.cnt)
 		* data->term.tab.cnt;
+	if (data->term.tab.cnt == 1)
+	{
+		tab_select(data, 1);
+		return ;
+	}
 	print_files(data);
 }

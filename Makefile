@@ -6,7 +6,7 @@
 #    By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/07 21:17:20 by cachetra         ###   ########.fr        #
+#    Updated: 2024/08/08 17:36:51 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,13 +35,14 @@ NAME = minishell
 CC = @cc
 
 SRCS =	./srcs/termcap/arrow_keys.c \
-		./srcs/termcap/cwd_utils.c \
+		./srcs/termcap/copy_paste.c \
 		./srcs/termcap/delete_keys.c \
 		./srcs/termcap/free_terminal.c \
 		./srcs/termcap/ft_readline.c \
 		./srcs/termcap/printables.c \
 		./srcs/termcap/tab_select.c \
 		./srcs/termcap/tab_switch.c \
+		./srcs/termcap/tab_utils.c \
 		./srcs/termcap/tab.c \
 		./srcs/termcap/term_initialise.c \
 		./srcs/termcap/utils.c \
