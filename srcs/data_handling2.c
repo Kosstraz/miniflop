@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handling2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:47 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 01:46:28 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 13:52:54 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	increment_shlvl(t_env **env)
 
 void	exit_shell(char *mess, t_data *data, int status)
 {
+	tab_reset(data);
 	if (status && mess)
 		perror(mess);
 	else if (!status && mess)

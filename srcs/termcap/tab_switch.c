@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:08:20 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 04:07:46 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:27:40 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,15 @@ static void	fetch_tab_ref(t_data *data)
 	i += (i > 0 || data->term.line.buf[i] == ' ');
 	data->term.tab.dir = take_dir_no_space(&data->term.line.buf[i]);
 	data->term.tab.ref = take_absocmd_no_space(&data->term.line.buf[i], data);
+	int fd = open("out.txt", O_WRONLY | O_CREAT | O_TRUNC);
+	if (data->term.tab.dir)
+		write(fd, data->term.tab.dir, ft_strlen(data->term.tab.dir));
+	else
+		write(fd, "DIR NULL", 7);
+	if (data->term.tab.ref)
+		write(fd, data->term.tab.ref, ft_strlen(data->term.tab.ref));
+	else
+		write(fd, "Ref NULL", 7);
 }
 
 static void	fetch_dir_contents_loop_exec(t_data *data, DIR *dir)
@@ -122,13 +131,16 @@ static void	fetch_dir_contents_loop_exec(t_data *data, DIR *dir)
 	while (dirent)
 	{
 		tmp = ft_strdup(dirent->d_name);
-		if (dirent->d_type == DIRECTORY
+		if ((dirent->d_type == DIRECTORY
 			|| (dirent->d_type == REG_FILE && is_an_execbin(tmp)))
+				&& ((data->term.tab.ref == 0) ^ (dirent->d_name[0] == '.')))
 		{
 			data->term.tab.types[data->term.tab.cnt] = dirent->d_type;
 			ft_memmove(data->term.tab.files[data->term.tab.cnt++],
 				dirent->d_name, ft_strlen(dirent->d_name));
 		}
+		errno = 0;
+		dirent = readdir(dir);
 	}
 	if (errno)
 		exit_shell("\e[31mreaddir\e[0m", data, EXIT_FAILURE);
@@ -183,14 +195,6 @@ void	enter_tab_mode(t_data *data)
 	i = -1;
 	data->term.tab.is_on = 1;
 	fetch_tab_ref(data);
-	if (data->term.tab.dir)
-		ft_printf("\n%s\n", data->term.tab.dir);
-	else
-		ft_printf("\nNULL\n");
-	if (data->term.tab.ref)
-		ft_printf("\n%s\n", data->term.tab.ref);
-	else
-		ft_printf("\nNULL\n");
 	fetch_dir_contents(data);
 	if (!data->term.tab.files[0][0])
 	{

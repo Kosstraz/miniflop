@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:28 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 04:11:54 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:35:16 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static char	**split_twice(char *str, char sep1, char sep2)
 	char	**tmp;
 	char	**rtn;
 
+	if (!str)
+		return (NULL);
 	tmp = ft_split(str, sep1);
 	if (!tmp)
 		return (NULL);
@@ -38,11 +40,8 @@ static char	*take_dir_no_space2(char *path_to_file, char **words)
 	i = 0;
 	dir = NULL;
 	if (path_to_file[0] == '/')
-	{
-		dir = ft_strdup("/");
-		// dir = ft_strsjoin(dir, "/");
-	}
-	while (words[i] && words[i + 1])
+		dir = ft_strsjoin(dir, "/");
+	while ((words[i] && words[i + 1]) || i == 0)
 	{
 		dir = ft_strsjoin(dir, words[i++]);
 		dir = ft_strsjoin(dir, "/");
@@ -59,25 +58,23 @@ char	*take_dir_no_space(char *path_to_file)
 
 	isdir = 0;
 	i = 0;
-	if (!path_to_file)
+	dir = NULL;
+	if (!ft_strchr(path_to_file, '/'))
 		return (NULL);
 	while (path_to_file[i])
 		isdir += (path_to_file[i++] == '/');
 	if (!isdir)
 		return (NULL);
-	words = split_twice(path_to_file, ' ', '/');
-	if (!words)
-		return (NULL);
-	if (words[0] && !words[1])
-	{
-		dir = words[0];
+	if (path_to_file[0] == '/')
 		dir = ft_strsjoin(dir, "/");
-		free(words);
-		return (dir);
+	words = split_twice(path_to_file, ' ', '/');
+	i = 0;
+	while (words && ((words[i] && words[i + 1]) || (i == 0 && words[i])))
+	{
+		dir = ft_strsjoin(dir, words[i++]);
+		dir = ft_strsjoin(dir, "/");
 	}
-	dir = take_dir_no_space2(path_to_file, words);
-	dfree((void **)words);
-	return (dir);
+	return (dfree((void **)words), dir);
 }
 
 char	*take_absocmd_no_space(char	*path_to_file, t_data *data)
@@ -89,12 +86,16 @@ char	*take_absocmd_no_space(char	*path_to_file, t_data *data)
 
 	i = 0;
 	ret = NULL;
-	if (!path_to_file[0])
+	if (!path_to_file[0] || !ft_strcmp(path_to_file, "/"))
 		return (NULL);
+	// if (!ft_strchr(path_to_file, '/'))
+	// 	return (ft_strdup(path_to_file));
 	words = ft_split(path_to_file, '/');
 	if (!words)
 		return (NULL);
-	if (words[0] && !words[1])
+	// if (words[0] && !words[1] && !ft_strchr(path_to_file, '/'))
+	// 	return (dfree((void **)words), ft_strdup(path_to_file));
+	if (words[0] && !words[1] && ft_strchr(path_to_file, '/'))
 		return (dfree((void **)words), NULL);
 	while (words[i] && words[i + 1])
 		i++;

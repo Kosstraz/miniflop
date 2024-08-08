@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:37:03 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 04:06:14 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:40:49 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	tab_insert_loop(t_data *data, int ref_len)
 			else
 				move_up(data, 1);
 			data->term.line.i--;
-
 		}
 }
 
