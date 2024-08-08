@@ -1,9 +1,19 @@
 ###### A RAJOUTER/REGLER : ######
 
+- [ENV] Rajouter un environnement dans le cas ou le programme est lancé sans environnement.
+
 ###### QUESTIONNEMENTS : ######
 
 ###### TERMCAP : ######
 {cachetra}
+
+- [TAB] Implementer le tab :
+	- -~~~ Mouvement de la selection avec tab. ~~~
+	- -~~~ Mouvement de la selection avec les fleches. ~~~
+	- Selection du fichier a inserer dans la ligne de commande.
+	- Avec "/"...
+
+- [CTRL] Possibilité de copier-coller plusieurs caracteres.
 
 - -~~~ [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!! ~~~
 

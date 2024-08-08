@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:14:36 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 22:07:31 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:00:41 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 // 	int		curr;
 // 	int		lowest;
 // 	t_env	*rtn;
-// 	char	cmp[CHUNK];
+// 	char	cmp[B_CHUNK];
 
 // 	lowest = INT_MAX;
-// 	ft_memset(&cmp, 1, CHUNK);
+// 	ft_memset(&cmp, 1, B_CHUNK);
 // 	while (env)
 // 	{
 // 		curr = ft_strcmp(cmp, env->name);

@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 16:25:41 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 00:14:28 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 02:52:59 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ void	get_cursor_position(t_data *data)
 	int		b_read;
 	char	buf[READ];
 
-	i = 1;
-	ft_memset(&buf, 0, READ);
+	i = 0;
+	ft_memset(buf, 0, READ);
 	write(STDOUT_FILENO, "\033[6n", 4);
 	b_read = ft_read(STDIN_FILENO, buf, READ, data);
 	if (!b_read)
 		exit_shell("\e[1;31mread\e[0m", data, EXIT_FAILURE);
 	buf[b_read] = '\0';
-	while (!ft_isdigit(buf[i]))
+	while (buf[i] && !ft_isdigit(buf[i]))
 		i++;
 	data->term.curs.l = ft_atoi(&buf[i]);
 	while (buf[i] != ';')

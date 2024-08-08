@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:52:14 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 17:57:40 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/07 02:57:54 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # define TPROMPT_COLOR	"\e[38;2;0;235;200m"
 
+# define LINE_WHITE		"\e[58:2:255:255:255m"
 # define LINE_SEXY		"\e[58:2:211:54:130m"
 # define LINE_ORANGE	"\e[58:2:100:255:0m"
 # define LINE_RED		"\e[58:2:255:0:0m"
@@ -40,6 +41,7 @@
 # define BACKG_BLUE		"\e[48;2;0;0;255m"
 # define BACKG_CYAN		"\e[48;2;0;255;255m"
 # define BACKG_MAGENTA	"\e[48;2;255;0;255m"
+# define BACKG_WHITE	"\e[48;2;255;255;255m"
 
 # define TEXT_SEXY		"\e[38;2;211;54;130m"
 # define TEXT_RED		"\e[38;2;255;0;0m"
@@ -71,6 +73,8 @@
 # define DUNDERLINE		"\e[21m"
 # define R_DUNDERLINE	"\e[24m"
 
+# define R_BLINK		"\e[25m"
+
 # define R_HIDDEN		"\e[28m"
 # define R_CENTRALLINE	"\e[29m"
 
@@ -84,9 +88,10 @@
 /*														*/
 /* **************************************************** */
 
-# define RED		"\e[31m"
-# define GREEN		"\e[32m"
-# define BLUE		"\e[34m"
-# define YELLOW		"\e[93m"
+# define BOLD_RED		"\e[1;31m"
+# define BOLD_GREEN		"\e[1;32m"
+# define BOLD_BLUE		"\e[1;34m"
+# define BOLD_WHITE		"\e[1;37m"
+# define BOLD_YELLOW	"\e[1;93m"
 
 #endif

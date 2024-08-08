@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 22:21:34 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/08 02:50:29 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ static void	initialise_line_data(t_data *data)
 {
 	data->term.caps.lines = tgetnum("li");
 	data->term.caps.cols = tgetnum("co");
-	data->term.line.buf = (char *)ft_malloc(sizeof(char) * CHUNK, data);
-	ft_memset(data->term.line.buf, 0, CHUNK);
+	data->term.line.total = B_CHUNK;
+	data->term.line.buf =
+		(char *)ft_malloc(sizeof(char) * (B_CHUNK + 1), data);
+	ft_memset(data->term.line.buf, 0, B_CHUNK + 1);
 	data->term.line.i = 0;
 	data->term.line.size = 0;
 	data->term.line.next = 0;
@@ -30,6 +32,8 @@ static void terminal_handle_keys(t_data *data, char *ch)
 		tab_reset(data);
 	if (ft_isprint(ch[0]))
 		print_char(data, ch[0]);
+	else if (ch[0] == '\r' && data->term.tab.is_on)
+		tab_select(data);
 	else if (ch[0] == '\004')
 		exit_shell(EXIT_TEXT, data, EXIT_SUCCESS);
 	else if (ch[0] == '\177')
@@ -38,7 +42,7 @@ static void terminal_handle_keys(t_data *data, char *ch)
 		key_delete(data);
 	else if (ch[0] == '\t')
 		key_tab(data);
-	else if (!ft_strcmp(ch, KEY_UP))
+	else if (!ft_strcmp(ch, KEY_T_UP))
 		key_up(data);
 	else if (!ft_strcmp(ch, KEY_DOWN))
 		key_down(data);
@@ -59,31 +63,36 @@ char	*end_read(t_data *data)
 	return (NULL);
 }
 
+void	resize_line_buffer(t_data *data)
+{
+	data->term.line.total += B_CHUNK;
+	data->term.line.buf = (char *)ft_realloc(data->term.line.buf,
+					sizeof(char) * (data->term.line.total + 1), data);
+}
+
 char	*ft_readline(char *prompt, t_data *data)
 {
-	int		n;
 	int		b_read;
 	char	buf[READ];
 
-	n = 1;
 	write(1, prompt, ft_strlen(prompt));
 	initialise_line_data(data);
 	get_cursor_position(data);
-	ft_memset(&buf, 0, READ);
-	while (buf[0] != 13)
+	ft_memset(buf, 0, READ);
+	while (1)
 	{
-		if (data->term.line.size == CHUNK * n)
-			data->term.line.buf = (char *)ft_realloc(data->term.line.buf,
-					sizeof(char) * (CHUNK * ++n + 1), data);
+		if (data->term.line.size == data->term.line.total)
+			resize_line_buffer(data);
 		b_read = ft_read(data->term.fd, buf, READ, data);
 		buf[b_read] = '\0';
 		if (!ft_strcmp(buf, "\003"))
 			return (end_read(data));
+		if ((buf[0] == '\r' && !data->term.tab.is_on))
+			break ;
 		terminal_handle_keys(data, buf);
 	}
-	// tab_reset(data);
-	// while (data->term.curs.l++ <= data->term.line.last.l)
-	// 	write(data->term.fd, "\n", 1);
-	end_read(data);
+	tab_reset(data);
+	while (data->term.curs.l++ <= data->term.line.last.l)
+		write(data->term.fd, "\n", 1);
 	return (data->term.line.buf);
 }

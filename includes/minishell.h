@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 23:33:55 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/07 21:37:12 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@
 # define REG_FILE	8
 
 # define KEY_DEL	"\033[3~"
-# define KEY_UP		"\033[A"
+# define KEY_T_UP		"\033[A"
 # define KEY_DOWN	"\033[B"
 # define KEY_RIGHT	"\033[C"
 # define KEY_LEFT	"\033[D"
 
 # define READ 16
-# define CHUNK 512
+# define S_CHUNK 256
+# define B_CHUNK 1024
 # define TERM 4096
 
 # define NB_OF_PROC_MAX_PER_USER 1023
@@ -62,12 +63,13 @@
 # define CANON 0
 # define RAW 1
 
-# define LEFT -1
-# define RIGHT 1
+# define T_UP 65
+# define DOWN 66
+# define RIGHT 67
+# define LEFT 68
 
 # include <errno.h>
 # include <stdlib.h>
-// # include <limits.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <signal.h>
@@ -140,6 +142,8 @@ int			exec_builtins(char blt_val, t_data *data, t_token *cmdline);
 
 t_e_type	tok_next_type(t_token *last);
 
+char		*take_dir(char *path_to_file);
+char		*take_absocmd(char	*path_to_file);
 char		*catch_execbin(t_token *cmdline);
 char		*getcmdpath(t_token *cmdline, t_data *data);
 
@@ -223,9 +227,11 @@ char		**ft_split_quotes(const char *s, t_data *data);
 /*														*/
 /* **************************************************** */
 
+void		resize_line_buffer(t_data *data);
 void		tab_reset(t_data *data);
 void		enter_tab_mode(t_data *data);
-
+void		tab_select(t_data *data);
+void		print_files(t_data *data);
 void		kill_term(t_data *data);
 void		term_init(t_data *data) __attribute__((cold));
 void		term_set_raw(t_data *data);
@@ -238,20 +244,25 @@ void		update_position(t_term *term, int dir) __attribute__((hot));
 void		get_cursor_position(t_data *data) __attribute__((cold));
 void		move_up(t_data *data, int last_col);
 void		move_down(t_term *term, int first_col);
-void		write_stored(t_term *term, int at, char *mem) __attribute__((hot));
+void		write_stored_dont_move(t_term *term, int at, char *mem, int cnt)
+			__attribute__((hot));
+void		write_stored_move(t_term *term, int at, char *mem, int cnt)
+			__attribute__((hot));
 void		print_char(t_data *data, int c)
 			__attribute__((hot));
 void		key_backspace(t_data *data) __attribute__((hot));
 void		key_delete(t_data *data) __attribute__((hot));
 void		key_tab(t_data *data) __attribute__((hot));
-void		key_up(t_data *data) __attribute__((hot));
-void		key_down(t_data *data) __attribute__((hot));
-void		key_right(t_data *data) __attribute__((hot));
-void		key_left(t_data *data) __attribute__((hot));
 void		free_term(t_data *data) __attribute__((cold));
 
+int			key_up(t_data *data) __attribute__((hot));
+int			key_down(t_data *data) __attribute__((hot));
+int			key_right(t_data *data) __attribute__((hot));
+int			key_left(t_data *data) __attribute__((hot));
 int			ft_read(int fd, char *buf, int size, t_data *data);
 
+char		*take_dir_no_space(char *path_to_file);
+char		*take_absocmd_no_space(char	*path_to_file, t_data *data);
 char		*ft_readline(char *prompt, t_data *data) __attribute__((hot));
 
 /*		DEBUG		*/

@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 22:59:36 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/07 21:38:50 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_line
 	int			i;
 	int			size;
 	int			next;
+	int			total;
 	char		*buf;
 	t_coords	last;
 }	t_line;
@@ -92,11 +93,11 @@ typedef struct s_tab
 	int				max_len;
 	int				pos;
 	int				cnt;
-	int				prev_line;
 	int				written;
 	char			*ref;
-	unsigned char	types[CHUNK];
-	char			files[CHUNK][CHUNK];
+	char			*dir;
+	unsigned char	types[S_CHUNK];
+	char			files[S_CHUNK][S_CHUNK];
 }	t_tab;
 
 typedef struct s_term

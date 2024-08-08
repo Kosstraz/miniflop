@@ -6,13 +6,13 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:13:46 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 14:22:35 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/07 18:07:54 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	write_stored(t_term *term, int at, char *mem)
+void	write_stored_dont_move(t_term *term, int at, char *mem, int cnt)
 {
 	int	i;
 	int	rem;
@@ -20,16 +20,16 @@ void	write_stored(t_term *term, int at, char *mem)
 	i = at;
 	while (term->line.buf[i])
 		term->line.buf[i++] = 0;
-	ft_memmove(&term->line.buf[at], mem, term->line.next);
+	ft_memmove(&term->line.buf[at], mem, cnt);
 	write(term->fd, term->caps.save.cap, term->caps.save.len);
 	rem = term->caps.cols - term->curs.c;
-	if (rem >= term->line.next)
-		write(term->fd, mem, term->line.next);
+	if (rem >= cnt)
+		write(term->fd, mem, cnt);
 	else
 	{
 		if (rem)
 			write (term->fd, mem, rem);
-		write(term->fd, &mem[rem], term->line.next - rem);
+		write(term->fd, &mem[rem], cnt - rem);
 	}
 	write(term->fd, term->caps.restore.cap, term->caps.restore.len);
 }
@@ -45,7 +45,7 @@ static void	edge_case_last_line(t_data *data, int c)
 	update_position(&data->term, RIGHT);
 	data->term.line.buf[data->term.line.i++] = c;
 	data->term.line.size++;
-	write_stored(&data->term, data->term.line.i, tmp);
+	write_stored_dont_move(&data->term, data->term.line.i, tmp, data->term.line.next);
 	write(data->term.fd, data->term.caps.restore.cap, data->term.caps.restore.len);
 	if (data->term.curs.l >= data->term.caps.lines - 1)
 		move_up(data, 0);
@@ -64,7 +64,7 @@ static void	edge_case_last_char(t_data *data, int c)
 	data->term.line.buf[data->term.line.i++] = c;
 	data->term.line.size++;
 	move_down(&data->term, 1);
-	write_stored(&data->term, data->term.line.i, tmp);
+	write_stored_dont_move(&data->term, data->term.line.i, tmp, data->term.line.next);
 	free(tmp);
 }
 
@@ -88,7 +88,7 @@ static void	insert_char(t_data *data, int c)
 	update_position(&data->term, RIGHT);
 	data->term.line.buf[data->term.line.i++] = c;
 	data->term.line.size++;
-	write_stored(&data->term, data->term.line.i, tmp);
+	write_stored_dont_move(&data->term, data->term.line.i, tmp, data->term.line.next);
 	free(tmp);
 }
 

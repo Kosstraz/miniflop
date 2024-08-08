@@ -6,7 +6,7 @@
 #    By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/06 22:22:26 by cachetra         ###   ########.fr        #
+#    Updated: 2024/08/07 21:17:20 by cachetra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,16 +34,17 @@ NAME = minishell
 
 CC = @cc
 
-SRCS =	./srcs/termcap/delete_keys.c \
+SRCS =	./srcs/termcap/arrow_keys.c \
+		./srcs/termcap/cwd_utils.c \
+		./srcs/termcap/delete_keys.c \
 		./srcs/termcap/free_terminal.c \
 		./srcs/termcap/ft_readline.c \
-		./srcs/termcap/horizontal_keys.c \
 		./srcs/termcap/printables.c \
+		./srcs/termcap/tab_select.c \
 		./srcs/termcap/tab_switch.c \
 		./srcs/termcap/tab.c \
 		./srcs/termcap/term_initialise.c \
 		./srcs/termcap/utils.c \
-		./srcs/termcap/vertical_keys.c \
 		\
 		./srcs/parsing/check_parse_error.c \
 		./srcs/parsing/utils.c \
@@ -69,6 +70,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/builtins/pwd.c \
 		./srcs/builtins/unset.c \
 		\
+		./srcs/exec/cwd_utils.c \
 		./srcs/exec/search_cmd.c \
 		./srcs/exec/exec.c \
 		./srcs/exec/tok_utils.c \
