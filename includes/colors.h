@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:52:14 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 02:59:59 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:20:07 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,11 @@
 # define GREEN		"\e[32m"
 # define BLUE		"\e[34m"
 # define YELLOW		"\e[93m"
+
+# define BOLD_RED		"\e[1;31m"
+# define BOLD_GREEN		"\e[1;32m"
+# define BOLD_BLUE		"\e[1;34m"
+# define BOLD_WHITE		"\e[1;37m"
+# define BOLD_YELLOW	"\e[1;93m"
 
 #endif

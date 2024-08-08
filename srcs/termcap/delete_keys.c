@@ -6,7 +6,7 @@
 /*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:21:00 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/01 14:02:53 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/07 18:02:09 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	key_backspace(t_data *data)
 		tmp = (char *)ft_malloc(sizeof(char) * data->term.line.next, data);
 		ft_memmove(tmp, &data->term.line.buf[data->term.line.i], data->term.line.next);
 		delete(data);
-		write_stored(&data->term, --data->term.line.i, tmp);
+		write_stored_dont_move(&data->term, --data->term.line.i, tmp, data->term.line.next);
 		free(tmp);
 	}
 	data->term.line.size--;
@@ -55,7 +55,7 @@ void	key_delete(t_data *data)
 	ft_memmove(tmp, &data->term.line.buf[data->term.line.i + 1], data->term.line.next);
 	write(data->term.fd, data->term.caps.save.cap, data->term.caps.save.len);
 	write(data->term.fd, data->term.caps.clear.cap, data->term.caps.clear.len);
-	write_stored(&data->term, data->term.line.i, tmp);
+	write_stored_dont_move(&data->term, data->term.line.i, tmp, data->term.line.next);
 	write(data->term.fd, data->term.caps.restore.cap, data->term.caps.restore.len);
 	free(tmp);
 	data->term.line.next--;

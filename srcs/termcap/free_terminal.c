@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 13:20:43 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 23:57:18 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 21:38:53 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	free_term(t_data *data)
 {
-	if (data->term.line.buf)
-		free(data->term.line.buf);
-	if (data->term.tab.ref)
-		free(data->term.tab.ref);
+	free(data->term.line.buf);
+	free(data->term.tab.ref);
+	free(data->term.tab.dir);
 }
 
 void	kill_term(t_data *data)

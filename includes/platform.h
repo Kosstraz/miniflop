@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 03:35:56 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:27:56 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 typedef enum e_type
 {
 	Null,
-	Joker,
 	Pipe,
 	And,
 	Or,
@@ -69,6 +68,7 @@ typedef struct s_line
 	int			i;
 	int			size;
 	int			next;
+	int			total;
 	char		*buf;
 	t_coords	last;
 }	t_line;
@@ -101,11 +101,11 @@ typedef struct s_tab
 	int				max_len;
 	int				pos;
 	int				cnt;
-	int				prev_line;
 	int				written;
 	char			*ref;
-	unsigned char	types[CHUNK];
-	char			files[CHUNK][CHUNK];
+	char			*dir;
+	unsigned char	types[S_CHUNK];
+	char			files[S_CHUNK][S_CHUNK];
 }	t_tab;
 
 typedef struct s_term
@@ -113,10 +113,10 @@ typedef struct s_term
 	int				state;
 	int				fd;
 	char			*type;
+	t_tab			tab;
 	t_coords		curs;
 	t_line			line;
 	t_info			caps;
-	t_tab			tab;
 	struct termios	raw;
 	struct termios	og;
 }	t_term;
