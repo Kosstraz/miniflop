@@ -1,0 +1,12 @@
+cd bonus
+exit
+cd bonus
+cd @
+cd ..
+cd -$
+cd -
+cd @
+ls
+clear
+cd srcs
+env

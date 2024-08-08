@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   prompts2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 20:10:35 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/07 16:33:51 by bama             ###   ########.fr       */
+/*   Created: 2024/08/07 22:08:30 by bama              #+#    #+#             */
+/*   Updated: 2024/08/07 22:10:21 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strchr(const char *str, const char c)
+char	*prompt_add_retcmd(char *prompt, t_data *data)
 {
-	unsigned long	i;
-
-	i = 0;
-	if (!str)
-		return (NULL);
-	while (str[i])
-		if (str[i++] == c)
-			return ((char *)&(str[i - 1]));
-	if (c == 0)
-		return ((char *)&(str[i]));
-	return (NULL);
+	prompt = ft_strdup("[");
+	prompt = ft_strssjoin(prompt, getenvval("?", data->env));
+	prompt = ft_strsjoin(prompt, "] - ");
+	return (prompt);
 }

@@ -6,20 +6,19 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:29:54 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 17:10:44 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 17:05:11 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //  commandword_len
-static size_t	cwlen(char *word, t_data *data)
+static size_t	cwlen(const char *word)
 {
 	char	quote_status;
 	size_t	len;
 	size_t	i;
 
-	(void)data;
 	i = 0;
 	len = 0;
 	quote_status = 0;
@@ -35,75 +34,89 @@ static size_t	cwlen(char *word, t_data *data)
 	return (len);
 }
 
-size_t	ft_strlcpy_quotes(char *dst, const char *src, size_t size, t_data *data)
+void	remquotes(char **new, char *src)
 {
-	char	quote_status;
 	size_t	i;
-	size_t	l;
 	size_t	j;
+	char	quote_status;
 
-	(void)data;
 	i = 0;
-	l = 0;
 	j = 0;
 	quote_status = 0;
-	if (size == 0)
-		return (ft_strlen(src));
-	while (src[i] && l < size)
+	while (src[i])
 	{
 		check_quote_status(src[i], &quote_status);
 		if ((src[i] != '\'' && src[i] != '"')
 			|| ((quote_status == 1 && src[i] != '\'')
 				|| (quote_status == 2 && src[i] != '"')))
-		{
-			l++;
-			dst[j++] = src[i];
-		}
+			(*new)[j++] = src[i];
 		i++;
 	}
-	dst[j] = '\0';
-	return (ft_strlen(src));
+	(*new)[j] = '\0';
 }
 
-void	check_validity(char **src, char *word, size_t *src_idx, t_data *data)
+void	remove_useless_quotes(t_token **root, t_data *data)
 {
+	char	*tmp;
+	t_token	*tok;
 	size_t	size;
 
-	size = cwlen(word, data);
-	if (size > 0)
+	tok = *root;
+	while (tok)
 	{
-		ft_strlcpy_quotes(src[(*src_idx)++], word, size, data);
-		free(word);
+		size = cwlen(tok->value);
+		tmp = (char *)tok->value;
+		tok->value = (const char *)malloc(sizeof(const char) * (size + 1));
+		if (!tok->value)
+			exit_shell(NULL, data, 0);
+		if (size > 0)
+			remquotes((char **)&tok->value, tmp);
+		else
+			ft_memset((char *)tok->value, '\0', 1);
+		free(tmp);
+		tok = tok->next;
 	}
-	else
-		free(src[*src_idx]);
 }
 
-char	**remove_useless_quotes(char **splitted, t_data *data)
+size_t	cwlen_joker(const char *word)
 {
-	char	**ret;
-	size_t	size2;
-	size_t	size;
+	char	quote_status;
+	size_t	len;
+	size_t	i;
+
+	i = 0;
+	len = 0;
+	quote_status = 0;
+	while (word[i] && !(!quote_status && word[i] == '*'))
+	{
+		check_quote_status(word[i], &quote_status);
+		if ((word[i] != '\'' && word[i] != '"')
+			|| ((quote_status == 1 && word[i] != '\'')
+				|| (quote_status == 2 && word[i] != '"')))
+			len++;
+		i++;
+	}
+	return (len);
+}
+
+void	remquotes_joker(char **new, char *src)
+{
 	size_t	i;
 	size_t	j;
+	char	quote_status;
 
-	size2 = ft_strlen2(splitted);
-	ret = (char **)malloc(sizeof(char *) * (size2 + 1));
-	if (!ret)
-		return (NULL);
 	i = 0;
 	j = 0;
-	while (splitted[i])
+	quote_status = 0;
+	while (src[i] && !(!quote_status && src[i] == '*'))
 	{
-		size = cwlen(splitted[i], data);
-		ret[j] = (char *)malloc(sizeof(char) * (size + 1));
-		if (!ret[j])
-			return (NULL);
-		check_validity(ret, splitted[i], &j, data);
+		check_quote_status(src[i], &quote_status);
+		if ((src[i] != '\'' && src[i] != '"')
+			|| ((quote_status == 1 && src[i] != '\'')
+				|| (quote_status == 2 && src[i] != '"')))
+			(*new)[j++] = src[i];
 		i++;
 	}
-	while (j <= size2)
-		ret[j++] = NULL;
-	free(splitted);
-	return (ret);
+	(*new)[j] = '\0';
 }
+

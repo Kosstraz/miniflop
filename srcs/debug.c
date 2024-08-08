@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 18:31:54 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 18:56:01 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	show_token(t_token *tok)
 {
 	while (tok)
 	{
+		if (tok->joker)
+			printf("joker");
 		if (tok->type == Pipe)
 			printf("[PIPE]\t\t\t");
 		else if (tok->type == And)

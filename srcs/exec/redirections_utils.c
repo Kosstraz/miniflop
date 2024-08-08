@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:53:14 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 22:09:39 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 13:42:56 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	do_writeredirection(t_token *r)
 		fd = open(r->next->value, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	else if (r->type == RedirectAppend)
 		fd = open(r->next->value, O_WRONLY | O_APPEND | O_CREAT, 0666);
+	else
+		return ;
 	if (r->next->type == Errfile)
 		std = STDERR_FILENO;
 	else
@@ -58,7 +60,7 @@ void	do_redirections(t_token *cmdline, int mode)
 	r = tok_next_redirect(cmdline);
 	if (mode == O_RDONLY && r->type == RedirectR)
 		do_readredirection(r);
-	else if (mode == O_RDONLY && r->next->type == Errfile)
+	else if (mode == O_WRONLY && r->next && r->next->type == Errfile)
 		do_errredirection(r);
 	else if (mode == O_WRONLY)
 		do_writeredirection(r);

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 23:57:07 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 03:35:56 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef enum e_type
 {
 	Null,
+	Joker,
 	Pipe,
 	And,
 	Or,
@@ -35,6 +36,13 @@ typedef enum e_type
 	Errfile
 }	t_e_type;
 
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
 typedef struct s_env
 {
 	char			*name;
@@ -44,6 +52,7 @@ typedef struct s_env
 
 typedef struct s_token
 {
+	char			joker;
 	enum e_type		type;
 	const char		*value;
 	struct s_token	*next;
@@ -115,6 +124,7 @@ typedef struct s_term
 typedef struct s_data
 {
 	DIR		*dir;
+	DIR		*dirjok[512];
 	t_term	term;
 	t_token	*tokens;
 	t_env	*env;
@@ -128,6 +138,7 @@ typedef struct s_data
 	int		_errcode;
 	int		ret_cmd;
 	int		historyfd;
+	char	(*_is_sep_)(char);
 }	t_data;
 
 #endif

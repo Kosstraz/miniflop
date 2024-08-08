@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/04 17:10:36 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 02:44:02 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,23 @@ int	parse_quotes(const char *str, int quote_type, size_t *i,
 	return (0);
 }
 
+//else if (str[*i] == '\'' && !passed)
+//	passed = 1;
 int	parse_squote(const char *str, size_t *i, t_data *data)
 {
-	int	passed;
+	char	(*_is_sep_)(char);
 
-	passed = 0;
+	_is_sep_ = data->_is_sep_;
 	while (str[*i])
 	{
-		if ((str[*i] == '\'' || passed) && (!str[*i + 1] || str[*i + 1] == ' '))
+		if (str[*i] == '\'' && (!str[*i + 1] || str[*i + 1] == ' '))
 			return (1);
-		else if (str[*i] == '\'' && !passed)
-			passed = 1;
+		else if (str[*i] == '\'')
+		{
+			while (str[*i] && !_is_sep_(str[*i]))
+				(*i)++;
+			return (1);
+		}
 		(*i)++;
 	}
 	data->_errcode = SQUOTE_MISSING;
@@ -56,48 +62,46 @@ int	parse_squote(const char *str, size_t *i, t_data *data)
 		Bon"jour mec MOUAH"AHAHH "why are you raging ??" "" A"urevoir "
 */
 
+//else if (str[*i] == '"' && !passed)
+//	passed = 1;
 int	parse_dquote(const char *str, size_t *i, t_data *data)
 {
-	int	passed;
+	char	(*_is_sep_)(char);
 
-	passed = 0;
+	_is_sep_ = data->_is_sep_;
 	while (str[*i])
 	{
-		if ((str[*i] == '"' || passed) && (!str[*i + 1] || str[*i + 1] == ' '))
+		if (str[*i] == '"' && (!str[*i + 1] || str[*i + 1] == ' '))
 			return (1);
-		else if (str[*i] == '"' && !passed)
-			passed = 1;
+		else if (str[*i] == '"')
+		{
+			while (str[*i] && !_is_sep_(str[*i]))
+				(*i)++;
+			return (1);
+		}
 		(*i)++;
 	}
 	data->_errcode = DQUOTE_MISSING;
 	return (DQUOTE_MISSING);
 }
 
-size_t	ft_count_words_quotes(const char *s)
+size_t	ft_count_words_quotes(const char *s, t_data *data)
 {
 	size_t	words;
 	size_t	i;
-	int		squote;
-	int		dquote;
+	char	quote_status;
+	char	(*_is_sep_)(char);
 
-	squote = 0;
-	dquote = 0;
+	_is_sep_ = data->_is_sep_;
+	quote_status = 0;
 	words = 0;
-	i = -1;
-	while (s[++i])
+	i = 0;
+	while (s[i])
 	{
-		if (s[i] == '\'' && !squote && !dquote)
-			squote = 1;
-		else if (s[i] == '\'' && squote)
-			squote = 0;
-		if (s[i] == '"' && !dquote && !squote)
-			dquote = 2;
-		else if (s[i] == '"' && dquote)
-			dquote = 0;
-		if (((s[i] == '"' || s[i] == '\'')&& ((i != 0 && (is_sep(s[i - 1]) || s[i - 1] == '\'' || s[i - 1] == '"')) || i == 0)) && (squote | dquote))
+		check_quote_status(s[i], &quote_status);
+		if (!_is_sep_(s[i]) && (_is_sep_(s[i + 1]) && !quote_status))
 			words++;
-		else if (((i > 0 && is_sep(s[i - 1])) || i == 0) && !is_sep(s[i]) && (squote == 0 && dquote == 0))
-			words++;
+		i++;
 	}
 	return (words);
 }

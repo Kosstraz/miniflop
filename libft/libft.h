@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/07 01:11:27 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 01:47:22 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 # ifndef GNL_BUFFER_SIZE
 #  define GNL_BUFFER_SIZE 64
@@ -114,7 +115,7 @@ int		btree_size(t_btree *root);
 			/* **************************** */
 			/* **************************** */
 
-char	*cat(int fd);
+char	*cat(char *filepath, int oflags, int mode);
 
 			/* **************************** */
 			/* **************************** */

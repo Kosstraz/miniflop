@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/07 00:02:06 by bama             ###   ########.fr        #
+#    Updated: 2024/08/07 22:10:12 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/parsing/ft_split_quotes.c \
 		./srcs/parsing/token_id2.c \
 		./srcs/parsing/token_id.c \
+		./srcs/parsing/token_utils.c \
 		./srcs/parsing/parsing_wildcards2.c \
 		./srcs/parsing/parsing_wildcards.c \
 		./srcs/parsing/parsing_quotes.c \
@@ -84,6 +85,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		\
 		./srcs/debug.c \
 		./srcs/prompts.c \
+		./srcs/prompts2.c \
 		./srcs/data_handling.c \
 		./srcs/data_handling2.c \
 		./srcs/data_handling3.c \

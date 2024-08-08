@@ -6,107 +6,243 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 02:56:15 by bama              #+#    #+#             */
-/*   Updated: 2024/08/04 14:57:39 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 03:22:41 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/gnl/get_next_line_bonus.h"
 #include ".test.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-void	reopenf(struct s_openf *openfile)
+static int	ft_intlen_itoa(int n)
 {
-	close(openfile->fd);
-	*openfile = openf(openfile->file_path ,openfile->oflags, openfile->mode);
-}
+	int	n_len;
 
-static size_t	get_nb_of_line_in_fd(int fd)
-{
-	char	*gnl;
-	size_t	count;
-
-	count = 0;
-	gnl = get_next_line(fd);
-	while (gnl)
+	n_len = 0;
+	while (n > 0)
 	{
-		count++;
-		printf("\e[32m%s\e[0m\n", gnl);
-		free(gnl);
-		gnl = get_next_line(fd);
+		n_len++;
+		n /= 10;
 	}
-	return (count);
+	return (n_len);
 }
 
-// Obtenir la n-ième dernière ligne d'un fichier
-// Si n=0 la dernière ligne sera retournée
-// Si n=3 la 3ème avant dernière ligne sera retournée
-// Si n>[contenu du fd] la première ligne sera tjrs retournée
-char	*ft_ntail(struct s_openf *openfile, int n)
+static char	*ft_itoa_int_min(void)
 {
 	char	*ret;
-	char	*gnl;
-	size_t	i;
-	size_t	size;
+	int		n;
+	int		n_len;
 
-	reopenf(openfile);
-	size = get_nb_of_line_in_fd(openfile->fd);
-	printf("size %d\n", size);
-	reopenf(openfile);
-	gnl = get_next_line(openfile->fd);
-	if (n + 1 > size)
-		return (gnl);
-	i = 0;
-	while (gnl && i < size - n - 1)
+	ret = (char *)malloc(12);
+	if (!ret)
+		return ((char *)0);
+	ret[0] = '-';
+	ret[11] = '\0';
+	ret[10] = '8';
+	n = 214748364;
+	n_len = 9;
+	while (n_len >= 1)
 	{
-		free(gnl);
-		gnl = get_next_line(openfile->fd);
+		ret[n_len--] = n % 10 + '0';
+		n /= 10;
+	}
+	return (ret);
+}
+
+static char	*ft_itoa_zero(void)
+{
+	char	*ret;
+
+	ret = (char *)malloc(2);
+	if (!ret)
+		return ((char *)0);
+	ret[0] = '0';
+	ret[1] = '\0';
+	return (ret);
+}
+
+static char	*ft_itoa_neg(long n)
+{
+	char	*ret;
+	int		n_len;
+
+	if (n == -2147483648)
+		return (ft_itoa_int_min());
+	n_len = ft_intlen_itoa(n);
+	ret = (char *)malloc(n_len + 2);
+	if (!ret)
+		return ((char *)0);
+	ret[0] = '-';
+	ret[n_len + 1] = '\0';
+	while (n_len >= 1)
+	{
+		ret[n_len--] = n % 10 + '0';
+		n /= 10;
+	}
+	return (ret);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*ret;
+	int		n_len;
+
+	if (n == 0)
+		return (ft_itoa_zero());
+	if (n < 0)
+		return (ft_itoa_neg(-n));
+	n_len = ft_intlen_itoa(n);
+	ret = (char *)malloc(n_len + 1);
+	if (!ret)
+		return ((char *)0);
+	ret[n_len--] = '\0';
+	while (n_len >= 0)
+	{
+		ret[n_len--] = n % 10 + '0';
+		n /= 10;
+	}
+	return (ret);
+}
+
+char	*ft_strdup(const char *str)
+{
+	char			*ret;
+	unsigned long	alloc_size;
+	unsigned long	i;
+
+	if (!str)
+		return (NULL);
+	alloc_size = strlen(str);
+	ret = (char *)malloc(sizeof(char) * (alloc_size + 1));
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		ret[i] = str[i];
 		i++;
 	}
-	return (gnl);
+	ret[i] = '\0';
+	return (ret);
 }
 
-void	closef(struct s_openf *openfile)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	free((char *)openfile->file_path);
-	openfile->oflags = 0;
-	openfile->mode = 0;
-	close(openfile->fd);
-}
+	char	*ret;
+	int		size1;
+	int		size2;
+	int		i;
+	int		n;
 
-struct s_openf	openf(const char *filepath, int oflags, int mode)
-{
-	struct s_openf	openfile;
-
-	openfile.file_path = filepath;
-	openfile.oflags = oflags;
-	openfile.mode = mode;
-	openfile.fd = open(filepath, oflags, mode);
-	return (openfile);
+	size1 = strlen(s1);
+	size2 = strlen(s2);
+	ret = (char *)malloc(size1 + size2 + 1);
+	if (!ret)
+		return ((char *)0);
+	i = 0;
+	n = 0;
+	while (s1[i])
+		ret[n++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		ret[n++] = s2[i++];
+	ret[n] = '\0';
+	return (ret);
 }
 
 int	main(void)
 {
-	struct	s_openf	openfile;
-	char			*ntail;
+	int	r, g, b;
+	int	back[3];
 
-	openfile = openf("LS", O_RDONLY, 0666);
-	ntail = ft_ntail(&openfile, 0);
-	if (ntail)
-		printf("%s\n", ntail);
-	else
-		printf("(null)\n");
+	back[0] = 0;
+	back[1] = 0;
+	back[2] = 0;
+	r = 0;
+	g = 0;
+	b = 0;
+	while (1)
+	{
+		char	*ez;
 
-	ntail = ft_ntail(&openfile, 1);
-	if (ntail)
-		printf("%s\n", ntail);
-	else
-		printf("(null)\n");
+		ez = ft_strdup("\e[38;2;");
+		ez = ft_strjoin(ez, ft_itoa(r));
+		ez = ft_strjoin(ez, ";");
+		ez = ft_strjoin(ez, ft_itoa(g));
+		ez = ft_strjoin(ez, ";");
+		ez = ft_strjoin(ez, ft_itoa(b));
+		ez = ft_strjoin(ez, "m");
+		printf("%s╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣╠╣\e[0m\n", ez);
+		if (r >= 255)
+			back[0] = 1;
+		else if (r <= 0)
+			back[0] = 0;
+		if (g >= 255)
+			back[1] = 1;
+		else if (g <= 0)
+			back[1] = 0;
+		if (b >= 255)
+			back[2] = 1;
+		else if (b <= 0)
+			back[2] = 0;
+		if (back[0])
+			r -= 3;
+		else
+			r += 1;
+		if (back[1])
+			g -= 2;
+		else
+			g += 2;
+		if (back[2])
+			b -= 1;
+		else
+			b += 3;
+		usleep(20000);
+	}
+	
+	/*for (int k = 5 ; k < 6 ; k++)
+	{
+		for (int i = 0 ; i < 99 ; i++)
+		{
+			for (int j = 0 ; j < 99 ; j++)
+			{
+				char	*ascii;
 
-	ntail = ft_ntail(&openfile, 0);
-	if (ntail)
-		printf("%s\n", ntail);
-	else
-		printf("(null)\n");
+				ascii = ft_strdup("\e[");
+				ascii = ft_strjoin(ascii, ft_itoa(k));
+				ascii = ft_strjoin(ascii, ":");
+				ascii = ft_strjoin(ascii, ft_itoa(i));
+				ascii = ft_strjoin(ascii, ":");
+				ascii = ft_strjoin(ascii, ft_itoa(j));
+				ascii = ft_strjoin(ascii, "m");
+				printf("%d:%d:%d : %s%s\e[0m", k, i, j, ascii, "Bonjour\n");
+			}
+		}
+	}*/
+	/*for (int i = 0 ; i < 99 ; i++)
+	{
+		for (int j = 0 ; j < 99 ; j++)
+		{
+			char	*ascii;
+
+			ascii = ft_strdup("\e[");
+			ascii = ft_strjoin(ascii, ft_itoa(i));
+			ascii = ft_strjoin(ascii, ":");
+			ascii = ft_strjoin(ascii, ft_itoa(j));
+			ascii = ft_strjoin(ascii, "m");
+			printf("%d:%d : \e[48;2;211;54;130m%s%s\e[0m", i, j, ascii, "Bonjour\n");
+		}
+	}
+	for (int i = 0 ; i < 100 ; i++)
+	{
+		char	*ascii;
+
+		ascii = ft_strdup("\e[");
+		ascii = ft_strjoin(ascii, ft_itoa(i));
+		ascii = ft_strjoin(ascii, "m");
+		printf("%d : %s%s\e[0m", i, ascii, "Bonjour\n");
+	}*/
 	return (0);
 }

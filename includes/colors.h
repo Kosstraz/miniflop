@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 13:52:14 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 01:07:37 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 02:59:59 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define TPROMPT_COLOR	"\e[38;2;0;235;200m"
 
+# define LINE_WHITE		"\e[58:2:255:255:255m"
+# define LINE_BLACK		"\e[58:2:0:0:0m"
 # define LINE_SEXY		"\e[58:2:211:54:130m"
 # define LINE_ORANGE	"\e[58:2:100:255:0m"
 # define LINE_RED		"\e[58:2:255:0:0m"
@@ -56,8 +58,12 @@
 /*														*/
 /* **************************************************** */
 
-# define CURLY			"\e[4:3m"
 # define R_CURLY		"\e[4:0m"
+# define CURLY			"\e[4:3m"
+// soulignement pointillé
+# define ULPOINT		"\e[4:4m"
+// soulignement en trait
+# define ULTRAIT		"\e[4:5m"
 
 # define BOLD			"\e[1m"
 # define OPACITY		"\e[2m"

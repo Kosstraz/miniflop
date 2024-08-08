@@ -6,15 +6,18 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 01:16:58 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 02:38:10 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define PROMPT1 "\e[1m\e[38;2;0;235;200m"
+# define PROMPT1 "\e[1m\e[38;2;0;165;140m"
 # define PROMPT1_SIZE 9
+
+# define PROMPT1BIS "\e[1m\e[38;2;188;148;195m"
+# define PROMPT1BIS_SIZE 9
 
 # define PROMPT2 " $> "
 # define PROMPT2_SIZE 4
@@ -29,8 +32,8 @@
 #  define ARG_MAX 2087151
 # endif
 
-# define CWD_MAX_LEN 35
-# define CWD_AT_NAME "CWD_AT_PATH"
+# define CWD_MAX_LEN 25
+# define CWD_AT_NAME "@"
 
 // ARG_MAX / 2
 # define SZ_MAX 1174302
@@ -202,16 +205,21 @@ char		*search_in_history(char *line, t_data *data);
 /*														*/
 /* **************************************************** */
 
+void		add_newtoken_next(char *value, t_token **prev);
 void		tok_set_null_to_arg(t_token **root);
 void		reset_commandtype(t_token **root);
 void		print_env(t_env *env);
 void		take_commandline(const char *line, t_data *data);
 void		free_tokens(t_token **root);
 void		place_envvars(char ***splitted, t_data *data);
-void		apply_wildcards(char ***splitted);
+//void		apply_wildcards(char ***splitted);
+void		jokeroverride(t_token **root, t_data *data);
+void		tokenise_joker(t_token **root);
 void		separate_operands(char ***splitted);
 void		check_quote_status(char c, char *opened_status);
 void		check_e_type(t_token **second, const char *word, int i);
+void		remquotes(char **new, char *src);
+void		remquotes_joker(char **new, char *src);
 void		review_tokenid(t_token **tokens);
 void		detect_redirect_type(t_token **tok);
 void		check_potential_errors(char **splitted, t_data *data);
@@ -221,15 +229,18 @@ char		is_operand(char c[3]);
 char		is_sep(char c);
 char		is_sep_toktype(t_token tok);
 char		is_missing_septoktype(int _errcode);
-char		*return_missing_chars(char _errcode);
 char		handle_generic_error(char ***splitted, t_data *data);
+
+size_t		cwlen_joker(const char *word);
+
+char		*return_missing_chars(char _errcode);
+void		remove_useless_quotes(t_token **root, t_data *data);
 
 t_token		*check_tokens_error(t_token *tokens, t_data *data);
 t_token		*new_token(char *value);
 t_token		*ret_last_token(t_token *tokens);
 
-char		**remove_useless_quotes(char **splitted, t_data *data);
-char		**ft_split_quotes(const char *s, t_data *data);
+char		**ft_split_quotes(const char *s, char (*_is_sep)(char c), t_data *data);
 
 /* **************************************************** */
 /*														*/

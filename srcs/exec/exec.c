@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:41:28 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/07 00:04:52 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 14:51:15 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,19 @@ void	exec(t_data *data)
 {
 	t_token	*cmd;
 	char	*path_to_file;
+	char	there_is_redi;
 
 	cmd = data->tokens;
 	save_stdfileno(data->fileno);
 	while (cmd)
 	{
 		path_to_file = NULL;
-		if (is_there_redirect(cmd) && data->exec_next)
+		there_is_redi = is_there_redirect(cmd);
+		if (there_is_redi && data->exec_next)
 			do_redirections(cmd, O_RDONLY);
 		if (is_there_cmd(cmd) && data->exec_next)
 			fetch_command(&path_to_file, &cmd, data);
-		if ((data->blt_val || path_to_file) && data->exec_next)
+		if ((data->blt_val || path_to_file || there_is_redi) && data->exec_next)
 			launch_cmd(path_to_file, cmd, data);
 		if (tok_next_type(cmd) != Pipe)
 			waitchildren(data);

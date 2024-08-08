@@ -27,15 +27,15 @@
 - -~~~[<] Parser et tokeniser dans ce contexte. Notamment quand ils sont collés aux arguments/commandes.~~~
 - -~~~[>] Parser et tokeniser dans ce contexte. Notamment quand ils sont collés aux arguments/commandes.~~~
 
-- [*] Avec gestion des fichiers cachés et exclusions (avec lettres pré/post wildcard)
+- -~~~ [*] Avec gestion des fichiers cachés et exclusions (avec lettres pré/post wildcard)~~~
 
 - -~~~[ENV_VAR] Parser et remplacer les variables d'environnement trouvées.~~~
 
-- -~~~[PARHENTESES] Parser les parentheses et créer des sous-tokenisation. Aussi découper la chaîne de token et les déplacer pour gérer les priorités. {cachetra}~~~
+- -~~~[PARHENTESES] Parser les parentheses et créer des sous-tokenisation. Aussi découper la chaîne de token et les déplacer pour gérer les priorités.~~~
 
 ###### LISTE DES CHOSES A FAIRE : ######
 
-- [HISTORY] Faire un historique fonctionnel, basique. {ymanchon}
+- [HISTORY] Faire un historique fonctionnel, basique. {ymanchon/cachetra}
 
 - -~~~[EXEC_GENERIC] Execution générique des commandes trouvées. {ymanchon}~~~
 
@@ -55,12 +55,6 @@
 
 - -~~~[$?] Retourne la valeur DE RETOUR de la dernière commande (ex : ls renvoie 0 s'il y a eu aucune erreur). {cachetra}~~~
 
-- -~~~[ctrl-C] Interpréter ce signal (SIGINT). Affiche un nouveau prompt avec une nouvelle ligne. {ymanchon}~~~
-
-- -~~~[ctrl-D] Interpréter ce signal (EOF <=> End-Of-File). With a read(). Quitte le Shell actuel. {ymanchon}~~~
-
-- -~~~[ctrl-\] Interpréter ce signal (SIGQUIT). Ne doit rien faire. {ymanchon}~~~
-
 ###### BUILTINS : ######
 
 - -~~~[echo] Avec l'option -n. Affiche l'argument. {ymanchon}~~~
@@ -69,7 +63,7 @@
 
 - -~~~[pwd] Affiche le répertoire dans lequel se trouve l'utilisateur appelant. {cachetra}~~~
 
-- [export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnements exportées. {cachetra}
+- [export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnements exportées. {cachetra/ymanchon}
 
 - -~~~[unset] Détruit une variable. Cette commande ne retourne rien --> void unset(...). {ymanchon}~~~
 

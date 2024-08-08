@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/07/29 16:56:40 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 02:43:51 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		check_quotes(char c, int *quote_type, t_data *data);
 int		parse_quotes(const char *str, int quote_type, size_t *i,
 			t_data *data);
-size_t	ft_count_words_quotes(const char *s);
+size_t	ft_count_words_quotes(const char *s, t_data *data);
 
 static void	ft_split_free(char **tofree, size_t count)
 {
@@ -27,16 +27,17 @@ static void	ft_split_free(char **tofree, size_t count)
 
 static char	skip_sep(const char *s, size_t *i, size_t *old, t_data *data)
 {
-	int	quote_type;
+	int		quote_type;
+	char	(*_is_sep_)(char);
 
+	_is_sep_ = data->_is_sep_;
 	quote_type = 0;
-	while (s[*i] && is_sep(s[*i]))
-		if (is_sep(s[*i]))
-			(*i)++;
+	while (s[*i] && _is_sep_(s[*i]))
+		(*i)++;
 	if (!s[*i])
 		return (SPLIT_ERROR);
 	*old = *i;
-	while (s[*i] && !is_sep(s[*i]) && !check_quotes(s[*i], &quote_type, data))
+	while (s[*i] && !_is_sep_(s[*i]) && !check_quotes(s[*i], &quote_type, data))
 		(*i)++;
 	if (quote_type)
 	{
@@ -51,16 +52,17 @@ static char	skip_sep(const char *s, size_t *i, size_t *old, t_data *data)
 		Bon"jour mec MOUAH"AHAHH "why are you raging ??" "" A"urevoir "
 */
 
-char	**ft_split_quotes(const char *s, t_data *data)
+char	**ft_split_quotes(const char *s, char (*_is_sep_)(char c), t_data *data)
 {
 	char	**ret;
 	size_t	back;
 	size_t	i;
 	size_t	j;
 
+	data->_is_sep_ = _is_sep_;
 	if (!s)
 		return (NULL);
-	ret = (char **)malloc(sizeof(char *) * (ft_count_words_quotes(s) + 1));
+	ret = (char **)malloc(sizeof(char *) * (ft_count_words_quotes(s, data) + 1));
 	if (!ret)
 		return (NULL);
 	i = 0;

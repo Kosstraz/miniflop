@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:09:44 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 22:18:51 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/07 18:54:39 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ t_token	*new_token(char *value)
 		return (NULL);
 	ret->type = Null;
 	ret->value = value;
+	ret->joker = FALSE;
 	ret->next = NULL;
 	return (ret);
 }

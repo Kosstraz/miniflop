@@ -1,3 +1,11 @@
-[31m
-exit(int) : too many arguments
-[0m
+a.out
+ez
+includes
+libft
+LS
+main.c
+Makefile
+minishell
+objs
+README.md
+srcs
