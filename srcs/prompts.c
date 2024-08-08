@@ -65,8 +65,8 @@ char	*create_shading(char *normal_prompt)
 	i = 0;
 	ft_memset((int *)lvl, (-1), 3 * sizeof(int));
 	rgb.r = 0 + ((ft_strlen(normal_prompt)) / 2);
-	rgb.g = 239 + ((ft_strlen(normal_prompt)) / 2);
-	rgb.b = 190 + ((ft_strlen(normal_prompt)) / 2);
+	rgb.g = 235 + ((ft_strlen(normal_prompt)) / 2);
+	rgb.b = 185 + ((ft_strlen(normal_prompt)) / 2);
 	new = ft_strdup(BOLD);
 	while (normal_prompt[i])
 	{

@@ -61,7 +61,7 @@ void	take_commandline(const char *line, t_data *data)
 		return ;
 	tokens = parse_commandline(line, data);
 	data->tokens = tokens;
-	show_token(tokens);
+	//show_token(tokens);
 	if (data && data->tokens && data->tokens->value)
 		exec(data);
 	add_to_history((char *)line, data);

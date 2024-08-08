@@ -23,7 +23,7 @@ int	ft_env(char **args, t_data *data)
 		return (ERROR);
 	}
 	tmp = data->env;
-	data->env = data->env->next;
+	//data->env = data->env->next;
 	while (data->env)
 	{
 		if (data->env->value)

@@ -39,6 +39,7 @@ static int	ft_cd_home(t_data *data)
 		data->ret_cmd = -log;
 		return (-log);
 	}
+	printf("%s%s~ : %s%s\n", ITALIC, OPACITY, path, RESET);
 	free(path);
 	change_pwdenvval(oldpwd, data);
 	return (-log);

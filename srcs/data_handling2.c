@@ -69,6 +69,7 @@ void	increment_shlvl(t_env **env)
 
 void	exit_shell(char *mess, t_data *data, int status)
 {
+	tab_reset(data, 1);
 	if (status && mess)
 		perror(mess);
 	else if (!status && mess)

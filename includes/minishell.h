@@ -75,7 +75,7 @@
 # define CANON 0
 # define RAW 1
 
-# define HISTORY_PATH "/.miniflop.history"
+# define HISTORY_PATH "/.miniflop_history"
 
 # include <stdlib.h>
 # include <errno.h>
