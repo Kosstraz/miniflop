@@ -10,8 +10,9 @@
 - [TAB] Implementer le tab :
 	- -~~~ Mouvement de la selection avec tab. ~~~
 	- -~~~ Mouvement de la selection avec les fleches. ~~~
-	- Selection du fichier a inserer dans la ligne de commande.
-	- Avec "/"...
+	- -~~~ Selection du fichier a inserer dans la ligne de commande. -~~~
+	- -~~~ Avec "/"... -~~~
+	- Bugs a regler.
 
 - [CTRL] Possibilité de copier-coller plusieurs caracteres.
 
