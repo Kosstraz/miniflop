@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:32:54 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 13:55:53 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 01:11:10 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ int	ft_env(char **args, t_data *data)
 		return (ERROR);
 	}
 	tmp = data->env;
-	data->env = data->env->next;
 	while (data->env)
 	{
-		if (data->env->value)
+		if (data->env->value && ft_strcmp("?", data->env->name))
 		{
 			write(1, data->env->name, ft_strlen(data->env->name));
 			write(1, "=", 1);

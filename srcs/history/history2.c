@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:25:57 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:08:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 23:52:30 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,5 @@ char	*get_history_fpath(t_data *data)
 	free(user);
 	return (hpath);
 }
+
+

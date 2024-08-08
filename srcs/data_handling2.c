@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handling2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 13:17:47 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 16:52:07 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 00:51:08 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int	setenvval(char *envname, char *newval, t_env **env)
 
 void	free_shell(t_data *data)
 {
-	free_data(data);
+	kill_term(data);
 	free_env(&data->env);
+	free_data(data);
 	if (data->historyfd != -1)
 		close(data->historyfd);
-	kill_term(data);
 }
 
 void	increment_shlvl(t_env **env)
@@ -69,6 +69,7 @@ void	increment_shlvl(t_env **env)
 
 void	exit_shell(char *mess, t_data *data, int status)
 {
+	tab_reset(data, 1);
 	if (status && mess)
 		perror(mess);
 	else if (!status && mess)

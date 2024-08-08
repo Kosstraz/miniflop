@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompts.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:59:44 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:43:26 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 23:02:52 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ void	new_prompt(char **buffer_prompt, t_data *data)
 		if (env_exist(CWD_AT_NAME, data))
 			env_remove(CWD_AT_NAME, &data->env);
 	*buffer_prompt = prompt_add_retcmd(*buffer_prompt, data);
-	*buffer_prompt = va_strjoin(3, *buffer_prompt, cwd, PROMPT2);
-	//*buffer_prompt = strlljoin(*buffer_prompt, cwd);
-	//*buffer_prompt = strljoin(*buffer_prompt, PROMPT2);
+	// *buffer_prompt = va_strjoin(3, *buffer_prompt, cwd, PROMPT2);
+	*buffer_prompt = strlljoin(*buffer_prompt, cwd);
+	*buffer_prompt = strljoin(*buffer_prompt, PROMPT2);
 	*buffer_prompt = create_shading(*buffer_prompt);
 	data->prompt = (*buffer_prompt);
 }

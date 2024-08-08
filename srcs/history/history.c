@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 22:49:48 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:08:48 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 23:51:59 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,16 @@ char	*search_in_history(char *line, t_data *data)
 	char	*hpath;
 
 	hpath = get_history_fpath(data);
-	hdoc = heredoc(hpath, O_CREAT | O_RDWR, 0666, '\n');
+	data->historyfd = open_hfile(data);
+	hdoc = get_next_line(data->historyfd);
 	while (hdoc)
 	{
 		if (!ft_strncmp(line, hdoc, ft_strlen(line)))
-			return (hdoc);
+			return (close_hfile(data), hdoc);
 		free(hdoc);
-		hdoc = heredoc(hpath, O_CREAT | O_RDWR, 0666, '\n');
+		hdoc = get_next_line(data->historyfd);
 	}
+	close_hfile(data);
 	free(hpath);
 	return (NULL);
 }

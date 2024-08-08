@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   platform.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 22:27:56 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 00:53:43 by cachetra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ typedef struct s_tab
 
 typedef struct s_term
 {
-	int				state;
 	int				fd;
+	int				state;
 	char			*type;
 	t_tab			tab;
 	t_coords		curs;
@@ -120,6 +120,12 @@ typedef struct s_term
 	struct termios	raw;
 	struct termios	og;
 }	t_term;
+
+typedef struct s_history
+{
+	int		fd;
+	char	*buf;
+}	t_history;
 
 typedef struct s_data
 {
