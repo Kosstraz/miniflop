@@ -1,9 +1,21 @@
 ###### A RAJOUTER/REGLER : ######
 
+- [ENV] Rajouter un environnement dans le cas ou le programme est lancé sans environnement.
+
+
 ###### QUESTIONNEMENTS : ######
 
 ###### TERMCAP : ######
 {cachetra}
+
+- -~~~  [TAB] Implementer le tab : -~~~
+	- -~~~ Mouvement de la selection avec tab. ~~~
+	- -~~~ Mouvement de la selection avec les fleches. ~~~
+	- -~~~ Selection du fichier a inserer dans la ligne de commande. -~~~
+	- -~~~ Avec "/"... -~~~
+	- -~~~  Bugs a regler. -~~~
+
+- [CTRL] Possibilité de copier-coller plusieurs caracteres.
 
 - -~~~ [FT_READLINE] Faire ft_readline() ez. LE BOSS FINAL MOUAHAHH!!! ~~~
 
@@ -76,5 +88,7 @@
 - -~~~[||] Exécute seulement seulement la première commande valide trouvée (de gauche à droite). {cachetra}~~~
 
 - -~~~[&&] N'exécute aucune commande si l'une d'entre elles n'est pas valide. {cachetra}~~~
+
+- [SUBSHELL] Subshell --> ez (exécution des parenthèses). {cachetra}
 
 - -~~~[*] Doit fonctionner sur le répertoire courant. {ymanchon}~~~

@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/08 17:28:55 by bama             ###   ########.fr        #
+#    Updated: 2024/08/08 22:38:29 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,16 +34,18 @@ NAME = minishell
 
 CC = @cc
 
-SRCS =	./srcs/termcap/delete_keys.c \
+SRCS =	./srcs/termcap/tab/select.c \
+		./srcs/termcap/tab/switch.c \
+		./srcs/termcap/tab/utils.c \
+		./srcs/termcap/tab/tab.c \
+		./srcs/termcap/arrow_keys.c \
+		./srcs/termcap/copy_paste.c \
+		./srcs/termcap/delete_keys.c \
 		./srcs/termcap/free_terminal.c \
 		./srcs/termcap/ft_readline.c \
-		./srcs/termcap/horizontal_keys.c \
 		./srcs/termcap/printables.c \
-		./srcs/termcap/tab_switch.c \
-		./srcs/termcap/tab.c \
 		./srcs/termcap/term_initialise.c \
 		./srcs/termcap/utils.c \
-		./srcs/termcap/vertical_keys.c \
 		\
 		./srcs/parsing/check_parse_error.c \
 		./srcs/parsing/utils.c \
