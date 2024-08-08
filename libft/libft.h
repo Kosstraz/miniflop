@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/07 01:47:22 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:17:16 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,10 @@ ssize_t	ft_rev_isspaceptr(const char *s, ssize_t start);
 			/* **************************** */
 			/* **************************** */
 
-char	*ft_strdup_atfree(const char *str, ssize_t start, ssize_t end);
+char	*va_strjoin(size_t count, ...);
+char	*va_strljoin(size_t count, ...);
+char	*ft_strldup(char *str);
+char	*ft_strldup_at(const char *str, ssize_t start, ssize_t end);
 void	strs_add_str(char ***strs, char *str);
 char	*lastword(char **strs);
 char	*duplastword(char **strs);
@@ -293,12 +296,12 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 	Si 's1' est nul en entré, renvoie ft_strdup(s2)
 	free 's1' a la fin
 */
-char	*ft_strsjoin(char *s1, const char *s2);
+char	*strljoin(char *s1, const char *s2);
 /*
 	Similaire à un strsjoin, cependant s2 est aussi free à la fin
 	s2 Ne sera pas free si !s1
 */
-char	*ft_strssjoin(char *s1, char *s2);
+char	*strlljoin(char *s1, char *s2);
 char	*ft_strtrim(const char *s1, const char *set);
 char	**ft_split(const char *s, char sep);
 char	*ft_strmapi(const char *str, char (*f)(unsigned int, char));

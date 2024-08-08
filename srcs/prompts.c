@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:59:44 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 02:26:08 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:16:13 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ static char	*create_color_ascii(int r, int g, int b)
 	itoa = ft_itoa(r);
 	color = ft_strjoin("\e[38;2;", itoa);
 	free(itoa);
-	color = ft_strsjoin(color, ";");
+	color = strljoin(color, ";");
 	itoa = ft_itoa(g);
-	color = ft_strsjoin(color, itoa);
+	color = strljoin(color, itoa);
 	free(itoa);
-	color = ft_strsjoin(color, ";");
+	color = strljoin(color, ";");
 	itoa = ft_itoa(b);
-	color = ft_strsjoin(color, itoa);
+	color = strljoin(color, itoa);
 	free(itoa);
-	color = ft_strsjoin(color, "m");
+	color = strljoin(color, "m");
 	return (color);
 }
 
@@ -73,11 +73,11 @@ char	*create_shading(char *normal_prompt)
 		increment_color(lvl, &rgb);
 		c[0] = normal_prompt[i];
 		c[1] = 0;
-		new = ft_strssjoin(new, create_color_ascii(rgb.r, rgb.g, rgb.b));
-		new = ft_strsjoin(new, c);
+		new = strlljoin(new, create_color_ascii(rgb.r, rgb.g, rgb.b));
+		new = strljoin(new, c);
 		i++;
 	}
-	new = ft_strsjoin(new, RESET);
+	new = strljoin(new, RESET);
 	free(normal_prompt);
 	return (new);
 }
@@ -103,7 +103,7 @@ void	new_prompt(char **buffer_prompt, t_data *data)
 		while (cwd[size - CWD_MAX_LEN] && cwd[size - CWD_MAX_LEN] != '/')
 			size++;
 		add_at_to_env(ft_strdup_at(cwd, 0, size - CWD_MAX_LEN), data);
-		cwd = ft_strdup_atfree(cwd, size - CWD_MAX_LEN, size);
+		cwd = ft_strldup_at(cwd, size - CWD_MAX_LEN, size);
 		tmp = cwd;
 		cwd = ft_strjoin("@", cwd);
 		free(tmp);
@@ -112,9 +112,8 @@ void	new_prompt(char **buffer_prompt, t_data *data)
 		if (env_exist(CWD_AT_NAME, data))
 			env_remove(CWD_AT_NAME, &data->env);
 	*buffer_prompt = prompt_add_retcmd(*buffer_prompt, data);
-	*buffer_prompt = ft_strsjoin(*buffer_prompt, cwd);
-	*buffer_prompt = ft_strsjoin(*buffer_prompt, PROMPT2);
+	*buffer_prompt = strlljoin(*buffer_prompt, cwd);
+	*buffer_prompt = strljoin(*buffer_prompt, PROMPT2);
 	*buffer_prompt = create_shading(*buffer_prompt);
 	data->prompt = (*buffer_prompt);
-	free(cwd);
 }

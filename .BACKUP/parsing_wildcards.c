@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:47:22 by bama              #+#    #+#             */
-/*   Updated: 2024/07/30 15:05:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:08:43 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static char	handle_wildcard(char ***splitted, size_t word_at, size_t at)
 	{
 		if (check_wildcard_protection(pre_wc, post_wc, dirent->d_name))
 		{
-			allfiles = ft_strsjoin(allfiles, dirent->d_name);
-			allfiles = ft_strsjoin(allfiles, " ");
+			allfiles = strljoin(allfiles, dirent->d_name);
+			allfiles = strljoin(allfiles, " ");
 		}
 		dirent = readdir(dir);
 	}

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 02:40:18 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 17:45:46 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	take_commandline(const char *line, t_data *data)
 
 	if (!line)
 		return ;
-	add_to_history((char *)line, data);
 	tokens = parse_commandline(line, data);
 	data->tokens = tokens;
 	show_token(tokens);
 	if (data && data->tokens && data->tokens->value)
 		exec(data);
+	add_to_history((char *)line, data);
 }

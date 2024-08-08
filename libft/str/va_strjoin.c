@@ -1,39 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup_at.c                                     :+:      :+:    :+:   */
+/*   va_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 13:03:52 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:16:51 by bama             ###   ########.fr       */
+/*   Created: 2024/08/08 22:01:38 by bama              #+#    #+#             */
+/*   Updated: 2024/08/08 22:17:11 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdarg.h>
 
-char	*ft_strdup_at(const char *str, ssize_t start, ssize_t end)
+char	*va_strjoin(size_t count, ...)
 {
-	size_t	i;
-	size_t	size;
 	char	*ret;
+	size_t	i;
+	va_list	va;
 
-	size = end - start;
-	ret = (char *)malloc(sizeof(char) * (size + 1));
-	if (!ret)
-		return (NULL);
-	ret[size] = '\0';
+	va_start(va, count);
 	i = 0;
-	while (start < end)
-		ret[i++] = str[start++];
+	if (count == 0)
+		return (NULL);
+	ret = ft_strdup(va_arg(va, char *));
+	while (i++ < count)
+		ret = strljoin(ret, va_arg(va, char *));
+	va_end(va);
 	return (ret);
 }
 
-char	*ft_strldup_at(const char *str, ssize_t start, ssize_t end)
+char	*va_strljoin(size_t count, ...)
 {
 	char	*ret;
+	size_t	i;
+	va_list	va;
 
-	ret = ft_strdup_at(str, start, end);
-	free((char *)str);
+	va_start(va, count);
+	i = 0;
+	if (count == 0)
+		return (NULL);
+	ret = ft_strdup(va_arg(va, char *));
+	while (i++ < count)
+		ret = strlljoin(ret, va_arg(va, char *));
+	va_end(va);
 	return (ret);
 }

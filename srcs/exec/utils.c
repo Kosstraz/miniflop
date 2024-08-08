@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 15:13:51 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:08:43 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	is_a_builtin(t_token *cmdline)
 		return (ENV_BLT);
 	else if (!ft_strcmp(cmd, "pwd"))
 		return (PWD_BLT);
+	else if (!ft_strcmp(cmd, "__hdel__"))
+		return (HDEL_BLT);
 	return (0);
 }
 
@@ -89,7 +91,7 @@ char	**convert_env(t_env *env)
 	while (i < size)
 	{
 		var = ft_strjoin(env->name, "=");
-		var = ft_strsjoin(var, env->value);
+		var = strljoin(var, env->value);
 		ret[i++] = var;
 		env = env->next;
 	}

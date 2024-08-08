@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_utils.c                                      :+:      :+:    :+:   */
+/*   hdel.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/07 19:48:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 19:44:47 by bama             ###   ########.fr       */
+/*   Created: 2024/08/08 16:49:57 by bama              #+#    #+#             */
+/*   Updated: 2024/08/08 17:44:00 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_newtoken_next(char *value, t_token **prev)
+int	hdel(t_data *data)
 {
-	t_token	*tofree;
-	t_token	*tmp;
+	char	*hpath;
 
-	tmp = *prev;
-	if (!tmp)
+	hpath = get_history_fpath(data);
+	if (access(hpath, F_OK) == -1)
 	{
-		*prev = new_token(value);
-		(*prev)->type = Argument;
+		write(2, HDEL_EXIST, ft_strlen(HDEL_EXIST));
+		return (1);
 	}
-	else if (tmp->next)
+	data->historyfd = open(hpath, O_WRONLY | O_TRUNC, 0666);
+	free(hpath);
+	if (data->historyfd < 0)
 	{
-		tofree = (*prev)->next;
-		(*prev)->next = new_token(value);
-		(*prev)->next->type = tofree->type;
-		(*prev)->next->next = tofree->next;
-		free(tofree);
+		write(2, HDEL_ERROR, ft_strlen(HDEL_ERROR));
+		return (1);
 	}
-	else if (!tmp->next)
-	{
-		tmp->next = new_token(value);
-		tmp->type = Argument;
-	}
+	close(data->historyfd);
+	data->historyfd = -1;
+	write(1, HDEL_SUCCESS, ft_strlen(HDEL_SUCCESS));
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:28:38 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 00:00:17 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:08:43 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	*check_in_path(t_token **cmdword, t_data *data, char **paths)
 				|| !ft_strcmp((*cmdword)->value, file->d_name))
 			{
 				path_to_f = ft_strjoin(paths[i], "/");
-				path_to_f = ft_strsjoin(path_to_f, file->d_name);
+				path_to_f = strljoin(path_to_f, file->d_name);
 				if (absocmd)
 				{
 					free(path_to_f);

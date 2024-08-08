@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/06 23:32:44 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 17:45:04 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@
 
 # define NO_MATCH_FOUND_ERROR "\e[31m\nno match found \
 with wildcard %s%s'%s'%s :O\n\e[0m"
+
+# define HDEL_EXIST "\e[2m\e[3m\e[31mhistory file doesn't exist\n\e[0m"
+# define HDEL_ERROR "\e[2m\e[3m\e[31mhistory can not be reset\n\e[0m"
+# define HDEL_SUCCESS "\e[2m\e[3mhistory successfully reset\n\e[0m"
 
 # define SQUOTE_ERROR		"\e[1m\nparse error caused by an non-closed \
 \e[21m\e[58:2:255:122:0msquote\e[0m\n"

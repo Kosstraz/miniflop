@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/07 00:55:02 by bama             ###   ########.fr        #
+#    Updated: 2024/08/08 22:15:55 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./str/ft_strndup.c \
 		./str/ft_striteri.c \
 		./str/ft_strjoin.c \
-		./str/ft_strsjoin.c \
+		./str/strljoin.c \
 		./str/ft_strlen.c \
 		./str/ft_strlen2.c \
 		./str/ft_strmapi.c \
@@ -113,6 +113,7 @@ SRCS = 	./binary_tree/btree_apply_infix.c \
 		./str/strdelete.c \
 		./str/strerase.c \
 		./str/strinsert.c \
+		./str/va_strjoin.c \
 		\
 		./utils/ft_count_words.c \
 		./utils/ft_intlen.c \

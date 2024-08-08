@@ -77,4 +77,4 @@
 
 - -~~~[&&] N'exécute aucune commande si l'une d'entre elles n'est pas valide. {cachetra}~~~
 
-- [*] Doit fonctionner sur le répertoire courant. {ymanchon}
+- -~~~[*] Doit fonctionner sur le répertoire courant. {ymanchon}~~~

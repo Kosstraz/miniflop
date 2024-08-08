@@ -6,15 +6,30 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 22:49:48 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 13:59:53 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:08:48 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	open_hfile(void)
+int	open_hfile(t_data *data)
 {
-	return (open(HISTORY_PATH, O_CREAT | O_RDWR, 0666));
+	char	*hpath;
+	int		fd;
+
+	hpath = get_history_fpath(data);
+	fd = open(hpath, O_CREAT | O_RDWR, 0666);
+	free(hpath);
+	return (fd);
+}
+
+
+// close(data->historyfd)
+// data->historyfd = -1;
+inline void	close_hfile(t_data *data)
+{
+	close(data->historyfd);
+	data->historyfd = -1;
 }
 
 static char	*heredoc(char *filepath, int oflags, int mode, char sep)
@@ -39,29 +54,28 @@ static char	*heredoc(char *filepath, int oflags, int mode, char sep)
 	return (contant);
 }
 
-void	create_history(t_data *data)
-{
-	data->historyfd = open_hfile();
-}
 
 void	add_to_history(char *line, t_data *data)
 {
 	char	*history;
 	char	*hdoc;
 	char	*tmp;
+	char	*hpath;
 
-	close(data->historyfd);
-	data->historyfd = open_hfile();
-	history = cat(HISTORY_PATH, O_CREAT | O_RDWR, 0666);
-	close(data->historyfd);
-	hdoc = heredoc(HISTORY_PATH, O_CREAT | O_RDWR, 0666, '\n');
+	hpath = get_history_fpath(data);
+	data->historyfd = open_hfile(data);
+	history = cat(hpath, O_CREAT | O_RDWR, 0666);
+	close_hfile(data);
+	hdoc = heredoc(hpath, O_CREAT | O_RDWR, 0666, '\n');
 	if (ft_strcmp(line, hdoc))
 	{
 		tmp = ft_strjoin(line, "\n");
-		history = ft_strssjoin(tmp, history);
-		data->historyfd = open_hfile();
+		history = strlljoin(tmp, history);
+		data->historyfd = open_hfile(data);
 		write(data->historyfd, history, ft_strlen(history));
+		close_hfile(data);
 	}
+	free(hpath);
 	free(hdoc);
 	free(history);
 }
@@ -69,15 +83,17 @@ void	add_to_history(char *line, t_data *data)
 char	*search_in_history(char *line, t_data *data)
 {
 	char	*hdoc;
+	char	*hpath;
 
-	(void)data;
-	hdoc = heredoc(HISTORY_PATH, O_CREAT | O_RDWR, 0666, '\n');
+	hpath = get_history_fpath(data);
+	hdoc = heredoc(hpath, O_CREAT | O_RDWR, 0666, '\n');
 	while (hdoc)
 	{
 		if (!ft_strncmp(line, hdoc, ft_strlen(line)))
 			return (hdoc);
 		free(hdoc);
-		hdoc = heredoc(HISTORY_PATH, O_CREAT | O_RDWR, 0666, '\n');
+		hdoc = heredoc(hpath, O_CREAT | O_RDWR, 0666, '\n');
 	}
+	free(hpath);
 	return (NULL);
 }

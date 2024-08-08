@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:43:15 by bama              #+#    #+#             */
-/*   Updated: 2024/08/03 18:04:27 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:08:48 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static char	*modify_word(const char *s, const char *varname, char *env,
 
 	ret = NULL;
 	dup = ft_strdup_at(s, 0, at);
-	ret = ft_strssjoin(ret, dup);
+	ret = strlljoin(ret, dup);
 	free(dup);
 	if (env)
 	{
 		dup = ft_strdup(env);
-		ret = ft_strssjoin(ret, dup);
+		ret = strlljoin(ret, dup);
 	}
 	if (ft_strlen(varname) != ft_strlen(s) - 1)
 	{
 		dup = ft_strdup_at(s, at + 1 + ft_strlen(varname), ft_strlen(s));
-		ret = ft_strssjoin(ret, dup);
+		ret = strlljoin(ret, dup);
 	}
 	return (ret);
 }

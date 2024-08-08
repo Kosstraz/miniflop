@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 18:28:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 14:50:39 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 16:59:02 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	exec_builtins(char blt_val, t_data *data, t_token *cmdline)
 		ret_cmd = ft_env(strs, data);
 	else if (blt_val == PWD_BLT)
 		ret_cmd = ft_pwd(strs, data);
+	else if (blt_val == HDEL_BLT)
+		ret_cmd = hdel(data);
 	dfree((void **)strs);
 	return (ret_cmd);
 }

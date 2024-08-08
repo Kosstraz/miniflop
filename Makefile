@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/07 22:10:12 by bama             ###   ########.fr        #
+#    Updated: 2024/08/08 17:28:55 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/builtins/export.c \
 		./srcs/builtins/pwd.c \
 		./srcs/builtins/unset.c \
+		./srcs/builtins/hdel.c \
 		\
 		./srcs/exec/search_cmd.c \
 		./srcs/exec/exec.c \
@@ -82,6 +83,7 @@ SRCS =	./srcs/termcap/delete_keys.c \
 		./srcs/exec/utils2.c \
 		\
 		./srcs/history/history.c \
+		./srcs/history/history2.c \
 		\
 		./srcs/debug.c \
 		./srcs/prompts.c \

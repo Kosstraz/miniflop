@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:28 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 20:09:11 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 22:08:43 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ char	*take_dir(char *path_to_file)
 	if (!words)
 		return (NULL);
 	if (path_to_file[0] == '/')
-		dir = ft_strsjoin(dir, "/");
+		dir = strljoin(dir, "/");
 	while (words[i] && words[i + 1])
 	{
-		dir = ft_strsjoin(dir, words[i++]);
-		dir = ft_strsjoin(dir, "/");
+		dir = strljoin(dir, words[i++]);
+		dir = strljoin(dir, "/");
 	}
 	return (dfree((void **)words), dir);
 }

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 02:38:10 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/08 17:27:10 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define EXPORT_BLT	5
 # define ENV_BLT	6
 # define PWD_BLT	7
+# define HDEL_BLT	8
 
 # define FORKED		1
 
@@ -71,7 +72,7 @@
 # define LEFT -1
 # define RIGHT 1
 
-# define HISTORY_PATH ".miniflop.history"
+# define HISTORY_PATH "/.miniflop.history"
 
 # include <stdlib.h>
 # include <errno.h>
@@ -184,6 +185,7 @@ int			ft_export(char **args, t_data *data);
 int			ft_ls(char **args, t_data *data);
 int			ft_pwd(char **args, t_data *data);
 int			ft_unset(char **arguments, t_data *data);
+int			hdel(t_data *data);
 
 /* **************************************************** */
 /*														*/
@@ -193,8 +195,12 @@ int			ft_unset(char **arguments, t_data *data);
 /*														*/
 /* **************************************************** */
 
-void		create_history(t_data *data);
+void		close_hfile(t_data *data);
 void		add_to_history(char *line, t_data *data);
+
+int			open_hfile(t_data *data);
+
+char		*get_history_fpath(t_data *data);
 char		*search_in_history(char *line, t_data *data);
 
 /* **************************************************** */
