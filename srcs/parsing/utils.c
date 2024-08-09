@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:40:38 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 18:34:40 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 18:19:12 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	is_operand(char c[3])
 		|| (c[0] == '>' && c[1] != '>')
 		|| (c[0] == '>' && c[1] == '>')
 		|| (c[0] == '2' && c[1] == '>')
+		|| (c[0] == ';')
 		|| (c[0] == '(')
 		|| (c[0] == ')'));
 }
@@ -51,10 +52,6 @@ char	is_sep(char c)
 
 char	is_sep_toktype(t_token tok)
 {
-	return (tok.type == Pipe || tok.type == And || tok.type == Or);
-}
-
-char	there_is_validwildcards(t_token *tok)
-{
-
+	return (tok.type == Pipe || tok.type == And || tok.type == Or 
+			|| tok.type == Comma);
 }

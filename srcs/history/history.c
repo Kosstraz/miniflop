@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 22:49:48 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 17:46:07 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 19:51:46 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,19 @@ char	*search_in_history(char *line, t_data *data)
 {
 	char	*hdoc;
 	char	*hpath;
+	char	*trunc;
+	int		fd;
 
+	fd = open_hfile(data);
 	hpath = get_history_fpath(data);
-	hdoc = heredoc(hpath, O_CREAT | O_RDWR, 0666, '\n');
+	trunc = strtrunc_quotes(line, ' ');
+	hdoc = get_next_line(fd);
 	while (hdoc)
 	{
-		if (!ft_strncmp(line, hdoc, ft_strlen(line)))
+		if (!ft_strncmp(trunc, hdoc, ft_strlen(trunc)))
 			return (hdoc);
 		free(hdoc);
-		hdoc = heredoc(hpath, O_CREAT | O_RDWR, 0666, '\n');
+		hdoc = get_next_line(fd);
 	}
 	free(hpath);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 22:17:54 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 22:17:17 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 17:58:18 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	reset_commandtype(t_token **root)
 				&& tmp->type != RedirectAppend
 				&& tmp->type != HereDoc && tmp->type != Infile
 				&& tmp->type != Outfile && tmp->type != Command
-				&& tmp->type != Subshell && tmp->type != Errfile)
+				&& tmp->type != Subshell && tmp->type != Errfile
+				&& tmp->type != Comma)
 				tmp->type = Command;
 			if (tmp->type == Command)
 				break ;

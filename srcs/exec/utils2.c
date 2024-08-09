@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 18:28:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 16:59:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 19:54:58 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,4 @@ int	ft_fork(t_data *data)
 	if (pid == -1)
 		exit_shell("\e[31mfork\e[0m", data, EXIT_FAILURE);
 	return (pid);
-}
-
-int	exec_builtins(char blt_val, t_data *data, t_token *cmdline)
-{
-	char	**strs;
-	int		ret_cmd;
-
-	ret_cmd = -ARG_MAX;
-	strs = tok_to_strs(cmdline);
-	if (blt_val == ECHO_BLT)
-		ret_cmd = ft_echo(strs, data);
-	else if (blt_val == CD_BLT)
-		ret_cmd = ft_cd(strs, data);
-	else if (blt_val == UNSET_BLT)
-		ret_cmd = ft_unset(strs, data);
-	else if (blt_val == EXIT_BLT)
-		ret_cmd = ft_exit(strs, data);
-	else if (blt_val == EXPORT_BLT)
-		ret_cmd = ft_export(strs, data);
-	else if (blt_val == ENV_BLT)
-		ret_cmd = ft_env(strs, data);
-	else if (blt_val == PWD_BLT)
-		ret_cmd = ft_pwd(strs, data);
-	else if (blt_val == HDEL_BLT)
-		ret_cmd = hdel(data);
-	dfree((void **)strs);
-	return (ret_cmd);
 }

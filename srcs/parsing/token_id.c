@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:09:44 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 18:54:39 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 17:59:16 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	check_e_type(t_token **prev, const char *word, int i)
 			type = Pipe;
 		else if (word[0] == '(' || word[0] == ')')
 			type = Subshell;
+		else if (word[0] == ';')
+			type = Comma;
 	}
 	else if (ft_strlen(word) == 2)
 	{

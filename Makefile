@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/08 22:38:29 by bama             ###   ########.fr        #
+#    Updated: 2024/08/09 19:55:30 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRCS =	./srcs/termcap/tab/select.c \
 		\
 		./srcs/exec/search_cmd.c \
 		./srcs/exec/exec.c \
+		./srcs/exec/blt_utils.c \
 		./srcs/exec/cwd_utils.c \
 		./srcs/exec/tok_utils.c \
 		./srcs/exec/tok_utils2.c \
@@ -120,7 +121,7 @@ TLIB = -ltermcap \
 #*    REGLES    *#
 # ############## #
 
-all: libft_comp pre_comp $(NAME) mischief
+all: libft_comp  $(NAME) pre_comp #mischief
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(TLIB) -o $@

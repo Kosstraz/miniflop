@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:29:20 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 19:54:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ int			ft_export(char **args, t_data *data);
 int			ft_ls(char **args, t_data *data);
 int			ft_pwd(char **args, t_data *data);
 int			ft_unset(char **arguments, t_data *data);
-int			hdel(t_data *data);
+int			hdel(char **arguments, t_data *data);
 
 /* **************************************************** */
 /*														*/

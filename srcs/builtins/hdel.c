@@ -6,13 +6,13 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 16:49:57 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 17:44:00 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 19:57:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	hdel(t_data *data)
+static int	hdel_reset_history(t_data *data)
 {
 	char	*hpath;
 
@@ -32,5 +32,19 @@ int	hdel(t_data *data)
 	close(data->historyfd);
 	data->historyfd = -1;
 	write(1, HDEL_SUCCESS, ft_strlen(HDEL_SUCCESS));
+	return (0);
+}
+
+static int	hdel_rm_things(char **arguments, t_data *data)
+{
+	
+}
+
+int	hdel(char **arguments, t_data *data)
+{
+	if (!arguments || !arguments[0])
+		return (hdel_reset_history(data));
+	else
+		return (hdel_rm_things(arguments, data));
 	return (0);
 }

@@ -6,37 +6,11 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:08:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 19:54:38 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	is_a_builtin(t_token *cmdline)
-{
-	char	*cmd;
-
-	while (cmdline && cmdline->type != Command)
-		cmdline = cmdline->next;
-	cmd = (char *)cmdline->value;
-	if (!ft_strcmp(cmd, "echo"))
-		return (ECHO_BLT);
-	else if (!ft_strcmp(cmd, "cd"))
-		return (CD_BLT);
-	else if (!ft_strcmp(cmd, "unset"))
-		return (UNSET_BLT);
-	else if (!ft_strcmp(cmd, "exit"))
-		return (EXIT_BLT);
-	else if (!ft_strcmp(cmd, "export"))
-		return (EXPORT_BLT);
-	else if (!ft_strcmp(cmd, "env"))
-		return (ENV_BLT);
-	else if (!ft_strcmp(cmd, "pwd"))
-		return (PWD_BLT);
-	else if (!ft_strcmp(cmd, "__hdel__"))
-		return (HDEL_BLT);
-	return (0);
-}
 
 char	check_exitedchild(t_data *data, int *status)
 {

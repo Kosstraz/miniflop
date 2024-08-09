@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/09 02:02:10 by bama             ###   ########.fr        #
+#    Updated: 2024/08/09 18:49:05 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -155,7 +155,7 @@ PRINTF_P = ./ft_printf
 #*    REGLES    *#
 # ############## #
 
-all: pre_comp $(NAME)
+all:  pre_comp $(NAME)
 
 $(NAME): $(OBJS)
 	$(LMAKE) $(PRINTF_P) re
