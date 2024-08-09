@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 22:49:48 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 02:05:45 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 17:46:07 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	add_to_history(char *line, t_data *data)
 	char	*hdoc;
 	char	*tmp;
 	char	*hpath;
+	char	*trunc;
 
 	hpath = get_history_fpath(data);
 	data->historyfd = open_hfile(data);
@@ -68,7 +69,8 @@ void	add_to_history(char *line, t_data *data)
 	hdoc = heredoc(hpath, O_CREAT | O_RDWR, 0666, '\n');
 	if (line[0] && chrocc(line, ' ') != ft_strlen(line) && ft_strcmp(line, hdoc))
 	{
-		tmp = ft_strjoin(line, "\n");
+		trunc = strtrunc_quotes(line, ' ');
+		tmp = strljoin(trunc, "\n");
 		history = strlljoin(tmp, history);
 		data->historyfd = open_hfile(data);
 		write(data->historyfd, history, ft_strlen(history));

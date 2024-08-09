@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/09 02:02:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 17:45:40 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ ssize_t	ft_rev_isspaceptr(const char *s, ssize_t start);
 			/* **************************** */
 			/* **************************** */
 
-char    *strtrunc(char *str, char t);
+char    *strtrunc_quotes(char *str, char t);
 size_t  chrocc(char *str, char chr);
 char	*va_strjoin(size_t count, ...);
 char	*va_strljoin(size_t count, ...);
