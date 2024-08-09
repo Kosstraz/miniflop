@@ -6,15 +6,17 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 00:10:12 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 23:07:44 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 02:17:57 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 void	ft_cd_notdir(char *path);
+int		ft_cd_back(t_data *data);
+char	*replace_tild(char *old, t_data *data);
 
-static void	change_pwdenvval(char *old_pwd, t_data *data)
+void	change_pwdenvval(char *old_pwd, t_data *data)
 {
 	setenvval("OLDPWD", old_pwd, &data->env);
 	setenvval("PWD", getcwd(NULL, 0), &data->env);
@@ -58,6 +60,8 @@ static int	ft_cd_at(t_data *data)
 	}
 	oldpwd = getenvval("PWD", data->env);
 	path = getenvval(CWD_AT_NAME, data->env);
+	if (path[0] == '~')
+		path = replace_tild(path, data);
 	log = chdir(path);
 	if (log != 0)
 	{
@@ -74,26 +78,8 @@ static int	ft_cd_at(t_data *data)
 
 static int	ft_cd_edgecase(char **arguments, t_data *data)
 {
-	char	*oldpwd;
-	char	*path;
-	int		log;
-
 	if (!ft_strcmp(arguments[1], "-"))
-	{
-		oldpwd = getenvval("PWD", data->env);
-		path = getenvval("OLDPWD", data->env);
-		log = chdir(path);
-		if (log != 0)
-		{
-			free(path);
-			free(oldpwd);
-			return (data->ret_cmd = log, log);
-		}
-		change_pwdenvval(oldpwd, data);
-		printf("%s%s%s --> %s%s\n", ITALIC, OPACITY, oldpwd, path, RESET);
-		free(path);
-		return (-log);
-	}
+		return (ft_cd_back(data));
 	else if (!ft_strcmp(arguments[1], "@"))
 		return (ft_cd_at(data));
 	else if (!ft_strcmp(arguments[1], "~"))

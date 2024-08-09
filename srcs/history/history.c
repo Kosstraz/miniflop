@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 22:49:48 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:08:48 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 02:05:45 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static char	*heredoc(char *filepath, int oflags, int mode, char sep)
 	return (contant);
 }
 
-
 void	add_to_history(char *line, t_data *data)
 {
 	char	*history;
@@ -67,7 +66,7 @@ void	add_to_history(char *line, t_data *data)
 	history = cat(hpath, O_CREAT | O_RDWR, 0666);
 	close_hfile(data);
 	hdoc = heredoc(hpath, O_CREAT | O_RDWR, 0666, '\n');
-	if (ft_strcmp(line, hdoc))
+	if (line[0] && chrocc(line, ' ') != ft_strlen(line) && ft_strcmp(line, hdoc))
 	{
 		tmp = ft_strjoin(line, "\n");
 		history = strlljoin(tmp, history);

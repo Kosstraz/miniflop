@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtolower.c                                    :+:      :+:    :+:   */
+/*   .test.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/07 18:50:57 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/09 01:35:34 by bama             ###   ########.fr       */
+/*   Created: 2024/08/04 13:56:45 by bama              #+#    #+#             */
+/*   Updated: 2024/08/04 14:23:39 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
-char	*ft_strtolower(char *str)
+struct s_openf	openf(const char *filepath, int oflags, int mode);
+void			closef(struct s_openf *openfile);
+void			reopenf(struct s_openf *openfile);
+
+typedef struct s_openf
 {
-	int	i;
-
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (str[i])
-	{
-		str[i] = ft_tolower(str[i]);
-		i++;
-	}
-	return (str);
-}
+	const char	*file_path;
+	int			oflags;
+	int			mode;
+	int			fd;
+}	t_openf;

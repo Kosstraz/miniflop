@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strldup.c                                          :+:      :+:    :+:   */
+/*   chrocc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 22:12:04 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:13:24 by bama             ###   ########.fr       */
+/*   Created: 2024/08/09 01:31:13 by bama              #+#    #+#             */
+/*   Updated: 2024/08/09 02:00:08 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strldup(char *str)
+size_t  chrocc(char *str, char chr)
 {
-	char	*ret;
+    size_t  i;
+    size_t  occ;
 
-	ret = ft_strdup(str);
-	free(str);
-	return (ret);
+    i = 0;
+    occ = 0;
+    while (str[i])
+        if (str[i++] == chr)
+            occ++;
+    return (occ);
 }

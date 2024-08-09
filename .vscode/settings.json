@@ -4,5 +4,8 @@
 		"minishell.h": "c",
 		"libft.h": "c",
 		"utility": "c"
-	}
+	},
+	"editor.insertSpaces": false,
+	"editor.comments.insertSpace": false,
+	"editor.detectIndentation": false
 }

@@ -6,13 +6,14 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:59:44 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:43:26 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 02:11:18 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 char	*prompt_add_retcmd(char *prompt, t_data *data);
+char	*replace_home_by_tild(char *cwd, t_data *data);
 
 static char	*create_color_ascii(int r, int g, int b)
 {
@@ -97,6 +98,7 @@ void	new_prompt(char **buffer_prompt, t_data *data)
 	int		size;
 
 	cwd = getcwd(NULL, 0);
+	cwd = replace_home_by_tild(cwd, data);
 	size = ft_strlen(cwd);
 	if (size > CWD_MAX_LEN)
 	{
@@ -112,9 +114,8 @@ void	new_prompt(char **buffer_prompt, t_data *data)
 		if (env_exist(CWD_AT_NAME, data))
 			env_remove(CWD_AT_NAME, &data->env);
 	*buffer_prompt = prompt_add_retcmd(*buffer_prompt, data);
-	*buffer_prompt = va_strjoin(3, *buffer_prompt, cwd, PROMPT2);
-	//*buffer_prompt = strlljoin(*buffer_prompt, cwd);
-	//*buffer_prompt = strljoin(*buffer_prompt, PROMPT2);
+	*buffer_prompt = strlljoin(*buffer_prompt, cwd);
+	*buffer_prompt = strljoin(*buffer_prompt, PROMPT2);
 	*buffer_prompt = create_shading(*buffer_prompt);
 	data->prompt = (*buffer_prompt);
 }

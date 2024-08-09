@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/08 22:40:59 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 02:02:02 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 	@param ac Le nombre de paramètres à 'free'
 	@param ... Les paramètres qui seront 'free'
 */
-void	freemen(int ac, ...);
+void	freemem(int ac, ...);
 /*
 	freemem avec un exit(errcode) a la fin
 */
@@ -216,6 +216,8 @@ ssize_t	ft_rev_isspaceptr(const char *s, ssize_t start);
 			/* **************************** */
 			/* **************************** */
 
+char    *strtrunc(char *str, char t);
+size_t  chrocc(char *str, char chr);
 char	*va_strjoin(size_t count, ...);
 char	*va_strljoin(size_t count, ...);
 char	*ft_strldup(char *str);

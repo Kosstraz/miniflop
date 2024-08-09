@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:37 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/03 03:21:46 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 01:48:56 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,14 @@ char	*ft_strdup(const char *str)
 		i++;
 	}
 	ret[i] = '\0';
+	return (ret);
+}
+
+char	*ft_strldup(char *str)
+{
+	char	*ret;
+
+	ret = ft_strdup(str);
+	free(str);
 	return (ret);
 }

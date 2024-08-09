@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:08:20 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 22:39:39 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 01:45:46 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ static void	fetch_dir_contents_loop_exec(t_data *data, DIR *dir)
 		tmp = ft_strdup(dirent->d_name);
 		if ((dirent->d_type == DIRECTORY
 			|| (dirent->d_type == REG_FILE && is_an_execbin(tmp)))
-			&& (!ft_strncmp(data->term.tab.ref, dirent->d_name, len)
+			&& (!ft_strncmp(ft_strtolower(ft_strdup(data->term.tab.ref)),// a free
+				ft_strtolower(ft_strdup(dirent->d_name)), len)// a free
 				|| (!data->term.tab.ref && dirent->d_name[0] != '.')))
 		{
 			data->term.tab.types[data->term.tab.cnt] = dirent->d_type;
@@ -87,6 +88,8 @@ static void	fetch_dir_contents_loop_exec(t_data *data, DIR *dir)
 static void	fetch_dir_contents_loop(t_data *data, DIR *dir)
 {
 	int				len;
+	char			*tolower1;
+	char			*tolower2;
 	struct dirent	*dirent;
 
 	errno = 0;
@@ -94,9 +97,10 @@ static void	fetch_dir_contents_loop(t_data *data, DIR *dir)
 	len = ft_strlen(data->term.tab.ref);
 	while (dirent)
 	{
+		tolower1 = ft_strtolower(ft_strdup(data->term.tab.ref));
+		tolower2 = ft_strtolower(ft_strdup(dirent->d_name));
 		if ((!data->term.tab.ref && dirent->d_name[0] != '.')
-			|| !ft_strncmp(data->term.tab.ref,
-				dirent->d_name, len))
+			|| !ft_strncmp(tolower1, tolower2, len))
 		{
 			data->term.tab.types[data->term.tab.cnt] = dirent->d_type;
 			ft_memmove(data->term.tab.files[data->term.tab.cnt++],
@@ -104,6 +108,7 @@ static void	fetch_dir_contents_loop(t_data *data, DIR *dir)
 		}
 		errno = 0;
 		dirent = readdir(dir);
+		freemem(2, tolower1, tolower2);
 	}
 	if (errno)
 		exit_shell("\e[31mreaddir\e[0m", data, EXIT_FAILURE);
