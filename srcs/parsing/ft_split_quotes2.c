@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:32 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/08 02:44:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 14:07:19 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ size_t	ft_count_words_quotes(const char *s, t_data *data)
 	while (s[i])
 	{
 		check_quote_status(s[i], &quote_status);
-		if (!_is_sep_(s[i]) && (_is_sep_(s[i + 1]) && !quote_status))
+		if (!_is_sep_(s[i]) && (!s[i + 1] || _is_sep_(s[i + 1])) && !quote_status)
 			words++;
 		i++;
 	}

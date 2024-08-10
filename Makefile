@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/10 03:13:59 by bama             ###   ########.fr        #
+#    Updated: 2024/08/10 14:07:47 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,7 +119,7 @@ TLIB = -ltermcap \
 #*    REGLES    *#
 # ############## #
 
-all: libft_comp  $(NAME) pre_comp #mischief
+all: libft_comp pre_comp  $(NAME) #mischief
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(TLIB) -o $@
