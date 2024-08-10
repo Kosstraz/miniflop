@@ -6,12 +6,13 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 01:31:13 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 02:00:08 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 00:24:37 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// Compte le nombre de caractères 'chr' dans 'str'
 size_t  chrocc(char *str, char chr)
 {
     size_t  i;

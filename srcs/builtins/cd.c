@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 00:10:12 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 02:17:57 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 02:05:04 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	ft_cd_home(t_data *data)
 
 	oldpwd = getenvval("PWD", data->env);
 	user = getenvval("USER", data->env);
-	path = ft_strjoin("/home/", user);
-	free(user);
+	path = ft_strdup("/home/");
+	path = strlljoin(path, user);
 	log = chdir(path);
 	if (log != 0)
 	{

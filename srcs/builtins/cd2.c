@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 17:57:28 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 02:18:09 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 02:24:42 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,31 @@ char	*replace_tild(char *old, t_data *data)
 	char	*user;
 
 	user = getenvval("USER", data->env);
-	ret = ft_strdup("/home/");
+	ret = ft_strdup("/home");
+	if (user)
+		ret = strljoin(ret, "/");
 	ret = strlljoin(ret, user);
-	ret = strljoin(ret, "/");
 	ret = strljoin(ret, &old[1]);
+	free(old);
+	return (ret);
+}
+
+static char	*replace_home_by_tild(char *old, t_data *data)
+{
+	char	*ret;
+	char	*tmp;
+	char	*user;
+
+	user = getenvval("USER", data->env);
+	ret = ft_strdup("/home");
+	if (user)
+		ret = strljoin(ret, "/");
+	ret = strlljoin(ret, user);
+	if (ft_strncmp(old, ret, ft_strlen(ret)))
+		return (free(ret), old);
+	tmp = ret;
+	ret = ft_strjoin("~", &old[ft_strlen(ret)]);
+	free(tmp);
 	free(old);
 	return (ret);
 }
@@ -36,6 +57,8 @@ int	ft_cd_back(t_data *data)
 
 	oldpwd = getenvval("PWD", data->env);
 	path = getenvval("OLDPWD", data->env);
+	if (path[0] == '~')
+		path = replace_tild(path, data);
 	log = chdir(path);
 	if (log != 0)
 	{
@@ -43,6 +66,8 @@ int	ft_cd_back(t_data *data)
 		free(oldpwd);
 		return (data->ret_cmd = log, log);
 	}
+	oldpwd = replace_home_by_tild(oldpwd, data);
+	path = replace_home_by_tild(path, data);
 	change_pwdenvval(oldpwd, data);
 	printf("%s%s%s --> %s%s\n", ITALIC, OPACITY, oldpwd, path, RESET);
 	free(path);

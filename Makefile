@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/09 19:55:30 by bama             ###   ########.fr        #
+#    Updated: 2024/08/10 03:13:59 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,8 @@ SRCS =	./srcs/termcap/tab/select.c \
 		./srcs/parsing/token_id2.c \
 		./srcs/parsing/token_id.c \
 		./srcs/parsing/token_utils.c \
-		./srcs/parsing/parsing_wildcards2.c \
-		./srcs/parsing/parsing_wildcards.c \
+		./srcs/parsing/jokeroverride.c \
+		./srcs/parsing/jokeroverride2.c \
 		./srcs/parsing/parsing_quotes.c \
 		./srcs/parsing/envvar.c \
 		./srcs/parsing/separate_operands.c \
@@ -68,7 +68,6 @@ SRCS =	./srcs/termcap/tab/select.c \
 		./srcs/builtins/exit.c \
 		./srcs/builtins/env.c \
 		./srcs/builtins/export_args.c \
-		./srcs/builtins/export_no_args.c \
 		./srcs/builtins/export.c \
 		./srcs/builtins/pwd.c \
 		./srcs/builtins/unset.c \
@@ -92,9 +91,8 @@ SRCS =	./srcs/termcap/tab/select.c \
 		./srcs/prompts.c \
 		./srcs/prompts2.c \
 		./srcs/data_handling.c \
-		./srcs/data_handling2.c \
-		./srcs/data_handling3.c \
 		./srcs/env_utils.c \
+		./srcs/env_utils2.c \
 		./srcs/minishell.c \
 		\
 		./main.c

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_swap_addr.c                                     :+:      :+:    :+:   */
+/*   swap_addr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_swap_addr(void **a, void **b)
+void	swap_addr(void **a, void **b)
 {
 	unsigned long	al;
 	unsigned long	bl;
 
-	al = (unsigned long long)(a);
-	bl = (unsigned long long)(b);
-	a = (void **)bl;
-	b = (void **)al;
+	al = (unsigned long long)(*a);
+	bl = (unsigned long long)(*b);
+	*a = (void *)bl;
+	*b = (void *)al;
 }

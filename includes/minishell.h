@@ -6,76 +6,12 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 19:54:14 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 01:55:01 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-# define PROMPT1 "\e[1m\e[38;2;0;165;140m"
-# define PROMPT1_SIZE 9
-
-# define PROMPT1BIS "\e[1m\e[38;2;188;148;195m"
-# define PROMPT1BIS_SIZE 9
-
-# define PROMPT2 " $> "
-# define PROMPT2_SIZE 4
-
-# define PROMPT3 "\e[0m"
-# define PROMPT3_SIZE 4
-
-# define EXIT_TEXT "\e[31m\nexit\n\e[0m"
-# define EXIT_TEXT_SIZE 15
-
-# ifndef ARG_MAX
-#  define ARG_MAX 2087151
-# endif
-
-# define CWD_MAX_LEN 25
-# define CWD_AT_NAME "@"
-
-// ARG_MAX / 2
-# define SZ_MAX 1174302
-
-# define EXEC_BIN	-1
-# define ECHO_BLT	1
-# define UNSET_BLT	2
-# define CD_BLT		3
-# define EXIT_BLT	4
-# define EXPORT_BLT	5
-# define ENV_BLT	6
-# define PWD_BLT	7
-# define HDEL_BLT	8
-
-# define FORKED		1
-
-# define F_UNKNOWN	0
-# define DIRECTORY	4
-# define REG_FILE	8
-
-# define KEY_DEL	"\033[3~"
-# define KEY_T_UP	"\033[A"
-# define KEY_DOWN	"\033[B"
-# define KEY_RIGHT	"\033[C"
-# define KEY_LEFT	"\033[D"
-
-# define T_UP 65
-# define DOWN 66
-# define RIGHT 67
-# define LEFT 68
-
-# define READ 16
-# define S_CHUNK 256
-# define B_CHUNK 1024
-# define TERM 4096
-
-# define NB_OF_PROC_MAX_PER_USER 1023
-
-# define CANON 0
-# define RAW 1
-
-# define HISTORY_PATH "/.miniflop_history"
 
 # include <stdlib.h>
 # include <errno.h>
@@ -89,6 +25,7 @@
 # include <termcap.h>
 # include <termios.h>
 # include "colors.h"
+# include "defs.h"
 # include "error.h"
 # include "libft.h"
 # include "platform.h"
@@ -103,6 +40,8 @@
 /*													*/
 /* ************************************************ */
 
+void		create_own_env(t_data *data);
+void		initialise_env(t_data *data);
 void		env_remove(char *name, t_env **env);
 void		exit_shell(char *mess, t_data *data, int status);
 void		increment_shlvl(t_env **env);
@@ -123,6 +62,8 @@ char		env_exist(char *name, t_data *data);
 int			setenvval(char *envname, char *newval, t_env **env);
 
 char		*getenvval(char *envname, t_env *env);
+
+t_env		*env_create_node(const char *var, t_data *data);
 
 /* **************************************************************** */
 /*																	*/
@@ -203,6 +144,7 @@ void		add_to_history(char *line, t_data *data);
 
 int			open_hfile(t_data *data);
 
+char		*up_history(char *line, t_data *data);
 char		*get_history_fpath(t_data *data);
 char		*search_in_history(char *line, t_data *data);
 
@@ -266,7 +208,7 @@ void		enter_tab_mode(t_data *data);
 void		tab_select(t_data *data, char shortcut);
 void		print_files(t_data *data);
 void		kill_term(t_data *data);
-void		term_init(t_data *data) __attribute__((cold));
+void		term_init(t_data *data, char **env) __attribute__((cold));
 void		term_set_raw(t_data *data);
 void		term_reset(t_data *data) __attribute__((cold));
 void		*ft_malloc(size_t size, t_data *data) __attribute__((cold));

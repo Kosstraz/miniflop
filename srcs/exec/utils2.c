@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 18:28:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 19:54:58 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 02:09:39 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	custom_execve(char *path, t_token *cmdline, t_data *data)
 	free_data(data);
 	free_env(&data->env);
 	free_term(data);
+	if (args && (!ft_strcmp(args[0], "ls") || !ft_strcmp(args[0], "grep")))
+		strsljoinstr_at(&args, "--color=tty", 1);
 	execve((const char *)path,
 		(char *const *)args,
 		(char *const *)env);

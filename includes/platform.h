@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/09 17:56:31 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 02:50:50 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ typedef enum e_type
 	Outfile,
 	Errfile
 }	t_e_type;
+
+typedef struct s_joker
+{
+	size_t	at;
+	char	first;
+	char	last;
+	char	single;
+}	t_joker;
 
 typedef struct s_rgb
 {

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 19:54:38 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 00:52:16 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char	**convert_env(t_env *env)
 	i = 0;
 	while (i < size)
 	{
-		var = ft_strjoin(env->name, "=");
-		var = strljoin(var, env->value);
+		var = ft_strjoin(ft_strdup(env->name), "=");// peut-être enlever ft_strdup
+		var = strljoin(var, ft_strdup(env->value));// peut-être enlever ft_strdup
 		ret[i++] = var;
 		env = env->next;
 	}

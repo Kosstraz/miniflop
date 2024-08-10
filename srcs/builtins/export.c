@@ -6,31 +6,60 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:13:33 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/04 17:09:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 01:13:27 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static char	**abc_sort_env(t_env *env)
+{
+	char	**strsenv;
+
+	size_t	size;
+	size_t	i;
+	size_t	j;
+
+	strsenv = convert_env(env);
+	if (!strsenv)
+		return (NULL);
+	i = 0;
+	while (strsenv[i])
+	{
+		j = 0;
+		while (strsenv[j])
+		{
+			size = ft_strlen(ft_strchr(strsenv[i], '='));
+			if (size > ft_strlen(ft_strchr(strsenv[j], '=')))
+				size = ft_strlen(ft_strchr(strsenv[j], '='));
+			if (ft_strncmp(strsenv[i], strsenv[j], size) < 0)
+				swap_addr((void **)&strsenv[i], (void **)&strsenv[j]);
+			j++;
+		}
+		i++;
+	}
+	return (strsenv);
+}
+
+static void	print_abc_env(t_data *data, t_env *env)
+{
+	char	**sorted;
+	size_t	i;
+
+	i = 0;
+	sorted = abc_sort_env(env);
+	if (!sorted)
+		exit_shell(NULL, data, 1);
+	while (sorted[i])
+		printf("export %s\n", sorted[i++]);
+}
+
 int	ft_export(char **args, t_data *data)
 {
-	int		size;
-	t_env	*env;
-	char	**strs;
-
-	(void)strs;
-	(void)env;
-	(void)size;
-	size = 0;
-	env = data->env->next;
-	if (!args[1])
-	{
-		ft_printf("ez\n");
-	}
+	if (!args || !args[1])
+		print_abc_env(data, data->env);
 	else if (!export_args(args, &data->env))
 		exit_shell("\e[1;31mmalloc\e[0m", data, EXIT_FAILURE);
-	print_env(data->env);
-	// dfree((void **)args);
 	data->ret_cmd = 0;
 	return (0);
 }

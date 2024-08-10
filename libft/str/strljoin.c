@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:10:42 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/08 22:08:00 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 02:04:13 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*strlljoin(char *s1, char *s2)
 		ret = ft_strdup(s2);
 		return (free(s2), ret);
 	}
+	else if (!s2)
+		return (s1);
 	size1 = ft_strlen(s1);
 	size2 = ft_strlen(s2);
 	ret = (char *)malloc(sizeof(char) * (size1 + size2 + 1));

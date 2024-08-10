@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 19:49:23 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 00:25:10 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ static t_token	*parse_commandline(const char *line, t_data *data)
 	token = new_token(splitted[0]);
 	token->type = Command;
 	root = token;
-	i = 0;
-	while (splitted[++i])
+	i = 1;
+	while (splitted[i])
 	{
 		token->next = new_token(splitted[i]);
 		check_e_type(&token, splitted[i], i);
 		token = token->next;
+		i++;
 	}
 	free(splitted);
 	jokeroverride(&root, data);
 	review_tokenid(&root);
-	root = check_tokens_error(root, data);
-	handle_generic_error(NULL, data);
+	root = check_tokens_error(root, data);// handle_genercic_error() juste après
 	remove_useless_quotes(&root, data);
 	return (root);
 }
@@ -61,12 +61,6 @@ void	take_commandline(const char *line, t_data *data)
 		return ;
 	tokens = parse_commandline(line, data);
 	data->tokens = tokens;
-	//show_token(tokens);
-	char *search = search_in_history(line, data);
-	if (search)
-		printf("search : %s\n", search);
-	else
-		printf("(null)\n");
 	if (data && data->tokens && data->tokens->value)
 		exec(data);
 	add_to_history((char *)line, data);

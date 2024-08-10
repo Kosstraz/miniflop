@@ -1,14 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_wildcards2.c                               :+:      :+:    :+:   */
+/*   strisdigits.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 00:26:52 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 00:26:57 by bama             ###   ########.fr       */
+/*   Created: 2024/08/10 00:03:13 by bama              #+#    #+#             */
+/*   Updated: 2024/08/10 00:04:39 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
+// 0 : no only digits
+// 1 : only digits
+char	strisdigits(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		if (!ft_isdigit(str[i++]))
+			return (0);
+	return (1);
+}

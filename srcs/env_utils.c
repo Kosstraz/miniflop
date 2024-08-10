@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 22:12:09 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 23:28:36 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 01:27:23 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,42 @@ void	add_new_env(char *name, char *value, t_env	**env)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+}
+
+void	free_env(t_env **env)
+{
+	t_env	*tmp;
+
+	if (!env)
+		return ;
+	while (*env)
+	{
+		tmp = *env;
+		free(tmp->value);
+		free(tmp->name);
+		*env = (*env)->next;
+		free(tmp);
+	}
+}
+
+t_env	*env_create_node(const char *var, t_data *data)
+{
+	t_env	*env;
+	size_t	i;
+
+	i = 0;
+	env = (t_env *)ft_malloc(sizeof(t_env), data);
+	while (var[i] != '=')
+		i++;
+	env->name = ft_strndup(var, i);
+	if (!env->name)
+		free_data(data);
+	if (!ft_strcmp(var, "USER"))
+		env->value = getenv(env->name);
+	else
+		env->value = ft_strdup(getenv(env->name));
+	if (!env->value)
+		exit_shell(NULL, data, 1);
+	env->next = NULL;
+	return (env);
 }

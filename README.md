@@ -1,7 +1,10 @@
+###### AMELIORATIONS : ######
+
+- [NO_COLOR] Effectuer un isatty(int fd) avant tout impression d'un texte coloré. Pour éviter d'imprimer en couleur dans des fichiers (s'il y a redirections).
+
 ###### A RAJOUTER/REGLER : ######
 
 - [ENV] Rajouter un environnement dans le cas ou le programme est lancé sans environnement.
-
 
 ###### QUESTIONNEMENTS : ######
 
@@ -75,7 +78,7 @@
 
 - -~~~[pwd] Affiche le répertoire dans lequel se trouve l'utilisateur appelant. {cachetra}~~~
 
-- [export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnements exportées. {cachetra/ymanchon}
+- -~~~[export] Ajouter une variable à l'environnement shell actuel. Si 'export' ne reçoit aucun argument, affiche toutes les variables d'environnements exportées. {cachetra/ymanchon}~~~
 
 - -~~~[unset] Détruit une variable. Cette commande ne retourne rien --> void unset(...). {ymanchon}~~~
 
@@ -89,6 +92,6 @@
 
 - -~~~[&&] N'exécute aucune commande si l'une d'entre elles n'est pas valide. {cachetra}~~~
 
-- [SUBSHELL] Subshell --> ez (exécution des parenthèses). {cachetra}
+- [(SUBSHELL)] Subshell --> ez (exécution des parenthèses). {cachetra}
 
-- -~~~[*] Doit fonctionner sur le répertoire courant. {ymanchon}~~~
+- [*] Doit fonctionner sur le répertoire courant. {ymanchon}

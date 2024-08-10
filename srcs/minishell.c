@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:41:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 16:52:48 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 02:02:03 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	minishell(char **env)
 	char	*prompt;
 	char	*rl;
 
-	term_init(&data);
+	term_init(&data, env);
 	add_env_to_data(&data, env);
 	data.blt_val = 0;
 	data.ret_cmd = 0;

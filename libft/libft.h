@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/08/09 17:45:40 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 01:04:57 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ ssize_t	ft_rev_isspaceptr(const char *s, ssize_t start);
 			/* **************************** */
 			/* **************************** */
 
+char	strisdigits(const char *str);
 char    *strtrunc_quotes(char *str, char t);
 size_t  chrocc(char *str, char chr);
 char	*va_strjoin(size_t count, ...);
@@ -223,6 +224,9 @@ char	*va_strljoin(size_t count, ...);
 char	*ft_strldup(char *str);
 char	*ft_strldup_at(const char *str, ssize_t start, ssize_t end);
 void	strsjoinstr(char ***strs, char *str);
+void	strsljoinstr(char ***strs, char *str);
+void	strsljoinstr_at(char ***strs, char *str, size_t at);
+void	strsjoinstr_at(char ***strs, char *str, size_t at);
 char	*lastword(char **strs);
 char	*duplastword(char **strs);
 char	*str_add_strs_free(char *str, char **strs, char sep, char last_sep);
@@ -328,7 +332,7 @@ char	*strlinsert(char *str, const char *insert_, int at);
 			/* **************************** */
 
 void	swap64(long long *a, long long *b);
-void	ft_swap_addr(void **a, void **b);
+void	swap_addr(void **a, void **b);
 int		ft_intlen(int n);
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to);
 size_t	ft_count_words(const char *s, char sep);

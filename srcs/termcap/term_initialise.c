@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:49:47 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 22:33:23 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 01:52:57 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,16 @@ static void	get_termcaps(t_data *data)
 	data->term.caps.carriage = ft_tgetstr("cr", NULL, data);
 }
 
-void	term_init(t_data *data)
+void	term_init(t_data *data, char **env)
 {
 	int		log;
 	char	buffer[TERM];
 
 	term_set_zero(&data->term);
-	data->term.type = getenv("TERM");
+	if (!env || !*env)
+		data->term.type = ft_strdup(DEFAULT_TERM);//a free si !env ou !*env
+	else
+		data->term.type = getenv("TERM");
 	if (!data->term.type)
 		exit_shell("\e[1;31mgetenv\e[0m", data, EXIT_FAILURE);
 	log = tgetent(buffer, data->term.type);

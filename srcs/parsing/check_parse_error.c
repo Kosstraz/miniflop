@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 16:40:32 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 16:31:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/09 22:54:11 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ t_token	*check_tokens_error(t_token *tokens, t_data *data)
 			return (NULL);
 		tmp = tok_skip_subshell(tmp);
 	}
+	handle_generic_error(NULL, data);
 	return (tokens);
 }
