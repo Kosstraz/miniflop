@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 17:47:27 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 03:36:50 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 23:44:41 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	find_occurence(const char *str, const char *to_find, int i)
 	while (to_find[j] && str[i])
 		if (to_find[j++] != str[i++])
 			return (0);
+	if (to_find[j] && !str[i])
+		return (0);
 	return (1);
 }
 

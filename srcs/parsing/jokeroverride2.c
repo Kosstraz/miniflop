@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:52 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 14:19:16 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 23:45:13 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ char	inspect_a_file(char *file, t_joker joker)
 	if (!joker.first)
 		if (ft_strncmp(file, joker.words[0], ft_strlen(joker.words[0])))
 			return (JOKER_NO);
-	if (!joker.last)
-		if (ft_strcmp(&file[size], joker.words[i - 1]))
-			return (JOKER_NO);
+	if (!joker.last && ft_strcmp(&file[size], joker.words[i - 1]))
+		return (JOKER_NO);
 	return (JOKER_YES);
 }
 
