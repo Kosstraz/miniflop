@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:52 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 03:13:48 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 13:50:35 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,35 @@ static void	init_t_joker(t_joker *joker)
 	joker->first = 0;
 	joker->last = 0;
 	joker->single = 0;
+}
+
+char	inspect_a_file(char *file, char **jokers, t_joker joker)
+{
+	size_t	i;
+	size_t	size;
+	char	*addrs;
+
+	if (!jokers || !jokers[0])
+		return (JOKER_SINGLE);
+	i = 0;
+	size = 0;
+	while (jokers[i])
+	{
+		addrs = ft_strstr(&file[size], jokers[i]);
+		if (!addrs)
+			return (JOKER_NO);
+		if (addrs == file && !jokers[i + 1] && !joker.first)
+			return (JOKER_YES);
+		size = addrs - file;
+		i++;
+	}
+	if (!joker.first)
+		if (ft_strncmp(file, jokers[0], ft_strlen(jokers[0])))
+			return (JOKER_NO);
+	if (!joker.last)
+		if (ft_strcmp(&file[size], jokers[i - 1]))
+			return (JOKER_NO);
+	return (JOKER_YES);
 }
 
 void	joker_check_firstlast(const char *str, t_joker *joker)

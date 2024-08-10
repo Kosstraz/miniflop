@@ -6,14 +6,15 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:18 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 04:21:19 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 13:52:36 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 char	there_is_joker(char *str);
-void	inspect_all_files(t_data *data, char *word, char **jokers, t_joker joker);
+void	inspect_all_files(t_data *data, char **jokers, t_joker joker);
+char	inspect_a_file(char *file, char **jokers, t_joker joker);
 void	joker_check_firstlast(const char *str, t_joker *joker);
 
 char	is_sep_joker(char c)
@@ -36,54 +37,13 @@ void	jokeroverride(t_token **root, t_data *data)
 			splitted = ft_split_quotes(tok->value, is_sep_joker, data);
 			if (!splitted || !splitted[0])
 				joker.single = 1;
-			inspect_all_files(data, NULL, splitted, joker);
+			inspect_all_files(data, splitted, joker);
 		}
 		tok = tok->next;
 	}
 }
 
-char	inspect_a_file(t_data *data, char *file, char **jokers, t_joker joker)
-{
-	size_t	i;
-	size_t	size;
-	char	*addrs;
-
-	if (!jokers || !jokers[0])
-		return (JOKER_SINGLE);
-	i = 0;
-	size = 0;
-	while (jokers[i])
-	{
-		addrs = ft_strstr(&file[size], jokers[i]);
-		if (!addrs)
-			return (JOKER_NO);
-		//if (ft_strlen(addrs) == ft_strlen(file))
-		//{
-		//	printf("addrs %s\n&file[%d] %s\n", addrs, size, &file[size]);
-		//	return (JOKER_FULL);
-		//}
-		if (joker.first && addrs == file)
-			return (JOKER_NO);
-		else if (joker.first)
-			size = addrs - file;
-		else
-			size += ft_strlen(addrs);
-		if (size > ft_strlen(file))
-			return (JOKER_NO);
-
-		i++;
-	}
-	printf("addrs %s\n&file[%d] %s\n", addrs, size, &file[size]);
-	if (!joker.first)
-		if (ft_strcmp(addrs, &file[size]))
-			return (JOKER_NO);
-	if (!joker.last)
-		if (ft_strncmp_rev(file, jokers[i - 1], ft_strlen(jokers[i - 1])))
-			return (JOKER_NO);
-	return (JOKER_YES);
-}
-
-void	inspect_all_files(t_data *data, char *word, char **jokers, t_joker joker)
+void	inspect_all_files(t_data *data, char **jokers, t_joker joker)
 {
 	char			judge;
 	struct dirent	*rd;
@@ -94,20 +54,14 @@ void	inspect_all_files(t_data *data, char *word, char **jokers, t_joker joker)
 	{
 		if (ft_strcmp(rd->d_name, ".") && ft_strcmp(rd->d_name, ".."))
 		{
-			judge = inspect_a_file(data, rd->d_name, jokers, joker);
+			judge = inspect_a_file(rd->d_name, jokers, joker);
 			if (judge == JOKER_SINGLE)
 			{
 				if (ft_strncmp(rd->d_name, ".", 1))
 					ft_printf("%s%sADD : %s%s\n", BOLD, ITALIC, rd->d_name, RESET);
 			}
-			else if (judge == JOKER_FULL)
-			{
-				ft_printf("%s%sADD : %s%s\n", BOLD, ITALIC, rd->d_name, RESET);
-			}
 			else if (judge == JOKER_YES)
-			{
 				ft_printf("%s%sADD : %s%s\n", BOLD, ITALIC, rd->d_name, RESET);
-			}
 		}
 		rd = readdir(data->dir);
 	}
