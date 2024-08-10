@@ -6,15 +6,15 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:18 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 13:52:36 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 14:17:34 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 char	there_is_joker(char *str);
-void	inspect_all_files(t_data *data, char **jokers, t_joker joker);
-char	inspect_a_file(char *file, char **jokers, t_joker joker);
+void	inspect_all_files(t_data *data, t_joker joker);
+char	inspect_a_file(char *file, t_joker joker);
 void	joker_check_firstlast(const char *str, t_joker *joker);
 
 char	is_sep_joker(char c)
@@ -26,7 +26,6 @@ void	jokeroverride(t_token **root, t_data *data)
 {
 	t_joker	joker;
 	t_token	*tok;
-	char	**splitted;
 
 	tok = *root;
 	while (tok)
@@ -34,16 +33,16 @@ void	jokeroverride(t_token **root, t_data *data)
 		if (there_is_joker((char *)tok->value))
 		{
 			joker_check_firstlast(tok->value, &joker);
-			splitted = ft_split_quotes(tok->value, is_sep_joker, data);
-			if (!splitted || !splitted[0])
+			joker.words = ft_split_quotes(tok->value, is_sep_joker, data);
+			if (!joker.words || !joker.words[0])
 				joker.single = 1;
-			inspect_all_files(data, splitted, joker);
+			inspect_all_files(data, joker);
 		}
 		tok = tok->next;
 	}
 }
 
-void	inspect_all_files(t_data *data, char **jokers, t_joker joker)
+void	inspect_all_files(t_data *data, t_joker joker)
 {
 	char			judge;
 	struct dirent	*rd;
@@ -54,7 +53,7 @@ void	inspect_all_files(t_data *data, char **jokers, t_joker joker)
 	{
 		if (ft_strcmp(rd->d_name, ".") && ft_strcmp(rd->d_name, ".."))
 		{
-			judge = inspect_a_file(rd->d_name, jokers, joker);
+			judge = inspect_a_file(rd->d_name, joker);
 			if (judge == JOKER_SINGLE)
 			{
 				if (ft_strncmp(rd->d_name, ".", 1))

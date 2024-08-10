@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:52 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 13:50:35 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 14:19:16 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,34 @@ static void	init_t_joker(t_joker *joker)
 	joker->single = 0;
 }
 
-char	inspect_a_file(char *file, char **jokers, t_joker joker)
+char	inspect_a_file(char *file, t_joker joker)
 {
 	size_t	i;
 	size_t	size;
 	char	*addrs;
 
-	if (!jokers || !jokers[0])
+	if (!joker.words || !joker.words[0])
 		return (JOKER_SINGLE);
 	i = 0;
 	size = 0;
-	while (jokers[i])
+	while (joker.words[i])
 	{
-		addrs = ft_strstr(&file[size], jokers[i]);
+		addrs = ft_strstr(&file[size], joker.words[i]);
 		if (!addrs)
 			return (JOKER_NO);
-		if (addrs == file && !jokers[i + 1] && !joker.first)
+		if (addrs == file && !joker.words[i + 1] && !joker.first)
 			return (JOKER_YES);
-		size = addrs - file;
+		if (addrs == file)
+			size++;
+		else
+			size = addrs - file;
 		i++;
 	}
 	if (!joker.first)
-		if (ft_strncmp(file, jokers[0], ft_strlen(jokers[0])))
+		if (ft_strncmp(file, joker.words[0], ft_strlen(joker.words[0])))
 			return (JOKER_NO);
 	if (!joker.last)
-		if (ft_strcmp(&file[size], jokers[i - 1]))
+		if (ft_strcmp(&file[size], joker.words[i - 1]))
 			return (JOKER_NO);
 	return (JOKER_YES);
 }
