@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 22:29:20 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 18:01:36 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ char	*ft_readline(char *prompt, t_data *data)
 		b_read = ft_read(data->term.fd, buf, READ, data);
 		buf[b_read] = '\0';
 		if (!ft_strcmp(buf, "\003"))
+		{
+			data->ret_cmd = 130;
 			return (end_read(data));
+		}
 		if ((buf[0] == '\r' && !data->term.tab.is_on))
 			break ;
 		terminal_handle_keys(data, buf);
@@ -94,5 +97,6 @@ char	*ft_readline(char *prompt, t_data *data)
 	tab_reset(data, 1);
 	while (data->term.curs.l++ <= data->term.line.last.l)
 		write(data->term.fd, "\n", 1);
+	data->ret_cmd = 0;
 	return (data->term.line.buf);
 }

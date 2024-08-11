@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 01:22:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 23:54:03 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 17:43:39 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ g=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;9\
 # define PROMPT3 "\e[0m"
 # define PROMPT3_SIZE 4
 
-# define EXIT_TEXT "\e[31m\nexit\n\e[0m"
+# define EXIT_TEXT "\e[31m\n\nexit\n\e[0m"
 # define EXIT_TEXT_SIZE 15
 
 # ifndef ARG_MAX

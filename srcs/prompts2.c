@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 22:08:30 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 02:11:17 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 18:01:55 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*replace_home_by_tild(char *cwd, t_data *data)
 char	*prompt_add_retcmd(char *prompt, t_data *data)
 {
 	prompt = ft_strdup("[");
-	prompt = strlljoin(prompt, getenvval("?", data->env));
+	prompt = strlljoin(prompt, ft_itoa(data->ret_cmd));
 	prompt = strljoin(prompt, "]  ");
 	return (prompt);
 }

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:41:28 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/07 14:51:15 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 18:02:22 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	fetch_command(char **ptf, t_token **cmdline, t_data *data)
 		if (!*ptf)
 		{
 			fprint_invalidcmd(*cmdline);
+			data->ret_cmd = CMD_UNKNOW;
 			setenvval("?", ft_itoa(CMD_UNKNOW), &data->env);
 		}
 		else

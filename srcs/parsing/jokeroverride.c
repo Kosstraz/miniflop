@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:18 by bama              #+#    #+#             */
-/*   Updated: 2024/08/11 15:58:45 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 16:59:49 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ void	jokeroverride(t_token **root, t_data *data)
 		{
 			joker_check_firstlast(tok->value, &joker);
 			joker.words = ft_split_quotes(tok->value, is_sep_joker, data);
-			if (!joker.words || !joker.words[0])
-				joker.single = 1;
+			data->dir = opendir(".");
 			inspect_all_files(data, &joks, joker);
 			insert_token(&tok, joks);
 			delete_token(root, &tok);
@@ -53,7 +52,6 @@ void	inspect_all_files(t_data *data, t_token **newtok, t_joker joker)
 	struct dirent	*rd;
 
 	tmp = *newtok;
-	data->dir = opendir(".");
 	rd = readdir(data->dir);
 	while (rd)
 	{
