@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:18 by bama              #+#    #+#             */
-/*   Updated: 2024/08/11 16:59:49 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 20:51:32 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	jokeroverride(t_token **root, t_data *data)
 			joker.words = ft_split_quotes(tok->value, is_sep_joker, data);
 			data->dir = opendir(".");
 			inspect_all_files(data, &joks, joker);
+			if (!joks)
+				ft_printf(JOKER_ERROR, BOLD, CURLY, LINE_RED,
+						tok->value, RESET, BOLD, RESET);
 			insert_token(&tok, joks);
 			delete_token(root, &tok);
 			dfree((void **)joker.words);

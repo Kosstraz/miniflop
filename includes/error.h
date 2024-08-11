@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 17:45:04 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 20:52:13 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 /*
 	TEXT ERROR
 */
+# define JOKER_ERROR "\n%sjoker : \"%s%s%s%s%s\" : no match found%s\n"
+
 # define UNKNOW_CMD_PRINTF1 "\e[1m\ninvalid command : not found \
 \""
 # define UNKNOW_CMD_PRINTF1_SIZE 35
