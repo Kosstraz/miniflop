@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:18 by bama              #+#    #+#             */
-/*   Updated: 2024/08/11 15:50:07 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 15:58:45 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ char	there_is_joker(char *str);
 void	inspect_all_files(t_data *data, t_token **prev, t_joker joker);
 char	inspect_a_file(char *file, t_joker joker);
 void	joker_check_firstlast(const char *str, t_joker *joker);
-
-char	is_sep_joker(char c)
-{
-	return (c == ' ' || c == '\n' || c == '\t' || c == '*');
-}
+char	is_sep_joker(char c);
+void	add_joker_to_token(char *file, t_token **current, t_token **newtok);
 
 void	jokeroverride(t_token **root, t_data *data)
 {
@@ -66,34 +63,10 @@ void	inspect_all_files(t_data *data, t_token **newtok, t_joker joker)
 			if (judge == JOKER_SINGLE)
 			{
 				if (ft_strncmp(rd->d_name, ".", 1))
-				{
-					//printf("add %s\n", rd->d_name);
-					if (!tmp)
-					{
-						tmp = new_token(ft_strdup(rd->d_name));
-						*newtok = tmp;
-					}
-					else
-					{
-						tmp->next = new_token(ft_strdup(rd->d_name));
-						tmp = tmp->next;
-					}
-				}
+					add_joker_to_token(rd->d_name, &tmp, newtok);
 			}
 			else if (judge == JOKER_YES)
-			{
-				//printf("add %s\n", rd->d_name);
-				if (!tmp)
-				{
-					tmp = new_token(ft_strdup(rd->d_name));
-					*newtok = tmp;
-				}
-				else
-				{
-					tmp->next = new_token(ft_strdup(rd->d_name));
-					tmp = tmp->next;
-				}
-			}
+				add_joker_to_token(rd->d_name, &tmp, newtok);
 		}
 		rd = readdir(data->dir);
 	}
@@ -101,21 +74,16 @@ void	inspect_all_files(t_data *data, t_token **newtok, t_joker joker)
 	data->dir = NULL;
 }
 
-char	there_is_joker(char *str)
+void	add_joker_to_token(char *file, t_token **current, t_token **newtok)
 {
-	size_t	i;
-	char	quote_status;
-
-	if (!str)
-		return (0);
-	i = 0;
-	quote_status = 0;
-	while (str[i])
+	if (!(*current))
 	{
-		check_quote_status(str[i], &quote_status);
-		if (str[i] == '*' && !quote_status)
-			return (i + 1);
-		i++;
+		*current = new_token(ft_strdup(file));
+		*newtok = *current;
 	}
-	return (0);
+	else
+	{
+		(*current)->next = new_token(ft_strdup(file));
+		*current = (*current)->next;
+	}
 }

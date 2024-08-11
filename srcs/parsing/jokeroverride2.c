@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:52 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 23:45:13 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 15:51:45 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,28 @@ void	joker_check_firstlast(const char *str, t_joker *joker)
 			break ;
 		}
 	}
+}
+
+char	there_is_joker(char *str)
+{
+	size_t	i;
+	char	quote_status;
+
+	if (!str)
+		return (0);
+	i = 0;
+	quote_status = 0;
+	while (str[i])
+	{
+		check_quote_status(str[i], &quote_status);
+		if (str[i] == '*' && !quote_status)
+			return (i + 1);
+		i++;
+	}
+	return (0);
+}
+
+char	is_sep_joker(char c)
+{
+	return (c == ' ' || c == '\n' || c == '\t' || c == '*');
 }
