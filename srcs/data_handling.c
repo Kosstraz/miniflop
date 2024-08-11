@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/10 01:54:41 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 00:06:37 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ void	add_env_to_data(t_data *data, char **env)
 	}
 	data->env = root;
 	increment_shlvl(&data->env);
+	setenvval("LS_COLORS", ft_strdup(LS_COLORS), &data->env);
 }

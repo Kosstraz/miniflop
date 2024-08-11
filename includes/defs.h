@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 01:22:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 03:53:36 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/10 23:54:03 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define LSCOLORS "Gxfxcxdxbxegedabagacad"
 # define LS_COLORS "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=\
 01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;4\
-2:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.\
+2:ow=34;42:st=37;44:ex=01;32:*=00;93:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.\
 taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01\
 ;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=0\
 1;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.b\
@@ -44,9 +44,6 @@ g=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;9\
 # define JOKER_NO		-1
 # define JOKER_YES		0
 # define JOKER_SINGLE	1
-# define JOKER_FULL		2
-# define JOKER_FIRST	3
-# define JOKER_LAST		4
 
 # define PROMPT1 "\e[1m\e[38;2;0;165;140m"
 # define PROMPT1_SIZE 9

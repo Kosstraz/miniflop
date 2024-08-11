@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 01:55:01 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/11 15:40:43 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ char		*search_in_history(char *line, t_data *data);
 /*														*/
 /* **************************************************** */
 
-void		add_newtoken_next(char *value, t_token **prev);
 void		tok_set_null_to_arg(t_token **root);
 void		reset_commandtype(t_token **root);
 void		print_env(t_env *env);
@@ -174,6 +173,8 @@ void		remquotes_joker(char **new, char *src);
 void		review_tokenid(t_token **tokens);
 void		detect_redirect_type(t_token **tok);
 void		check_potential_errors(char **splitted, t_data *data);
+void		delete_token(t_token **root, t_token **to_del);
+void		insert_token(t_token **after_it, t_token *new);
 
 char		check_parse_error(char ***splitted, t_data *data);
 char		is_operand(char c[3]);

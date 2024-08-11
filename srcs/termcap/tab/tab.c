@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 18:30:32 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/08 21:05:55 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/08/10 23:55:56 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	print_files_colors(unsigned char type, char *name, int is_select)
 		else if (type == REG_FILE && is_an_execbin(ft_strdup(name)))
 			write(STDOUT_FILENO, BOLD_GREEN, 7);
 		else if (type == REG_FILE)
-			write(STDOUT_FILENO, BOLD_YELLOW, 7);
+			write(STDOUT_FILENO, YELLOW, 5);
 		else if (type == F_UNKNOWN)
 			write(STDOUT_FILENO, BOLD_RED, 7);
 	}
