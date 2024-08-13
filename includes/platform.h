@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/10 14:16:54 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/12 15:16:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,14 @@ typedef enum e_type
 typedef struct s_joker
 {
 	size_t	at;
+	size_t	dirslen;
 	char	first;
 	char	last;
 	char	single;
 	char	**words;	// ft_split_quotes('*')
 	char	**dirs;		// ft_split_quotes('/')
+	char	*save;
+	char	*dir;
 }	t_joker;
 
 typedef struct s_rgb

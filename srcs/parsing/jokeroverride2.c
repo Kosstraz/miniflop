@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:52 by bama              #+#    #+#             */
-/*   Updated: 2024/08/11 16:05:13 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/12 15:01:52 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	is_sep_joker(char c);
 
 static void	init_t_joker(t_joker *joker)
 {
-	joker->at = 0;
 	joker->first = 0;
 	joker->last = 0;
 	joker->single = 0;
@@ -46,8 +45,12 @@ char	inspect_a_file(char *file, t_joker joker)
 		i++;
 	}
 	if (!joker.first)
+	{
 		if (ft_strncmp(file, joker.words[0], ft_strlen(joker.words[0])))
 			return (JOKER_NO);
+	}
+	else if (joker.first && !ft_strncmp(file, ".", 1))
+		return (JOKER_NO);
 	if (!joker.last && ft_strcmp(&file[size], joker.words[i - 1]))
 		return (JOKER_NO);
 	return (JOKER_YES);
