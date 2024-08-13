@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:18 by bama              #+#    #+#             */
-/*   Updated: 2024/08/13 14:13:13 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/13 20:15:17 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void	joker_check_firstlast(const char *str, t_joker *joker);
 char	is_sep_joker(char c);
 void	add_joker_to_token(char *file, t_token **current, t_token **newtok);
 void	prepare_inspection(t_data *data, t_token **currtok, t_token **newtok);
+DIR		*joker_opendir(char	*dir, t_joker *joker);
+void	joker_launch_recursion(t_data *data, char *dir,
+		t_token **newtok, t_joker *joker);
+void	exit_joker(t_joker joker);
+void	where_place_joker(char *d_name, t_token **current, t_token **newtok,
+		t_joker joker);
+void	is_joker_valid(t_data *data, t_token **newtok, char *d_name, t_joker *joker);
 
 void	jokeroverride(t_token **root, t_data *data)
 {
@@ -46,6 +53,10 @@ void	prepare_inspection(t_data *data, t_token **currtok, t_token **newtok)
 	t_joker	joker;
 
 	joker.at = 0;
+	if ((*currtok)->value[0] == '/')
+		joker.absolute = 1;
+	else
+		joker.absolute = 0;
 	joker.dirs = ft_split((*currtok)->value, '/');
 	joker.dirslen = ft_strlen2(joker.dirs);
 	inspect_all_files(data, NULL, newtok, joker);
@@ -57,79 +68,29 @@ void	prepare_inspection(t_data *data, t_token **currtok, t_token **newtok)
 
 void	inspect_all_files(t_data *data, char *dir, t_token **newtok, t_joker joker)
 {
-	char			judge;
-	t_token			*tmp;
 	struct dirent	*rd;
 
 	joker_check_firstlast(joker.dirs[joker.at], &joker);
 	joker.words = ft_split_quotes(joker.dirs[joker.at], is_sep_joker, data);
-	if (joker.at == 0 && !dir)
-		joker.dir = ft_strdup(".");
-	else
-	{
-		if (joker.at == 1)
-		{
-			free(joker.dir);
-			joker.dir = NULL;
-		}
-		joker.dir = strljoin(joker.dir, dir);
-		joker.dir = strljoin(joker.dir, "/");
-	}
-	data->dirjok[joker.at] = opendir(joker.dir);
-	if (!data->dirjok[joker.at])
-		return ;
-	tmp = *newtok;
-	rd = readdir(data->dirjok[joker.at]);
+	joker.dijok[joker.at] = joker_opendir(dir, &joker);
+	if (!joker.dijok[joker.at])
+		return (exit_joker(joker));
+	joker.lastfromrecu = *newtok;
+	rd = readdir(joker.dijok[joker.at]);
 	while (rd)
 	{
 		if (ft_strcmp(rd->d_name, ".") && ft_strcmp(rd->d_name, "..")
 			&& ((!ft_strncmp(rd->d_name, ".", 1) && !ft_strncmp(joker.words[0], ".", 1))
 				|| (ft_strncmp(rd->d_name, ".", 1) && ft_strncmp(joker.words[0], ".", 1))))
 		{
-			judge = inspect_a_file(rd->d_name, joker);
-			if (judge == JOKER_SINGLE)
-			{
-				if (ft_strncmp(rd->d_name, ".", 1) && joker.at == joker.dirslen - 1)
-				{
-					if (joker.at != 0)
-						ft_printf("%sADD : %s%s\n", BOLD, ft_strjoin(joker.dir, rd->d_name), RESET);//add_joker_to_token(rd->d_name, &tmp, newtok);
-					else
-						ft_printf("%sADD : %s%s\n", BOLD, rd->d_name, RESET);//add_joker_to_token(rd->d_name, &tmp, newtok);
-				}
-				else if (joker.at < joker.dirslen - 1)
-				{
-					joker.at++;
-					joker.save = ft_strdup(joker.dir);
-					printf("dname %s\n", rd->d_name);
-					inspect_all_files(data, ft_strdup(rd->d_name), newtok, joker);
-					joker.dir = joker.save;
-					joker.at--;
-				}
-			}
-			else if (judge == JOKER_YES)
-			{
-				if (joker.at == joker.dirslen - 1)
-				{
-					if (joker.at != 0)
-						ft_printf("%sADD : %s%s\n", BOLD, ft_strjoin(joker.dir, rd->d_name), RESET);//add_joker_to_token(rd->d_name, &tmp, newtok);
-					else
-						ft_printf("%sADD : %s%s\n", BOLD, rd->d_name, RESET);//add_joker_to_token(rd->d_name, &tmp, newtok);
-				}
-				else if (joker.at < joker.dirslen - 1)
-				{
-					joker.at++;
-					joker.save = ft_strdup(joker.dir);
-					inspect_all_files(data, ft_strdup(rd->d_name), newtok, joker);
-					joker.dir = joker.save;
-					joker.at--;
-				}
-			}
+			joker.judge = inspect_a_file(rd->d_name, joker);
+			is_joker_valid(data, newtok, rd->d_name, &joker);
 		}
-		rd = readdir(data->dirjok[joker.at]);
+		rd = readdir(joker.dijok[joker.at]);
 	}
 	free(dir);
-	closedir(data->dirjok[joker.at]);
-	data->dirjok[joker.at] = NULL;
+	closedir(joker.dijok[joker.at]);
+	joker.dijok[joker.at] = NULL;
 	dfree((void **)joker.words);
 }
 
@@ -145,4 +106,10 @@ void	add_joker_to_token(char *file, t_token **current, t_token **newtok)
 		(*current)->next = new_token(ft_strdup(file));
 		*current = (*current)->next;
 	}
+}
+
+void	exit_joker(t_joker joker)
+{
+	free(joker.words);
+	free(joker.dir);
 }

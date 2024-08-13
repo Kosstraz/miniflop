@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/12 15:16:14 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/13 19:52:14 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <dirent.h>
 # include <termcap.h>
 # include <termios.h>
+
+typedef struct s_token	t_token;
 
 typedef enum e_type
 {
@@ -36,15 +38,34 @@ typedef enum e_type
 	Errfile
 }	t_e_type;
 
+// dirjok[1024] is a list of directories
+// lastfromrecu is the last token from the recursion
+// at is the index of the current directory
+// dirslen is the length of strings in 'char **dirs'
+// judge is the result of inspect_a_file()
+	// 1 : joker is valid
+	// 0 : joker is invalid
+// first is to now if the first character is a joker
+// last is to now if the last character is a joker
+// single is to now if there is only joker
+// words is the result of ft_split_quotes('*')
+// dirs is the result of ft_split_quotes('/')
+// save is the original string before the recursion, and the current string during the recursion
+	// but we need to restore the original string after the recursion
+// dir is the total directory string name
 typedef struct s_joker
 {
+	DIR		*dijok[1024];
+	t_token	*lastfromrecu;
 	size_t	at;
 	size_t	dirslen;
-	char	first;
-	char	last;
-	char	single;
-	char	**words;	// ft_split_quotes('*')
-	char	**dirs;		// ft_split_quotes('/')
+	BOOL	judge;
+	BOOL	first;
+	BOOL	last;
+	BOOL	single;
+	BOOL	absolute;
+	char	**words;
+	char	**dirs;
 	char	*save;
 	char	*dir;
 }	t_joker;
@@ -138,7 +159,6 @@ typedef struct s_term
 typedef struct s_data
 {
 	DIR		*dir;
-	DIR		*dirjok[512];
 	t_term	term;
 	t_token	*tokens;
 	t_env	*env;

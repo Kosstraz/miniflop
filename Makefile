@@ -6,7 +6,7 @@
 #    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/10 14:07:47 by bama             ###   ########.fr        #
+#    Updated: 2024/08/13 18:52:28 by bama             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRCS =	./srcs/termcap/tab/select.c \
 		./srcs/parsing/token_utils.c \
 		./srcs/parsing/jokeroverride.c \
 		./srcs/parsing/jokeroverride2.c \
+		./srcs/parsing/jokeroverride3.c \
 		./srcs/parsing/parsing_quotes.c \
 		./srcs/parsing/envvar.c \
 		./srcs/parsing/separate_operands.c \

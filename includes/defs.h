@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 01:22:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/11 17:43:39 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/13 19:10:49 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ rdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=\
 00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmori\
 g=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;9\
 0:*.ucf-old=00;90:"
+
+# define BOOL char
 
 # define JOKER_NO		-1
 # define JOKER_YES		0

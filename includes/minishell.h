@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/11 15:40:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/13 18:59:16 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ char		*search_in_history(char *line, t_data *data);
 /*														*/
 /* **************************************************** */
 
+void		inspect_all_files(t_data *data, char *dir,
+			t_token **newtok, t_joker joker);
 void		tok_set_null_to_arg(t_token **root);
 void		reset_commandtype(t_token **root);
 void		print_env(t_env *env);
