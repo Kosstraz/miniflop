@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 18:48:58 by bama              #+#    #+#             */
-/*   Updated: 2024/08/13 20:16:27 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/13 20:26:03 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	joker_launch_recursion(t_data *data, char *dir,
 	joker->at++;
 	joker->save = ft_strdup(joker->dir);
 	inspect_all_files(data, dir, newtok, *joker);
+	joker->lastfromrecu = ret_last_token(*newtok);
 	joker->dir = joker->save;
 	joker->at--;
 }

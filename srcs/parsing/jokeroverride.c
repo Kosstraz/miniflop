@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:18 by bama              #+#    #+#             */
-/*   Updated: 2024/08/13 20:15:17 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/13 20:22:46 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	inspect_all_files(t_data *data, char *dir, t_token **newtok, t_joker joker)
 	joker.dijok[joker.at] = joker_opendir(dir, &joker);
 	if (!joker.dijok[joker.at])
 		return (exit_joker(joker));
-	joker.lastfromrecu = *newtok;
+	if (joker.at == 0)
+		joker.lastfromrecu = *newtok;
 	rd = readdir(joker.dijok[joker.at]);
 	while (rd)
 	{
