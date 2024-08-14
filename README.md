@@ -4,8 +4,6 @@
 
 ###### A RAJOUTER/REGLER : ######
 
-- [ENV] Rajouter un environnement dans le cas ou le programme est lancé sans environnement.
-
 ###### QUESTIONNEMENTS : ######
 
 ###### TERMCAP : ######
@@ -94,4 +92,4 @@
 
 - [(SUBSHELL)] Subshell --> ez (exécution des parenthèses). {cachetra}
 
-- [*] Doit fonctionner sur le répertoire courant. {ymanchon}
+- -~~~[*] Doit fonctionner sur le répertoire courant. {ymanchon}~~~

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:42:00 by bama              #+#    #+#             */
-/*   Updated: 2024/08/07 14:16:19 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/14 16:38:57 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	restore_stdfileno(int fileno_[3])
 		close(fileno_[2]);
 }
 
-void	dup2_stdin(t_token *cmdline, int fd[2])
+void	dup2_stdin(t_data *data, t_token *cmdline, int fd[2])
 {
 	if (tok_next_type(cmdline) == Pipe)
 	{
@@ -41,10 +41,10 @@ void	dup2_stdin(t_token *cmdline, int fd[2])
 		close(fd[0]);
 	}
 	if (is_there_redirect(cmdline))
-		do_redirections(cmdline, O_RDONLY);
+		do_redirections(data, cmdline, O_RDONLY);
 }
 
-void	dup2_stdout(t_token *cmdline, int fd[2])
+void	dup2_stdout(t_data *data, t_token *cmdline, int fd[2])
 {
 	if (tok_next_type(cmdline) == Pipe)
 	{
@@ -53,7 +53,7 @@ void	dup2_stdout(t_token *cmdline, int fd[2])
 		close(fd[1]);
 	}
 	if (is_there_redirect(cmdline))
-		do_redirections(cmdline, O_WRONLY);
+		do_redirections(data, cmdline, O_WRONLY);
 }
 
 void	waitchildren(t_data *data)

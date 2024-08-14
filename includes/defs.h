@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 01:22:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/13 19:10:49 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/14 14:47:22 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ g=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;9\
 # define JOKER_NO		-1
 # define JOKER_YES		0
 # define JOKER_SINGLE	1
+
+# define HEREDOC_PROMPT "HereDoc $> "
 
 # define PROMPT1 "\e[1m\e[38;2;0;165;140m"
 # define PROMPT1_SIZE 9

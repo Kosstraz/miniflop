@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:59:44 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 02:11:18 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/14 14:53:47 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 char	*prompt_add_retcmd(char *prompt, t_data *data);
 char	*replace_home_by_tild(char *cwd, t_data *data);
+t_rgb	create_rgb(int r, int g, int b);
 
 static char	*create_color_ascii(int r, int g, int b)
 {
@@ -35,7 +36,7 @@ static char	*create_color_ascii(int r, int g, int b)
 	return (color);
 }
 
-static void	increment_color(int lvl[3], t_rgb *rgb)
+static void	increment_color(int lvl[3], t_rgb *rgb, t_rgb inc)
 {
 	if (rgb->r <= 0)
 		lvl[0] = 1;
@@ -49,13 +50,15 @@ static void	increment_color(int lvl[3], t_rgb *rgb)
 		lvl[2] = 1;
 	else if (rgb->b >= 255)
 		lvl[2] = -1;
-	rgb->r += 3 * lvl[0];
-	rgb->g += 2 * lvl[1];
-	rgb->b -= 3 * lvl[2];
+	rgb->r += inc.r * lvl[0];
+	rgb->g += inc.g * lvl[1];
+	rgb->b += inc.b * lvl[2];
 }
 
-// 0 ; 235 ; 200
-char	*create_shading(char *normal_prompt)
+// 0 235 185
+// s --> start value RGB
+// i --> increment RGB values, respectivly
+char	*create_shading(char *normal_prompt, t_rgb s, t_rgb inc)
 {
 	t_rgb	rgb;
 	int		i;
@@ -65,13 +68,13 @@ char	*create_shading(char *normal_prompt)
 
 	i = 0;
 	ft_memset((int *)lvl, (-1), 3 * sizeof(int));
-	rgb.r = 0 + ((ft_strlen(normal_prompt)) / 2);
-	rgb.g = 235 + ((ft_strlen(normal_prompt)) / 2);
-	rgb.b = 185 + ((ft_strlen(normal_prompt)) / 2);
+	rgb.r = s.r + ((ft_strlen(normal_prompt)) / 2);
+	rgb.g = s.g + ((ft_strlen(normal_prompt)) / 2);
+	rgb.b = s.b + ((ft_strlen(normal_prompt)) / 2);
 	new = ft_strdup(BOLD);
 	while (normal_prompt[i])
 	{
-		increment_color(lvl, &rgb);
+		increment_color(lvl, &rgb, inc);
 		c[0] = normal_prompt[i];
 		c[1] = 0;
 		new = strlljoin(new, create_color_ascii(rgb.r, rgb.g, rgb.b));
@@ -116,6 +119,7 @@ void	new_prompt(char **buffer_prompt, t_data *data)
 	*buffer_prompt = prompt_add_retcmd(*buffer_prompt, data);
 	*buffer_prompt = strlljoin(*buffer_prompt, cwd);
 	*buffer_prompt = strljoin(*buffer_prompt, PROMPT2);
-	*buffer_prompt = create_shading(*buffer_prompt);
+	*buffer_prompt = create_shading(*buffer_prompt, create_rgb(0, 235, 185),
+		create_rgb(3, 2, -3));
 	data->prompt = (*buffer_prompt);
 }

@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:41:28 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/11 18:02:22 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/14 16:39:24 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	execute_cmd(char *path, t_token *cmdline, t_data *data, int forked)
 {
-	dup2_stdout(cmdline, data->fildes);
+	dup2_stdout(data, cmdline, data->fildes);
 	if (!path)
 		data->ret_cmd = exec_builtins(data->blt_val, data, cmdline);
 	else
@@ -47,7 +47,7 @@ static void	launch_cmd(char *path, t_token *cmdline, t_data *data)
 			data->pids[data->npid++] = pid;
 		free(path);
 		setenvval("?", ft_itoa(data->ret_cmd), &data->env);
-		dup2_stdin(cmdline, data->fildes);
+		dup2_stdin(data, cmdline, data->fildes);
 	}
 }
 
@@ -99,7 +99,7 @@ void	exec(t_data *data)
 		path_to_file = NULL;
 		there_is_redi = is_there_redirect(cmd);
 		if (there_is_redi && data->exec_next)
-			do_redirections(cmd, O_RDONLY);
+			do_redirections(data, cmd, O_RDONLY);
 		if (is_there_cmd(cmd) && data->exec_next)
 			fetch_command(&path_to_file, &cmd, data);
 		if ((data->blt_val || path_to_file || there_is_redi) && data->exec_next)

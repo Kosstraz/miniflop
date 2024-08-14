@@ -6,7 +6,7 @@
 /*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/13 20:25:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/08/14 16:39:13 by bama             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 /*													*/
 /* ************************************************ */
 
+void		new_prompt_heredoc(char **buffer_prompt, t_data *data);
 void		create_own_env(t_data *data);
 void		initialise_env(t_data *data);
 void		env_remove(char *name, t_env **env);
@@ -61,6 +62,7 @@ char		env_exist(char *name, t_data *data);
 
 int			setenvval(char *envname, char *newval, t_env **env);
 
+char		*create_shading(char *normal_prompt, t_rgb s, t_rgb inc);
 char		*getenvval(char *envname, t_env *env);
 
 t_env		*env_create_node(const char *var, t_data *data);
@@ -73,11 +75,11 @@ t_env		*env_create_node(const char *var, t_data *data);
 /*																	*/
 /* **************************************************************** */
 
-void		do_redirections(t_token *cmdline, int mode);
+void		do_redirections(t_data *data, t_token *cmdline, int mode);
 void		custom_execve(char *path, t_token *cmdline, t_data *data);
 void		waitchildren(t_data *data);
-void		dup2_stdin(t_token *cmdline, int fd[2]);
-void		dup2_stdout(t_token *cmdline, int fd[2]);
+void		dup2_stdin(t_data *data, t_token *cmdline, int fd[2]);
+void		dup2_stdout(t_data *data, t_token *cmdline, int fd[2]);
 void		open_pipe(t_token *cmdline, int fd[2]);
 void		fprint_invalidcmd(t_token *cmdline);
 void		save_stdfileno(int fileno_[3]);
