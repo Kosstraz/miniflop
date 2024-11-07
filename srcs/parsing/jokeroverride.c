@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   jokeroverride.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:26:18 by bama              #+#    #+#             */
-/*   Updated: 2024/08/13 20:22:46 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/07 14:49:14 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,15 @@ void	inspect_all_files(t_data *data, char *dir, t_token **newtok, t_joker joker)
 	rd = readdir(joker.dijok[joker.at]);
 	while (rd)
 	{
+		//if (ft_strcmp(rd->d_name, ".") && ft_strcmp(rd->d_name, "..")
+		//	&& ((!ft_strncmp(rd->d_name, ".", 1) && !ft_strncmp(joker.words[0], ".", 1))
+		//		|| (ft_strncmp(rd->d_name, ".", 1) && ft_strncmp(joker.words[0], ".", 1))))
 		if (ft_strcmp(rd->d_name, ".") && ft_strcmp(rd->d_name, "..")
-			&& ((!ft_strncmp(rd->d_name, ".", 1) && !ft_strncmp(joker.words[0], ".", 1))
-				|| (ft_strncmp(rd->d_name, ".", 1) && ft_strncmp(joker.words[0], ".", 1))))
+			&& ((!ft_strncmp(rd->d_name, ".", 1) && !ft_strncmp(joker.words[0], ".", 1) && !joker.first)
+				|| (ft_strncmp(rd->d_name, ".", 1) && ft_strncmp(joker.words[0], ".", 1))
+				|| (ft_strncmp(rd->d_name, ".", 1) && !ft_strncmp(joker.words[0], ".", 1) && joker.first)))
 		{
+			//write(1, rd->d_name, ft_strlen(rd->d_name)); write(1, "\n", 1);
 			joker.judge = inspect_a_file(rd->d_name, joker);
 			is_joker_valid(data, newtok, rd->d_name, &joker);
 		}

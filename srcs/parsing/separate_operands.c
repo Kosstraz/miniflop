@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   separate_operands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 16:49:27 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 17:57:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/06 15:49:26 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ static void	add_new_words(char ***div, char *str, size_t *i, size_t at)
 {
 	size_t	ope_len;
 
+	ope_len = 0ULL;
 	if (!ft_strncmp(&str[at], "2>>", 3))
-		ope_len = 3;
+		ope_len = 3ULL;
 	else if ((str[at] == '|' && str[at + 1] != '|')
 		|| (str[at] == '>' && str[at + 1] != '>')
 		|| (str[at] == '<' && str[at + 1] != '<')
 		|| (str[at] == ';')
 		|| (str[at] == '(')
 		|| (str[at] == ')'))
-		ope_len = 1;
+		ope_len = 1ULL;
 	else if ((str[at] == '&' && str[at + 1] == '&')
 		|| (str[at] == '|' && str[at + 1] == '|')
 		|| (str[at] == '<' && str[at + 1] == '<')
 		|| (str[at] == '>' && str[at + 1] == '>')
 		|| (str[at] == '2' && str[at + 1] == '>'))
-		ope_len = 2;
-	if (at > 0)
-		(*div)[(*i)++] = ft_strdup_at(str, 0, at);
+		ope_len = 2ULL;
+	if (at > 0ULL)
+		(*div)[(*i)++] = ft_strdup_at(str, 0LL, at);
 	(*div)[(*i)++] = ft_strdup_at(str, at, at + ope_len);
 	if (at + ope_len < ft_strlen(str))
-		(*div)[(*i)++] = ft_strdup_at(str, at + ope_len,
-				ft_strlen(str));
+		(*div)[(*i)++] = ft_strdup_at(str, at + ope_len, ft_strlen(str));
 	free(str);
 }
 

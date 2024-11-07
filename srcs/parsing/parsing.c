@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/08/11 00:27:53 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/06 16:07:29 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	take_commandline(const char *line, t_data *data)
 	if (!line)
 		return ;
 	tokens = parse_commandline(line, data);
-	show_token(tokens);
+	//show_token(tokens);
 	data->tokens = tokens;
 	if (data && data->tokens && data->tokens->value)
 		exec(data);

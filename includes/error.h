@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/11 20:52:13 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/06 17:30:38 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 # define TOO_MANY_ARGS_ERROR "\e[1m\nexit(int) : \
 \e[5m\e[31mtoo many arguments\n\e[0m"
 # define TOO_MANY_ARGS_ERROR_SIZE 50
+
+# define EXIT_ALNUM "\e[1m\nexit(int) : \
+\e[5m\e[31mnumeric argument required\n\e[0m"
+# define EXIT_ALNUM_SIZE 57
 
 # define ENV_ARGS_ERROR "\e[1m\nenv : \
 \e[5m\e[31mtoo many arguments\n\e[0m"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   platform.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/13 19:52:14 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/07 18:24:01 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum e_type
 	Outfile,
 	Errfile
 }	t_e_type;
+
 
 // dirjok[1024] is a list of directories
 // lastfromrecu is the last token from the recursion
@@ -156,23 +157,38 @@ typedef struct s_term
 	struct termios	og;
 }	t_term;
 
+typedef struct s_history
+{
+	char				*line;
+	struct s_history	*next;
+}	t_history;
+
+typedef struct s_history_info
+{
+	t_history	*info;
+	char		*original_line;
+	int			nb_of_line_searched;
+	int			current_line;
+}	t_history_info;
+
 typedef struct s_data
 {
-	DIR		*dir;
-	t_term	term;
-	t_token	*tokens;
-	t_env	*env;
-	char	*prompt;
-	char	exec_next;
-	char	blt_val;
-	int		npid;
-	int		pids[NB_OF_PROC_MAX_PER_USER];
-	int		fildes[2];
-	int		fileno[3];
-	int		_errcode;
-	int		ret_cmd;
-	int		historyfd;
-	char	(*_is_sep_)(char);
+	DIR				*dir;
+	t_term			term;
+	t_token			*tokens;
+	t_env			*env;
+	t_history_info	history;
+	char			*prompt;
+	char			exec_next;
+	char			blt_val;
+	int				npid;
+	int				pids[NB_OF_PROC_MAX_PER_USER];
+	int				fildes[2];
+	int				fileno[3];
+	int				_errcode;
+	int				ret_cmd;
+	int				historyfd;
+	char			(*_is_sep_)(char);
 }	t_data;
 
 #endif

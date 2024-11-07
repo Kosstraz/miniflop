@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:28:38 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:08:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/06 16:06:03 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*check_in_path(t_token **cmdword, t_data *data, char **paths)
 	char			*absocmd;
 	struct dirent	*file;
 
-	i = 0;
+	i = 0ULL;
 	absolute = take_dir((char *)(*cmdword)->value);
 	if (absolute)
 		absocmd = take_absocmd((char *)(*cmdword)->value);
@@ -45,6 +45,11 @@ static char	*check_in_path(t_token **cmdword, t_data *data, char **paths)
 			data->dir = opendir(absolute);
 		else
 			data->dir = opendir(paths[i]);
+		if (!data->dir)
+		{
+			i++;
+			continue ;
+		}
 		file = readdir(data->dir);
 		while (file)
 		{

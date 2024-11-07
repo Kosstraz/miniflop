@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompts.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:59:44 by bama              #+#    #+#             */
-/*   Updated: 2024/08/14 14:53:47 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/07 15:25:48 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void	new_prompt(char **buffer_prompt, t_data *data)
 	*buffer_prompt = prompt_add_retcmd(*buffer_prompt, data);
 	*buffer_prompt = strlljoin(*buffer_prompt, cwd);
 	*buffer_prompt = strljoin(*buffer_prompt, PROMPT2);
-	*buffer_prompt = create_shading(*buffer_prompt, create_rgb(0, 235, 185),
-		create_rgb(3, 2, -3));
+	*buffer_prompt = create_shading(*buffer_prompt, create_rgb(0, 235, 185), create_rgb(3, 2, -3));
 	data->prompt = (*buffer_prompt);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:21:00 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/07 18:02:09 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/11/07 19:14:08 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	key_delete(t_data *data)
 	data->term.line.next--;
 	data->term.line.size--;
 	update_last(&data->term, 0);
+	data->history.original_line = NULL; //!
 }

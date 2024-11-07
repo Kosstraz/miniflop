@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_readline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/11 18:01:36 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/07 17:33:24 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	initialise_line_data(t_data *data)
 	data->term.line.next = 0;
 }
 
-static void terminal_handle_keys(t_data *data, char *ch)
+static void	terminal_handle_keys(t_data *data, char *ch)
 {
 	if (data->term.tab.is_on &&
 		(ft_isprint(ch[0]) || ch[0] == '\177' || !ft_strcmp(ch, KEY_DEL)))
@@ -88,6 +88,7 @@ char	*ft_readline(char *prompt, t_data *data)
 		if (!ft_strcmp(buf, "\003"))
 		{
 			data->ret_cmd = 130;
+			setenvval("?", ft_itoa(data->ret_cmd), &data->env);
 			return (end_read(data));
 		}
 		if ((buf[0] == '\r' && !data->term.tab.is_on))

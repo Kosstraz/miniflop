@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 17:57:28 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 02:24:42 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/06 16:20:17 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_cd_back(t_data *data)
 	oldpwd = replace_home_by_tild(oldpwd, data);
 	path = replace_home_by_tild(path, data);
 	change_pwdenvval(oldpwd, data);
-	printf("%s%s%s --> %s%s\n", ITALIC, OPACITY, oldpwd, path, RESET);
+	printf("%s%s%s %s-->%s%s%s %s%s\n", ITALIC, OPACITY, oldpwd, BOLD, RESET, ITALIC, OPACITY, path, RESET);
 	free(path);
 	return (-log);
 }

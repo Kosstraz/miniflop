@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:53:14 by bama              #+#    #+#             */
-/*   Updated: 2024/08/14 16:46:10 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/06 15:54:46 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	do_readredirection(t_token *r, t_data *data)
 {
 	char	*heredoc_prompt;
-	char	*heredoc_eof;
+	//char	*heredoc_eof;
 	char	*gnl;
 	int		fd;
 
@@ -52,6 +52,8 @@ static void	do_errredirection(t_token *r)
 		fd = open(r->next->value, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	else if (r->type == RedirectAppend)
 		fd = open(r->next->value, O_WRONLY | O_APPEND | O_CREAT, 0666);
+	else
+		return ;
 	dup2(fd, STDERR_FILENO);
 	close(fd);
 }

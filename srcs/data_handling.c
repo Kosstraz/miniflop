@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/11 17:59:45 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/07 18:11:24 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	init_data(t_data *data)
 	data->fileno[0] = -1;
 	data->fileno[1] = -1;
 	data->fileno[2] = -1;
+	data->history.info = NULL;
+	data->history.nb_of_line_searched = 0;
+	data->history.current_line = -1;
+	data->history.original_line = NULL;
 }
 
 void	exit_shell(char *mess, t_data *data, int status)
@@ -52,6 +56,7 @@ void	free_data(t_data *data)
 	data->dir = NULL;
 	free(data->prompt);
 	data->prompt = NULL;
+	free_history_info(data);
 	if (data->fileno[0] != -1)
 		close(data->fileno[0]);
 	if (data->fileno[1] != -1)

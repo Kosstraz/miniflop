@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/08/14 16:39:13 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/07 19:00:16 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,9 @@ int			open_hfile(t_data *data);
 char		*up_history(char *line, t_data *data);
 char		*get_history_fpath(t_data *data);
 char		*search_in_history(char *line, t_data *data);
+void		free_history_info(t_data *data);
+void		new_history_info_node(t_data *data, t_history **history, char *gnl);
+char		*down_history(char *line, t_data *data);
 
 /* **************************************************** */
 /*														*/
