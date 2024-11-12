@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/11/06 15:53:44 by ymanchon         ###   ########.fr        #
+#    Updated: 2024/11/11 18:16:31 by ymanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,7 +120,8 @@ TLIB = -ltermcap \
 #*    REGLES    *#
 # ############## #
 
-all: libft_comp pre_comp  $(NAME) #mischief
+#pre_comp
+all: libft_comp   $(NAME) #mischief
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) $(TLIB) -o $@

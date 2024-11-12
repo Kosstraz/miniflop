@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 17:57:28 by bama              #+#    #+#             */
-/*   Updated: 2024/11/06 16:20:17 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:02:22 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,24 @@ void	ft_cd_notdir(char *arg1)
 	write(2, CD_INVALID_ARG1, ft_strlen(CD_INVALID_ARG1));
 	write(2, arg1, ft_strlen(arg1));
 	write(2, CD_INVALID_ARG2, ft_strlen(CD_INVALID_ARG2));
+}
+
+int	ft_cd_specialmove(char *arg1, t_data *data)
+{
+	if (!ft_strncmp(arg1, "-/", 2))
+	{
+		ft_cd_back(data);
+		return (2);
+	}
+	else if (!ft_strncmp(arg1, "@/", 2))
+	{
+		ft_cd_at(data);
+		return (2);
+	}
+	else if (!ft_strncmp(arg1, "~/", 2))
+	{
+		ft_cd_home(data);
+		return (2);
+	}
+	return (0);
 }

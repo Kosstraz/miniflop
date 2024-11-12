@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/07 18:11:24 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:55:47 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	init_data(t_data *data)
 {
-	ft_memset(data->fildes, 0, 2);
+	ft_memset(data->fildes, -1, 2);
+	ft_memset(data->tmpFildes, -1, 2);
 	data->npid = 0;
 	data->dir = NULL;
 	data->tokens = NULL;

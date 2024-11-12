@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:53:14 by bama              #+#    #+#             */
-/*   Updated: 2024/11/06 15:54:46 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:11:24 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	do_errredirection(t_token *r)
 	close(fd);
 }
 
-static void	do_writeredirection(t_token *r)
+static void	do_writeredirection(t_token *r, t_data *data)
 {
 	int	fd;
 	int	std;
@@ -73,6 +73,14 @@ static void	do_writeredirection(t_token *r)
 		std = STDERR_FILENO;
 	else
 		std = STDOUT_FILENO;
+	r->next->value = "daw";
+	if (fd == -1)
+	{
+		ft_printf("%s%s%s%s%s%s%s", INVALIDFILE_PRINTF1,
+			CURLY, LINE_RED, r->next->value, RESET,
+			BOLD, INVALIDFILE_PRINTF2);
+		exit_shell("file can not be opened\n", data, 1);
+	}
 	dup2(fd, std);
 	close(fd);
 }
@@ -82,10 +90,14 @@ void	do_redirections(t_data *data, t_token *cmdline, int mode)
 	t_token	*r;
 
 	r = tok_next_redirect(cmdline);
-	if (mode == O_RDONLY && r->type == RedirectR)
-		do_readredirection(r, data);
-	else if (mode == O_WRONLY && r->next && r->next->type == Errfile)
-		do_errredirection(r);
-	else if (mode == O_WRONLY)
-		do_writeredirection(r);
+	while (r)
+	{
+		if (mode == O_RDONLY && r->type == RedirectR)
+			do_readredirection(r, data);
+		else if (mode == O_WRONLY && r->next && r->next->type == Errfile)
+			do_errredirection(r);
+		else if (mode == O_WRONLY)
+			do_writeredirection(r, data);
+		r = tok_next_redirect(r->next);
+	}
 }

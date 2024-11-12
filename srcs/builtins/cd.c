@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 00:10:12 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 02:05:04 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/11 18:02:38 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	change_pwdenvval(char *old_pwd, t_data *data)
 	setenvval("PWD", getcwd(NULL, 0), &data->env);
 }
 
-static int	ft_cd_home(t_data *data)
+int	ft_cd_home(t_data *data)
 {
 	char	*oldpwd;
 	char	*path;
@@ -47,7 +47,7 @@ static int	ft_cd_home(t_data *data)
 	return (-log);
 }
 
-static int	ft_cd_at(t_data *data)
+int	ft_cd_at(t_data *data)
 {
 	char	*oldpwd;
 	char	*path;
@@ -103,7 +103,8 @@ int	ft_cd(char **arguments, t_data *data)
 	if (log >= 0)
 		return (log);
 	oldpwd = getenvval("PWD", data->env);
-	log = chdir(arguments[1]);
+	log = ft_cd_specialmove(arguments[1], data);
+	log = chdir(&arguments[1][log]);
 	if (log != 0)
 	{
 		ft_cd_notdir(arguments[1]);

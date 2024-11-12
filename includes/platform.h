@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/07 18:24:01 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:14:07 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,12 +183,15 @@ typedef struct s_data
 	char			blt_val;
 	int				npid;
 	int				pids[NB_OF_PROC_MAX_PER_USER];
+	int				tmpFildes[2];
 	int				fildes[2];
 	int				fileno[3];
 	int				_errcode;
 	int				ret_cmd;
 	int				historyfd;
 	char			(*_is_sep_)(char);
+	char			last_is_pipe;
+	char			firstcmd;
 }	t_data;
 
 #endif

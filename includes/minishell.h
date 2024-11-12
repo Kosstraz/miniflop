@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/11/07 19:00:16 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:20:46 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,9 @@ t_token		*tok_next_sep(t_token *last);
 
 void		show_dir_contents(char *filename, char *ref, t_data *data);
 
+int			ft_cd_specialmove(char *arg1, t_data *data);
+int			ft_cd_home(t_data *data);
+int			ft_cd_at(t_data *data);
 int			export_args(char **args, t_env **head);
 int			ft_cd(char **arguments, t_data *data);
 int			ft_echo(char **arguments, t_data *data);

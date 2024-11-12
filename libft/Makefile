@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bama <bama@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/08/10 01:04:43 by bama             ###   ########.fr        #
+#    Updated: 2024/11/11 18:16:42 by ymanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -157,7 +157,8 @@ PRINTF_P = ./ft_printf
 #*    REGLES    *#
 # ############## #
 
-all:  pre_comp $(NAME)
+#pre_comp
+all:   $(NAME)
 
 $(NAME): $(OBJS)
 	$(LMAKE) $(PRINTF_P) re

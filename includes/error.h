@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/06 17:30:38 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:05:54 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 
 # define UNKNOW_CMD_PRINTF2 "\"\n\e[0m"
 # define UNKNOW_CMD_PRINTF2_SIZE 7
+
+# define INVALIDFILE_PRINTF1 "\e[1m\ninvalid file name : can not open \
+\""
+# define INVALIDFILE_PRINTF2 "\"\n\e[0m"
 
 # define PARSE_ERROR_T "\e[31m\nparse error :/\n\e[0m"
 # define PARSE_ERROR_SIZE 25
