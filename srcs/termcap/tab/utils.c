@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tab_utils.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 19:17:28 by bama              #+#    #+#             */
-/*   Updated: 2024/08/08 22:15:19 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:09:38 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	write_spacetab(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->term.line.i += TAB_SIZE;
+	data->term.line.size += TAB_SIZE;
+	while (i++ < TAB_SIZE)
+	{
+		data->term.line.buf = strljoin(data->term.line.buf, " ");
+		write(data->term.fd, " ", 1);
+	}
+}
 
 static char	*fetch_dir_name2(int len, char *path, char **words)
 {

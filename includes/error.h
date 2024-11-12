@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/12 15:05:54 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:29:19 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ missing action\e[0;1m in \
 \e[21m\e[58:2:255:122:0msubshell\e[0m\n"
 # define SUBSHELLU_ERROR	"\e[1m\nparse error caused by a useless \
 \e[21m\e[58:2:255:122:0msubshell like \"()\"\e[0m\n"
+# define COMMA_ERROR		"\e[1m\nparse error caused by an incomplete \
+\e[21m\e[58:2:255:122:0mcomma\e[0m\n"
 # define PIPE_ERROR			"\e[1m\nparse error caused by an incomplete \
 \e[21m\e[58:2:255:122:0mpipe\e[0m\n"
 # define AND_ERROR			"\e[1m\nparse error caused by an incomplete \
@@ -107,6 +109,7 @@ missing action\e[0;1m in \
 # define INCOMPLETE_PIPE	-15
 # define INCOMPLETE_AND		-16
 # define INCOMPLETE_OR		-17
+# define INCOMPLETE_COMMA	-18
 
 /*
 	bash --posix ERROR

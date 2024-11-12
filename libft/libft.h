@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:09:36 by ymanchon          #+#    #+#             */
-/*   Updated: 2024/11/06 17:23:21 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:30:43 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ void	strsljoinstr(char ***strs, char *str);
 void	strsljoinstr_at(char ***strs, char *str, size_t at);
 void	strsjoinstr_at(char ***strs, char *str, size_t at);
 char	*lastword(char **strs);
+char	*before_lastword(char **strs);
 char	*duplastword(char **strs);
 char	*str_add_strs_free(char *str, char **strs, char sep, char last_sep);
 char	*str_add_strs(char *str, char **strs, char sep);

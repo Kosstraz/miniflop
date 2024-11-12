@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:01:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/07 19:23:39 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 18:56:23 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,36 @@ static void	key_delete_test(t_data *data)
 int	key_up(t_data *data)
 {
 	char	*history;
+	size_t	tmp;
 
 	if (data->term.tab.is_on)
 		return (arrow_keys_tab(data, T_UP));
 	else
 	{
-		if (!data->history.original_line)
+		if (!data->history.original_line_set)
+		{
 			data->history.original_line = data->term.line.buf;
-		//else
-		//{
-		//	for (size_t i = 0 ; i < ft_strlen(data->term.line.buf) - ft_strlen(data->history.original_line) ; i++)
-		//	{
-		//		key_delete_test(data);
-		//		write_stored_dont_move(&data->term, data->term.line.i, data->history.original_line, data->term.line.next);
-		//	}
-		//}
+			data->history.original_line_set = TRUE;
+		}
+		else
+		{
+			t_coords	lastpos = data->term.curs;
+			for (size_t i = 0 ; i < ft_strlen(data->term.line.buf) ; i++)
+			{
+				write(data->term.fd, data->term.caps.clear.cap, data->term.caps.clear.len);
+				write(data->term.fd, data->term.caps.left.cap, data->term.caps.left.len);
+				update_position(&data->term, LEFT);
+			}
+		}
 		history = up_history(data->history.original_line, data);
 		if (!history)
 			return (T_UP);
 		if (data->history.original_line)
 			history = &history[ft_strlen(data->history.original_line)];
 		data->term.line.size = ft_strlen(history);
-		data->term.line.next = ft_strlen(history);
 		data->term.line.i = ft_strlen(history);
-		write(0, history, ft_strlen(history));
-		data->term.line.buf = history;
+		write(data->term.fd, history, ft_strlen(history));
+		data->term.line.buf = ft_strdup(history);
 	}
 	return (T_UP);
 }
@@ -97,13 +102,26 @@ int	key_down(t_data *data)
 		return (arrow_keys_tab(data, DOWN));
 	else
 	{
-		history = down_history(data->history.original_line, data); //! faire la correspondance avec data->history.original_line
+		t_coords	lastpos = data->term.curs;
+		for (size_t i = 0 ; i < ft_strlen(data->term.line.buf) ; i++)
+		{
+			write(data->term.fd, data->term.caps.clear.cap, data->term.caps.clear.len);
+			write(data->term.fd, data->term.caps.left.cap, data->term.caps.left.len);
+			update_position(&data->term, LEFT);
+		}
+		history = down_history(data->history.original_line, data);
 		if (!history)
+		{
+			free(data->term.line.buf);
+			data->term.line.buf = NULL;
 			return (DOWN);
+		}
+		if (data->history.original_line)
+			history = &history[ft_strlen(data->history.original_line)];
 		data->term.line.size = ft_strlen(history);
-		data->term.line.next = ft_strlen(history);
 		data->term.line.i = ft_strlen(history);
-		write(0, history, ft_strlen(history));
+		write(data->term.fd, history, ft_strlen(history));
+		data->term.line.buf = ft_strdup(history);
 	}
 	return (DOWN);
 }

@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/12 14:14:07 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:24:26 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef struct s_history_info
 {
 	t_history	*info;
 	char		*original_line;
+	char		original_line_set;
 	int			nb_of_line_searched;
 	int			current_line;
 }	t_history_info;

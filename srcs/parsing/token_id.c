@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_id.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:09:44 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 22:53:47 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/12 19:00:01 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@ void	review_tokenid(t_token **tokens)
 				|| !ft_strcmp(tok->value, "2>>"))
 			{
 				if (!tok->next || (tok->next && is_sep_toktype(*(tok->next))))
+				{
 					write(1, PARSE_ERROR_T, PARSE_ERROR_SIZE);
+					free_tokens(tokens);
+					*tokens = NULL;
+					return ;
+				}
 				else if (tok->next)
 					detect_redirect_type(&tok);
 			}

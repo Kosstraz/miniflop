@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/11/11 16:20:46 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:50:44 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ void		check_potential_errors(char **splitted, t_data *data);
 void		delete_token(t_token **root, t_token **to_del);
 void		insert_token(t_token **after_it, t_token *new);
 
+char		handle_when_sep_is_first(char ***splitted, t_data *data);
 char		check_parse_error(char ***splitted, t_data *data);
 char		is_operand(char c[3]);
 char		is_sep(char c);
@@ -240,6 +241,7 @@ void		key_backspace(t_data *data) __attribute__((hot));
 void		key_delete(t_data *data) __attribute__((hot));
 void		key_tab(t_data *data) __attribute__((hot));
 void		free_term(t_data *data) __attribute__((cold));
+void		write_spacetab(t_data *data);
 
 int			key_up(t_data *data) __attribute__((hot));
 int			key_down(t_data *data) __attribute__((hot));

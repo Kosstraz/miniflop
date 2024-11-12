@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/07 17:33:24 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:06:04 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	initialise_line_data(t_data *data)
 
 static void	terminal_handle_keys(t_data *data, char *ch)
 {
+	//ft_printf("char : %d\n", ch[0]);
 	if (data->term.tab.is_on &&
 		(ft_isprint(ch[0]) || ch[0] == '\177' || !ft_strcmp(ch, KEY_DEL)))
 		tab_reset(data, 1);
@@ -40,6 +41,8 @@ static void	terminal_handle_keys(t_data *data, char *ch)
 		key_backspace(data);
 	else if (!ft_strcmp(ch, KEY_DEL))
 		key_delete(data);
+	else if (ch[0] == '\t' && (!data->term.line.buf || !data->term.line.buf[0])) // real tab (ctrl + tab + v) fuck it
+		write_spacetab(data);
 	else if (ch[0] == '\t')
 		key_tab(data);
 	else if (!ft_strcmp(ch, KEY_T_UP))

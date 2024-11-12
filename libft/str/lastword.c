@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lastword.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 17:28:10 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 17:33:43 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/12 16:30:32 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ char	*lastword(char **strs)
 	if (i == 0)
 		return (NULL);
 	return (strs[i - 1]);
+}
+
+char	*before_lastword(char **strs)
+{
+	size_t	i;
+
+	i = 0;
+	while (strs[i])
+		i++;
+	if (i <= 1)
+		return (NULL);
+	return (strs[i - 2]);
 }
 
 char	*duplastword(char **strs)
