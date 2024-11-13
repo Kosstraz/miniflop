@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 00:47:48 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/13 17:26:21 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,38 @@ void	show_token(t_token *tok)
 	while (tok)
 	{
 		if (tok->joker)
-			printf("joker");
+			ft_printf("joker");
 		if (tok->type == Pipe)
-			printf("[PIPE]\t\t\t");
+			ft_printf("[PIPE]\t\t\t");
 		else if (tok->type == And)
-			printf("[AND]\t\t\t");
+			ft_printf("[AND]\t\t\t");
 		else if (tok->type == Or)
-			printf("[OR]\t\t\t");
+			ft_printf("[OR]\t\t\t");
 		else if (tok->type == Command)
-			printf("[COMMAND]\t\t");
+			ft_printf("[COMMAND]\t\t");
 		else if (tok->type == Argument)
-			printf("[ARGUMENT]\t\t");
+			ft_printf("[ARGUMENT]\t\t");
 		else if (tok->type == RedirectR)
-			printf("[REDIRECTIONread]\t");
+			ft_printf("[REDIRECTIONread]\t");
 		else if (tok->type == RedirectW)
-			printf("[REDIRECTIONwrite]\t");
+			ft_printf("[REDIRECTIONwrite]\t");
 		else if (tok->type == RedirectAppend)
-			printf("[REDIRECTION (APPEND)]\t");
+			ft_printf("[REDIRECTION (APPEND)]\t");
 		else if (tok->type == HereDoc)
-			printf("[HERE_DOC]\t\t");
+			ft_printf("[HERE_DOC]\t\t");
 		else if (tok->type == Infile)
-			printf("[INFILE]\t\t");
+			ft_printf("[INFILE]\t\t");
 		else if (tok->type == Outfile)
-			printf("[OUTFILE]\t\t");
+			ft_printf("[OUTFILE]\t\t");
 		else if (tok->type == Errfile)
-			printf("[ERRFILE]\t\t");
+			ft_printf("[ERRFILE]\t\t");
 		else if (tok->type == Subshell)
-			printf("[SUBSHELL]\t\t");
+			ft_printf("[SUBSHELL]\t\t");
 		else if (tok->type == Null)
-			printf("[NULL]\t\t\t");
-		printf("\e[31m$\e[0m%s\e[31m$\e[0m\n", tok->value);
+			ft_printf("[NULL]\t\t\t");
+		else
+			ft_printf("chelou");
+		ft_printf("\e[31m$\e[0m%s\e[31m$\e[0m\n", tok->value);
 		tok = tok->next;
 	}
 }

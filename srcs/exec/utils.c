@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 23:29:59 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 00:52:16 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/13 14:48:40 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ char	**convert_env(t_env *env)
 	if (!ret)
 		return (NULL);
 	i = 0;
-	while (i < size)
+	while (i < size && env)
 	{
-		var = ft_strjoin(ft_strdup(env->name), "=");// peut-être enlever ft_strdup
-		var = strljoin(var, ft_strdup(env->value));// peut-être enlever ft_strdup
+		var = ft_strjoin(ft_strdup(env->name), "=");
+		if (env->value)
+			var = strljoin(var, ft_strdup(env->value));
 		ret[i++] = var;
 		env = env->next;
 	}

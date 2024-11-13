@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cachetra <cachetra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:15:00 by cachetra          #+#    #+#             */
-/*   Updated: 2024/08/03 15:16:05 by cachetra         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:31:31 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ static int	env_overwrite(char *arg, t_env **node, t_env *first)
 		(*node)->value = ft_strdup(arg);
 		if (!(*node)->value)
 			return (0);
-		(*node) = first;
+		//(*node) = first;
+	}
+	else
+	{
+		free((*node)->value);
+		(*node)->value = NULL;
+		//(*node) = first;
 	}
 	return (1);
 }
@@ -53,27 +59,40 @@ static t_env	*env_export_node(char *arg)
 
 int	export_args(char **args, t_env **head)
 {
-	int		i;
-	int		len;
+	size_t	i;
+	size_t	len;
 	t_env	*tmp;
 
-	i = 0;
-	while (args[++i])
+	i = 1;
+	while (args[i])
 	{
-		len = 0;
 		tmp = (*head);
+		len = 0;
 		while (args[i][len] && args[i][len] != '=')
 			len++;
+		if (!ft_strncmp(args[i], "?", len))
+		{
+			i++;
+			ft_printf("%s%s", EXPORT_IDENTIFIER1, EXPORT_IDENTIFIER2);
+			continue ;
+		}
 		while ((*head)->next)
 		{
 			if (!ft_strncmp((*head)->name, args[i], len))
-				return (env_overwrite(&args[i][++len], head, tmp));
+				break ;
 			(*head) = (*head)->next;
 		}
-		(*head)->next = env_export_node(args[i]);
-		if (!(*head)->next)
-			return (0);
+		if (!ft_strncmp((*head)->name, args[i], len))
+		{
+			if (ft_strlen(args[i]) > len)
+				env_overwrite(&args[i][++len], head, tmp);
+			else
+				env_overwrite(NULL, head, tmp);
+		}
+		else
+			(*head)->next = env_export_node(args[i]);
 		(*head) = tmp;
+		i++;
 	}
 	return (1);
 }

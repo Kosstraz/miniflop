@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:40:25 by bama              #+#    #+#             */
-/*   Updated: 2024/08/06 23:33:50 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/13 15:29:09 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static char	find_envvar(char *varname, t_data *data)
 
 	prev = NULL;
 	env = data->env;
+	if (!ft_strcmp(varname, "?"))
+		return (ft_printf("%s%s", UNSET_IDENTIFIER1, UNSET_IDENTIFIER2));
 	while (env)
 	{
 		if (!ft_strcmp(env->name, varname))

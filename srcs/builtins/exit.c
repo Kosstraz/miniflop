@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 22:50:43 by bama              #+#    #+#             */
-/*   Updated: 2024/11/07 15:03:36 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:39:13 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_exit_quit(char onlydigits, char **av, t_data *data)
 	write(1, EXIT_TEXT, EXIT_TEXT_SIZE);
 	data->ret_cmd = SUCCESS;
 	if (onlydigits)
-		exit(SUCCESS);
+		exit(ret);
 	else
 	{
 		write(2, EXIT_ALNUM, EXIT_ALNUM_SIZE);

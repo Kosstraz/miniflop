@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/11/12 16:50:44 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:32:29 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ void		detect_redirect_type(t_token **tok);
 void		check_potential_errors(char **splitted, t_data *data);
 void		delete_token(t_token **root, t_token **to_del);
 void		insert_token(t_token **after_it, t_token *new);
+void		handle_gen_subshell_error(t_data *data);
 
 char		handle_when_sep_is_first(char ***splitted, t_data *data);
 char		check_parse_error(char ***splitted, t_data *data);

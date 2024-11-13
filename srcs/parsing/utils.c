@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:40:38 by bama              #+#    #+#             */
-/*   Updated: 2024/08/09 18:19:12 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/13 17:36:41 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ char	is_sep(char c)
 char	is_sep_toktype(t_token tok)
 {
 	return (tok.type == Pipe || tok.type == And || tok.type == Or 
-			|| tok.type == Comma);
+		|| tok.type == Comma);
 }

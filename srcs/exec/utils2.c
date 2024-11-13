@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 18:28:31 by bama              #+#    #+#             */
-/*   Updated: 2024/08/10 02:09:39 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/13 16:19:57 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	custom_execve(char *path, t_token *cmdline, t_data *data)
 
 	args = tok_to_strs(cmdline);
 	env = convert_env(data->env);
-	free_data(data);
+	//free_data(data);
 	free_env(&data->env);
 	free_term(data);
 	if (args && (!ft_strcmp(args[0], "ls") || !ft_strcmp(args[0], "grep")))

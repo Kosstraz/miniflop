@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:01:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/12 18:56:23 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:42:59 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	key_up(t_data *data)
 		}
 		else
 		{
-			t_coords	lastpos = data->term.curs;
 			for (size_t i = 0 ; i < ft_strlen(data->term.line.buf) ; i++)
 			{
 				write(data->term.fd, data->term.caps.clear.cap, data->term.caps.clear.len);
@@ -102,7 +101,6 @@ int	key_down(t_data *data)
 		return (arrow_keys_tab(data, DOWN));
 	else
 	{
-		t_coords	lastpos = data->term.curs;
 		for (size_t i = 0 ; i < ft_strlen(data->term.line.buf) ; i++)
 		{
 			write(data->term.fd, data->term.caps.clear.cap, data->term.caps.clear.len);

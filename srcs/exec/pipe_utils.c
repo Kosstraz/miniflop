@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:42:00 by bama              #+#    #+#             */
-/*   Updated: 2024/11/12 14:58:39 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 14:43:07 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ void	waitchildren(t_data *data)
 		check_exitedchild(data, &stat);
 		data->ret_cmd = stat;
 	}
+	setenvval("?", ft_itoa(data->ret_cmd), &data->env);
 }

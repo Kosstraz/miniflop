@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:05:53 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/12 16:29:19 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:30:26 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@
 
 # define UNSET_NOT_FOUND1 "\e[1m\nunset : \e[4:3m\e[58:2:255:0:0m"
 # define UNSET_NOT_FOUND2 "\e[0m\e[1;5;31m env var not found\e[0m\n"
+
+# define UNSET_IDENTIFIER1 "\e[1m\nunset : \e[4:3m\e[58:2:255:0:0m"
+# define UNSET_IDENTIFIER2 "\e[0m\e[1;5;31m can not unset an identifier\e[0m\n"
+
+# define EXPORT_IDENTIFIER1 "\e[1m\nexport : \e[4:3m\e[58:2:255:0:0m"
+# define EXPORT_IDENTIFIER2 "\e[0m\e[1;5;31m can not export an identifier\e[0m\n"
 
 # define CD_INVALID_ARG1 "\e[1m\ncd : \e[4:3m\e[58:2:255:0:0m"
 # define CD_INVALID_ARG2 "\e[0m\e[1;5;31m is not a directory\e[0m\n"

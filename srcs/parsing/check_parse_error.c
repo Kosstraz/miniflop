@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 16:40:32 by bama              #+#    #+#             */
-/*   Updated: 2024/11/12 16:37:46 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:32:16 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	handle_when_sep_is_first(char ***splitted, t_data *data)
 	return (-status);
 }
 
-static void	handle_gen_subshell_error(t_data *data)
+void	handle_gen_subshell_error(t_data *data)
 {
 	if (data->_errcode == SUBSHELL_MISSING)
 		write(2, SUBSHELL_ERROR, ft_strlen(SUBSHELL_ERROR));

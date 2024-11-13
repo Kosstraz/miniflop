@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 19:13:33 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/06 17:03:56 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:29:36 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static char	**abc_sort_env(t_env *env)
 {
 	char	**strsenv;
-
 	size_t	size;
 	size_t	i;
 	size_t	j;

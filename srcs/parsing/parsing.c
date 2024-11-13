@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/11/12 16:36:48 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:32:55 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static t_token	*parse_commandline(const char *line, t_data *data)
 	jokeroverride(&root, data);
 	review_tokenid(&root);
 	root = check_tokens_error(root, data);
+	handle_gen_subshell_error(data);
 	remove_useless_quotes(&root, data);
 	return (root);
 }

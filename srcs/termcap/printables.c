@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:13:46 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/07 18:49:59 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:44:04 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void	print_char(t_data *data, int c)
 	else
 		insert_char(data, c);
 	update_last(&data->term, 1);
-	data->history.original_line = NULL; //!
+	data->history.original_line = NULL;
+	data->history.original_line_set = FALSE;
 }

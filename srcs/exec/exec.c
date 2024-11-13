@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 00:41:28 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/12 16:12:50 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:51:54 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	launch_cmd(char *path, t_token *cmdline, t_data *data)
 		if (pid != -2)
 			data->pids[data->npid++] = pid;
 		free(path);
-		setenvval("?", ft_itoa(data->ret_cmd), &data->env);
+		//setenvval("?", ft_itoa(data->ret_cmd), &data->env);
 		if (tok_next_sep(cmdline) && tok_next_sep(cmdline)->type == Pipe && data->fildes[1] != -1)
 			close(data->fildes[1]);
 	}
@@ -158,6 +158,10 @@ void	exec(t_data *data)
 	data->firstcmd = TRUE;
 	while (cmd)
 	{
+		//if (cmd->type == Subshell && ft_strcmp(cmd->value, ")"))
+		//	exit(data->ret_cmd);
+		//else if (cmd->type == Subshell && ft_strcmp(cmd->value, "("))
+		//	exec();
 		path_to_file = NULL;
 		there_is_redi = is_there_redirect(cmd);	
 		if (there_is_redi && data->exec_next)
