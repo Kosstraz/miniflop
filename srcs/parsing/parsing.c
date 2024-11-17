@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:08:41 by bama              #+#    #+#             */
-/*   Updated: 2024/11/13 17:32:55 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:01:43 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	do_some_parsing(char ***splitted, const char *line, t_data *data)
 	*splitted = ft_split_quotes(line, is_sep, data);
 	if (handle_generic_error(splitted, data) < 0)
 		return ;
-	else if (handle_when_sep_is_first(splitted, data) < 0)
+	else if (handle_when_sep_is_first(splitted) < 0)
 		return ;
 	place_envvars(splitted, data);
 	separate_operands(splitted);
@@ -50,8 +50,7 @@ static t_token	*parse_commandline(const char *line, t_data *data)
 	free(splitted);
 	jokeroverride(&root, data);
 	review_tokenid(&root);
-	root = check_tokens_error(root, data);
-	handle_gen_subshell_error(data);
+	root = check_tokens_error(&root, data);
 	remove_useless_quotes(&root, data);
 	return (root);
 }
@@ -63,7 +62,6 @@ void	take_commandline(const char *line, t_data *data)
 	if (!line)
 		return ;
 	tokens = parse_commandline(line, data);
-	show_token(tokens);
 	data->tokens = tokens;
 	if (data && data->tokens && data->tokens->value)
 		exec(data);

@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 17:40:38 by bama              #+#    #+#             */
-/*   Updated: 2024/11/13 17:36:41 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/14 15:02:35 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,14 @@ char	is_sep(char c)
 	return (c == ' ' || c == '\n' || c == '\t' || c == '\0');
 }
 
+char	is_justsep_toktype(t_token tok)
+{
+	return (tok.type == Pipe || tok.type == And || tok.type == Or
+		|| tok.type == Comma);
+}
+
 char	is_sep_toktype(t_token tok)
 {
-	return (tok.type == Pipe || tok.type == And || tok.type == Or 
-		|| tok.type == Comma);
+	return (tok.type == Pipe || tok.type == And || tok.type == Or
+		|| tok.type == Comma || tok.type == Subshell);
 }

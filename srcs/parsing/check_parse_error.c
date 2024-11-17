@@ -6,13 +6,13 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 16:40:32 by bama              #+#    #+#             */
-/*   Updated: 2024/11/13 17:32:16 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:10:54 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	handle_when_sep_is_first(char ***splitted, t_data *data)
+char	handle_when_sep_is_first(char ***splitted)
 {
 	char	status;
 
@@ -71,7 +71,7 @@ char	handle_generic_error(char ***splitted, t_data *data)
 		}
 		return (data->_errcode);
 	}
-	return (0);
+	return (data->_errcode);
 }
 
 void	check_potential_errors(char **splitted, t_data *data)
@@ -91,19 +91,15 @@ void	check_potential_errors(char **splitted, t_data *data)
 		data->_errcode = INCOMPLETE_COMMA;
 }
 
-t_token	*check_tokens_error(t_token *tokens, t_data *data)
+t_token	*check_tokens_error(t_token **tokens, t_data *data)
 {
-	t_token	*tmp;
-
-	tmp = tokens;
-	while (tmp)
-	{
-		is_there_subshells(tmp, data);
-		if (data->_errcode <= SQUOTE_MISSING
-			&& data->_errcode >= INCOMPLETE_OR)
-			return (NULL);
-		tmp = tok_skip_subshell(tmp);
-	}
+	is_there_subshells(*tokens, data);
 	handle_generic_error(NULL, data);
-	return (tokens);
+	if (data->_errcode <= SQUOTE_MISSING
+		&& data->_errcode >= INCOMPLETE_COMMA)
+	{
+		free_tokens(tokens);
+		*tokens = NULL;
+	}
+	return (*tokens);
 }

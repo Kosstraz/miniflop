@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompts2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 22:08:30 by bama              #+#    #+#             */
-/*   Updated: 2024/08/14 16:37:34 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/17 16:42:09 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*prompt_add_retcmd(char *prompt, t_data *data)
 
 void	new_prompt_heredoc(char **buffer_prompt, t_data *data)
 {
+	(void)data;
 	*buffer_prompt = NULL;
 	*buffer_prompt = strljoin(*buffer_prompt, HEREDOC_PROMPT);
 	*buffer_prompt = create_shading(*buffer_prompt, create_rgb(208, 117, 152),

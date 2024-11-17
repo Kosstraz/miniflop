@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tok_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bama <bama@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:45:04 by bama              #+#    #+#             */
-/*   Updated: 2024/08/05 18:16:02 by bama             ###   ########.fr       */
+/*   Updated: 2024/11/17 16:39:07 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,29 @@ t_token	*tok_next_sep(t_token *last)
 	return (last);
 }
 
+t_token	*tok_next_subshell(t_token *last)
+{
+	while (last && last->type != Subshell)
+		last = last->next;
+	return (last);
+}
+
+t_token	*tok_next_subshell_in(t_token *last)
+{
+	while (last && last->type != Subshell &&!ft_strcmp(last->value, "("))
+		last = last->next;
+	return (last);
+}
+
+t_token	*tok_next_subshell_out(t_token *last)
+{
+	while (last && last->type != Subshell && ft_strcmp(last->value, ")"))
+		last = last->next;
+	if (last && (last->type != Subshell || ft_strcmp(last->value, ")")))
+		return (NULL);
+	return (last);
+}
+
 t_token	*tok_next_cmd(t_token *last)
 {
 	while (last && !is_sep_toktype(*last))
@@ -55,7 +78,7 @@ size_t	tok_cmdline_size(t_token *cmdline)
 		type = cmdline->type;
 		if (type != RedirectR && type != RedirectW && type != RedirectAppend
 			&& type != Infile && type != Outfile && type != Errfile
-			&& type != HereDoc)
+			&& type != HereDoc && type != Subshell)
 			len++;
 		cmdline = cmdline->next;
 	}
@@ -69,7 +92,7 @@ char	**tok_to_strs(t_token *cmdline)
 	size_t		i;
 	t_e_type	type;
 
-	if (is_sep_toktype(*cmdline))
+	while (is_sep_toktype(*cmdline))
 		cmdline = cmdline->next;
 	size = tok_cmdline_size(cmdline);
 	ret = (char **)malloc(sizeof(char *) * (size + 1));
@@ -81,7 +104,7 @@ char	**tok_to_strs(t_token *cmdline)
 		type = cmdline->type;
 		if (type != RedirectR && type != RedirectW && type != RedirectAppend
 			&& type != Infile && type != Outfile && type != Errfile
-			&& type != HereDoc)
+			&& type != HereDoc && type != Subshell)
 			ret[i++] = ft_strdup((char *)cmdline->value);
 		cmdline = cmdline->next;
 	}

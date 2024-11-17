@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 00:51:01 by bama              #+#    #+#             */
-/*   Updated: 2024/11/13 17:26:21 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:29:10 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	show_token(t_token *tok)
 			ft_printf("[SUBSHELL]\t\t");
 		else if (tok->type == Null)
 			ft_printf("[NULL]\t\t\t");
+		else if (tok->type == Comma)
+			ft_printf("[COMMA]\t\t\t");
 		else
 			ft_printf("chelou");
 		ft_printf("\e[31m$\e[0m%s\e[31m$\e[0m\n", tok->value);

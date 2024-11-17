@@ -6,7 +6,7 @@
 #    By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/11/11 18:16:31 by ymanchon         ###   ########.fr        #
+#    Updated: 2024/11/13 18:59:30 by ymanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,7 @@ DEPS = $(OBJS:%.obj=%.d)
 
 INCLUDES = -I ./includes/ -I $(LIBFT_P)/ -I .
 
-CFLAGS = -Wall -Wextra -MMD -g3 #-Werror
+CFLAGS = -Wall -Wextra -MMD -O3 -g3 #-Werror
 
 LIBFT_P = ./libft
 

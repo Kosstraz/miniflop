@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 19:42:00 by bama              #+#    #+#             */
-/*   Updated: 2024/11/13 14:43:07 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:42:39 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	restore_stdfileno(int fileno_[3])
 
 void	dup2_stdin(t_data *data, t_token *cmdline, int fd[2])
 {
-	t_token	*tmp;
-
 	if (data->last_is_pipe)
 	{
 		dup2(fd[0], STDIN_FILENO);

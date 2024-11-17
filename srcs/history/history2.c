@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:25:57 by bama              #+#    #+#             */
-/*   Updated: 2024/11/07 19:04:43 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:42:27 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*up_history(char *line, t_data *data)
 	char	*trunc;
 	char	*gnl;
 
+	(void)data;
 	if (data->history.current_line < data->history.nb_of_line_searched - 1)
 		return (up_history_saved(line, data));
 	data->historyfd = open_hfile(data);
@@ -53,6 +54,7 @@ char	*up_history_saved(char *line, t_data *data)
 	t_history	*node;
 	ssize_t		i;
 
+	(void)data;
 	i = 0;
 	if (data->history.nb_of_line_searched > 0)
 	{

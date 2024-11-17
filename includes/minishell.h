@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/11/13 17:32:29 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:11:02 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,11 +187,12 @@ void		delete_token(t_token **root, t_token **to_del);
 void		insert_token(t_token **after_it, t_token *new);
 void		handle_gen_subshell_error(t_data *data);
 
-char		handle_when_sep_is_first(char ***splitted, t_data *data);
+char		handle_when_sep_is_first(char ***splitted);
 char		check_parse_error(char ***splitted, t_data *data);
 char		is_operand(char c[3]);
 char		is_sep(char c);
 char		is_sep_toktype(t_token tok);
+char		is_justsep_toktype(t_token tok);
 char		is_missing_septoktype(int _errcode);
 char		handle_generic_error(char ***splitted, t_data *data);
 
@@ -200,7 +201,10 @@ size_t		cwlen_joker(const char *word);
 char		*return_missing_chars(char _errcode);
 void		remove_useless_quotes(t_token **root, t_data *data);
 
-t_token		*check_tokens_error(t_token *tokens, t_data *data);
+t_token		*tok_next_subshell_in(t_token *last);
+t_token		*tok_next_subshell_out(t_token *last);
+t_token		*tok_next_subshell(t_token *last);
+t_token		*check_tokens_error(t_token **tokens, t_data *data);
 t_token		*new_token(char *value);
 t_token		*ret_last_token(t_token *tokens);
 

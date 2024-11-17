@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 15:15:00 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/13 15:31:31 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:43:14 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	env_overwrite(char *arg, t_env **node, t_env *first)
 {
+	(void)first;
 	if (arg)
 	{
 		free((*node)->value);
