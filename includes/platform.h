@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 01:14:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/12 17:24:26 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:55:29 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ typedef struct s_data
 	t_token			*tokens;
 	t_env			*env;
 	t_history_info	history;
+	char			heredoc_is_active;
 	char			*prompt;
 	char			exec_next;
 	char			blt_val;

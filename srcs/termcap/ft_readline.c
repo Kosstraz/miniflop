@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/13 17:46:21 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:21:47 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	terminal_handle_keys(t_data *data, char *ch)
 		print_char(data, ch[0]);
 	else if (ch[0] == '\r' && data->term.tab.is_on)
 		tab_select(data, 0);
-	else if (ch[0] == '\004' && (!data->term.line.buf || !data->term.line.buf[0]))
+	else if (ch[0] == '\004' && (!data->term.line.buf || !data->term.line.buf[0]) && !data->heredoc_is_active)
 		exit_shell(EXIT_TEXT, data, EXIT_SUCCESS);
 	else if (ch[0] == '\177')
 		key_backspace(data);
@@ -91,7 +91,13 @@ char	*ft_readline(char *prompt, t_data *data)
 		{
 			data->ret_cmd = 130;
 			setenvval("?", ft_itoa(data->ret_cmd), &data->env);
-			return (end_read(data));
+			if (!data->heredoc_is_active)
+				return (end_read(data));
+			else
+			{
+				end_read(data);
+				return (ft_strdup("\003"));
+			}
 		}
 		if ((buf[0] == '\r' && !data->term.tab.is_on))
 			break ;

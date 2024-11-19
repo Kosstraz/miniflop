@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 22:06:34 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/12 17:24:39 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:55:40 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_data(t_data *data)
 	data->history.current_line = -1;
 	data->history.original_line = NULL;
 	data->history.original_line_set = FALSE;
+	data->heredoc_is_active = FALSE;
 }
 
 void	exit_shell(char *mess, t_data *data, int status)
