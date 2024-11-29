@@ -6,7 +6,7 @@
 #    By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 16:21:19 by ymanchon          #+#    #+#              #
-#    Updated: 2024/11/13 18:59:30 by ymanchon         ###   ########.fr        #
+#    Updated: 2024/11/29 15:43:30 by ymanchon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS =	./srcs/termcap/tab/select.c \
 		./srcs/termcap/printables.c \
 		./srcs/termcap/term_initialise.c \
 		./srcs/termcap/utils.c \
+		./srcs/termcap/ctrl_l.c\
 		\
 		./srcs/parsing/check_parse_error.c \
 		./srcs/parsing/utils.c \

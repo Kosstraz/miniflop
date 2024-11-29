@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 22:33:43 by bama              #+#    #+#             */
-/*   Updated: 2024/11/17 16:11:02 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:43:04 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ char		**ft_split_quotes(const char *s, char (*_is_sep)(char c), t_data *data);
 /*														*/
 /* **************************************************** */
 
+void		make_ctrl_l(t_data *data, char *prompt);
 void		resize_line_buffer(t_data *data);
 void		tab_clear(t_data *data);
 void		tab_reset(t_data *data, int clear);

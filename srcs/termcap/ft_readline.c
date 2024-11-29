@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 18:39:06 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/19 16:21:47 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:42:46 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	initialise_line_data(t_data *data)
 	data->term.line.next = 0;
 }
 
-static void	terminal_handle_keys(t_data *data, char *ch)
+static void	terminal_handle_keys(t_data *data, char *ch, char *prompt)
 {
 	if (data->term.tab.is_on &&
 		(ft_isprint(ch[0]) || ch[0] == '\177' || !ft_strcmp(ch, KEY_DEL)))
@@ -36,11 +36,13 @@ static void	terminal_handle_keys(t_data *data, char *ch)
 		tab_select(data, 0);
 	else if (ch[0] == '\004' && (!data->term.line.buf || !data->term.line.buf[0]) && !data->heredoc_is_active)
 		exit_shell(EXIT_TEXT, data, EXIT_SUCCESS);
+	else if (ch[0] == CTRL_L)
+		make_ctrl_l(data, prompt);
 	else if (ch[0] == '\177')
 		key_backspace(data);
 	else if (!ft_strcmp(ch, KEY_DEL))
 		key_delete(data);
-	else if ((ch[0] == '\t' && (!data->term.line.buf || !data->term.line.buf[0])) || ch[0] == '\033[Z') // real tab (ctrl + tab + v) fuck it
+	else if ((ch[0] == '\t' && (!data->term.line.buf || !data->term.line.buf[0]))) // real tab (ctrl + tab + v) fuck it
 		write_spacetab(data);
 	else if (ch[0] == '\t')
 		key_tab(data);
@@ -101,7 +103,7 @@ char	*ft_readline(char *prompt, t_data *data)
 		}
 		if ((buf[0] == '\r' && !data->term.tab.is_on))
 			break ;
-		terminal_handle_keys(data, buf);
+		terminal_handle_keys(data, buf, prompt);
 	}
 	tab_reset(data, 1);
 	while (data->term.curs.l++ <= data->term.line.last.l)

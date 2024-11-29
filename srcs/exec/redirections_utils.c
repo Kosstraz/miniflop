@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 21:53:14 by bama              #+#    #+#             */
-/*   Updated: 2024/11/19 16:20:49 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:10:46 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,29 @@ static void	do_readredirection(t_token *r, t_data *data)
 
 	if (r->next && r->next->type == HereDoc)
 	{
-		tmp = *data;
-		line = NULL;
-		new_prompt_heredoc(&heredoc_prompt, data);
-		while (ft_strcmp(line, r->next->value) && ft_strcmp(line, "\003"))
+		fd = fork();
+		if (fd == 0)
 		{
-			free(line);
-			init_data(data);	
-			data->heredoc_is_active = TRUE;
-			if (data->term.state == CANON)
-				term_set_raw(data);
-			line = ft_readline(heredoc_prompt, data);
-			term_reset(data);
+			tmp = *data;
+			line = NULL;
+			new_prompt_heredoc(&heredoc_prompt, data);
+			while (ft_strcmp(line, r->next->value) && ft_strcmp(line, "\003"))
+			{
+				free(line);
+				init_data(data);	
+				data->heredoc_is_active = TRUE;
+				if (data->term.state == CANON)
+					term_set_raw(data);
+				line = ft_readline(heredoc_prompt, data);
+				term_reset(data);
+			}
+			free(heredoc_prompt);
+			write(data->term.fd, "\n", 1);
+			*data = tmp;
+			data->heredoc_is_active = FALSE;
+			exit(data->ret_cmd);
 		}
-		free(heredoc_prompt);
-		write(data->term.fd, "\n", 1);
-		*data = tmp;
-		data->heredoc_is_active = FALSE;
+		waitpid(fd, NULL, 0);
 	}
 	else
 	{
