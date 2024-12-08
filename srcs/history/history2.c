@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 17:25:57 by bama              #+#    #+#             */
-/*   Updated: 2024/11/17 16:42:27 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:26:54 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ char	*up_history_saved(char *line, t_data *data);
 
 char	*up_history(char *line, t_data *data)
 {
-	char	*trunc;
+	//char	*trunc;
 	char	*gnl;
 
-	(void)data;
-	if (data->history.current_line < data->history.nb_of_line_searched - 1)
+	if (data->history.current_line < data->history.nb_of_line_searched - 1
+		&& data->history.nb_of_line_searched > 0)
 		return (up_history_saved(line, data));
 	data->historyfd = open_hfile(data);
 	if (!line || chrocc(line, ' ') == ft_strlen(line)
-		|| ft_strlen(line) <= 0)
+		|| ft_strlen(line) == 0)
 	{
 		gnl = get_next_line(data->historyfd);
 		new_history_info_node(data, &data->history.info, gnl);
@@ -32,12 +32,12 @@ char	*up_history(char *line, t_data *data)
 		data->history.nb_of_line_searched++;
 		return (close_hfile(data), gnl);
 	}
-	trunc = strtrunc_quotes(line, ' ');
+	//trunc = strtrunc_quotes(line, ' ');
 	gnl = get_next_line(data->historyfd);
-	if (!ft_strncmp(gnl, trunc, ft_strlen(trunc)))
+	if (!ft_strncmp(gnl, line, ft_strlen(line)))
 	{
 		close_hfile(data);
-		free(trunc);
+		free(line);
 		new_history_info_node(data, &data->history.info, gnl);
 		data->history.current_line++;
 		data->history.nb_of_line_searched++;
@@ -45,7 +45,7 @@ char	*up_history(char *line, t_data *data)
 	}
 	close_hfile(data);
 	free(gnl);
-	free(trunc);
+	free(line);
 	return (NULL);
 }
 
@@ -54,18 +54,16 @@ char	*up_history_saved(char *line, t_data *data)
 	t_history	*node;
 	ssize_t		i;
 
-	(void)data;
 	i = 0;
-	if (data->history.nb_of_line_searched > 0)
-	{
-		node = data->history.info;
-		while (node && node->next && node->next->line
-			&& i++ < data->history.current_line)
-			node = node->next;
-		data->history.current_line++;
+	node = data->history.info;
+	data->history.current_line++;
+	if (!node)
+		return (NULL);
+	else if (!node->next)
 		return (node->line);
-	}
-	return (NULL);
+	while (node->next && i++ < data->history.current_line)
+		node = node->next;
+	return (node->line);
 }
 
 char	*down_history(char *line, t_data *data)
@@ -77,10 +75,13 @@ char	*down_history(char *line, t_data *data)
 	if (data->history.nb_of_line_searched > 0 && data->history.current_line > 0)
 	{
 		node = data->history.info;
-		while (node && node->next && node->next->line
-			&& i++ < data->history.current_line + 1)
-			node = node->next;
 		data->history.current_line--;
+		if (!node)
+			return (NULL);
+		else if (!node->next)
+			return (node->line);
+		while (node->next && i++ < data->history.current_line + 2)
+			node = node->next;
 		return (node->line);
 	}
 	return (NULL);

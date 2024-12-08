@@ -6,7 +6,7 @@
 /*   By: ymanchon <ymanchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 20:01:40 by cachetra          #+#    #+#             */
-/*   Updated: 2024/11/13 13:42:59 by ymanchon         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:29:42 by ymanchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	key_down(t_data *data)
 		history = down_history(data->history.original_line, data);
 		if (!history)
 		{
+			//ft_printf("null sa mere\n");
 			free(data->term.line.buf);
 			data->term.line.buf = NULL;
 			return (DOWN);
